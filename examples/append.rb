@@ -1,4 +1,4 @@
-require_relative '../src/definitonal_tree.rb'
+require_relative '../src/definitional_tree.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the append operation(on lists or arrays)
@@ -8,20 +8,6 @@ require_relative '../src/definitonal_tree.rb'
 # 1. append [] ys = ys
 # 2. append (z:zs) ys = z:(append zs ys)
 
-#old code
-'''
-ys = Variable.new("ys")
-appendsymbol = XSymbol.new("append",2,:oper)
-listnil = XSymbol.new("[]",0,:ctor)
-lhs = Application.new(appendsymbol,[listnil,ys])
-childpatt = ?
-child = Leaf.new(childpatt,ys)
-var = ys
-patt = lhs # temporarily considering Pattern = Application
-appendrule1 = Branch.new(patt,var,[child])
-'''
-
-#current code
 
 # Symbols in the rules
 append_symbol = XSymbol.new("append",2,:oper)
