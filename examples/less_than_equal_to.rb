@@ -12,7 +12,7 @@ require_relative '../src/definitional_tree.rb'
 # Symbols in the rules
 less_than_equal_symbol = XSymbol.new("<=",2,:oper)
 zero_symbol = XSymbol.new("0",0,:ctor)
-s_symbol = XSymbol.new("s",1,:oper)
+s_symbol = XSymbol.new("s",1,:ctor)
 true_symbol = XSymbol.new("true",0,:ctor)
 false_symbol = XSymbol.new("false",0,:ctor)
 
