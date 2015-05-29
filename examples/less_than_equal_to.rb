@@ -38,7 +38,7 @@ rhs3 = Application.new(less_than_equal_symbol,[x3,x2])
 child4 = Leaf.new(lhs3,rhs3)
 
 
-# in child2 branch node x2 is the inductive variable
+# in child2 branch node, x2 is the inductive variable
 child2_patt = Application.new(less_than_equal_symbol,[Application.new(s_symbol,[x3]),x2])
 child2 = Branch.new(child2_patt,x2,[child3,child4])
 
