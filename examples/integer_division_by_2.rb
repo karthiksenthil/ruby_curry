@@ -42,3 +42,5 @@ child2 = Branch.new(child2_patt,x2,[child3,child4])
 # definitonal tree for the above rules, in the root node x1 is the inductive variable
 root_patt = Application.new(half_symbol,[x1])
 root_node = Branch.new(root_patt,x1,[child1,child2])
+root_node.pretty_print()
+print "\n"
