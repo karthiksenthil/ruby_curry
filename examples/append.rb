@@ -36,3 +36,4 @@ child2 = Leaf.new(lhs2,rhs2)
 
 rootpatt = Application.new(append_symbol,[xs,ys])
 append_tree = Branch.new(rootpatt,xs,[child1,child2])
+append_tree.print()

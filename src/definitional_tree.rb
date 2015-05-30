@@ -25,6 +25,11 @@ class Variable < Expression
 		@name = name
 	end
 
+	def show
+		output = @name
+		return output
+	end
+
 end
 
 class Application < Expression
@@ -35,6 +40,22 @@ class Application < Expression
     @arguments = arguments
   end
   
+  def show
+  	output = symbol.name+"("
+  	@arguments.each do |arg|
+  		output += arg.show()+","
+  	end
+
+  	# to remove the last comma
+  	if output[-1] == ','
+  		output[-1] = ''
+  	end
+
+  	output += ")"
+		return output
+  end
+
+
 end
 
 # Base class node for Definitional tree
@@ -44,6 +65,10 @@ class DefTreeNode
 	def initialize(pattern)
 		@pattern = pattern
 	end
+
+	def print(n=0)
+	end
+
 end
 
 # Subclasses of a DefTreeNode - Branch, Exempt and Leaf
@@ -54,6 +79,15 @@ class Branch < DefTreeNode
 		super(pattern)
 		@variable = variable
 		@children = children
+	end
+
+	def print(n=0)
+		print "\n"
+		# print 2n spaces + symbol(arguments) + : + variable
+		print ' '*2*n + @pattern.show() + " : " + @variable.show()
+		@children.each do |child|
+			child.print(n+1)
+		end
 	end
 
 end
@@ -67,6 +101,12 @@ class Leaf < DefTreeNode
 	def initialize(pattern,expression)
 		super(pattern)
 		@expression = expression
+	end
+
+	def print(n=0)
+		print "\n"
+		# print 2n spaces + symbol(arguments) + arrow i.e -> + expression
+		print ' '*2*n + @pattern.show() + " -> " + @expression.show()
 	end
 
 end
