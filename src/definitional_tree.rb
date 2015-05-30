@@ -69,8 +69,8 @@ class DefTreeNode
 		@pattern = pattern
 	end
 
-	# def print(n=0)
-	# end
+	def pretty_print(n=0)
+	end
 
 end
 
