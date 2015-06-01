@@ -32,7 +32,7 @@ child1 = Leaf.new(lhs1,rhs1)
 
 # rule 2
 lhs2 = Application.new(reverse_symbol,[Application.new(@cons_symbol,[x,@xs])])
-rhs2 = Application.new(@append_symbol,[Application.new(reverse_symbol,[@xs]),x])
+rhs2 = Application.new(@append_symbol,[Application.new(reverse_symbol,[@xs]),Application.new(@cons_symbol,[x,@nil_list_symbol])])
 child2 = Leaf.new(lhs2,rhs2)
 
 
