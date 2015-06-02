@@ -13,7 +13,7 @@ require_relative '../src/definitional_tree.rb'
 
 # Rules for rev -
 # General rule -> last xs
-# 1. last xs = cond (append xs x =:= xs) x
+# 1. last xs = cond (append xs [x] =:= xs) x
 
 # Rules for cond -
 # General rule -> cond xs ys
@@ -36,7 +36,7 @@ x = Variable.new("x")
 # definitional tree for last operation
 last_tree_rootlhs = Application.new(last_symbol,[@xs])
 last_tree_rootrhs = Application.new(condition_symbol,[Application.new(constrained_equal,
-											[Application.new(@append_symbol,[@xs,x]),@xs]),x])
+											[Application.new(@append_symbol,[@xs,Application.new(@cons_symbol,[x,@nil_list_symbol])]),@xs]),x])
 
 last_tree_rootnode = Leaf.new(last_tree_rootlhs,last_tree_rootrhs)
 last_tree_rootnode.pretty_print()
