@@ -44,16 +44,13 @@ print "\n"
 
 # definitional tree for condition operation
 
-@ys.show()
 cond_lhs1 = Application.new(condition_symbol,[success_symbol,@ys])
 cond_rhs1 = @ys
 child1 = Leaf.new(cond_lhs1,cond_rhs1)
 
-child1.pretty_print()
-
 cond_tree_rootpatt = Application.new(condition_symbol,[@xs,@ys])
 cond_tree_rootnode = Branch.new(cond_tree_rootpatt,@xs,[child1])
-# cond_tree_rootnode.pretty_print()
+cond_tree_rootnode.pretty_print()
 print "\n"
 
 
