@@ -96,6 +96,16 @@ class Branch < DefTreeNode
 end
 
 class Exempt < DefTreeNode
+	
+	def initialize(pattern)
+		super(pattern)
+	end
+
+	def pretty_print(n=0)
+		print "\n"
+		# print 2n spaces + symbol(arguments)
+		print ' '*2*n + @pattern.show() + " -> " + "FAIL"
+	end
 end
 
 class Leaf < DefTreeNode
