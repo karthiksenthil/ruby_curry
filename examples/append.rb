@@ -38,3 +38,6 @@ rootpatt = Application.new(@append_symbol,[@xs,@ys])
 append_tree = Branch.new(rootpatt,@xs,[child1,child2])
 append_tree.pretty_print()
 print "\n"
+
+print "\nOutput of compile function on definitional tree\n"
+compile(append_tree)

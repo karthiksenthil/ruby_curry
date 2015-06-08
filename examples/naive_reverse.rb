@@ -41,3 +41,5 @@ rev_tree_rootnode = Branch.new(rev_tree_rootpatt,@xs,[child1,child2])
 rev_tree_rootnode.pretty_print()
 print "\n"
 
+print "\nOutput of compile function on definitional tree\n"
+compile(rev_tree_rootnode)

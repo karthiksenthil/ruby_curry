@@ -53,6 +53,7 @@ cond_tree_rootnode = Branch.new(cond_tree_rootpatt,@xs,[child1])
 cond_tree_rootnode.pretty_print()
 print "\n"
 
-
+print "\nOutput of compile function on definitional tree\n"
+compile(cond_tree_rootnode)
 
 

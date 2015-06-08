@@ -22,7 +22,7 @@ integer_two = XSymbol.new("2",0,:ctor)
 blank_exp = XSymbol.new("_",0,:ctor)
 lit_symbol = XSymbol.new("Lit",1,:oper)
 var_symbol = XSymbol.new("Var",1,:oper)
-other_int_symobol = XSymbol.new("Other integers",0,:ctor)
+other_int_symbol = XSymbol.new("Other integers",0,:ctor)
 
 # Variables in the rules
 e1 = Variable.new("e1")
@@ -52,7 +52,7 @@ add_leaf2_rhs = Application.new(add_symbol,[l,Application.new(replace_symbol,[r,
 add_leaf2 = Leaf.new(add_leaf2_lhs,add_leaf2_rhs)
 
 # Add exempt
-add_exempt_patt = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[other_int_symobol,v]),e2])
+add_exempt_patt = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[other_int_symbol,v]),e2])
 add_exempt = Exempt.new(add_exempt_patt)
 
 # Add type - branch node
@@ -70,7 +70,7 @@ mul_leaf2_rhs = Application.new(mul_symbol,[l,Application.new(replace_symbol,[r,
 mul_leaf2 = Leaf.new(mul_leaf2_lhs,mul_leaf2_rhs)
 
 # Mul exempt
-mul_exempt_patt = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[other_int_symobol,v]),e2])
+mul_exempt_patt = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[other_int_symbol,v]),e2])
 mul_exempt = Exempt.new(mul_exempt_patt)
 
 # Mul(tiply) type - branch node
@@ -92,3 +92,6 @@ replace_rootnode = Branch.new(replace_rootpatt,p,[leaf1,branch1])
 
 replace_rootnode.pretty_print()
 print "\n"
+
+print "\nOutput of compile function on definitional tree\n"
+compile(replace_rootnode)

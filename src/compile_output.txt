@@ -1,0 +1,61 @@
+Example 1 : append.rb
+
+Rules:
+General rule -> append xs ys
+1. append [] ys = ys
+2. append (z:zs) ys = z:(append zs ys)
+
+Definitional tree obtained:
+append(xs,ys) : xs
+  append([],ys) -> ys
+  append(:(z,zs),ys) -> :(z,append(zs,ys))
+
+Compile output:
+H(append(:(z,zs),ys)) = :(z,append(zs,ys))
+H(append(xs,ys)) = H(append(H(xs),ys))
+
+------------------------------------------------
+Example 2 : less_than_equal_to.rb
+
+Rules:
+General rule -> x1 <= x2
+1. 0 <= x2 = true
+2. s(x3) <= 0 = false
+3. s(x3) <= s(x2) = x3<= x2
+
+Definitional tree obtained:
+<=(x1,x2) : x1
+  <=(0,x2) -> true
+  <=(s(x3),x2) : x2
+    <=(s(x3),0) -> false
+    <=(s(x3),s(x2)) -> <=(x3,x2)
+
+Compile output:
+H(<=(0,x2)) = true
+H(<=(s(x3),0)) = false
+H(<=(s(x3),s(x2))) = H(<=(x3,x2))
+H(<=(s(x3),x2)) = H(<=(s(x3),H(x2)))
+H(<=(x1,x2)) = H(<=(H(x1),x2))
+
+-------------------------------------------------
+Example 3 : integer_division_by_2.rb
+
+Rules:
+General rule -> half(x1)
+1. half(0) = 0
+2. half(s(0)) = 0
+3. half(s(s(x2))) = s(half(x2))
+
+Definitional tree obtained:
+half(x1) : x1
+  half(0) -> 0
+  half(s(x2)) : x2
+    half(s(0)) -> 0
+    half(s(s(x3))) -> s(half(x3))
+
+Compile output:
+H(half(0)) = 0
+H(half(s(0))) = 0
+H(half(s(s(x3)))) = s(half(x3))
+H(half(s(x2))) = H(half(s(H(x2))))
+H(half(x1)) = H(half(H(x1)))

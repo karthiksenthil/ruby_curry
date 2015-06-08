@@ -48,3 +48,6 @@ root_patt = Application.new(less_than_equal_symbol,[x1,x2])
 root_node = Branch.new(root_patt,x1,[child1,child2])
 root_node.pretty_print()
 print "\n"
+
+print "\nOutput of compile function on definitional tree\n"
+compile(root_node)
