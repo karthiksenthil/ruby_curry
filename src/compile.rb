@@ -1,5 +1,7 @@
 require_relative './definitional_tree.rb'
 
+# implementation of the 'COMPILE' procedure for a definitional tree
+
 def compile(def_tree)
 	#(1) to handle the case when the node is a Branch
 	if def_tree.class == Branch
@@ -11,6 +13,7 @@ def compile(def_tree)
 		branch_patt = def_tree.pattern
 		output = 'H(' + branch_patt.show() + ') = '
 
+		# replace RHS of the branch, replace the inductive_var by H(inductive_var)
 		replaced_branch_patt = branch_patt.replace(inductive_var)
 		output += 'H(' + replaced_branch_patt.show() +')'
 
