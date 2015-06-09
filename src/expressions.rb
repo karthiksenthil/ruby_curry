@@ -112,3 +112,6 @@ y = Variable.new("y")
 app = Application.new(a,[x,y])
 p = Pattern.new(app)
 =end
+
+
+@constructors_hash = {}

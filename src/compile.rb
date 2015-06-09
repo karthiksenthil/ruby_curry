@@ -33,14 +33,34 @@ def compile(def_tree)
 			elsif leading_symbol.kind == :ctor	# case (2.2) i.e. constructor-rooted
 				output += rule_rhs.show()
 			end
+			
 								
 		# to handle the case when the RHS of the rule is a variable
 		elsif rule_rhs.class == Variable			
-			# code to handle case of variable
+			var_type = "list" # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
+			constructors = @constructors_hash[var_type]
+
+			if !constructors.nil?
+				# l_prime -> r_prime where r_prime is expr when r is replaced by a constructor
+				constructors.each do |constructor|
+					replaced_args = def_tree.pattern.arguments.map{|a| 
+						if a == rule_rhs
+							constructor
+						else
+							a
+						end
+					}
+					replaced_patt = Application.new(def_tree.pattern.symbol,replaced_args)
+					output += 'H(' + replaced_patt.show() + ') = '
+					output += constructor.show()+"\n" 
+				end
+			end
+
+			output += 'H(' + def_tree.pattern.show() + ') = ' + 'H(' + rule_rhs.show() +')'
 
 		end 
-		
 		print output+"\n"
+		
 
 
 	#(3) to handle the case when the node is Exempt 
