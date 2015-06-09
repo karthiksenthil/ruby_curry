@@ -1,4 +1,5 @@
 require_relative '../src/definitional_tree.rb'
+require_relative '../src/compile.rb'
 
 # Example to construct definitonal trees for a curry program
 # to reverse a list

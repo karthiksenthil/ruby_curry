@@ -1,4 +1,5 @@
 require_relative '../src/definitional_tree.rb'
+require_relative '../src/compile.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the append operation(on lists or arrays)
