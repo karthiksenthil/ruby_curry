@@ -37,16 +37,6 @@ class Variable < Expression
 		return @name
 	end
 
-	def replace(var)
-		# puts var.name,self.name
-		if self.name == var.name
-			replaced_var = H.new(var)
-			return Variable.new(replaced_var.show())
-		else
-			return self
-		end
-	end
-
 	def construct_expr?
 		return true
 	end
@@ -76,28 +66,9 @@ class Application < Expression
 		return output
   end
 
-  def replace(var)
-  	args = @arguments.map { |a| a.replace(var)  }
-  	return Application.new(@symbol,args)
-  end
-
   def construct_expr?
   	return self.symbol.kind == :ctor && self.arguments.map{|a| a.construct_expr?}.all? 
   end
-
-end
-
-# Subclass to encode H operation around an expression
-class H < Expression
-	attr_accessor :arg
-	
-	def initialize(arg)
-		@arg = arg
-	end
-
-	def show
-		return 'H('+arg.show()+')'
-	end
 
 end
 

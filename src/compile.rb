@@ -1,4 +1,5 @@
 require_relative './definitional_tree.rb'
+require_relative './replace.rb'
 
 # implementation of the 'COMPILE' procedure for a definitional tree
 
