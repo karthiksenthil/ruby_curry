@@ -5,7 +5,6 @@ require_relative './exec_expressions.rb'
 class Variable < Expression
 	
 	def replace(var)
-		# puts var.name,self.name
 		if self.name == var.name
 			replaced_var = H.new(var)
 			return Variable.new(replaced_var.show())
@@ -19,8 +18,8 @@ end
 class Application < Expression
 	  
 	def replace(var)
-  	args = @arguments.map { |a| a.replace(var)  }
-  	return Application.new(@symbol,args)
- 	end
+		args = @arguments.map { |a| a.replace(var)  }
+		return Application.new(@symbol,args)
+	end
  
 end

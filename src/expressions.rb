@@ -1,15 +1,21 @@
 
 # Basic building block classes for the nodes of tree
 
+# Class to denote symbols in an expression
 class XSymbol
   attr_accessor :name, :arity, :kind
   
+  # create a symbol with its name, arity and kind/type
+  # Params : name(string), arity(integer), kind(:ctor/:oper)
+  # Return : XSymbol
   def initialize(name,arity,kind)
     @name = name
     @arity = arity
     @kind = kind
   end
 
+  # return the name of the symbol
+  # Return : name(string)
   def show
   	return @name
   end
@@ -18,39 +24,56 @@ end
 
 class Expression
 
+	# abstract function specilised in concrete sub-classes
 	def replace
 	end
 
+	# abstract function specilised in concrete sub-classes
 	def construct_expr?
 	end
 
 end
 
+# Class to denote variables
 class Variable < Expression
 	attr_accessor :name
 
+	# create a varible with its name
+	# Params : name(string)
+	# Return : Variable
 	def initialize(name)
 		@name = name
 	end
 
+	# return name of variable
+	# Return : name(string)
 	def show
 		return @name
 	end
 
+	# check if variable is a constructor-rooted expression
+	# Return : true(boolean)
 	def construct_expr?
 		return true
 	end
 
 end
 
+# Class to denote applications
 class Application < Expression
   attr_accessor :symbol, :arguments
   
+  # create an application with a root-symbol and arguments
+  # Params : symbol(XSymbol), arguments(array of Expression/XSymbol)
+  # Return : Application
   def initialize(symbol,arguments)
     @symbol = symbol
     @arguments = arguments
   end
   
+  # give a representation of an application
+  # for example, xs ++ ys ==> ++(xs,ys)
+  # Return : output(string)
   def show
   	output = symbol.name+"("
   	@arguments.each do |arg|
@@ -66,6 +89,8 @@ class Application < Expression
 		return output
   end
 
+  # check if variable is a constructor-rooted expression
+	# Return : true/false(boolean)
   def construct_expr?
   	return self.symbol.kind == :ctor && self.arguments.map{|a| a.construct_expr?}.all? 
   end
@@ -75,6 +100,9 @@ end
 # Pattern is an application meeting certain conditions
 class Pattern < Application
 	
+	# perform a sanity check on a new Pattern
+	# if error raise corresponding exception
+	# Params : application(Application)
 	def initialize(application)
 		if application.symbol.kind != :oper 
 			raise "Root symbol of Pattern is not an operator"
@@ -90,6 +118,13 @@ class Pattern < Application
 
 end
 
+# Data-structure to store the constructors of a type
+# Key : data type
+# Values : array of XSymbols(constructors)
+@constructors_hash = {}
+
+
+### APPENDIX ###
 # code to test sanity check in Pattern
 =begin
 append_symbol = XSymbol.new("append",2,:oper)
@@ -102,5 +137,3 @@ zs = Variable.new("zs")
 lhs2 = Application.new(append_symbol,[Application.new(cons_symbol,[z,zs]),ys])
 p = Pattern.new(lhs2)
 =end
-
-@constructors_hash = {}
