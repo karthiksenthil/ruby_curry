@@ -17,6 +17,13 @@ class XSymbol
 end
 
 class Expression
+
+	def replace
+	end
+
+	def construct_expr?
+	end
+
 end
 
 class Variable < Expression
@@ -38,6 +45,10 @@ class Variable < Expression
 		else
 			return self
 		end
+	end
+
+	def construct_expr?
+		return true
 	end
 
 end
@@ -70,6 +81,10 @@ class Application < Expression
   	return Application.new(@symbol,args)
   end
 
+  def construct_expr?
+  	return self.symbol.kind == :ctor && self.arguments.map{|a| a.construct_expr?}.all? 
+  end
+
 end
 
 # Subclass to encode H operation around an expression
@@ -94,21 +109,13 @@ class Pattern < Application
 			raise "Root symbol of Pattern is not an operator"
 		else
 			application.arguments.each do |arg|
-				if !construct_expr(arg)
+				if !arg.construct_expr?
 					raise "Non root symbol of Pattern is not a variable or a constructor rooted symbol"
 				end
 			end
 		end
 	end
 
-	def construct_expr(arg)
-		if arg.class == Variable
-			return true
-		elsif arg.class == Application
-			return arg.symbol.kind == :ctor && arg.arguments.map{|a| construct_expr(a)}.all? 
-		end
-			
-	end
 
 end
 
