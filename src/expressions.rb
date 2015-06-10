@@ -94,24 +94,35 @@ class Pattern < Application
 			raise "Root symbol of Pattern is not an operator"
 		else
 			application.arguments.each do |arg|
-				if arg.class != Variable
-					# TODO : Add code to verify that variable is a symbol of constructor
-					raise "Non root symbol of a pattern must be a variable"
+				if !construct_expr(arg)
+					raise "Non root symbol of Pattern is not a variable or a constructor rooted symbol"
 				end
 			end
 		end
+	end
+
+	def construct_expr(arg)
+		if arg.class == Variable
+			return true
+		elsif arg.class == Application
+			return arg.symbol.kind == :ctor && arg.arguments.map{|a| construct_expr(a)}.all? 
+		end
+			
 	end
 
 end
 
 # code to test sanity check in Pattern
 =begin
-a = XSymbol.new("a",2,:oper)
-x = XSymbol.new("x",1,:ctor)
-y = Variable.new("y")
-app = Application.new(a,[x,y])
-p = Pattern.new(app)
+append_symbol = XSymbol.new("append",2,:oper)
+nil_list_symbol = XSymbol.new("[]",0,:ctor)
+cons_symbol = XSymbol.new(":",2,:oper)
+xs = Variable.new("xs")
+ys = Variable.new("ys")
+z = Variable.new("z")
+zs = Variable.new("zs")
+lhs2 = Application.new(append_symbol,[Application.new(cons_symbol,[z,zs]),ys])
+p = Pattern.new(lhs2)
 =end
-
 
 @constructors_hash = {}
