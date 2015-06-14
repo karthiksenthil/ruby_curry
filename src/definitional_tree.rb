@@ -12,6 +12,9 @@ class DefTreeNode
 	def pretty_print(n=0)
 	end
 
+	def compile
+	end
+
 end
 
 # Subclasses of a DefTreeNode - Branch, Exempt and Leaf

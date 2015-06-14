@@ -15,10 +15,10 @@ require_relative '../src/compile.rb'
 @nil_list_symbol = XSymbol.new("[]",0,:ctor)
 @cons_symbol = XSymbol.new(":",2,:ctor)
 
-if @constructors_hash["list"].nil?
-	@constructors_hash["list"] = [@nil_list_symbol,@cons_symbol]
+if $constructors_hash["list"].nil?
+	$constructors_hash["list"] = [@nil_list_symbol,@cons_symbol]
 else
-	@constructors_hash["list"] += [@nil_list_symbol,@cons_symbol]
+	$constructors_hash["list"] += [@nil_list_symbol,@cons_symbol]
 end
 
 # Variables in the rules
@@ -47,4 +47,4 @@ append_tree.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-compile(append_tree)
+print append_tree.compile()

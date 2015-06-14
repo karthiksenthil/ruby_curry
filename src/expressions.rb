@@ -9,13 +9,11 @@ class XSymbol
   # Params : name(string), arity(integer), kind(:ctor/:oper)
   # Return : XSymbol
   def initialize(name,arity,kind)
-    @name = name
+    @name = name	# the printable representation of symbol
     @arity = arity
-    @kind = kind
+    @kind = kind	# either operator or constructor
   end
 
-  # return the name of the symbol
-  # Return : name(string)
   def show
   	return @name
   end
@@ -24,11 +22,13 @@ end
 
 class Expression
 
-	# abstract function specilised in concrete sub-classes
+	# abstract function
+	# Functionality : replace an expression by an executable expression
 	def replace
 	end
 
-	# abstract function specilised in concrete sub-classes
+	# abstract function
+	# Functionality : check if expression is a constructor-rooted expression
 	def construct_expr?
 	end
 
@@ -42,11 +42,9 @@ class Variable < Expression
 	# Params : name(string)
 	# Return : Variable
 	def initialize(name)
-		@name = name
+		@name = name # the printable representation of variable
 	end
 
-	# return name of variable
-	# Return : name(string)
 	def show
 		return @name
 	end
@@ -121,7 +119,7 @@ end
 # Data-structure to store the constructors of a type
 # Key : data type
 # Values : array of XSymbols(constructors)
-@constructors_hash = {}
+$constructors_hash = {}
 
 
 ### APPENDIX ###

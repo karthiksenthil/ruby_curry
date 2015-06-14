@@ -43,4 +43,4 @@ rev_tree_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-compile(rev_tree_rootnode)
+print rev_tree_rootnode.compile()

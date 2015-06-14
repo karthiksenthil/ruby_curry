@@ -6,8 +6,7 @@ class Variable < Expression
 	
 	def replace(var)
 		if self.name == var.name
-			replaced_var = H.new(var)
-			return Variable.new(replaced_var.show())
+			return H.new(var)
 		else
 			return self
 		end

@@ -48,4 +48,4 @@ root_node.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-compile(root_node)
+print root_node.compile()

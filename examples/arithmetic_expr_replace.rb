@@ -95,4 +95,4 @@ replace_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-compile(replace_rootnode)
+print replace_rootnode.compile()
