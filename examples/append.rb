@@ -28,7 +28,7 @@ z = Variable.new("z")
 zs = Variable.new("zs")
 
 # child1 i.e rule1 ; lhs = pattern and rhs = expression
-lhs1 = Application.new(@append_symbol,[@nil_list_symbol,@ys])
+lhs1 = Application.new(@append_symbol,[Application.new(@nil_list_symbol,[]),@ys])
 rhs1 = @ys	
 child1 = Leaf.new(lhs1,rhs1)
 

@@ -22,13 +22,13 @@ x2 = Variable.new("x2")
 x3 = Variable.new("x3")
 
 # rule 1
-lhs1 = Application.new(half_symbol,[zero_symbol])
-rhs1 = zero_symbol
+lhs1 = Application.new(half_symbol,[Application.new(zero_symbol,[])])
+rhs1 = Application.new(zero_symbol,[])
 child1 = Leaf.new(lhs1,rhs1)
 
 # rule 2
-lhs2 = Application.new(half_symbol,[Application.new(s_symbol,[zero_symbol])])
-rhs2 = zero_symbol
+lhs2 = Application.new(half_symbol,[Application.new(s_symbol,[Application.new(zero_symbol,[])])])
+rhs2 = Application.new(zero_symbol,[])
 child3 = Leaf.new(lhs2,rhs2)
 
 #rule 3

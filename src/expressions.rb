@@ -74,16 +74,20 @@ class Application < Expression
   # Return : output(string)
   def show
   	output = symbol.name+"("
-  	@arguments.each do |arg|
-  		output += arg.show()+","
+  	if !@arguments.nil?
+  		@arguments.each do |arg|
+  			output += arg.show()+","
+  		end
   	end
 
-  	# to remove the last comma
-  	if output[-1] == ','
+  	
+  	if output[-1] == ',' # to remove the last comma
   		output[-1] = ''
+  		output += ")"
+		elsif output[-1] == '(' # case to remove '(' if Application has no arguments
+			output[-1] = ''
   	end
-
-  	output += ")"
+	
 		return output
   end
 

@@ -37,15 +37,18 @@ x = Variable.new("x")
 # definitional tree for last operation
 last_tree_rootlhs = Application.new(last_symbol,[@xs])
 last_tree_rootrhs = Application.new(condition_symbol,[Application.new(constrained_equal,
-											[Application.new(@append_symbol,[@xs,Application.new(@cons_symbol,[x,@nil_list_symbol])]),@xs]),x])
+											[Application.new(@append_symbol,[@xs,Application.new(@cons_symbol,[x,Application.new(@nil_list_symbol,[])])]),@xs]),x])
 
 last_tree_rootnode = Leaf.new(last_tree_rootlhs,last_tree_rootrhs)
 last_tree_rootnode.pretty_print()
 print "\n"
 
+print "\nOutput of compile function on definitional tree\n"
+print last_tree_rootnode.compile()
+
 # definitional tree for condition operation
 
-cond_lhs1 = Application.new(condition_symbol,[success_symbol,@ys])
+cond_lhs1 = Application.new(condition_symbol,[Application.new(success_symbol,[]),@ys])
 cond_rhs1 = @ys
 child1 = Leaf.new(cond_lhs1,cond_rhs1)
 

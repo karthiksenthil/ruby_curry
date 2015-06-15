@@ -24,13 +24,13 @@ x2 = Variable.new("x2")
 x3 = Variable.new("x3")
 
 # rule 1
-lhs1 = Application.new(less_than_equal_symbol,[zero_symbol,x2])
-rhs1 = true_symbol
+lhs1 = Application.new(less_than_equal_symbol,[Application.new(zero_symbol,[]),x2])
+rhs1 = Application.new(true_symbol,[])
 child1 = Leaf.new(lhs1,rhs1)
 
 # rule 2
-lhs2 = Application.new(less_than_equal_symbol,[Application.new(s_symbol,[x3]),zero_symbol])
-rhs2 = false_symbol
+lhs2 = Application.new(less_than_equal_symbol,[Application.new(s_symbol,[x3]),Application.new(zero_symbol,[])])
+rhs2 = Application.new(false_symbol,[])
 child3 = Leaf.new(lhs2,rhs2)
 
 #rule 3

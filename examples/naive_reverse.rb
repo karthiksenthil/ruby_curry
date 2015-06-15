@@ -27,13 +27,13 @@ reverse_symbol = XSymbol.new("rev",1,:oper)
 x = Variable.new("x")
 
 # rule 1
-lhs1 = Application.new(reverse_symbol,[@nil_list_symbol])
-rhs1 = @nil_list_symbol
+lhs1 = Application.new(reverse_symbol,[Application.new(@nil_list_symbol,[])])
+rhs1 = Application.new(@nil_list_symbol,[])
 child1 = Leaf.new(lhs1,rhs1)
 
 # rule 2
 lhs2 = Application.new(reverse_symbol,[Application.new(@cons_symbol,[x,@xs])])
-rhs2 = Application.new(@append_symbol,[Application.new(reverse_symbol,[@xs]),Application.new(@cons_symbol,[x,@nil_list_symbol])])
+rhs2 = Application.new(@append_symbol,[Application.new(reverse_symbol,[@xs]),Application.new(@cons_symbol,[x,Application.new(@nil_list_symbol,[])])])
 child2 = Leaf.new(lhs2,rhs2)
 
 

@@ -35,25 +35,25 @@ l = Variable.new("l")
 r = Variable.new("r")
 
 # Lit type - exempt node
-lit_exempt_patt = Application.new(replace_symbol,[Application.new(lit_symbol,[blank_exp]),Application.new(cons_symbol,[u,v]),e2])
+lit_exempt_patt = Application.new(replace_symbol,[Application.new(lit_symbol,[Application.new(blank_exp,[])]),Application.new(cons_symbol,[u,v]),e2])
 lit_exempt = Exempt.new(lit_exempt_patt)
 
 # Var type - exempt node
-var_exempt_patt = Application.new(replace_symbol,[Application.new(var_symbol,[blank_exp]),Application.new(cons_symbol,[u,v]),e2])
+var_exempt_patt = Application.new(replace_symbol,[Application.new(var_symbol,[Application.new(blank_exp,[])]),Application.new(cons_symbol,[u,v]),e2])
 var_exempt = Exempt.new(var_exempt_patt)
 
 # Add leaf1 - rule 2
-add_leaf1_lhs = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[integer_one,v]),e2])
+add_leaf1_lhs = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[Application.new(integer_one,[]),v]),e2])
 add_leaf1_rhs = Application.new(add_symbol,[Application.new(replace_symbol,[l,v,e2]),r])
 add_leaf1 = Leaf.new(add_leaf1_lhs,add_leaf1_rhs)
 
 # Add leaf2 - rule 3
-add_leaf2_lhs = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[integer_two,v]),e2])
+add_leaf2_lhs = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[Application.new(integer_two,[]),v]),e2])
 add_leaf2_rhs = Application.new(add_symbol,[l,Application.new(replace_symbol,[r,v,e2])])
 add_leaf2 = Leaf.new(add_leaf2_lhs,add_leaf2_rhs)
 
 # Add exempt
-add_exempt_patt = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[other_int_symbol,v]),e2])
+add_exempt_patt = Application.new(replace_symbol,[Application.new(add_symbol,[l,r]),Application.new(cons_symbol,[Application.new(other_int_symbol,[]),v]),e2])
 add_exempt = Exempt.new(add_exempt_patt)
 
 # Add type - branch node
@@ -61,17 +61,17 @@ add_branch_patt = Application.new(replace_symbol,[Application.new(add_symbol,[l,
 add_branch = Branch.new(add_branch_patt,u,[add_leaf1,add_leaf2,add_exempt])
 
 # Mul leaf1 - rule 4
-mul_leaf1_lhs = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[integer_one,v]),e2])
+mul_leaf1_lhs = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[Application.new(integer_one,[]),v]),e2])
 mul_leaf1_rhs = Application.new(mul_symbol,[Application.new(replace_symbol,[l,v,e2]),r])
 mul_leaf1 = Leaf.new(mul_leaf1_lhs,mul_leaf1_rhs)
 
 # Mul leaf2 - rule 5
-mul_leaf2_lhs = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[integer_two,v]),e2])
+mul_leaf2_lhs = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[Application.new(integer_two,[]),v]),e2])
 mul_leaf2_rhs = Application.new(mul_symbol,[l,Application.new(replace_symbol,[r,v,e2])])
 mul_leaf2 = Leaf.new(mul_leaf2_lhs,mul_leaf2_rhs)
 
 # Mul exempt
-mul_exempt_patt = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[other_int_symbol,v]),e2])
+mul_exempt_patt = Application.new(replace_symbol,[Application.new(mul_symbol,[l,r]),Application.new(cons_symbol,[Application.new(other_int_symbol,[]),v]),e2])
 mul_exempt = Exempt.new(mul_exempt_patt)
 
 # Mul(tiply) type - branch node
@@ -83,7 +83,7 @@ branch1_patt = Application.new(replace_symbol,[e1,Application.new(cons_symbol,[u
 branch1 = Branch.new(branch1_patt,e1,[lit_exempt,var_exempt,add_branch,mul_branch])
 
 # leaf 1 i.e rule 1
-leaf1_lhs = Application.new(replace_symbol,[e1,nil_list_symbol,e2])
+leaf1_lhs = Application.new(replace_symbol,[e1,Application.new(nil_list_symbol,[]),e2])
 leaf1_rhs = e2
 leaf1 = Leaf.new(leaf1_lhs,leaf1_rhs)
 
