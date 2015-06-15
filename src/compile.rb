@@ -1,8 +1,59 @@
 require_relative './definitional_tree.rb'
 require_relative './replace.rb'
 
-# implementation of the 'COMPILE' procedure for a definitional tree
+# extending the Application and Variable classes for compile procedure
+# to handle the Leaf node case
 
+class Application < Expression
+
+	def generate_H(lhs_pattern)
+		output = 'H(' + lhs_pattern.show() + ') = '
+
+		# identify the leading symbol of RHS 
+		leading_symbol = self.symbol
+		if leading_symbol.kind == :oper # case 2.1 i.e operator rooted
+			output += 'H(' + self.show() + ')'
+		elsif leading_symbol.kind == :ctor # case 2.2 i.e constructor rooted
+			output += self.show()
+		end
+
+		return output
+	end
+
+end
+
+class Variable < Expression
+
+	def generate_H(lhs_pattern)
+		var_type = "list" # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
+		output = ''
+		constructors = $constructors_hash[var_type]
+
+		# l_prime -> r_prime where r_prime is expr when r is replaced by a constructor
+		if !constructors.nil?
+			constructors.each do |constructor|
+				replaced_args = lhs_pattern.arguments.map{ |a|
+					if a == self
+						constructor
+					else
+						a
+					end
+				}
+				replaced_patt = Application.new(lhs_pattern.symbol,replaced_args)
+				output += 'H(' + replaced_patt.show() + ') = '
+				output += constructor.show()+"\n" 
+			end
+		end
+
+		output += 'H(' + lhs_pattern.show() + ') = ' + 'H(' + self.show() +')'
+
+		return output
+	end
+	
+end
+
+
+# implementation of the 'COMPILE' procedure for a definitional tree
 
 class Branch < DefTreeNode
 
@@ -44,41 +95,7 @@ class Leaf < DefTreeNode
 	def compile
 		rule_rhs = self.expression
 		output = ''
-		# to handle the case when RHS of the rule is a pattern or symbol
-		if rule_rhs.class == Application || rule_rhs.class == XSymbol
-			# identify the leading symbol of RHS 
-			leading_symbol = rule_rhs.class == Application ? rule_rhs.symbol : rule_rhs
-			output += 'H(' + self.pattern.show() + ') = '
-			if leading_symbol.kind == :oper  # case (2.1) i.e. operator-rooted
-				output += 'H(' + rule_rhs.show() +')'
-			elsif leading_symbol.kind == :ctor	# case (2.2) i.e. constructor-rooted
-				output += rule_rhs.show()
-			end
-
-		elsif rule_rhs.class == Variable
-			var_type = "list" # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
-			constructors = $constructors_hash[var_type]
-
-			if !constructors.nil?
-				# l_prime -> r_prime where r_prime is expr when r is replaced by a constructor
-				constructors.each do |constructor|
-					replaced_args = self.pattern.arguments.map{|a| 
-						if a == rule_rhs
-							constructor
-						else
-							a
-						end
-					}
-					replaced_patt = Application.new(self.pattern.symbol,replaced_args)
-					output += 'H(' + replaced_patt.show() + ') = '
-					output += constructor.show()+"\n" 
-				end
-			end
-
-			output += 'H(' + self.pattern.show() + ') = ' + 'H(' + rule_rhs.show() +')'
-		end
-
-
+		output += rule_rhs.generate_H(self.pattern)
 		output += "\n"
 		return output
 
