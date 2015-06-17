@@ -36,13 +36,14 @@ end
 
 # Class to denote variables
 class Variable < Expression
-	attr_accessor :name
+	attr_accessor :name,:type
 
 	# create a varible with its name
 	# Params : name(string)
 	# Return : Variable
-	def initialize(name)
+	def initialize(name,type)
 		@name = name # the printable representation of variable
+		@type = type # tags the Variable with its type
 	end
 
 	def show

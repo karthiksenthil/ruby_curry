@@ -13,13 +13,19 @@ require_relative '../src/compile.rb'
 
 # Symbols in the rules
 half_symbol = XSymbol.new("half",1,:oper)
-zero_symbol = XSymbol.new("0",1,:ctor)
+zero_symbol = XSymbol.new("0",0,:ctor)
 s_symbol = XSymbol.new("s",1,:ctor)
 
+if $constructors_hash["integer"].nil?
+	$constructors_hash["integer"] = [zero_symbol,s_symbol]
+else
+	$constructors_hash["integer"] += [zero_symbol,s_symbol]
+end
+
 # Variables in the rules
-x1 = Variable.new("x1")
-x2 = Variable.new("x2")
-x3 = Variable.new("x3")
+x1 = Variable.new("x1","integer")
+x2 = Variable.new("x2","integer")
+x3 = Variable.new("x3","integer")
 
 # rule 1
 lhs1 = Application.new(half_symbol,[Application.new(zero_symbol,[])])

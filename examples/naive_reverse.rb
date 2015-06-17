@@ -24,7 +24,7 @@ require_relative 'append.rb'
 reverse_symbol = XSymbol.new("rev",1,:oper)
 
 # Variable
-x = Variable.new("x")
+x = Variable.new("x","list")
 
 # rule 1
 lhs1 = Application.new(reverse_symbol,[Application.new(@nil_list_symbol,[])])

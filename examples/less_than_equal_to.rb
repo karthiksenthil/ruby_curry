@@ -17,11 +17,17 @@ s_symbol = XSymbol.new("s",1,:ctor)
 true_symbol = XSymbol.new("true",0,:ctor)
 false_symbol = XSymbol.new("false",0,:ctor)
 
+if $constructors_hash["boolean"].nil?
+	$constructors_hash["boolean"] = [true_symbol,false_symbol]
+else
+	$constructors_hash["boolean"] += [true_symbol,false_symbol]
+end
+
 
 # Variables in the rules
-x1 = Variable.new("x1")
-x2 = Variable.new("x2")
-x3 = Variable.new("x3")
+x1 = Variable.new("x1","integer")
+x2 = Variable.new("x2","integer")
+x3 = Variable.new("x3","integer")
 
 # rule 1
 lhs1 = Application.new(less_than_equal_symbol,[Application.new(zero_symbol,[]),x2])

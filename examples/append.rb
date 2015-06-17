@@ -22,10 +22,10 @@ else
 end
 
 # Variables in the rules
-@xs = Variable.new("xs")
-@ys = Variable.new("ys")
-z = Variable.new("z")
-zs = Variable.new("zs")
+@xs = Variable.new("xs","list")
+@ys = Variable.new("ys","list")
+z = Variable.new("z","list")
+zs = Variable.new("zs","list")
 
 # child1 i.e rule1 ; lhs = pattern and rhs = expression
 lhs1 = Application.new(@append_symbol,[Application.new(@nil_list_symbol,[]),@ys])

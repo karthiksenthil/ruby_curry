@@ -29,10 +29,16 @@ require_relative 'append.rb'
 last_symbol = XSymbol.new("last",1,:oper)
 condition_symbol = XSymbol.new("cond",2,:oper)
 constrained_equal = XSymbol.new("=:=",2,:oper)
-success_symbol = XSymbol.new("success",1,:ctor)
+success_symbol = XSymbol.new("success",0,:ctor)
+
+if $constructors_hash["boolean"].nil?
+	$constructors_hash["boolean"] = [success_symbol]
+else
+	$constructors_hash["boolean"] += [success_symbol]
+end
 
 # Variables
-x = Variable.new("x")
+x = Variable.new("x","list")
 
 # definitional tree for last operation
 last_tree_rootlhs = Application.new(last_symbol,[@xs])

@@ -39,23 +39,35 @@ end
 class Variable < Expression
 
 	def generate_H(lhs_pattern)
-		var_type = "list" # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
+		var_type = self.type # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
 		output = []
 		constructors = $constructors_hash[var_type]
 
 		# l_prime -> r_prime where r_prime is expr when r is replaced by a constructor
 		if !constructors.nil?
 			constructors.each do |constructor|
+				constructor_expr = nil
 				replaced_args = lhs_pattern.arguments.map{ |a|
 					if a == self
-						constructor
+						# replace constructor which an expression built using constructor
+						arity = constructor.arity
+						if arity == 0
+							constructor_expr = Application.new(constructor,[])
+						else
+							args = []
+							(1..arity).each do |i|
+								args << Variable.new("_v"+i.to_s,"temporary_variable")
+							end
+							constructor_expr = Application.new(constructor,args)
+						end
+						constructor_expr
 					else
 						a
 					end
 				}
 				replaced_patt = Application.new(lhs_pattern.symbol,replaced_args)
 				output_lhs = H.new(replaced_patt)
-				output_rhs = constructor
+				output_rhs = constructor_expr
 				output += [Rule.new(output_lhs,output_rhs)] 
 			end
 		end
@@ -95,7 +107,15 @@ class Exempt < DefTreeNode
 
 	#(3) to handle the case when the node is Exempt
 	def compile
-		output = [Rule.new(H.new(self.pattern),H.new(Variable.new("abort")))]
+		abort_symbol = XSymbol.new("abort",0,:ctor)
+		if $constructors_hash["unknown"].nil?
+			$constructors_hash["unknown"] = [abort_symbol]
+		else
+			$constructors_hash["unknown"] += [abort_symbol]
+		end
+		
+		abort_expr = Application.new(abort_symbol,[])
+		output = [Rule.new(H.new(self.pattern),H.new(abort_expr))]
 		return output
 	end
 

@@ -25,6 +25,19 @@ lit_symbol = XSymbol.new("Lit",1,:oper)
 var_symbol = XSymbol.new("Var",1,:oper)
 other_int_symbol = XSymbol.new("Other integers",0,:ctor)
 
+if $constructors_hash["integer"].nil?
+	$constructors_hash["integer"] = [integer_one,integer_two]
+else
+	$constructors_hash["integer"] += [integer_one,integer_two]
+end
+
+if $constructors_hash["unknown"].nil?
+	$constructors_hash["unknown"] = [blank_exp,other_int_symbol]
+else
+	$constructors_hash["unknown"] += [blank_exp,other_int_symbol]
+end
+
+
 # Variables in the rules
 e1 = Variable.new("e1")
 p = Variable.new("p")
@@ -95,7 +108,6 @@ replace_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-# print replace_rootnode.compile()
 
 rules = replace_rootnode.compile()
 rules.each do |rule|
