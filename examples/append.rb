@@ -47,4 +47,8 @@ append_tree.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-print append_tree.compile()
+rules = append_tree.compile()
+
+rules.each do |rule|
+	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+end

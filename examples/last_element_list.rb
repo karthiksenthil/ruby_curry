@@ -44,7 +44,12 @@ last_tree_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-print last_tree_rootnode.compile()
+
+rules = last_tree_rootnode.compile()
+rules.each do |rule|
+	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+end
+
 
 # definitional tree for condition operation
 
@@ -58,6 +63,10 @@ cond_tree_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-print cond_tree_rootnode.compile()
+
+rules = cond_tree_rootnode.compile()
+rules.each do |rule|
+	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+end
 
 

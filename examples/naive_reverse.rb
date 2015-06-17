@@ -43,4 +43,8 @@ rev_tree_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-print rev_tree_rootnode.compile()
+
+rules = rev_tree_rootnode.compile()
+rules.each do |rule|
+	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+end
