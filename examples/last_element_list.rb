@@ -31,10 +31,10 @@ condition_symbol = XSymbol.new("cond",2,:oper)
 constrained_equal = XSymbol.new("=:=",2,:oper)
 success_symbol = XSymbol.new("success",0,:ctor)
 
-if $constructors_hash["boolean"].nil?
-	$constructors_hash["boolean"] = [success_symbol]
+if $constructors_hash["Success"].nil?
+	$constructors_hash["Success"] = [success_symbol]
 else
-	$constructors_hash["boolean"] += [success_symbol]
+	$constructors_hash["Success"] += [success_symbol]
 end
 
 # Variables
@@ -58,9 +58,11 @@ end
 
 
 # definitional tree for condition operation
+# "*" denotes that ys can be a Variable of any type
+ys = Variable.new("ys","*")
 
-cond_lhs1 = Application.new(condition_symbol,[Application.new(success_symbol,[]),@ys])
-cond_rhs1 = @ys
+cond_lhs1 = Application.new(condition_symbol,[Application.new(success_symbol,[]),ys])
+cond_rhs1 = ys
 child1 = Leaf.new(cond_lhs1,cond_rhs1)
 
 cond_tree_rootpatt = Application.new(condition_symbol,[@xs,@ys])

@@ -14,15 +14,15 @@ require_relative '../src/compile.rb'
 
 # Symbols in the rules
 replace_symbol = XSymbol.new("replace",3,:oper)
-add_symbol = XSymbol.new("Add",2,:oper)
-mul_symbol = XSymbol.new("Mul",2,:oper)
+add_symbol = XSymbol.new("Add",2,:ctor)
+mul_symbol = XSymbol.new("Mul",2,:ctor)
 nil_list_symbol = XSymbol.new("[]",0,:ctor)
 cons_symbol = XSymbol.new(":",2,:ctor)
 integer_one = XSymbol.new("1",0,:ctor)
 integer_two = XSymbol.new("2",0,:ctor)
 blank_exp = XSymbol.new("_",0,:ctor)
-lit_symbol = XSymbol.new("Lit",1,:oper)
-var_symbol = XSymbol.new("Var",1,:oper)
+lit_symbol = XSymbol.new("Lit",1,:ctor)
+var_symbol = XSymbol.new("Var",1,:ctor)
 other_int_symbol = XSymbol.new("Other integers",0,:ctor)
 
 if $constructors_hash["integer"].nil?
@@ -37,15 +37,20 @@ else
 	$constructors_hash["unknown"] += [blank_exp,other_int_symbol]
 end
 
+if $constructors_hash["arithmetic expressions"].nil?
+	$constructors_hash["arithmetic expressions"] = [add_symbol,mul_symbol,lit_symbol,var_symbol]
+else
+	$constructors_hash["arithmetic expressions"] += [add_symbol,mul_symbol,lit_symbol,var_symbol]
+end
 
 # Variables in the rules
-e1 = Variable.new("e1")
-p = Variable.new("p")
-e2 = Variable.new("e2")
-u = Variable.new("u")
-v = Variable.new("v")
-l = Variable.new("l")
-r = Variable.new("r")
+e1 = Variable.new("e1","arithmetic expressions")
+p = Variable.new("p","list")
+e2 = Variable.new("e2","arithmetic expressions")
+u = Variable.new("u","element")
+v = Variable.new("v","list")
+l = Variable.new("l","arithmetic expressions")
+r = Variable.new("r","arithmetic expressions")
 
 # Lit type - exempt node
 lit_exempt_patt = Application.new(replace_symbol,[Application.new(lit_symbol,[Application.new(blank_exp,[])]),Application.new(cons_symbol,[u,v]),e2])

@@ -17,9 +17,15 @@ zero_symbol = XSymbol.new("0",0,:ctor)
 s_symbol = XSymbol.new("s",1,:ctor)
 
 if $constructors_hash["integer"].nil?
-	$constructors_hash["integer"] = [zero_symbol,s_symbol]
+	$constructors_hash["integer"] = [zero_symbol]	
 else
-	$constructors_hash["integer"] += [zero_symbol,s_symbol]
+	$constructors_hash["integer"] += [zero_symbol]
+end
+
+if $constructors_hash["peano"].nil?
+	$constructors_hash["peano"] = [s_symbol]	
+else
+	$constructors_hash["peano"] += [s_symbol]
 end
 
 # Variables in the rules

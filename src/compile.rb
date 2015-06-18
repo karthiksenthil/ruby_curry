@@ -41,7 +41,11 @@ class Variable < Expression
 	def generate_H(lhs_pattern)
 		var_type = self.type # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
 		output = []
-		constructors = $constructors_hash[var_type]
+		if var_type=="*" # include all the constructors for a Variable of any type
+			constructors = $constructors_hash.values.flatten
+		else
+			constructors = $constructors_hash[var_type]
+		end
 
 		# l_prime -> r_prime where r_prime is expr when r is replaced by a constructor
 		if !constructors.nil?
@@ -51,15 +55,13 @@ class Variable < Expression
 					if a == self
 						# replace constructor which an expression built using constructor
 						arity = constructor.arity
-						if arity == 0
-							constructor_expr = Application.new(constructor,[])
-						else
-							args = []
-							(1..arity).each do |i|
-								args << Variable.new("_v"+i.to_s,"temporary_variable")
-							end
-							constructor_expr = Application.new(constructor,args)
+						
+						args = []
+						(1..arity).each do |i|
+							args << Variable.new("_v"+i.to_s,"temporary_variable")
 						end
+
+						constructor_expr = Application.new(constructor,args)
 						constructor_expr
 					else
 						a
