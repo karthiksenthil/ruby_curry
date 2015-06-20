@@ -12,6 +12,10 @@ class Rule
 		@rhs = rhs
 	end
 
+	def show
+		return @lhs.show() + ' = ' + @rhs.show()
+	end
+
 end
 
 # extending the Application and Variable classes for compile procedure
