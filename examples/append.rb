@@ -50,5 +50,5 @@ print "\nOutput of compile function on definitional tree\n"
 rules = append_tree.compile()
 
 rules.each do |rule|
-	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+	print rule.show() + "\n"
 end

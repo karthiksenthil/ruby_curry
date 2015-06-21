@@ -74,7 +74,7 @@ print "\nOutput of compile function on definitional tree\n"
 
 rules = cond_tree_rootnode.compile()
 rules.each do |rule|
-	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+	print rule.show() + "\n"
 end
 
 

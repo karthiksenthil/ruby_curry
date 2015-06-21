@@ -16,6 +16,10 @@ class Rule
 		return @lhs.show() + ' = ' + @rhs.show()
 	end
 
+	def ==(another_rule)
+		return self.lhs == another_rule.lhs && self.rhs == another_rule.rhs
+	end
+
 end
 
 # extending the Application and Variable classes for compile procedure

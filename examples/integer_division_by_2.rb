@@ -63,5 +63,5 @@ print "\nOutput of compile function on definitional tree\n"
 
 rules = root_node.compile()
 rules.each do |rule|
-	print rule.lhs.show() + ' = ' + rule.rhs.show() + "\n"
+	print rule.show() + "\n"
 end

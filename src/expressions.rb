@@ -56,6 +56,14 @@ class Variable < Expression
 		return true
 	end
 
+	def ==(another_variable)
+		if another_variable.class == Variable
+			self.name == another_variable.name
+		else
+			false
+		end
+	end
+
 end
 
 # Class to denote applications
@@ -80,7 +88,6 @@ class Application < Expression
   			output += arg.show()+","
   		end
   	end
-
   	
   	if output[-1] == ',' # to remove the last comma
   		output[-1] = ''
@@ -96,6 +103,14 @@ class Application < Expression
 	# Return : true/false(boolean)
   def construct_expr?
   	return self.symbol.kind == :ctor && self.arguments.map{|a| a.construct_expr?}.all? 
+  end
+
+  def ==(another_application)
+  	if another_application.class == Application
+  		return self.symbol == another_application.symbol && self.arguments == another_application.arguments
+  	else
+  		false
+  	end
   end
 
 end

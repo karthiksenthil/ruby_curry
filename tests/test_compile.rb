@@ -31,10 +31,9 @@ class TestCompile < Test::Unit::TestCase
 
 		# Note : $rules contains the output rules produced by append.rb
 
-		assert_equal($rules.length(),expected_rules.length(),"Compile procedure failed on Append example")
-
+		# explicitly done to identify which particular rule failed
 		(0..4).each do |i|
-			assert_equal($rules[i].show(),expected_rules[i].show(),"Compile procedure failed on Append example")
+			assert_equal($rules[i],expected_rules[i],"Compile procedure failed on append example")
 		end
 
 	end

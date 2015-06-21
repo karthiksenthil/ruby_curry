@@ -12,6 +12,14 @@ class H < Expression
 		return 'H('+@expression.show()+')'
 	end
 
+	def ==(another_H)
+		if another_H.class == H
+			self.expression == another_H.expression
+		else
+			false
+		end
+	end
+
 end
 
 class N < Expression
