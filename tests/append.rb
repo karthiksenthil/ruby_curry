@@ -15,6 +15,19 @@ $append_symbol = XSymbol.new("append",2,:oper)
 $nil_list_symbol = XSymbol.new("[]",0,:ctor)
 $cons_symbol = XSymbol.new(":",2,:ctor)
 
+# methods/constructors to shorten code and better readability
+def make_append(x,y)
+	return Application.new($append_symbol,[x,y])
+end
+
+def make_nil
+	return Application.new($nil_list_symbol,[])
+end
+
+def make_cons(x,y)
+	return Application.new($cons_symbol,[x,y])
+end
+
 if $constructors_hash["list"].nil?
 	$constructors_hash["list"] = [$nil_list_symbol,$cons_symbol]
 else
@@ -28,21 +41,22 @@ $z = Variable.new("z","list")
 $zs = Variable.new("zs","list")
 
 # child1 i.e rule1 ; lhs = pattern and rhs = expression
-lhs1 = Application.new($append_symbol,[Application.new($nil_list_symbol,[]),$ys])
+lhs1 = make_append(make_nil,$ys)
 rhs1 = $ys	
 child1 = Leaf.new(lhs1,rhs1)
 
 # child2 i.e rule2
 # (z:zs) itself is another sub-pattern which is built using the : symbol
-lhs2 = Application.new($append_symbol,[Application.new($cons_symbol,[$z,$zs]),$ys])
+lhs2 = make_append(make_cons($z,$zs),$ys)
 # similarly (append zs ys)
-rhs2 = Application.new($cons_symbol,[$z,Application.new($append_symbol,[$zs,$ys])])
+rhs2 = make_cons($z,make_append($zs,$ys))
 child2 = Leaf.new(lhs2,rhs2)
 
 # definitional tree for above rules
 
-rootpatt = Application.new($append_symbol,[$xs,$ys])
+rootpatt = make_append($xs,$ys)
 append_tree = Branch.new(rootpatt,$xs,[child1,child2])
 
 # rules produced on running compile on append operation's definitional tree
 $rules = append_tree.compile()
+
