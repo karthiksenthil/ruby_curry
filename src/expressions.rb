@@ -17,6 +17,9 @@ class XSymbol
   def show
   	return @name
   end
+
+  def H
+  end
   
 end
 
@@ -111,6 +114,10 @@ class Application < Expression
   	else
   		false
   	end
+  end
+
+  def H
+  	self.symbol.H(self)
   end
 
 end
