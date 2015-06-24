@@ -11,9 +11,11 @@ require_relative '../src/compile.rb'
 
 
 # Symbols in the rules
-$append_symbol = XSymbol.new("append",2,:oper)
-$nil_list_symbol = XSymbol.new("[]",0,:ctor)
-$cons_symbol = XSymbol.new(":",2,:ctor)
+$append_symbol = XSymbol.new("append",2,:oper,OPERATION)
+NIL = CONSTRUCTOR
+CONS = NIL + 1
+$nil_list_symbol = XSymbol.new("[]",0,:ctor,NIL)
+$cons_symbol = XSymbol.new(":",2,:ctor,CONS)
 
 # methods/constructors to shorten code and better readability
 def make_append(x,y)

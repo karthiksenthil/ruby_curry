@@ -7,34 +7,76 @@ require_relative '../src/expressions.rb'
 # H(half(s(x2))) = H(half(s(H(x2))))
 # H(half(x1)) = H(half(H(x1)))
 
+# Tokens for constructors in this example
+ZERO = CONSTRUCTOR
+SUCC = ZERO + 1
+
+# expression constructors
+def make_zero
+	return Application.new($zero_symbol,[])
+end
+
+def make_succ(x)
+	return Application.new($s_symbol,[x])
+end
+
+def make_half(x)
+	return Application.new($half,[x])
+end
+
+# definition of the H function 
 class Half_symbol < XSymbol
 
 	def H(expr)
 		
+		# puts expr.show()
 		first_arg = expr.arguments[0] # first argument of Application
-		
-		case first_arg.symbol
-		when $zero_symbol	
-			return Application.new($zero_symbol,[]) # rule 1
-		when $s_symbol
+
+		case first_arg.symbol.token
+		when VARIABLE
+			raise "Handling Variables not implemented yet"
+		when CHOICE
+			raise "Handling Choice not implemented yet"
+		when OPERATION
+			# case is half(half(...)) ==> half(H(half(...)))
+			tmp = first_arg.H()
+			replaced_args = expr.arguments.map{|arg| arg == first_arg ? tmp : arg}
+			return Application.new(expr.symbol,replaced_args).H()
+		when ZERO
+			return make_zero
+		when SUCC
 			s_arg = first_arg.arguments[0]
-			case s_arg.symbol
-			when $zero_symbol
-				return Application.new($zero_symbol,[]) # rule 2
-			when $s_symbol
-				x3 = 	s_arg.arguments[0]
-				return Application.new($s_symbol,[Application.new(self,[x3])]) # rule 3
-			end 
-		end
+
+			case s_arg.symbol.token
+			when VARIABLE
+				raise "Handling Variables not implemented yet"
+			when CHOICE
+				raise "Handling Choice not implemented yet"
+			when OPERATION
+				# case is half(s(half(...))) ==> half(s(H(half(...))))
+				tmp = s_arg.H()
+				replaced_args = first_arg.arguments.map{|arg| arg == s_arg ? tmp : arg}
+				replaced_first_arg = Application.new(first_arg.symbol,replaced_args)
+				replaced_expr_args = expr.arguments.map{|arg| arg == first_arg ? replaced_first_arg : arg}
+				return Application.new(expr.symbol,replaced_expr_args).H()  
+			when ZERO
+				return make_zero
+			when SUCC
+				x3 = s_arg.arguments[0]
+				return make_succ(make_half(x3))
+			end
+
+		end # end of outer casee
 
 	end
 
 end
 
 
-half = Half_symbol.new("half",1,:oper)
-$zero_symbol = XSymbol.new("0",0,:ctor)
-$s_symbol = XSymbol.new("s",1,:ctor)
+# symbols in the example
+$half = Half_symbol.new("half",1,:oper,OPERATION)
+$zero_symbol = XSymbol.new("0",0,:ctor,ZERO)
+$s_symbol = XSymbol.new("s",1,:ctor,SUCC)
 
 if $constructors_hash["integer"].nil?
 	$constructors_hash["integer"] = [$zero_symbol]	
@@ -54,17 +96,21 @@ x2 = Variable.new("x2","integer")
 x3 = Variable.new("x3","integer")
 
 
-first = Application.new(half,[Application.new($zero_symbol,[])])
-third = Application.new(half,[Application.new($s_symbol,[Application.new($s_symbol,[Variable.new("x3","integer")])])])
-fourth = Application.new(half,[Application.new($s_symbol,[Variable.new("x2","integer")])])
+first = make_half(make_zero)
+third = make_half(make_succ(make_succ(x3)))
+fourth = make_half(make_succ(x2))
 
-# test half(s(s(s(0))))
-test = Application.new(half,[Application.new($s_symbol,
-														[Application.new($s_symbol,
-														[Application.new($s_symbol,
-														[Application.new($zero_symbol,[])])])])])
+# test1 half(s(s(s(0))))
+test = make_half(make_succ(make_succ(make_succ(make_zero))))
+# test2 half(half(0))
+test2 = make_half(make_half(make_zero))
+# test3 half(succ(half(0)))
+test3 = make_half(make_succ(make_half(make_zero)))
 
 
-print first.H().show() + "\n"
-print third.H().show() + "\n"
-print test.H().show() + "\n"
+# print first.H().show() + "\n"
+# print third.H().show() + "\n"
+# print fourth.H().show() + "\n"
+# print test.H().show() + "\n"
+# print test2.H().show() + "\n"
+print test3.H().show() + "\n"

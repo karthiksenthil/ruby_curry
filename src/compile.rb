@@ -113,11 +113,12 @@ class Branch < DefTreeNode
 
 end
 
+ABORT = CONSTRUCTOR
 class Exempt < DefTreeNode
 
 	#(3) to handle the case when the node is Exempt
 	def compile
-		abort_symbol = XSymbol.new("abort",0,:ctor)
+		abort_symbol = XSymbol.new("abort",0,:ctor,ABORT)
 		if $constructors_hash["unknown"].nil?
 			$constructors_hash["unknown"] = [abort_symbol]
 		else

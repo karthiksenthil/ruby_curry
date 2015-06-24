@@ -2,16 +2,25 @@
 # Basic building block classes for the nodes of tree
 
 # Class to denote symbols in an expression
+
+# Constant integer tokens used for XSymbol
+VARIABLE = 0
+CHOICE = 1
+OPERATION = 2
+# the constructor symbols take a token value starting from 3
+CONSTRUCTOR = 3 
+
 class XSymbol
-  attr_accessor :name, :arity, :kind
+  attr_accessor :name, :arity, :kind, :token
   
   # create a symbol with its name, arity and kind/type
   # Params : name(string), arity(integer), kind(:ctor/:oper)
   # Return : XSymbol
-  def initialize(name,arity,kind)
+  def initialize(name,arity,kind,token)
     @name = name	# the printable representation of symbol
     @arity = arity
     @kind = kind	# either operator or constructor
+    @token = token # an integer value to determine the kind of Symbol 
   end
 
   def show
