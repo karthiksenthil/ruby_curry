@@ -24,6 +24,7 @@ def make_half(x)
 	return Application.new($half,[x])
 end
 
+
 # definition of the H function 
 class Half_symbol < XSymbol
 
@@ -91,9 +92,9 @@ else
 end
 
 # Variables in the rules
-x1 = Variable.new("x1","integer")
-x2 = Variable.new("x2","integer")
-x3 = Variable.new("x3","integer")
+x1 = make_variable("x1","integer")
+x2 = make_variable("x2","integer")
+x3 = make_variable("x3","integer")
 
 
 first = make_half(make_zero)
@@ -108,9 +109,9 @@ test2 = make_half(make_half(make_zero))
 test3 = make_half(make_succ(make_half(make_zero)))
 
 
-# print first.H().show() + "\n"
-# print third.H().show() + "\n"
+print first.H().show() + "\n"
+print third.H().show() + "\n"
 # print fourth.H().show() + "\n"
-# print test.H().show() + "\n"
-# print test2.H().show() + "\n"
+print test.H().show() + "\n"
+print test2.H().show() + "\n"
 print test3.H().show() + "\n"

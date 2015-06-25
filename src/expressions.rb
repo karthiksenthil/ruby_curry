@@ -48,18 +48,18 @@ end
 
 # Class to denote variables
 class Variable < Expression
-	attr_accessor :name,:type
+	attr_accessor :symbol,:type
 
 	# create a varible with its name
-	# Params : name(string)
+	# Params : symbol
 	# Return : Variable
-	def initialize(name,type)
-		@name = name # the printable representation of variable
+	def initialize(symbol,type)
+		@symbol = symbol # the printable representation of variable
 		@type = type # tags the Variable with its type
 	end
 
 	def show
-		return @name
+		return @symbol.show()
 	end
 
 	# check if variable is a constructor-rooted expression
@@ -77,6 +77,13 @@ class Variable < Expression
 	end
 
 end
+
+# global function to make any Variable object
+def make_variable(name,type)
+	sym = XSymbol.new(name,0,:unknown,VARIABLE)
+	return Variable.new(sym,type)
+end
+
 
 # Class to denote applications
 class Application < Expression
