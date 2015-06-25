@@ -16,8 +16,8 @@ class TestCompile < Test::Unit::TestCase
 		rule1_rhs = make_nil
 		rule1 = Rule.new(rule1_lhs,rule1_rhs)
 
-		rule2_lhs = H.new(make_append(make_nil,make_cons(Variable.new("_v1","temporary_variable"),Variable.new("_v2","temporary_variable"))))
-		rule2_rhs = make_cons(Variable.new("_v1","temporary_variable"),Variable.new("_v2","temporary_variable"))
+		rule2_lhs = H.new(make_append(make_nil,make_cons(make_variable("_v1","temporary_variable"),make_variable("_v2","temporary_variable"))))
+		rule2_rhs = make_cons(make_variable("_v1","temporary_variable"),make_variable("_v2","temporary_variable"))
 		rule2 = Rule.new(rule2_lhs,rule2_rhs)
 
 		rule3_lhs = H.new(make_append(make_nil,$ys))

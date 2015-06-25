@@ -11,15 +11,14 @@ OPERATION = 2
 CONSTRUCTOR = 3 
 
 class XSymbol
-  attr_accessor :name, :arity, :kind, :token
+  attr_accessor :name, :arity, :token
   
   # create a symbol with its name, arity and kind/type
-  # Params : name(string), arity(integer), kind(:ctor/:oper)
+  # Params : name(string), arity(integer), token
   # Return : XSymbol
-  def initialize(name,arity,kind,token)
+  def initialize(name,arity,token)
     @name = name	# the printable representation of symbol
     @arity = arity
-    @kind = kind	# either operator or constructor
     @token = token # an integer value to determine the kind of Symbol 
   end
 
@@ -70,7 +69,7 @@ class Variable < Expression
 
 	def ==(another_variable)
 		if another_variable.class == Variable
-			self.name == another_variable.name
+			self.symbol.name == another_variable.symbol.name
 		else
 			false
 		end
@@ -80,7 +79,7 @@ end
 
 # global function to make any Variable object
 def make_variable(name,type)
-	sym = XSymbol.new(name,0,:unknown,VARIABLE)
+	sym = XSymbol.new(name,0,VARIABLE)
 	return Variable.new(sym,type)
 end
 
@@ -121,7 +120,7 @@ class Application < Expression
   # check if variable is a constructor-rooted expression
 	# Return : true/false(boolean)
   def construct_expr?
-  	return self.symbol.kind == :ctor && self.arguments.map{|a| a.construct_expr?}.all? 
+  	return self.symbol.token >= CONSTRUCTOR && self.arguments.map{|a| a.construct_expr?}.all? 
   end
 
   def ==(another_application)
@@ -145,7 +144,7 @@ class Pattern < Application
 	# if error raise corresponding exception
 	# Params : application(Application)
 	def initialize(application)
-		if application.symbol.kind != :oper 
+		if application.symbol.token != OPERATION 
 			raise "Root symbol of Pattern is not an operator"
 		else
 			application.arguments.each do |arg|

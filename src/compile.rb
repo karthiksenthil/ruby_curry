@@ -32,9 +32,9 @@ class Application < Expression
 		output_rhs = nil
 		# identify the leading symbol of RHS 
 		leading_symbol = self.symbol
-		if leading_symbol.kind == :oper # case 2.1 i.e operator rooted
+		if leading_symbol.token == OPERATION # case 2.1 i.e operator rooted
 			output_rhs = H.new(self)
-		elsif leading_symbol.kind == :ctor # case 2.2 i.e constructor rooted
+		elsif leading_symbol.token >= CONSTRUCTOR # case 2.2 i.e constructor rooted 
 			output_rhs = self
 		end
 
@@ -47,7 +47,7 @@ end
 class Variable < Expression
 
 	def generate_H(lhs_pattern)
-		var_type = self.type # hard-coded for the case of append.rb, alt -> rule_rhs.type ?
+		var_type = self.type
 		output = []
 		if var_type=="*" # include all the constructors for a Variable of any type
 			constructors = $constructors_hash.values.flatten
@@ -66,7 +66,7 @@ class Variable < Expression
 						
 						args = []
 						(1..arity).each do |i|
-							args << Variable.new("_v"+i.to_s,"temporary_variable")
+							args << make_variable("_v"+i.to_s,"temporary_variable")
 						end
 
 						constructor_expr = Application.new(constructor,args)
@@ -118,7 +118,7 @@ class Exempt < DefTreeNode
 
 	#(3) to handle the case when the node is Exempt
 	def compile
-		abort_symbol = XSymbol.new("abort",0,:ctor,ABORT)
+		abort_symbol = XSymbol.new("abort",0,ABORT)
 		if $constructors_hash["unknown"].nil?
 			$constructors_hash["unknown"] = [abort_symbol]
 		else

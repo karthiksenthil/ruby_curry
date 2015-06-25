@@ -11,11 +11,11 @@ require_relative '../src/compile.rb'
 
 
 # Symbols in the rules
-$append_symbol = XSymbol.new("append",2,:oper,OPERATION)
+$append_symbol = XSymbol.new("append",2,OPERATION)
 XNIL = CONSTRUCTOR
 CONS = XNIL + 1
-$nil_list_symbol = XSymbol.new("[]",0,:ctor,NIL)
-$cons_symbol = XSymbol.new(":",2,:ctor,CONS)
+$nil_list_symbol = XSymbol.new("[]",0,NIL)
+$cons_symbol = XSymbol.new(":",2,CONS)
 
 # methods/constructors to shorten code and better readability
 def make_append(x,y)
@@ -37,10 +37,10 @@ else
 end
 
 # Variables in the rules
-$xs = Variable.new("xs","list")
-$ys = Variable.new("ys","list")
-$z = Variable.new("z","list")
-$zs = Variable.new("zs","list")
+$xs = make_variable("xs","list")
+$ys = make_variable("ys","list")
+$z = make_variable("z","list")
+$zs = make_variable("zs","list")
 
 # child1 i.e rule1 ; lhs = pattern and rhs = expression
 lhs1 = make_append(make_nil,$ys)

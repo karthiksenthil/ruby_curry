@@ -75,9 +75,9 @@ end
 
 
 # symbols in the example
-$half = Half_symbol.new("half",1,:oper,OPERATION)
-$zero_symbol = XSymbol.new("0",0,:ctor,ZERO)
-$s_symbol = XSymbol.new("s",1,:ctor,SUCC)
+$half = Half_symbol.new("half",1,OPERATION)
+$zero_symbol = XSymbol.new("0",0,ZERO)
+$s_symbol = XSymbol.new("s",1,SUCC)
 
 if $constructors_hash["integer"].nil?
 	$constructors_hash["integer"] = [$zero_symbol]	
@@ -107,7 +107,8 @@ test = make_half(make_succ(make_succ(make_succ(make_zero))))
 test2 = make_half(make_half(make_zero))
 # test3 half(succ(half(0)))
 test3 = make_half(make_succ(make_half(make_zero)))
-
+# test4 half(half(s(s(s(s(zero))))))
+test4 = make_half(make_half(make_succ(make_succ(make_succ(make_succ(make_zero))))))
 
 print first.H().show() + "\n"
 print third.H().show() + "\n"
@@ -115,3 +116,4 @@ print third.H().show() + "\n"
 print test.H().show() + "\n"
 print test2.H().show() + "\n"
 print test3.H().show() + "\n"
+print test4.H().show() + "\n"
