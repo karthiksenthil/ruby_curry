@@ -5,7 +5,7 @@ require_relative './exec_expressions.rb'
 class Variable < Expression
 	
 	def replace(var)
-		if self.symbol.name == var.symbol.name
+		if self.symbol == var.symbol
 			return H.new(var)
 		else
 			return self

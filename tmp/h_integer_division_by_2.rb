@@ -44,6 +44,7 @@ class Half_symbol < XSymbol
 			replaced_args = expr.arguments.map{|arg| arg == first_arg ? tmp : arg}
 			return Application.new(expr.symbol,replaced_args).H()
 		when ZERO
+			# puts "this one"
 			return make_zero
 		when SUCC
 			s_arg = first_arg.arguments[0]
@@ -69,6 +70,14 @@ class Half_symbol < XSymbol
 
 		end # end of outer casee
 
+	end
+
+	def ==(another_symbol)
+		if another_symbol.class == Half_symbol
+			self.name == another_symbol.name
+		else
+			false
+		end
 	end
 
 end

@@ -28,6 +28,14 @@ class XSymbol
 
   def H
   end
+
+  def ==(another_symbol)
+		if another_symbol.class == XSymbol
+			self.name == another_symbol.name
+		else
+			false
+		end
+	end
   
 end
 
@@ -69,7 +77,7 @@ class Variable < Expression
 
 	def ==(another_variable)
 		if another_variable.class == Variable
-			self.symbol.name == another_variable.symbol.name
+			self.symbol == another_variable.symbol
 		else
 			false
 		end
