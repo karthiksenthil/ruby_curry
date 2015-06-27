@@ -1,6 +1,7 @@
 require_relative './expressions.rb'
 
 # Subclass to encode H operation around an expression
+# Very important : Temporarily the argument of this H is strictly an expression
 class H < Expression
 	attr_accessor :expression
 

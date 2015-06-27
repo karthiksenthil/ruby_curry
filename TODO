@@ -1,0 +1,14 @@
+The following is a list of tasks to be done :
+
+Main Tasks:
+1. Completely change compile.rb to produce a H function(like in tmp/h_append.rb) as output
+2. Implementing the N function
+3. Handle the case of Variable and Choice for H function
+
+Sub Tasks:
+1. Test the replacment functionality of Box
+2. Change the unit test tests/test_compile.rb to match the output from main task 1
+3. Remove redundant classes/functions like pseudo_replace.rb, classes H,N,A
+4. Remove temporary code from expressions.rb like line 162-166
+5. Documentation of code
+

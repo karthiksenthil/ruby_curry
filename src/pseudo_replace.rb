@@ -4,11 +4,11 @@ require_relative './exec_expressions.rb'
 
 class Variable < Expression
 	
-	def replace(var)
+	def pseudo_replace(var)
 		if self.symbol == var.symbol
-			return H.new(var)
+			return Box.new(H.new(make_variable(self.symbol.name,self.type)))
 		else
-			return self
+			return Box.new(self)
 		end
 	end
 
@@ -16,8 +16,8 @@ end
 
 class Application < Expression
 	  
-	def replace(var)
-		args = @arguments.map { |a| a.replace(var)  }
+	def pseudo_replace(var)
+		args = @arguments.map { |a| a.content.pseudo_replace(var)  }
 		return Application.new(@symbol,args)
 	end
  

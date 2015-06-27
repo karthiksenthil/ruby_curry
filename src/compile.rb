@@ -1,9 +1,9 @@
 require_relative './definitional_tree.rb'
-require_relative './replace.rb'
+require_relative './pseudo_replace.rb'
 
 # class to represent the set rules obtained as output of compile procedure
-# lhs -> Expression
-# rhs -> Expression
+# lhs -> Box wrapping an Expression
+# rhs -> Box wrapping an Expression
 class Rule
 	attr_accessor :lhs,:rhs
 
@@ -17,7 +17,7 @@ class Rule
 	end
 
 	def ==(another_rule)
-		return self.lhs == another_rule.lhs && self.rhs == another_rule.rhs
+		return self.lhs.content == another_rule.lhs.content && self.rhs.content == another_rule.rhs.content
 	end
 
 end
@@ -38,7 +38,8 @@ class Application < Expression
 			output_rhs = self
 		end
 
-		output = [Rule.new(output_lhs,output_rhs)]
+		output = [Rule.new(Box.new(output_lhs),Box.new(output_rhs))]
+		
 		return output
 	end
 
@@ -60,7 +61,7 @@ class Variable < Expression
 			constructors.each do |constructor|
 				constructor_expr = nil
 				replaced_args = lhs_pattern.arguments.map{ |a|
-					if a == self
+					if a.content == self
 						# replace constructor which an expression built using constructor
 						arity = constructor.arity
 						
@@ -75,15 +76,16 @@ class Variable < Expression
 						a
 					end
 				}
-				replaced_patt = Box.new(Application.new(lhs_pattern.symbol,replaced_args))
+				replaced_patt = Application.new(lhs_pattern.symbol,replaced_args)
 				output_lhs = H.new(replaced_patt)
 				output_rhs = constructor_expr
-				output += [Rule.new(output_lhs,output_rhs)] 
+
+				output += [Rule.new(Box.new(output_lhs),output_rhs)] 
 			end
 		end
 
 		
-		output += [Rule.new(H.new(Box.new(lhs_pattern)),H.new(self))]
+		output += [Rule.new(Box.new(H.new(lhs_pattern)),Box.new(H.new(self)))]
 
 		return output
 	end
@@ -105,10 +107,13 @@ class Branch < DefTreeNode
 		inductive_var = self.variable
 
 		# replace RHS of the branch, replace the inductive_var by H(inductive_var)
-		replaced_branch_patt = self.pattern.content.replace(inductive_var)
-		output += [Rule.new(H.new(self.pattern),H.new(replaced_branch_patt))]
+		# self.pattern is a Box
+		# replaced_branch_patt = self.pattern.content.replace(inductive_var)  -- deprecated method
+		# H(xs+ys) = H(H(xs)+ys)
 
-		return output
+		replaced_branch_patt = self.pattern.content.pseudo_replace(inductive_var.content)
+		output += [Rule.new(Box.new(H.new(self.pattern.content)),Box.new(H.new(replaced_branch_patt)))]
+		return output		
 	end
 
 end
@@ -125,8 +130,8 @@ class Exempt < DefTreeNode
 			$constructors_hash["unknown"] += [abort_symbol]
 		end
 		
-		abort_expr = Application.new(abort_symbol,[])
-		output = [Rule.new(H.new(self.pattern),H.new(abort_expr))]
+		abort_expr = Box.new(Application.new(abort_symbol,[]))
+		output = [Rule.new(Box.new(H.new(self.pattern)),Box.new(H.new(abort_expr)))]
 		return output
 	end
 
@@ -137,9 +142,9 @@ class Leaf < DefTreeNode
 	#(2) to handle the case when the node is a Leaf(Rule)
 	def compile
 		rule_rhs = self.expression.content  # self.expression is wrapped in a Box
-		# puts self.pattern.content.show()
 		output = []
 		output += rule_rhs.generate_H(self.pattern.content) #self.pattern is also wrapped in a Box
+
 		return output
 
 	end
