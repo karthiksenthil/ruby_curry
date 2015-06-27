@@ -69,13 +69,13 @@ class Variable < Expression
 							args << make_variable("_v"+i.to_s,"temporary_variable")
 						end
 
-						constructor_expr = Application.new(constructor,args)
+						constructor_expr = Box.new(Application.new(constructor,args))
 						constructor_expr
 					else
 						a
 					end
 				}
-				replaced_patt = Application.new(lhs_pattern.symbol,replaced_args)
+				replaced_patt = Box.new(Application.new(lhs_pattern.symbol,replaced_args))
 				output_lhs = H.new(replaced_patt)
 				output_rhs = constructor_expr
 				output += [Rule.new(output_lhs,output_rhs)] 
@@ -83,7 +83,7 @@ class Variable < Expression
 		end
 
 		
-		output += [Rule.new(H.new(lhs_pattern),H.new(self))]
+		output += [Rule.new(H.new(Box.new(lhs_pattern)),H.new(self))]
 
 		return output
 	end
@@ -105,7 +105,7 @@ class Branch < DefTreeNode
 		inductive_var = self.variable
 
 		# replace RHS of the branch, replace the inductive_var by H(inductive_var)
-		replaced_branch_patt = self.pattern.replace(inductive_var)
+		replaced_branch_patt = self.pattern.content.replace(inductive_var)
 		output += [Rule.new(H.new(self.pattern),H.new(replaced_branch_patt))]
 
 		return output
@@ -136,9 +136,10 @@ class Leaf < DefTreeNode
 
 	#(2) to handle the case when the node is a Leaf(Rule)
 	def compile
-		rule_rhs = self.expression
+		rule_rhs = self.expression.content  # self.expression is wrapped in a Box
+		# puts self.pattern.content.show()
 		output = []
-		output += rule_rhs.generate_H(self.pattern)
+		output += rule_rhs.generate_H(self.pattern.content) #self.pattern is also wrapped in a Box
 		return output
 
 	end

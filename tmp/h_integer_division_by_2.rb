@@ -11,73 +11,65 @@ require_relative '../src/expressions.rb'
 ZERO = CONSTRUCTOR
 SUCC = ZERO + 1
 
-# expression constructors
+# expression constructors with Box wrapper
 def make_zero
-	return Application.new($zero_symbol,[])
+	return Box.new(Application.new($zero_symbol,[]))
 end
 
 def make_succ(x)
-	return Application.new($s_symbol,[x])
+	return Box.new(Application.new($s_symbol,[x]))
 end
 
 def make_half(x)
-	return Application.new($half,[x])
+	return Box.new(Application.new($half,[x]))
 end
 
 
 # definition of the H function 
 class Half_symbol < XSymbol
 
+	# note that H can be run only on a Box object
 	def H(expr)
 		
 		# puts expr.show()
-		first_arg = expr.arguments[0] # first argument of Application
+		first_arg = expr.content.arguments[0] # first argument of Application(Box)
 
-		case first_arg.symbol.token
+		case first_arg.content.symbol.token
 		when VARIABLE
 			raise "Handling Variables not implemented yet"
 		when CHOICE
 			raise "Handling Choice not implemented yet"
 		when OPERATION
-			# case is half(half(...)) ==> half(H(half(...)))
+			# case is half(half(...)) ==> half(H(half(...))) ; check 1 for old code
 			tmp = first_arg.H()
-			replaced_args = expr.arguments.map{|arg| arg == first_arg ? tmp : arg}
-			return Application.new(expr.symbol,replaced_args).H()
+			first_arg.replace(tmp.content)
+			return expr.H()
+
 		when ZERO
-			# puts "this one"
 			return make_zero
 		when SUCC
-			s_arg = first_arg.arguments[0]
+			s_arg = first_arg.content.arguments[0] # argument of outer S (Box)
 
-			case s_arg.symbol.token
+			case s_arg.content.symbol.token
 			when VARIABLE
 				raise "Handling Variables not implemented yet"
 			when CHOICE
 				raise "Handling Choice not implemented yet"
 			when OPERATION
-				# case is half(s(half(...))) ==> half(s(H(half(...))))
+				# case is half(s(half(...))) ==> half(s(H(half(...)))); check 2 for old code
 				tmp = s_arg.H()
-				replaced_args = first_arg.arguments.map{|arg| arg == s_arg ? tmp : arg}
-				replaced_first_arg = Application.new(first_arg.symbol,replaced_args)
-				replaced_expr_args = expr.arguments.map{|arg| arg == first_arg ? replaced_first_arg : arg}
-				return Application.new(expr.symbol,replaced_expr_args).H()  
+				s_arg.replace(tmp.content)
+				return expr.H()
+
 			when ZERO
 				return make_zero
 			when SUCC
-				x3 = s_arg.arguments[0]
+				x3 = s_arg.content.arguments[0]
 				return make_succ(make_half(x3))
 			end
 
 		end # end of outer casee
 
-	end
-
-	def ==(another_symbol)
-		if another_symbol.class == Half_symbol
-			self.name == another_symbol.name
-		else
-			false
-		end
 	end
 
 end
@@ -126,3 +118,16 @@ print test.H().show() + "\n"
 print test2.H().show() + "\n"
 print test3.H().show() + "\n"
 print test4.H().show() + "\n"
+
+
+
+# Old code:
+# 1
+# replaced_args = expr.arguments.map{|arg| arg == first_arg ? tmp : arg}
+# return Application.new(expr.symbol,replaced_args).H()
+
+#2
+# replaced_args = first_arg.arguments.map{|arg| arg == s_arg ? tmp : arg}
+# replaced_first_arg = Application.new(first_arg.symbol,replaced_args)
+# replaced_expr_args = expr.arguments.map{|arg| arg == first_arg ? replaced_first_arg : arg}
+# return Application.new(expr.symbol,replaced_expr_args).H()

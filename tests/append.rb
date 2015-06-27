@@ -17,17 +17,17 @@ CONS = XNIL + 1
 $nil_list_symbol = XSymbol.new("[]",0,NIL)
 $cons_symbol = XSymbol.new(":",2,CONS)
 
-# methods/constructors to shorten code and better readability
+# methods/constructors to shorten code and better readability, and wrap Expressions in Box
 def make_append(x,y)
-	return Application.new($append_symbol,[x,y])
+	return Box.new(Application.new($append_symbol,[x,y]))
 end
 
 def make_nil
-	return Application.new($nil_list_symbol,[])
+	return Box.new(Application.new($nil_list_symbol,[]))
 end
 
 def make_cons(x,y)
-	return Application.new($cons_symbol,[x,y])
+	return Box.new(Application.new($cons_symbol,[x,y]))
 end
 
 if $constructors_hash["list"].nil?

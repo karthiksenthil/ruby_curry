@@ -30,7 +30,7 @@ class XSymbol
   end
 
   def ==(another_symbol)
-		if another_symbol.class == XSymbol
+		if another_symbol.class == self.class
 			self.name == another_symbol.name
 		else
 			false
@@ -38,6 +38,31 @@ class XSymbol
 	end
   
 end
+
+# a wrapper class around Expressions
+class Box
+	attr_accessor :content #content is an Expression object
+
+	def initialize(content)
+		@content = content
+	end
+
+	def replace(new_content) # new content should be the content of another Box object only
+		@content = new_content
+	end
+
+	# the H function for a Box object
+	def H
+		self.content.symbol.H(self)
+	end
+
+	# showing a Box
+	def show
+		return @content.show()
+	end
+
+end
+
 
 class Expression
 
@@ -88,7 +113,7 @@ end
 # global function to make any Variable object
 def make_variable(name,type)
 	sym = XSymbol.new(name,0,VARIABLE)
-	return Variable.new(sym,type)
+	return Box.new(Variable.new(sym,type)) # wrap the Variable in a Box
 end
 
 
@@ -139,9 +164,10 @@ class Application < Expression
   	end
   end
 
-  def H
-  	self.symbol.H(self)
-  end
+  # moving to Box
+  # def H
+  # 	self.symbol.H(self)
+  # end
 
 end
 
