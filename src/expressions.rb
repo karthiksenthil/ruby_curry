@@ -53,7 +53,12 @@ class Box
 
 	# the H function for a Box object
 	def H
-		self.content.symbol.H(self)
+		if self.content.symbol.token != OPERATION
+			raise "H is not defined on a non-operation rooted expression"
+		else
+			self.content.symbol.H(self)
+		end
+		
 	end
 
 	# showing a Box

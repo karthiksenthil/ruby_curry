@@ -94,7 +94,7 @@ ys = make_variable("ys","list")
 
 # test1 append([],[])
 test1 = make_append(make_nil,make_nil)
-puts test1.H().show()
+# puts test1.H().show()
 
 # test2 append(xs,ys)
 test2 = make_append(xs,ys)
@@ -106,7 +106,7 @@ test3 = make_append(make_nil,ys)
 
 # test4 append(append([],[]),:(xs,ys))
 test4 = make_append(make_append(make_nil,make_nil),make_cons(xs,ys))
-puts test4.H().show()
+# puts test4.H().show()
 
 
 # Old code
