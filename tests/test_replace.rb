@@ -1,5 +1,6 @@
 require_relative '../src/expressions.rb'
-require_relative './h_append.rb'
+require_relative '../tmp/h_append.rb'
+require 'test/unit'
 
 # constructors for pair example
 PAIR = CONSTRUCTOR
@@ -19,13 +20,18 @@ def evaluate_pair(pair)
 	end
 end
 
+class TestReplace<Test::Unit::TestCase
 
-$pair_symbol = XSymbol.new("pair",2,PAIR)
-# sample expression : append([],[])
-x = make_append(make_nil,make_nil)
-# make a pair : pair(x,x)
-test_pair = make_pair(x,x)
-evaluate_pair(test_pair)
+	def test_pair_replace
+		$pair_symbol = XSymbol.new("pair",2,PAIR)
+		# sample expression : append([],[])
+		x = make_append(make_nil,make_nil)
+		# make a pair : pair(x,x)
+		test_pair = make_pair(x,x)
+		assert_raises(RuntimeError) { evaluate_pair(test_pair) }
+		# assert_equals("H is not defined on a non-operation rooted expression",exception.message)
+	end
+end
 
 
 

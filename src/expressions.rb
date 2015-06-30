@@ -29,6 +29,21 @@ class XSymbol
   def H
   end
 
+  # the N function, defined for all Symbols
+  def N(expr)
+  	case self.token
+  	when OPERATION
+  		h_expr = expr.H()
+  		return h_expr.N()
+  	when CONSTRUCTOR
+  		expr.content.arguments.each do |arg|
+  			tmp = arg.N()
+  			arg.replace(tmp.content)
+  		end 
+  		return expr
+  	end
+  end
+
   def ==(another_symbol)
 		if another_symbol.class == self.class
 			self.name == another_symbol.name
@@ -59,6 +74,11 @@ class Box
 			self.content.symbol.H(self)
 		end
 		
+	end
+
+	# the N function for a Box object
+	def N
+		self.content.symbol.N(self)
 	end
 
 	# showing a Box
