@@ -43,10 +43,10 @@ class Half_symbol < XSymbol
 			# case is half(half(...)) ==> half(H(half(...))) ; check 1 for old code
 			tmp = first_arg.H()
 			first_arg.replace(tmp.content)
-			return expr.H()
+			expr.H()
 
 		when ZERO
-			return make_zero
+			expr.replace(make_zero.content)
 		when SUCC
 			s_arg = first_arg.content.arguments[0] # argument of outer S (Box)
 
@@ -59,16 +59,18 @@ class Half_symbol < XSymbol
 				# case is half(s(half(...))) ==> half(s(H(half(...)))); check 2 for old code
 				tmp = s_arg.H()
 				s_arg.replace(tmp.content)
-				return expr.H()
+				expr.H()
 
 			when ZERO
-				return make_zero
+				expr.replace(make_zero.content)
 			when SUCC
 				x3 = s_arg.content.arguments[0]
-				return make_succ(make_half(x3))
+				expr.replace(make_succ(make_half(x3)).content)
 			end
 
-		end # end of outer casee
+		end # end of outer case
+
+		expr
 
 	end
 

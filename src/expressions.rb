@@ -33,15 +33,15 @@ class XSymbol
   def N(expr)
   	case self.token
   	when OPERATION
-  		h_expr = expr.H()
-  		return h_expr.N()
+  		expr.H()
+  		expr.N()
   	when CONSTRUCTOR
   		expr.content.arguments.each do |arg|
   			tmp = arg.N()
   			arg.replace(tmp.content)
   		end 
-  		return expr
   	end
+  	expr
   end
 
   def ==(another_symbol)

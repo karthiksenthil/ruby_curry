@@ -38,7 +38,7 @@ class Append_symbol < XSymbol
 		when OPERATION
 			tmp = first_arg.H()
 			first_arg.replace(tmp.content)
-			return expr.H()
+			expr.H()
 
 		when XNIL
 			second_arg = expr.content.arguments[1] # second argument of expr in Box
@@ -51,14 +51,14 @@ class Append_symbol < XSymbol
 			when OPERATION
 				tmp = second_arg.H()
 				second_arg.replace(tmp.content)
-				return expr.H()
+				expr.H()
 			
 			when XNIL
-				return make_nil
+				expr.replace(make_nil.content)
 			when CONS
 				cons_first_arg = second_arg.content.arguments[0] # these 2 args will also be a Box object
 				cons_second_arg = second_arg.content.arguments[1]
-				return make_cons(cons_first_arg,cons_second_arg)
+				expr.replace(make_cons(cons_first_arg,cons_second_arg).content)
 				# possible shortcut for this code
 				# return second_arg	
 			end 
@@ -67,8 +67,10 @@ class Append_symbol < XSymbol
 			z = first_arg.content.arguments[0]
 			zs = first_arg.content.arguments[1]
 			ys = expr.content.arguments[1]
-			return make_cons(z,make_append(zs,ys))
+			expr.replace(make_cons(z,make_append(zs,ys)).content)
 		end
+
+		expr
 
 	end
 
@@ -94,19 +96,21 @@ ys = make_variable("ys","list")
 
 # test1 append([],[])
 test1 = make_append(make_nil,make_nil)
-# puts test1.H().show()
+# test1.H()
+# puts test1.show()
 
 # test2 append(xs,ys)
 test2 = make_append(xs,ys)
-# puts test2.H().show()
+# test2.H()
 
 # test3 append([],ys)
 test3 = make_append(make_nil,ys)
-# puts test3.H().show()
+# test3.H()
 
 # test4 append(append([],[]),:(xs,ys))
 test4 = make_append(make_append(make_nil,make_nil),make_cons(xs,ys))
-# puts test4.H().show()
+# test4.H()
+# puts test4.show()
 
 
 # Old code
