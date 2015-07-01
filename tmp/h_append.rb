@@ -109,7 +109,7 @@ test3 = make_append(make_nil,ys)
 
 # test4 append(append([],[]),:(xs,ys))
 test4 = make_append(make_append(make_nil,make_nil),make_cons(xs,ys))
-# test4.H()
+# test4.N()
 # puts test4.show()
 
 

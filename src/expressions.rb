@@ -37,8 +37,7 @@ class XSymbol
   		expr.N()
   	when CONSTRUCTOR
   		expr.content.arguments.each do |arg|
-  			tmp = arg.N()
-  			arg.replace(tmp.content)
+  			arg.N()
   		end 
   	end
   	expr
