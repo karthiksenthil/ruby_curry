@@ -36,8 +36,7 @@ class Append_symbol < XSymbol
 		when CHOICE
 			raise "Handling Choice not implemented yet"
 		when OPERATION
-			tmp = first_arg.H()
-			first_arg.replace(tmp.content)
+			first_arg.H()
 			expr.H()
 
 		when XNIL
@@ -49,8 +48,7 @@ class Append_symbol < XSymbol
 			when CHOICE
 				raise "Handling Choice not implemented yet"
 			when OPERATION
-				tmp = second_arg.H()
-				second_arg.replace(tmp.content)
+				second_arg.H()	
 				expr.H()
 			
 			when XNIL
@@ -96,8 +94,8 @@ ys = make_variable("ys","list")
 
 # test1 append([],[])
 test1 = make_append(make_nil,make_nil)
-# test1.H()
-# puts test1.show()
+test1.H()
+puts test1.show()
 
 # test2 append(xs,ys)
 test2 = make_append(xs,ys)
@@ -109,8 +107,13 @@ test3 = make_append(make_nil,ys)
 
 # test4 append(append([],[]),:(xs,ys))
 test4 = make_append(make_append(make_nil,make_nil),make_cons(xs,ys))
-# test4.N()
-# puts test4.show()
+test4.H()
+puts test4.show()
+
+# test5 append(append([],:(xs,ys),[])
+test5 = make_append(make_append(make_nil,make_cons(xs,ys)),make_nil)
+test5.H()
+puts test5.show()
 
 
 # Old code

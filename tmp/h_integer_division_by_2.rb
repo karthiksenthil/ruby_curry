@@ -41,8 +41,7 @@ class Half_symbol < XSymbol
 			raise "Handling Choice not implemented yet"
 		when OPERATION
 			# case is half(half(...)) ==> half(H(half(...))) ; check 1 for old code
-			tmp = first_arg.H()
-			first_arg.replace(tmp.content)
+			first_arg.H()
 			expr.H()
 
 		when ZERO
@@ -57,8 +56,7 @@ class Half_symbol < XSymbol
 				raise "Handling Choice not implemented yet"
 			when OPERATION
 				# case is half(s(half(...))) ==> half(s(H(half(...)))); check 2 for old code
-				tmp = s_arg.H()
-				s_arg.replace(tmp.content)
+				s_arg.H()
 				expr.H()
 
 			when ZERO

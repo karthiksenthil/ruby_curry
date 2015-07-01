@@ -46,8 +46,7 @@ class Not_symbol < XSymbol
 		when XFALSE
 			return make_true
 		when OPERATION
-			tmp = first_arg.H()
-			first_arg.replace(tmp.content)
+			first_arg.H()
 			return expr.H()			
 		end
 
@@ -87,14 +86,12 @@ class Or_symbol < XSymbol
 			when XFALSE
 				expr.replace(make_false.content)
 			when OPERATION
-				tmp = second_arg.H()
-				second_arg.replace(tmp.content)
+				second_arg.H()
 				expr.H()
 			end
 
 		when OPERATION
-			tmp = first_arg.H()
-			first_arg.replace(tmp.content)
+			first_arg.H()
 			expr.H()
 		end
 		expr
@@ -134,14 +131,12 @@ class And_symbol < XSymbol
 			when XTRUE
 				expr.replace(make_true.content)
 			when OPERATION
-				tmp = second_arg.H()
-				second_arg.replace(tmp.content)
+				second_arg.H()
 				expr.H()
 			end
 
 		when OPERATION
-			tmp = first_arg.H()
-			first_arg.replace(tmp.content)
+			first_arg.H()
 			expr.H()
 		end
 		expr
