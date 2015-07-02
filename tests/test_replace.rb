@@ -1,5 +1,5 @@
 require_relative '../src/expressions.rb'
-require_relative '../tmp/h_append.rb'
+require_relative '../flpcode/boolean.rb'
 require 'test/unit'
 
 # constructors for pair example
@@ -10,7 +10,7 @@ def make_pair(x,y)
 	return Box.new(Application.new($pair_symbol,[x,y]))
 end
 
-# method to evaluate a pair expression
+# method to evaluate a pair expression ,alternate code to N
 def evaluate_pair(pair)
 	count = 0
 	pair.content.arguments.each do |arg|
@@ -24,12 +24,12 @@ class TestReplace<Test::Unit::TestCase
 
 	def test_pair_replace
 		$pair_symbol = XSymbol.new("pair",2,PAIR)
-		# sample expression : append([],[])
-		x = make_append(make_nil,make_nil)
+		# sample expression : and(true,false)
+		x = make_and(make_true,make_false)
 		# make a pair : pair(x,x)
 		test_pair = make_pair(x,x)
-		assert_raises(RuntimeError) { evaluate_pair(test_pair) }
-		# assert_equals("H is not defined on a non-operation rooted expression",exception.message)
+		test_pair.N()
+		assert_equal(1,$replacement_records.count,"Replacement functionality is not consistent")
 	end
 end
 

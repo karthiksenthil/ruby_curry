@@ -42,13 +42,14 @@ class Not_symbol < XSymbol
 		when CHOICE
 			raise "Handling Choice not implemented yet"
 		when XTRUE
-			return make_false
+			expr.replace(make_false.content)
 		when XFALSE
-			return make_true
+			expr.replace(make_true.content)
 		when OPERATION
 			first_arg.H()
-			return expr.H()			
+			expr.H()			
 		end
+		expr
 
 	end
 end
@@ -149,8 +150,8 @@ $and_symbol = And_symbol.new("and",2,OPERATION)
 
 
 # not(true) = false
-puts make_not(make_true).H().show()
+# puts make_not(make_true).N()
 # or(false,or(false,not(false))) = true
-puts make_or(make_false,make_or(make_false,make_not(make_false))).H().show()
+# puts make_or(make_false,make_or(make_false,make_not(make_false))).H().show()
 # and(or(false,true),not(and(true,true))) = false
-puts make_and(make_or(make_false,make_true),make_not(make_and(make_true,make_true))).H().show()
+# puts make_and(make_or(make_false,make_true),make_not(make_and(make_true,make_true))).N()

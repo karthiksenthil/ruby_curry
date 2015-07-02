@@ -9,6 +9,6 @@ Sub Tasks:
 1. Test the replacment functionality of Box
 2. Change the unit test tests/test_compile.rb to match the output from main task 1
 3. Remove redundant classes/functions like pseudo_replace.rb, classes H,N,A
-4. Remove temporary code from expressions.rb like line 162-166
+4. Remove temporary code from expressions.rb like line 186-190
 5. Documentation of code
 

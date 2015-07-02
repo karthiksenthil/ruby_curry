@@ -53,6 +53,9 @@ class XSymbol
   
 end
 
+
+$replacement_records = []  # a structure to trace each and every replacement
+
 # a wrapper class around Expressions
 class Box
 	attr_accessor :content #content is an Expression object
@@ -62,6 +65,9 @@ class Box
 	end
 
 	def replace(new_content) # new content should be the content of another Box object only
+		replace_record = {:old=>@content,:new=>new_content}
+		$replacement_records << replace_record
+
 		@content = new_content
 	end
 
