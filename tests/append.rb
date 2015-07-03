@@ -14,7 +14,7 @@ require_relative '../src/compile.rb'
 $append_symbol = XSymbol.new("append",2,OPERATION)
 XNIL = CONSTRUCTOR
 CONS = XNIL + 1
-$nil_list_symbol = XSymbol.new("[]",0,NIL)
+$nil_list_symbol = XSymbol.new("[]",0,XNIL)
 $cons_symbol = XSymbol.new(":",2,CONS)
 
 # methods/constructors to shorten code and better readability, and wrap Expressions in Box

@@ -27,8 +27,13 @@ class TestReplace<Test::Unit::TestCase
 		# sample expression : and(true,false)
 		x = make_and(make_true,make_false)
 		# make a pair : pair(x,x)
-		test_pair = make_pair(x,x)
+		test_pair = make_pair(make_and(make_true,make_false),make_and(make_true,make_false))
 		test_pair.N()
+
+		$replacement_records.each do |rec|
+			puts rec[:old].show() + "=>" + rec[:new].show()
+		end
+
 		assert_equal(1,$replacement_records.count,"Replacement functionality is not consistent")
 	end
 end
