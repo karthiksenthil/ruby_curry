@@ -26,13 +26,11 @@ class TestReplace<Test::Unit::TestCase
 		$pair_symbol = XSymbol.new("pair",2,PAIR)
 		# sample expression : and(true,false)
 		x = make_and(make_true,make_false)
-		# make a pair : pair(x,x)
-		test_pair = make_pair(make_and(make_true,make_false),make_and(make_true,make_false))
+		# make a pair : pair(x,x) -> 1 replacement
+		test_pair = make_pair(x,x)
+		# make a pair : pair(and(true,false),and(true,false)) -> 2 replacements
+		# test_pair = make_pair(make_and(make_true,make_false),make_and(make_true,make_false))
 		test_pair.N()
-
-		$replacement_records.each do |rec|
-			puts rec[:old].show() + "=>" + rec[:new].show()
-		end
 
 		assert_equal(1,$replacement_records.count,"Replacement functionality is not consistent")
 	end
