@@ -7,8 +7,9 @@ class Branch < DefTreeNode
 		$inductive_var_counter += 1
 		inductive_arg = "inductive_arg"+$inductive_var_counter.to_s
 		output = print_spaces(indent)+inductive_arg+" = "
-		# here expr is not always the case, it's the outer most inductive variable
-		output += "expr.content.arguments["+($inductive_var_counter-1).to_s+"]\n\n"
+		# output += "expr.content.arguments["+($inductive_var_counter-1).to_s+"]\n\n"
+		# find the localtion of the inductive variable in the pattern
+		output += "expr"+build_using_path(self.pattern.content,self.variable.content)+"\n\n"
 		output += 
 print_spaces(indent)+"case "+inductive_arg+".content.symbol.token\n"+
 print_spaces(indent)+"when VARIABLE\n"+
@@ -56,7 +57,9 @@ class Leaf < DefTreeNode
 			# handles leaf case with constructors on rhs
 			rhs_constructor = self.expression.content
 			# handle case when variables are present in args of rhs_constructor
-			output += print_spaces(indent)+"expr.replace("+rhs_constructor.print_code()+")\n"
+			# pass the lhs_pattern of the leaf so that if variables are in rhs, they find their
+			# location with respect to lhs_pattern
+			output += print_spaces(indent)+"expr.replace("+rhs_constructor.print_code(self.pattern.content)+".content)\n"
 		end
 
 		return output
