@@ -87,32 +87,36 @@ end
 ################################ NOTES ################################
 
 print_code
-1.1) print_code is used in case "constructor-rooted rhs of leaf". While printing
-		 the arguments of an Application, it can also be a Variable. print_code for
-		 Variable requires a reference "expression" w.r.t which the Variable is found
-		 and code is built to retrieve that Variable in input expr
+1.1) 
+print_code is used in case "constructor-rooted rhs of leaf". While printing
+the arguments of an Application, it can also be a Variable. print_code for
+Variable requires a reference "expression" w.r.t which the Variable is found
+and code is built to retrieve that Variable in input expr
 
-		 In this case reference "expression" ==> lhs_pattern of the leaf
+In this case reference "expression" ==> lhs_pattern of the leaf
 
 
 find_path
-2.1) find_path finds the path to a Variable in an  expression
-		 Example -
-		 a)	expr = append(xs,ys)
-		 		expr.find_path(xs) ==> [1] ==> xs is first arg of expr
+2.1) 
+find_path finds the path to a Variable in an  expression
+Example -
+a)	expr = append(xs,ys)
+  	expr.find_path(xs) ==> [1] ==> xs is first arg of expr
 
-		 b)	expr = append(append(xs,ys),[])
-				expr.find_path(xs) ==> [1,1] ==> xs is first arg of the first arg of expr
+b)	expr = append(append(xs,ys),[])
+  	expr.find_path(xs) ==> [1,1] ==> xs is first arg of the first arg of expr
 
-2.2) find_path is specialised for Application & Variable, since each argument of
-			Application can be either of them.
+2.2) 
+find_path is specialised for Application & Variable, since each argument of
+Application can be either of them.
 
-2.3) Working : 1. Loop through all arguments of expression
-							 2. Push argument's index to path
-							 3. Recursive call to find_path on argument
-							 4. If empty --> Variable not present, pop the index
-							 5. If found --> Varible found return path
-							 5. Else --> Variable in nested expressions, add path
+2.3) Working : 
+1. Loop through all arguments of expression
+2. Push argument's index to path
+3. Recursive call to find_path on argument
+4. If empty --> Variable not present, pop the index
+5. If found --> Varible found return path
+6. Else --> Variable in nested expressions, add path
 			
 
 
