@@ -115,6 +115,13 @@ class Leaf < DefTreeNode
 
 end
 
+class Exempt < DefTreeNode
+
+	def compile(indent=0)
+		output = print_spaces(indent)+"raise('Exempt node encountered/Invalid expression')\n"
+	end
+
+end
 
 
 
@@ -122,11 +129,23 @@ end
 
 $inductive_var_counter = 0
 def main(def_tree)
+	
 	indent = 0
-	output = "def H(expr)\n"
-	output += def_tree.compile(indent+1)
-	output += print_spaces(indent+1)+"expr\n"
-	output += "end\n"
+	operation_name = def_tree.pattern.content.symbol.show()
+	output_file = File.new("/home/karthik/Documents/GSoC2015/PSU_stuff/definitional_trees/code/DefinitionalTree/tmp/new_compile_output/"+ operation_name +"_h.rb","w")
+	# IMPORTANT : name of the file where definitional tree is defined should be examples/<operation_symbol>.rb
+	output_file.write("require_relative '../../examples/"+operation_name+".rb'\n\n")
+	output_file.write("class "+operation_name.capitalize+"_symbol < XSymbol\n")
+	output = print_spaces(indent+1)+"def H(expr)\n"
+	output += def_tree.compile(indent+2)
+	output += print_spaces(indent+2)+"expr\n"
+	output += print_spaces(indent+1)+"end\n"
+	output_file.write(output)
+	output_file.write("end #end of class\n\n")
+	# redefine the operation symbol
+	output_file.write("$"+operation_name+"_symbol = "+operation_name.capitalize+"_symbol.new('"+operation_name+"',"+
+		def_tree.pattern.content.symbol.arity.to_s+",OPERATION)\n")
+	output_file.close
+	# puts output
 
-	puts output
 end
