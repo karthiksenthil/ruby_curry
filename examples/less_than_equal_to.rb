@@ -120,7 +120,7 @@ def H(expr)
 		when ZERO
 			expr.replace(make_false)
 		when SUCC
-			expr.replace(make_less_than(first_arg.content.arguments[0],second_arg.content.arguments[0]))
+			expr.replace(make_less_than(first_arg.content.arguments[0],second_arg.content.arguments[0]).H().content)
 		end
 	end
 

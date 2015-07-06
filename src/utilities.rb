@@ -17,16 +17,9 @@ class Application < Expression
 	# parameter expression => lhs_pattern of a leaf (see Notes print_code 1.1)
 	def print_code(expression)
 		code = "Box.new(Application.new("
-		code += self.symbol.show() + "_symbol,["
-
-		self.arguments.each do |arg|
-			code += arg.content.print_code(expression)+","
-		end
-
-		# if self.arguments is empty code[-1] is [
-		if code[-1] == ','
-			code[-1] = ''
-		end
+		# Doubt : should $ be appended to symbol
+		code += "$"+self.symbol.show() + "_symbol,["
+		code += self.arguments.map { |arg| arg.content.print_code(expression) }.join(",")
 		code += "]))"
 	end
 
