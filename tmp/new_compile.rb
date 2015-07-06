@@ -59,39 +59,39 @@ class Leaf < DefTreeNode
 			#    a) pattern = replace inductive arg by constructor_expression (Doubt : can this be inductive_arg.replace(cons_expr))
 			#    b) expression = constructor_expression 
 
-		var_type = self.expression.content.type
-		if var_type == "*"
-			constructors = $constructors_hash.values.flatten
-		else
-			constructors = $constructors_hash[var_type]
-		end
-
-		leaves = []
-		# building a leaf node for each constructor
-		constructors.each do |constructor|
-			constructor_args = []
-			(1..constructor.arity).each do |i|
-				constructor_args << make_variable("_v"+i.to_s,"temporary variable")
+			var_type = self.expression.content.type
+			if var_type == "*"
+				constructors = $constructors_hash.values.flatten
+			else
+				constructors = $constructors_hash[var_type]
 			end
-			constructor_expression = Box.new(Application.new(constructor,constructor_args))
 
-			replaced_args = self.pattern.content.arguments.map{|a|
-				if a.content == self.expression.content
-					constructor_expression
-				else
-					a
+			leaves = []
+			# building a leaf node for each constructor
+			constructors.each do |constructor|
+				constructor_args = []
+				(1..constructor.arity).each do |i|
+					constructor_args << make_variable("_v"+i.to_s,"temporary variable")
 				end
-			}
+				constructor_expression = Box.new(Application.new(constructor,constructor_args))
 
-			lhs = Box.new(Application.new(self.pattern.content.symbol,replaced_args))
-			rhs = constructor_expression
-			leaves << Leaf.new(lhs,rhs)
-		end
+				replaced_args = self.pattern.content.arguments.map{|a|
+					if a.content == self.expression.content
+						constructor_expression
+					else
+						a
+					end
+				}
 
-		pseudo_branch = Branch.new(self.pattern,self.expression,leaves)
+				lhs = Box.new(Application.new(self.pattern.content.symbol,replaced_args))
+				rhs = constructor_expression
+				leaves << Leaf.new(lhs,rhs)
+			end
 
-		# pseudo_branch.pretty_print()
-		output += pseudo_branch.compile(indent)
+			pseudo_branch = Branch.new(self.pattern,self.expression,leaves)
+
+			# pseudo_branch.pretty_print()
+			output += pseudo_branch.compile(indent)
 
 
 		when OPERATION
