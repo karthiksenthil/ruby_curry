@@ -134,7 +134,12 @@ def main(def_tree)
 	operation_name = def_tree.pattern.content.symbol.show()
 	output_file = File.new("/home/karthik/Documents/GSoC2015/PSU_stuff/definitional_trees/code/DefinitionalTree/tmp/new_compile_output/"+ operation_name +"_h.rb","w")
 	# IMPORTANT : name of the file where definitional tree is defined should be examples/<operation_symbol>.rb
-	output_file.write("require_relative '../../examples/"+operation_name+".rb'\n\n")
+	# output_file.write("require_relative '../../examples/"+operation_name+".rb'\n\n")
+
+	# alternatively, get name of file calling the new_compile main function
+	calling_file = caller[0].split(":")[0]
+	output_file.write("require_relative '../../"+calling_file+"'\n\n")	
+
 	output_file.write("class "+operation_name.capitalize+"_symbol < XSymbol\n")
 	output = print_spaces(indent+1)+"def H(expr)\n"
 	output += def_tree.compile(indent+2)

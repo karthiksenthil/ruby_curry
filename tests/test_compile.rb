@@ -34,7 +34,8 @@ class TestCompile < Test::Unit::TestCase
 
 		expected_rules = [rule1,rule2,rule3,rule4,rule5]
 
-		# Note : $rules contains the output rules produced by append.rb
+		# rules produced on running compile on append operation's definitional tree
+		$rules = $append_tree.compile()
 
 		# explicitly done to identify which particular rule failed
 		(0..4).each do |i|

@@ -1,5 +1,4 @@
 require_relative '../src/definitional_tree.rb'
-require_relative '../src/compile.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the append operation(on lists or arrays)
@@ -14,8 +13,8 @@ require_relative '../src/compile.rb'
 $append_symbol = XSymbol.new("append",2,OPERATION)
 XNIL = CONSTRUCTOR
 CONS = XNIL + 1
-$nil_list_symbol = XSymbol.new("[]",0,XNIL)
-$cons_symbol = XSymbol.new(":",2,CONS)
+$nil_list_symbol = XSymbol.new("nil_list",0,XNIL)
+$cons_symbol = XSymbol.new("cons",2,CONS)
 
 # methods/constructors to shorten code and better readability, and wrap Expressions in Box
 def make_append(x,y)
@@ -57,8 +56,5 @@ child2 = Leaf.new(lhs2,rhs2)
 # definitional tree for above rules
 
 rootpatt = make_append($xs,$ys)
-append_tree = Branch.new(rootpatt,$xs,[child1,child2])
-
-# rules produced on running compile on append operation's definitional tree
-$rules = append_tree.compile()
+$append_tree = Branch.new(rootpatt,$xs,[child1,child2])
 
