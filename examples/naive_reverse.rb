@@ -1,5 +1,6 @@
 require_relative '../src/definitional_tree.rb'
-require_relative '../src/compile.rb'
+# require_relative '../src/compile.rb'
+require_relative '../tmp/new_compile.rb'
 
 # Example to construct definitonal trees for a curry program
 # to reverse a list
@@ -21,7 +22,7 @@ require_relative '../src/compile.rb'
 require_relative 'append.rb'
 
 # Symbol for reverse operation
-$reverse_symbol = XSymbol.new("reverse",1,:oper)
+$reverse_symbol = XSymbol.new("reverse",1,OPERATION)
 
 # expression constructors
 def make_reverse(x)

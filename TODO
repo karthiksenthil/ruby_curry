@@ -13,6 +13,6 @@ Sub Tasks:
 5. Documentation of code
 6. Add unit test for find_path functionality(3 examples)
 
-Discussio:
+Discussion:
 1. Format of output H function produced by new_compile
 2. File structure and directory structure for output of new_compile

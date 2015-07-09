@@ -1,4 +1,4 @@
-require_relative '../../tests/test_new_compile.rb'
+require_relative '../../examples/append.rb'
 
 class Append_symbol < XSymbol
   def H(expr)
