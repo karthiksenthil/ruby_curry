@@ -17,8 +17,8 @@ ZERO = CONSTRUCTOR
 SUCC = ZERO + 1
 
 # Symbols in the rules
-$less_than_equal_symbol = XSymbol.new("<=",2,OPERATION)
-$zero_symbol = XSymbol.new("0",0,ZERO)
+$less_than_equal_symbol = XSymbol.new("less_than_equal",2,OPERATION)
+$zero_symbol = XSymbol.new("zero",0,ZERO)
 $s_symbol = XSymbol.new("s",1,SUCC)
 
 if $constructors_hash["integer"].nil?
@@ -48,82 +48,47 @@ end
 
 
 # Variables in the rules
-x1 = make_variable("x1","integer")
-x2 = make_variable("x2","integer")
-x3 = make_variable("x3","integer")
+$x1 = make_variable("x1","integer")
+$x2 = make_variable("x2","integer")
+$x3 = make_variable("x3","integer")
 
 # rule 1
-lhs1 = make_less_than_equal(make_zero,x2)
+lhs1 = make_less_than_equal(make_zero,$x2)
 rhs1 = make_true
 child1 = Leaf.new(lhs1,rhs1)
 
 # rule 2
-lhs2 = make_less_than_equal(make_succ(x3),make_zero)
+lhs2 = make_less_than_equal(make_succ($x3),make_zero)
 rhs2 = make_false
 child3 = Leaf.new(lhs2,rhs2)
 
 #rule 3
-lhs3 = make_less_than_equal(make_succ(x3),make_succ(x2))
-rhs3 = make_less_than_equal(x3,x2)
+lhs3 = make_less_than_equal(make_succ($x3),make_succ($x2))
+rhs3 = make_less_than_equal($x3,$x2)
 child4 = Leaf.new(lhs3,rhs3)
 
 
 # in child2 branch node, x2 is the inductive variable
-child2_patt = make_less_than_equal(make_succ(x3),x2)
-child2 = Branch.new(child2_patt,x2,[child3,child4])
+child2_patt = make_less_than_equal(make_succ($x3),$x2)
+child2 = Branch.new(child2_patt,$x2,[child3,child4])
 
 
 # definitonal tree for the above rules, in the root node x1 is the inductive variable
-root_patt = make_less_than_equal(x1,x2)
-root_node = Branch.new(root_patt,x1,[child1,child2])
-root_node.pretty_print()
-print "\n"
+root_patt = make_less_than_equal($x1,$x2)
+root_node = Branch.new(root_patt,$x1,[child1,child2])
 
-# print "\nOutput of compile function on definitional tree\n"
+# execute compile on def tree only if file is executed directly
+if __FILE__ == $0
+	root_node.pretty_print()
+	print "\n"
 
-# rules = root_node.compile()
-# rules.each do |rule|
-# 	print rule.show() + "\n"
-# end
+	# print "\nOutput of compile function on definitional tree\n"
 
-print "\nOutput of new compile function on definitional tree\n"
+	# rules = root_node.compile()
+	# rules.each do |rule|
+	# 	print rule.show() + "\n"
+	# end
 
-main(root_node)
-
-
-=begin 
-Expected H function :
-
-def H(expr)
-
-	first_arg = expr.content.arguments[o]
-
-	case first_arg.symbol.token
-	when VARIABLE
-		raise "Handling variable not implemented yet"
-	when CHOICE
-		raise "Handling choice not implemented yet"
-	when OPERATION
-		first_arg.H()
-		expr.H()
-	when ZERO
-		expr.replace(make_true)
-	when SUCC
-		second_arg = expr.content.arguments[1]
-		when VARIABLE
-			raise "Handling variable not implemented yet"
-		when CHOICE
-			raise "Handling choice not implemented yet"
-		when OPERATION
-			second_arg.H()
-			expr.H()
-		when ZERO
-			expr.replace(make_false)
-		when SUCC
-			expr.replace(make_less_than(first_arg.content.arguments[0],second_arg.content.arguments[0]).H().content)
-		end
-	end
-
+	print "\nOutput of new compile function on definitional tree\n"
+	main(root_node)
 end
-
-=end

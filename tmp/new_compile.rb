@@ -137,6 +137,8 @@ def main(def_tree)
 	# output_file.write("require_relative '../../examples/"+operation_name+".rb'\n\n")
 
 	# alternatively, get name of file calling the new_compile main function
+	# NOTE : this technique produces wrong result when loaded in irb
+	# QUESTION : in the output file should the example be required/loaded, chances of recursion
 	calling_file = caller[0].split(":")[0]
 	output_file.write("require_relative '../../"+calling_file+"'\n\n")	
 
