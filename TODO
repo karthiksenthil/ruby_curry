@@ -12,6 +12,7 @@ Sub Tasks:
 4. Remove temporary code from expressions.rb like line 186-190
 5. Documentation of code
 6. Add unit test for find_path functionality(3 examples)
+7. Test the refactored examples and their corresponding H outputs, make test expressions
 
 Discussion:
 1. Format of output H function produced by new_compile
