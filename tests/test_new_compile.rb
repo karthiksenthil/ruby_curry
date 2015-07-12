@@ -8,6 +8,7 @@ class TestNewCompile < Test::Unit::TestCase
 	def test_list_append
 		# run the new_compile method on append definitional tree
 		main($append_tree)
+		# needs a better test/assertion
 		created_file = File.exist?("./tmp/new_compile_output/append_h.rb") # assuming the tests are run from ROOT dir
 		assert(created_file,"Output file was not created, error in new_compile")
 
