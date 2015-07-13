@@ -10,10 +10,12 @@ require_relative '../src/definitional_tree.rb'
 
 # constructor tokens
 CONS = CONSTRUCTOR
+XNIL = CONS+1
 
 # symbols in the rules
 $ndinsert_symbol = XSymbol.new("ndinsert",2,OPERATION)
-$cons_symbol = XSymbol.new("cons",2,CONSTRUCTOR)
+$cons_symbol = XSymbol.new("cons",2,CONS)
+$nil_list_symbol = XSymbol.new("nil_list",0,XNIL)
 
 if $constructors_hash["list"].nil?
 	$constructors_hash["list"] = [$cons_symbol]
@@ -28,6 +30,10 @@ end
 
 def make_cons(x,y)
 	return Box.new(Application.new($cons_symbol,[x,y]))
+end
+
+def make_nil
+	return Box.new(Application.new($nil_list_symbol,[]))
 end
 
 
@@ -49,3 +55,31 @@ ndinsert_rootbranch.pretty_print()
 print "\n"
 
 
+# definitional tree for permutation(perm) operation
+
+# General rule : perm a
+# 1. perm 
+
+$perm_symbol = XSymbol.new("perm",1,OPERATION)
+
+def make_perm(x)
+	return Box.new(Application.new($perm_symbol,[x]))
+end
+
+# variables
+a = make_variable("a","list")
+xs = make_variable("xs","list")
+
+perm_leaf1_lhs = make_perm(make_nil)
+perm_leaf1_rhs = make_nil
+perm_leaf1 = Leaf.new(perm_leaf1_lhs,perm_leaf1_rhs)
+
+perm_leaf2_lhs = make_perm(make_cons(x,xs))
+perm_leaf2_rhs = make_ndinsert(x,make_perm(xs))
+perm_leaf2 = Leaf.new(perm_leaf2_lhs,perm_leaf2_rhs)
+
+perm_rootpatt = make_perm(a)
+perm_rootbranch = Branch.new(perm_rootpatt,a,[perm_leaf1,perm_leaf2])
+
+perm_rootbranch.pretty_print()
+print "\n"
