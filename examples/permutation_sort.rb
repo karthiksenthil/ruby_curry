@@ -58,7 +58,8 @@ print "\n"
 # definitional tree for permutation(perm) operation
 
 # General rule : perm a
-# 1. perm 
+# 1. perm [] = []
+# 2. perm (x:xs) = ndinsert x (perm xs)
 
 $perm_symbol = XSymbol.new("perm",1,OPERATION)
 
@@ -83,3 +84,25 @@ perm_rootbranch = Branch.new(perm_rootpatt,a,[perm_leaf1,perm_leaf2])
 
 perm_rootbranch.pretty_print()
 print "\n"
+
+
+# definitional tree for sorted operation
+
+# General rule : sorted a
+# 1. sorted [] = success
+# 2. sorted [_] = success
+# 3. sorted(x:y:ys) = sorted(y:ys)
+SUCCESS = XNIL + 1
+BLANK = SUCCESS + 1
+$sorted_symbol = XSymbol.new("sorted",1,OPERATION)
+$success_symbol = XSymbol.new("success",0,SUCCESS)
+$blank_symbol = XSymbol.new("blank",0,BLANK)
+
+def make_sorted(x)
+	return Box.new(Application.new($sorted_symbol,[x]))
+end
+
+sorted_leaf1_lhs = make_sorted(make_nil)
+sorted_leaf1_rhs = make_success
+sorted_leaf1 = Leaf.new(sorted_leaf1_lhs,sorted_leaf1_rhs)
+
