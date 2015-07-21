@@ -7,8 +7,9 @@
 VARIABLE = 0
 CHOICE = 1
 OPERATION = 2
+FAIL = 3
 # the constructor symbols take a token value starting from 3
-CONSTRUCTOR = 3 
+CONSTRUCTOR = 4 
 
 class XSymbol
   attr_accessor :name, :arity, :token
@@ -52,6 +53,9 @@ class XSymbol
 	end
   
 end
+
+# global symbols
+$fail_symbol = XSymbol.new("FAIL",0,FAIL)
 
 
 $replacement_records = []  # a structure to trace each and every replacement
@@ -209,6 +213,11 @@ class Application < Expression
   # end
 
 end
+
+# global expressions like fail_expression
+$fail_expression = Box.new(Application.new($fail_symbol,[]))
+
+
 
 # Pattern is an application meeting certain conditions
 class Pattern < Application

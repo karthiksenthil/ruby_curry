@@ -13,16 +13,16 @@ require_relative '../tmp/new_compile.rb'
 # 5. replace (Mul l r) (2:v) x = Mul l (replace r v x)
 
 # tokens for constructors
-ADD = CONSTRUCTOR 					#3
-MUL = ADD+1									#4
-XNIL = MUL+1								#5
-CONS = XNIL+1								#6
-INT_ONE = CONS+1						#7
-INT_TWO = INT_ONE+1					#8
-BLANK_EXP = INT_TWO+1				#9
-LIT = BLANK_EXP+1						#10
-VAR = LIT+1 								#11
-OTHER_INT = VAR+1 					#12
+ADD = CONSTRUCTOR 					#4
+MUL = ADD+1									#5
+XNIL = MUL+1								#6
+CONS = XNIL+1								#7
+INT_ONE = CONS+1						#8
+INT_TWO = INT_ONE+1					#9
+BLANK_EXP = INT_TWO+1				#10
+LIT = BLANK_EXP+1						#11
+VAR = LIT+1 								#12
+OTHER_INT = VAR+1 					#13
 
 # Symbols in the rules
 $arithmetic_replace_symbol = XSymbol.new("arithmetic_replace",3,OPERATION)

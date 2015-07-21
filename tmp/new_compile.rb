@@ -13,12 +13,14 @@ class Branch < DefTreeNode
 		output += 
 print_spaces(indent)+"case "+inductive_arg+".content.symbol.token\n"+
 print_spaces(indent)+"when VARIABLE\n"+
-print_spaces(indent)*2+"raise 'Handling Variables not implemented yet'\n"+
+print_spaces(indent+1)+"raise 'Handling Variables not implemented yet'\n"+
 print_spaces(indent)+"when CHOICE\n"+
-print_spaces(indent)*2+"raise 'Handling Choice not implemented yet'\n"+
+print_spaces(indent+1)+"raise 'Handling Choice not implemented yet'\n"+
+print_spaces(indent)+"when FAIL\n"+
+print_spaces(indent+1)+"expr.replace($fail_expression.content)\n"+
 print_spaces(indent)+"when OPERATION\n"+
-print_spaces(indent)*2+inductive_arg+".H()\n"+
-print_spaces(indent)*2+"expr.H()\n"
+print_spaces(indent+1)+inductive_arg+".H()\n"+
+print_spaces(indent+1)+"expr.H()\n"
 
 
 		var_type = self.variable.content.type
@@ -118,7 +120,7 @@ end
 class Exempt < DefTreeNode
 
 	def compile(indent=0)
-		output = print_spaces(indent)+"raise('Exempt node encountered/Invalid expression')\n"
+		output = print_spaces(indent)+"expr.replace($fail_expression.content)\n"
 	end
 
 end

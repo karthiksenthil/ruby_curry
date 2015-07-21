@@ -6,90 +6,100 @@ class Arithmetic_replace_symbol < XSymbol
 
     case inductive_arg1.content.symbol.token
     when VARIABLE
-        raise 'Handling Variables not implemented yet'
+      raise 'Handling Variables not implemented yet'
     when CHOICE
-        raise 'Handling Choice not implemented yet'
+      raise 'Handling Choice not implemented yet'
+    when FAIL
+      expr.replace($fail_expression.content)
     when OPERATION
-        inductive_arg1.H()
-        expr.H()
-    when 5
+      inductive_arg1.H()
+      expr.H()
+    when 6
       inductive_arg2 = expr.content.arguments[2]
 
       case inductive_arg2.content.symbol.token
       when VARIABLE
-            raise 'Handling Variables not implemented yet'
+        raise 'Handling Variables not implemented yet'
       when CHOICE
-            raise 'Handling Choice not implemented yet'
+        raise 'Handling Choice not implemented yet'
+      when FAIL
+        expr.replace($fail_expression.content)
       when OPERATION
-            inductive_arg2.H()
-            expr.H()
-      when 10
+        inductive_arg2.H()
+        expr.H()
+      when 11
         rhs = Box.new(Application.new($lit_symbol,[expr.content.arguments[2].content.arguments[0]]))
         expr.replace(rhs.content)
-      when 11
+      when 12
         rhs = Box.new(Application.new($var_symbol,[expr.content.arguments[2].content.arguments[0]]))
         expr.replace(rhs.content)
-      when 3
+      when 4
         rhs = Box.new(Application.new($add_symbol,[expr.content.arguments[2].content.arguments[0],expr.content.arguments[2].content.arguments[1]]))
         expr.replace(rhs.content)
-      when 4
+      when 5
         rhs = Box.new(Application.new($mul_symbol,[expr.content.arguments[2].content.arguments[0],expr.content.arguments[2].content.arguments[1]]))
         expr.replace(rhs.content)
       end
-    when 6
+    when 7
       inductive_arg3 = expr.content.arguments[0]
 
       case inductive_arg3.content.symbol.token
       when VARIABLE
-            raise 'Handling Variables not implemented yet'
+        raise 'Handling Variables not implemented yet'
       when CHOICE
-            raise 'Handling Choice not implemented yet'
+        raise 'Handling Choice not implemented yet'
+      when FAIL
+        expr.replace($fail_expression.content)
       when OPERATION
-            inductive_arg3.H()
-            expr.H()
-      when 10
-        raise('Exempt node encountered/Invalid expression')
+        inductive_arg3.H()
+        expr.H()
       when 11
-        raise('Exempt node encountered/Invalid expression')
-      when 3
+        expr.replace($fail_expression.content)
+      when 12
+        expr.replace($fail_expression.content)
+      when 4
         inductive_arg4 = expr.content.arguments[1].content.arguments[0]
 
         case inductive_arg4.content.symbol.token
         when VARIABLE
-                raise 'Handling Variables not implemented yet'
+          raise 'Handling Variables not implemented yet'
         when CHOICE
-                raise 'Handling Choice not implemented yet'
+          raise 'Handling Choice not implemented yet'
+        when FAIL
+          expr.replace($fail_expression.content)
         when OPERATION
-                inductive_arg4.H()
-                expr.H()
-        when 7
+          inductive_arg4.H()
+          expr.H()
+        when 8
           rhs = Box.new(Application.new($add_symbol,[Box.new(Application.new($arithmetic_replace_symbol,[expr.content.arguments[0].content.arguments[0],expr.content.arguments[1].content.arguments[1],expr.content.arguments[2]])),expr.content.arguments[0].content.arguments[1]]))
           expr.replace(rhs.content)
-        when 8
+        when 9
           rhs = Box.new(Application.new($add_symbol,[expr.content.arguments[0].content.arguments[0],Box.new(Application.new($arithmetic_replace_symbol,[expr.content.arguments[0].content.arguments[1],expr.content.arguments[1].content.arguments[1],expr.content.arguments[2]]))]))
           expr.replace(rhs.content)
-        when 12
-          raise('Exempt node encountered/Invalid expression')
+        when 13
+          expr.replace($fail_expression.content)
         end
-      when 4
+      when 5
         inductive_arg5 = expr.content.arguments[1].content.arguments[0]
 
         case inductive_arg5.content.symbol.token
         when VARIABLE
-                raise 'Handling Variables not implemented yet'
+          raise 'Handling Variables not implemented yet'
         when CHOICE
-                raise 'Handling Choice not implemented yet'
+          raise 'Handling Choice not implemented yet'
+        when FAIL
+          expr.replace($fail_expression.content)
         when OPERATION
-                inductive_arg5.H()
-                expr.H()
-        when 7
+          inductive_arg5.H()
+          expr.H()
+        when 8
           rhs = Box.new(Application.new($mul_symbol,[Box.new(Application.new($arithmetic_replace_symbol,[expr.content.arguments[0].content.arguments[0],expr.content.arguments[1].content.arguments[1],expr.content.arguments[2]])),expr.content.arguments[0].content.arguments[1]]))
           expr.replace(rhs.content)
-        when 8
+        when 9
           rhs = Box.new(Application.new($mul_symbol,[expr.content.arguments[0].content.arguments[0],Box.new(Application.new($arithmetic_replace_symbol,[expr.content.arguments[0].content.arguments[1],expr.content.arguments[1].content.arguments[1],expr.content.arguments[2]]))]))
           expr.replace(rhs.content)
-        when 12
-          raise('Exempt node encountered/Invalid expression')
+        when 13
+          expr.replace($fail_expression.content)
         end
       end
     end
