@@ -1,6 +1,6 @@
 require_relative '../src/definitional_tree.rb'
 # require_relative '../src/compile.rb'
-require_relative '../tmp/new_compile.rb'
+require_relative '../abstract_code_representation/new_compile.rb'
 
 
 # Example to construct definitonal tree for the rules representing
@@ -84,4 +84,4 @@ print "\nOutput of compile function on definitional tree\n"
 # 	print rule.show() + "\n"
 # end
 
-main(root_node)
+Evaluate_tree.new(root_node).print_in_ruby

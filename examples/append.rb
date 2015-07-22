@@ -1,5 +1,5 @@
 require_relative '../src/definitional_tree.rb'
-require_relative '../tmp/new_compile.rb'
+require_relative '../abstract_code_representation/new_compile.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the append operation(on lists or arrays)
@@ -64,4 +64,5 @@ print "\n"
 
 # rules produced on running compile on append operation's definitional tree
 puts "\nOutput of new compile function on the definitional tree\n"
-main(append_tree)
+
+Evaluate_tree.new(append_tree).print_in_ruby
