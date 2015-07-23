@@ -1,5 +1,5 @@
 require_relative '../src/definitional_tree.rb'
-require_relative '../tmp/new_compile.rb'
+require_relative '../acr/new_compile.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the replace function on arithmetic expressions
@@ -173,10 +173,12 @@ leaf1 = Leaf.new(leaf1_lhs,leaf1_rhs)
 replace_rootpatt = make_replace(e1,p,e2)
 replace_rootnode = Branch.new(replace_rootpatt,p,[leaf1,branch1])
 
-if __FILE__ == $0
-	replace_rootnode.pretty_print()
-	print "\n"
+# if __FILE__ == $0
+# 	replace_rootnode.pretty_print()
+# 	print "\n"
 
-	print "\nOutput of new compile function on definitional tree\n"
-	main(replace_rootnode)
-end
+# 	print "\nOutput of new compile function on definitional tree\n"
+# 	main(replace_rootnode)
+# end
+
+Evaluate_tree.new(replace_rootnode).print_in_ruby

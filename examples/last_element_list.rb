@@ -73,7 +73,7 @@ last_tree_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-main(last_tree_rootnode)
+Evaluate_tree.new(last_tree_rootnode).print_in_ruby
 
 # rules = last_tree_rootnode.compile()
 # rules.each do |rule|
@@ -96,7 +96,7 @@ cond_tree_rootnode.pretty_print()
 print "\n"
 
 print "\nOutput of compile function on definitional tree\n"
-main(cond_tree_rootnode)
+Evaluate_tree.new(cond_tree_rootnode).print_in_ruby
 
 # rules = cond_tree_rootnode.compile()
 # rules.each do |rule|

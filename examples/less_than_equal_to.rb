@@ -1,7 +1,7 @@
 require_relative '../src/definitional_tree.rb'
 # require_relative '../src/compile.rb'
 require_relative '../flpcode/boolean.rb'
-require_relative '../tmp/new_compile.rb'
+require_relative '../acr/new_compile.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the less than equal to operation(<=) on natural numbers
@@ -78,17 +78,20 @@ root_patt = make_less_than_equal($x1,$x2)
 root_node = Branch.new(root_patt,$x1,[child1,child2])
 
 # execute compile on def tree only if file is executed directly
-if __FILE__ == $0
-	root_node.pretty_print()
-	print "\n"
+# if __FILE__ == $0
+# 	root_node.pretty_print()
+# 	print "\n"
 
-	# print "\nOutput of compile function on definitional tree\n"
+# 	# print "\nOutput of compile function on definitional tree\n"
 
-	# rules = root_node.compile()
-	# rules.each do |rule|
-	# 	print rule.show() + "\n"
-	# end
+# 	# rules = root_node.compile()
+# 	# rules.each do |rule|
+# 	# 	print rule.show() + "\n"
+# 	# end
 
-	print "\nOutput of new compile function on definitional tree\n"
-	main(root_node)
-end
+# 	print "\nOutput of new compile function on definitional tree\n"
+# 	main(root_node)
+# end
+
+
+Evaluate_tree.new(root_node).print_in_ruby

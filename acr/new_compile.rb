@@ -39,7 +39,46 @@ class Leaf < DefTreeNode
 			
 		case self.expression.content.symbol.token
 		when VARIABLE
-			return "Leaf variable-on-RHS case not implemented yet"
+			# in this case, we build a sub-branch with following :
+			# 1. pattern = pattern of leaf
+			# 2. inductive variable = variable on RHS of leaf
+			# 3. children are leaf nodes where
+			#    a) pattern = replace inductive arg by constructor_expression (Doubt : can this be inductive_arg.replace(cons_expr))
+			#    b) expression = constructor_expression 
+			var_type = self.expression.content.type
+			if var_type == "*"
+				constructors = $constructors_hash.values.flatten
+			else
+				constructors = $constructors_hash[var_type]
+			end
+
+			leaves = []
+			# building a leaf node for each constructor
+			constructors.each do |constructor|
+				constructor_args = []
+				(1..constructor.arity).each do |i|
+					constructor_args << make_variable("_v"+i.to_s,"temporary variable")
+				end
+				constructor_expression = Box.new(Application.new(constructor,constructor_args))
+
+				replaced_args = self.pattern.content.arguments.map{|a|
+					if a.content == self.expression.content
+						constructor_expression
+					else
+						a
+					end
+				}
+
+				lhs = Box.new(Application.new(self.pattern.content.symbol,replaced_args))
+				rhs = constructor_expression
+				leaves << Leaf.new(lhs,rhs)
+			end
+
+			pseudo_branch = Branch.new(self.pattern,self.expression,leaves)
+
+			pseudo_branch.compile
+
+
 		when OPERATION
 			return RHS_Replace_H.new(self.expression.content.meta_expr_format(self.pattern.content),"operation")
 		else
