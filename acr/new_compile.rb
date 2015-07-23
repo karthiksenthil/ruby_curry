@@ -61,6 +61,8 @@ class Evaluate_tree
 	def print_in_ruby(indent=0)
 		output = "def H(expr)\n"
 		output += def_tree.compile.print_in_ruby(indent+1)
+		# code to return back replaced expr after outer most case
+		output += print_spaces(indent+1)+"expr"+"\n"
 		output += "end\n"
 		puts output
 	end

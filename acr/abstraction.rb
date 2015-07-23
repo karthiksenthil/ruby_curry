@@ -31,12 +31,6 @@ class Case_H < Abstract_H
 		end
 
 		output += print_spaces(indent)+"end"+"\n"
-
-		# code to return back replaced expr after outer most case
-		if $inductive_arg_counter == 1
-			output += print_spaces(indent)+"expr"+"\n"
-		end
-
 		return output
 
 	end
