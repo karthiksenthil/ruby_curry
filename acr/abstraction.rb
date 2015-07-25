@@ -38,17 +38,19 @@ class Case_H < Abstract_H
 end
 
 class RHS_Replace_H < Abstract_H
-	# replace_meta_expression -> RHS expression used to replace current expr
+	# replace_expression -> RHS expression used to replace current expr
+	# replace_pattern -> the pattern on LHS which is replaced by expression
 	# replace_type -> can take values "constructor" or "operation"
-	attr_accessor :replace_meta_expression, :replace_type
+	attr_accessor :replace_expression, :replace_pattern, :replace_type
 
-	def initialize(meta_expression,type)
-		@replace_meta_expression = meta_expression
+	def initialize(expression,pattern,type)
+		@replace_expression = expression
+		@replace_pattern = pattern
 		@replace_type = type
 	end
 
 	def print_in_ruby(indent=0)
-		output = print_spaces(indent)+"rhs = "+@replace_meta_expression.print_in_ruby(indent)+"\n"
+		output = print_spaces(indent)+"rhs = "+@replace_expression.print_in_ruby(indent,replace_pattern)+"\n"
 		if @replace_type == "constructor"
 			output += print_spaces(indent)+"expr.replace(rhs.content)"+"\n"
 		elsif @replace_type == "operation"
@@ -60,6 +62,46 @@ class RHS_Replace_H < Abstract_H
 end
 
 
+class Application < Expression
+
+	def print_in_ruby(indent=0,pattern)
+		output = "Box.new(Application.new("
+		output += "$"+self.symbol.show()+"_symbol,["
+		output +=
+		self.arguments.map{|arg|
+			arg.content.print_in_ruby(indent,pattern)
+		}.join(",")
+
+		output += "]))"
+		return output
+	end
+
+end
+
+class Variable < Expression
+
+	def print_in_ruby(indent=0,pattern)
+		path = pattern.find_path(self)
+		output = "expr"+build_path(path)
+		return output
+	end
+
+end
+
+## some new utilities , move to utilities.rb later ##
+
+def build_path(path)
+	output = ''
+	path.each do |i|
+		output += '.content.arguments['+(i-1).to_s+']' 
+	end
+	return output
+end
+
+
+
+###################### Meta expression code #########################
+=begin
 class Meta_expression
 	attr_accessor :symbol, :arguments # arguments can be path to varibles or another meta-expression
 
@@ -111,14 +153,4 @@ class Application < Expression
 	end
 
 end
-
-
-## some new utilities , move to utilities.rb later ##
-
-def build_path(path)
-	output = ''
-	path.each do |i|
-		output += '.content.arguments['+(i-1).to_s+']' 
-	end
-	return output
-end
+=end

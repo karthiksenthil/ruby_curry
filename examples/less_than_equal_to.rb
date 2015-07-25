@@ -1,7 +1,6 @@
 require_relative '../src/definitional_tree.rb'
-# require_relative '../src/compile.rb'
 require_relative '../flpcode/boolean.rb'
-require_relative '../acr/new_compile.rb'
+require_relative '../src/generate_h.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the less than equal to operation(<=) on natural numbers

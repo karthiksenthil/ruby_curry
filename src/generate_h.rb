@@ -1,7 +1,7 @@
 require_relative '../src/definitional_tree.rb'
 require_relative '../src/utilities.rb'
-require_relative 'abstraction.rb'
-require_relative 'entries.rb'
+require_relative '../acr/abstraction.rb'
+require_relative '../acr/entries.rb'
 
 
 class Branch < DefTreeNode
@@ -80,9 +80,9 @@ class Leaf < DefTreeNode
 
 
 		when OPERATION
-			return RHS_Replace_H.new(self.expression.content.meta_expr_format(self.pattern.content),"operation")
+			return RHS_Replace_H.new(self.expression.content,self.pattern.content,"operation")
 		else
-			return RHS_Replace_H.new(self.expression.content.meta_expr_format(self.pattern.content),"constructor")
+			return RHS_Replace_H.new(self.expression.content,self.pattern.content,"constructor")
 		end
 
 	end

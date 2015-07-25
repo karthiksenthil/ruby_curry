@@ -1,6 +1,5 @@
 require_relative '../src/definitional_tree.rb'
-require_relative '../src/compile.rb'
-# require_relative '../tmp/new_compile.rb'
+require_relative '../src/generate_h.rb'
 
 # Example to construct definitonal trees for a curry program
 # to determine last element of a list

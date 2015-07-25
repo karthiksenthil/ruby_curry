@@ -1,4 +1,4 @@
-require_relative '../../examples/append.rb'
+require_relative '../../tests/test_new_compile.rb'
 
 class Append_symbol < XSymbol
   def H(expr)
@@ -6,31 +6,35 @@ class Append_symbol < XSymbol
 
     case inductive_arg1.content.symbol.token
     when VARIABLE
-        raise 'Handling Variables not implemented yet'
+      raise 'Handling Variables not implemented yet'
     when CHOICE
-        raise 'Handling Choice not implemented yet'
+      raise 'Handling Choice not implemented yet'
+    when FAIL
+      expr.replace($fail_expression.content)
     when OPERATION
-        inductive_arg1.H()
-        expr.H()
-    when 3
+      inductive_arg1.H()
+      expr.H()
+    when 4
       inductive_arg2 = expr.content.arguments[1]
 
       case inductive_arg2.content.symbol.token
       when VARIABLE
-            raise 'Handling Variables not implemented yet'
+        raise 'Handling Variables not implemented yet'
       when CHOICE
-            raise 'Handling Choice not implemented yet'
+        raise 'Handling Choice not implemented yet'
+      when FAIL
+        expr.replace($fail_expression.content)
       when OPERATION
-            inductive_arg2.H()
-            expr.H()
-      when 3
+        inductive_arg2.H()
+        expr.H()
+      when 4
         rhs = Box.new(Application.new($nil_list_symbol,[]))
         expr.replace(rhs.content)
-      when 4
+      when 5
         rhs = Box.new(Application.new($cons_symbol,[expr.content.arguments[1].content.arguments[0],expr.content.arguments[1].content.arguments[1]]))
         expr.replace(rhs.content)
       end
-    when 4
+    when 5
       rhs = Box.new(Application.new($cons_symbol,[expr.content.arguments[0].content.arguments[0],Box.new(Application.new($append_symbol,[expr.content.arguments[0].content.arguments[1],expr.content.arguments[1]]))]))
       expr.replace(rhs.content)
     end
