@@ -89,6 +89,14 @@ class Leaf < DefTreeNode
 
 end
 
+class Exempt < DefTreeNode
+
+	def compile		
+		return RHS_Replace_H.new($fail_expression.content,self.pattern.content,"constructor")
+	end
+
+end
+
 
 class Evaluate_tree
 	attr_accessor :def_tree
