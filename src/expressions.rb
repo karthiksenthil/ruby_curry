@@ -27,23 +27,6 @@ class XSymbol
   	return @name
   end
 
-  def H
-  end
-
-  # the N function, defined for all Symbols
-  def N(expr)
-  	case self.token
-  	when OPERATION
-  		expr.H()
-  		expr.N()
-  	when CONSTRUCTOR
-  		expr.content.arguments.each do |arg|
-  			arg.N()
-  		end 
-  	end
-  	expr
-  end
-
   def ==(another_symbol)
 		if another_symbol.class == self.class
 			self.name == another_symbol.name
@@ -73,21 +56,6 @@ class Box
 		$replacement_records << replace_record
 
 		@content = new_content
-	end
-
-	# the H function for a Box object
-	def H
-		if self.content.symbol.token != OPERATION
-			raise "H is not defined on a non-operation rooted expression"
-		else
-			self.content.symbol.H(self)
-		end
-		
-	end
-
-	# the N function for a Box object
-	def N
-		self.content.symbol.N(self)
 	end
 
 	# showing a Box

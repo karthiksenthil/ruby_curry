@@ -3,6 +3,18 @@ require_relative '../src/utilities.rb'
 require_relative '../acr/abstraction.rb'
 require_relative '../acr/entries.rb'
 
+class Box
+
+	def H
+		if self.content.symbol.token != OPERATION
+			raise "H is not defined on a non-operation rooted expression"
+		else
+			self.content.symbol(self)
+		end
+	end
+
+end
+
 
 class Branch < DefTreeNode
 

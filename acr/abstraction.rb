@@ -1,5 +1,5 @@
 # class hierarchy to represent abstraction of H function
-# produced by new_compile procedure
+# produced by generate_h procedure
 
 require_relative '../src/expressions.rb'
 
