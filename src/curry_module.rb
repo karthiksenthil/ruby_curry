@@ -1,21 +1,32 @@
 require_relative './expressions.rb'
-require_relative './generate_h.rb'
-require_relative './function_A.rb'
-require_relative './function_N.rb'
 
-class CurryModule
-	# symbols => an array of the constructor/operation symbols in the Curry program
-	# root_of_def_tree => the root node of the program's definitional tree
-	attr_accessor :symbols, :root_of_def_tree
 
-	def initialize(symbols,root)
-		@symbols = symbols
-		@root_of_def_tree = root
+class CurryType
+	# type_name => Name of the curry data type
+	# constructors => array of constructors for curry data type
+	attr_accessor :type_name,:constructors
+
+	def initialize(type_name,type_constructors)
+		@type_name = type_name
+		@constructors = type_constructors
 	end
 
 end
 
 
+class CurryModule
+	# operations => an array of the operation symbols in the curry module
+	# curry_data_types => array of curry data type objects
+	attr_accessor :operations, :curry_data_types
+
+	def initialize(operations,curry_data_types)
+		@operations = operations
+		@curry_data_types = curry_data_types
+	end
+
+end
+
+=begin
 # Program 1 : List append Curry program
 require_relative '../examples/append.rb'
 prog1 = CurryModule.new($program_symbols,$append_tree)
@@ -29,3 +40,4 @@ Evaluate_tree.new(prog1.root_of_def_tree).print_in_ruby()
 
 # another possible code
 # Compiler.new(prog1,main_expr)
+=end

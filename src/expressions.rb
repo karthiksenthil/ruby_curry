@@ -1,45 +1,6 @@
+require_relative './symbols.rb'
 
 # Basic building block classes for the nodes of tree
-
-# Class to denote symbols in an expression
-
-# Constant integer tokens used for XSymbol
-VARIABLE = 0
-CHOICE = 1
-OPERATION = 2
-FAIL = 3
-# the constructor symbols take a token value starting from 3
-CONSTRUCTOR = 4 
-
-class XSymbol
-  attr_accessor :name, :arity, :token
-  
-  # create a symbol with its name, arity and kind/type
-  # Params : name(string), arity(integer), token
-  # Return : XSymbol
-  def initialize(name,arity,token)
-    @name = name	# the printable representation of symbol
-    @arity = arity
-    @token = token # an integer value to determine the kind of Symbol 
-  end
-
-  def show
-  	return @name
-  end
-
-  def ==(another_symbol)
-		if another_symbol.class == self.class
-			self.name == another_symbol.name
-		else
-			false
-		end
-	end
-  
-end
-
-# global symbols
-$fail_symbol = XSymbol.new("FAIL",0,FAIL)
-
 
 $replacement_records = []  # a structure to trace each and every replacement
 
@@ -114,7 +75,7 @@ end
 
 # global function to make any Variable object
 def make_variable(name,type)
-	sym = XSymbol.new(name,0,VARIABLE)
+	sym = Variable_symbol.new(name,0)
 	return Box.new(Variable.new(sym,type)) # wrap the Variable in a Box
 end
 

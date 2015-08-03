@@ -1,4 +1,5 @@
 require_relative '../src/definitional_tree.rb'
+require_relative '../src/curry_module.rb'
 
 # Example to construct definitonal tree for the rules representing
 # the append operation(on lists or arrays)
@@ -11,13 +12,11 @@ require_relative '../src/definitional_tree.rb'
 
 
 # Symbols in the rules
-$append_symbol = XSymbol.new("append",2,OPERATION)
+$append_symbol = Operation.new("append",2,nil)
 XNIL = CONSTRUCTOR
 CONS = XNIL + 1
-$nil_list_symbol = XSymbol.new("nil_list",0,XNIL)
-$cons_symbol = XSymbol.new("cons",2,CONS)
-
-$program_symbols = [$append_symbol,$nil_list_symbol,$cons_symbol]
+$nil_list_symbol = Constructor.new("nil_list",0)
+$cons_symbol = Constructor.new("cons",2)
 
 # expression constructors
 def make_append(x,y)
@@ -60,3 +59,10 @@ child2 = Leaf.new(lhs2,rhs2)
 
 rootpatt = make_append($xs,$ys)
 $append_tree = Branch.new(rootpatt,$xs,[child1,child2])
+$append_symbol.def_tree = $append_tree
+
+
+$program_operations = [$append_symbol]
+# curry data types
+$list_type = CurryType.new("list",[$nil_list_symbol,$cons_symbol])
+$program_data_types = [$list_type]

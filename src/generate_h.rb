@@ -110,7 +110,7 @@ class Exempt < DefTreeNode
 end
 
 
-class Evaluate_tree
+class Generate_H
 	attr_accessor :def_tree
 
 	def initialize(def_tree)
