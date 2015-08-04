@@ -17,11 +17,13 @@ end
 class CurryModule
 	# operations => an array of the operation symbols in the curry module
 	# curry_data_types => array of curry data type objects
-	attr_accessor :operations, :curry_data_types
+	# module_name => name of curry module being compiled
+	attr_accessor :operations, :curry_data_types, :module_name
 
-	def initialize(operations,curry_data_types)
+	def initialize(operations,curry_data_types,name)
 		@operations = operations
 		@curry_data_types = curry_data_types
+		@module_name = name
 	end
 
 end

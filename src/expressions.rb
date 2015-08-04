@@ -24,6 +24,14 @@ class Box
 		return @content.show()
 	end
 
+	def H
+		if self.content.symbol.token != OPERATION
+			raise "H is not defined on a non-operation rooted expression"
+		else
+			self.content.symbol.H(self)
+		end
+	end
+
 end
 
 

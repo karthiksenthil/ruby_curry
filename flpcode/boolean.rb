@@ -3,8 +3,8 @@ require_relative '../src/expressions.rb'
 XTRUE = CONSTRUCTOR
 XFALSE = XTRUE + 1
 
-$true_symbol = XSymbol.new("true",0,XTRUE)
-$false_symbol = XSymbol.new("false",0,XFALSE)
+$true_symbol = Constructor.new("true",0)
+$false_symbol = Constructor.new("false",0)
 if $constructors_hash["boolean"].nil?
 	$constructors_hash["boolean"] = [$true_symbol,$false_symbol]
 else
@@ -54,7 +54,7 @@ class Not_symbol < XSymbol
 	end
 end
 
-$not_symbol = Not_symbol.new("not",1,OPERATION)
+# $not_symbol = Not_symbol.new("not",1,OPERATION)
 
 # expected output on running compile on OR operation
 # H(or(False,True)) = True
@@ -99,7 +99,7 @@ class Or_symbol < XSymbol
 	end
 end
 
-$or_symbol = Or_symbol.new("or",2,OPERATION)
+# $or_symbol = Or_symbol.new("or",2,OPERATION)
 
 # expected output on running compile on AND operation
 # H(and(True,True)) = True
@@ -145,7 +145,7 @@ class And_symbol < XSymbol
 	end
 end
 
-$and_symbol = And_symbol.new("and",2,OPERATION)
+# $and_symbol = And_symbol.new("and",2,OPERATION)
 
 
 

@@ -3,19 +3,6 @@ require_relative '../src/utilities.rb'
 require_relative '../acr/abstraction.rb'
 require_relative '../acr/entries.rb'
 
-class Box
-
-	def H
-		if self.content.symbol.token != OPERATION
-			raise "H is not defined on a non-operation rooted expression"
-		else
-			self.content.symbol(self)
-		end
-	end
-
-end
-
-
 class Branch < DefTreeNode
 
 	def compile
@@ -118,12 +105,14 @@ class Generate_H
 	end
 
 	def print_in_ruby(indent=0)
-		output = "def H(expr)\n"
+		op = def_tree.pattern.content.symbol
+		# output = "class "+ op.show().capitalize()+"_symbol < Operation\n"
+		output = "def $"+op.show()+"_symbol.H(expr)\n"
 		output += def_tree.compile.print_in_ruby(indent+1)
 		# code to return back replaced expr after outer most case
 		output += print_spaces(indent+1)+"expr"+"\n"
 		output += "end\n"
-		puts output
+		# output += "end\n"
 	end
 
 end

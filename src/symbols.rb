@@ -83,8 +83,10 @@ end
 
 class Choice < XSymbol
 
-  def initialize(name,arity)
-    super(name,arity)
+  def initialize
+    # symbol for Choice -> ?
+    # arity of Choice -> 0
+    super("?",0)
   end
 
   def token
@@ -95,8 +97,8 @@ end
 
 class Fail < XSymbol
 
-  def initialize(name,arity)
-    super(name,arity)
+  def initialize
+    super("fail",0)
   end
 
   def token
@@ -105,6 +107,6 @@ class Fail < XSymbol
 
 end
 
-$fail_symbol = Fail.new("FAIL",0)
+$fail_symbol = Fail.new
 
 
