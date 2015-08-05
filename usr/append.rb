@@ -70,7 +70,7 @@ $append_symbol.def_tree = $append_tree
 
 # definitional tree for main
 main_tree_patt = make_main
-main_tree_expr = make_append(make_cons(make_nil,make_true),make_cons(make_nil,make_false))
+main_tree_expr = make_append(make_nil,make_nil)
 $main_tree = Leaf.new(main_tree_patt,main_tree_expr)
 $main_symbol.def_tree = $main_tree
 

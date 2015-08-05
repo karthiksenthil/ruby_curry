@@ -48,10 +48,6 @@ class Operation < XSymbol
     return OPERATION
   end
 
-  # empty function H defined by subclasses
-  def H(expr)
-  end
-
 end
 
 # second type of Symbol -> Constructor

@@ -4,6 +4,10 @@ require_relative '../src/expressions.rb'
 require_relative '../src/symbols.rb'
 require_relative '../usr/append.rb'
 
+$nil_list_symbol.token_value = 4
+$cons_symbol.token_value = 5
+
+
 
 def $append_symbol.H(expr)
   inductive_arg1 = expr.content.arguments[0]
@@ -47,7 +51,7 @@ end
 
 
 def $main_symbol.H(expr)
-  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($nil_list_symbol,[])),Box.new(Application.new($true_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($nil_list_symbol,[])),Box.new(Application.new($false_symbol,[]))]))]))
+  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($nil_list_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))
   expr.replace(rhs.H().content)
   expr
 end
@@ -57,5 +61,3 @@ def main
   main_expr = Box.new(Application.new($main_symbol,[]))
   main_expr.N()
 end
-
-main

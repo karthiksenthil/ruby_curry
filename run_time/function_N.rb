@@ -1,12 +1,13 @@
 require_relative '../src/definitional_tree.rb'
 require_relative '../src/utilities.rb'
+require_relative './function_A.rb'
 
 class Box
 
 	def N
 
 		token = self.content.symbol.token
-
+		
 		case token
 		when OPERATION 
 			self.H()

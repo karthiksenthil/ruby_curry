@@ -11,7 +11,7 @@ def compiler(prog)
 			constructor_token += 1
 		end
 	end
-
+	
 	object_code = object_code_initialise(prog) 
 
 	prog.operations.each do |oper|
@@ -33,6 +33,19 @@ def object_code_initialise(prog)
 	output += "require_relative '../src/expressions.rb'\n"
 	output += "require_relative '../src/symbols.rb'\n"
 	output += "require_relative '../usr/"+prog.module_name+".rb'\n"
+	
+	output += "\n"
+	# assigning token values in object code
+	constructor_token = CONSTRUCTOR
+	prog.curry_data_types.each do |dt|
+		dt.constructors.each do |constructor|
+			output += "$"+constructor.show()+"_symbol.token_value = "+constructor_token.to_s+"\n"
+			constructor_token += 1
+		end
+	end
+
+	output += "\n"
+
 	return output
 end
 
