@@ -21,7 +21,7 @@ def $append_symbol.H(expr)
   when OPERATION
     inductive_arg1.H()
     expr.H()
-  when 4
+  when 4  #nil_list
     inductive_arg2 = expr.content.arguments[1]
     case inductive_arg2.content.symbol.token
     when VARIABLE
@@ -33,14 +33,17 @@ def $append_symbol.H(expr)
     when OPERATION
       inductive_arg2.H()
       expr.H()
-    when 4
+    when 4  #nil_list
+      # nil_list
       rhs = Box.new(Application.new($nil_list_symbol,[]))
       expr.replace(rhs.content)
-    when 5
+    when 5  #cons
+      # cons(_v1,_v2)
       rhs = Box.new(Application.new($cons_symbol,[expr.content.arguments[1].content.arguments[0],expr.content.arguments[1].content.arguments[1]]))
       expr.replace(rhs.content)
     end
-  when 5
+  when 5  #cons
+    # cons(z,append(zs,ys))
     rhs = Box.new(Application.new($cons_symbol,[expr.content.arguments[0].content.arguments[0],Box.new(Application.new($append_symbol,[expr.content.arguments[0].content.arguments[1],expr.content.arguments[1]]))]))
     expr.replace(rhs.content)
   end
@@ -51,6 +54,7 @@ end
 
 
 def $main_symbol.H(expr)
+  # append(nil_list,nil_list)
   rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($nil_list_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))
   expr.replace(rhs.H().content)
   expr

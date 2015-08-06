@@ -19,7 +19,8 @@ class Branch < DefTreeNode
 		(0..constructors.length-1).each do |i|
 			constructor_token = constructors[i].token
 			constructor_abstract_h = self.children[i].compile()
-			constructor_entry = Constructor_entry.new(constructor_token,constructor_abstract_h)
+			constructor_name = constructors[i].show()
+			constructor_entry = Constructor_entry.new(constructor_token,constructor_abstract_h,constructor_name)
 			case_entries << constructor_entry
 		end
 

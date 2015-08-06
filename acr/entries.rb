@@ -45,15 +45,16 @@ class Choice_entry < Entry
 end
 
 class Constructor_entry < Entry
-	attr_accessor :token_of_constructor, :abstract_h
+	attr_accessor :token_of_constructor, :abstract_h, :constructor_name
 
-	def initialize(token,abstract_h)
+	def initialize(token,abstract_h,name)
 		@token_of_constructor = token
 		@abstract_h = abstract_h
+		@constructor_name = name
 	end
 
 	def print_in_ruby(indent=0)
-		output = print_spaces(indent)+"when "+@token_of_constructor.to_s+"\n"
+		output = print_spaces(indent)+"when "+@token_of_constructor.to_s+"  #"+constructor_name+"\n"
 		if @abstract_h.class == String
 			output += @abstract_h
 		else

@@ -50,7 +50,8 @@ class RHS_Replace_H < Abstract_H
 	end
 
 	def print_in_ruby(indent=0)
-		output = print_spaces(indent)+"rhs = "+@replace_expression.print_in_ruby(indent,replace_pattern)+"\n"
+		output = print_spaces(indent)+"# "+@replace_expression.show()+"\n"
+		output += print_spaces(indent)+"rhs = "+@replace_expression.print_in_ruby(indent,replace_pattern)+"\n"
 		if @replace_type == "constructor"
 			output += print_spaces(indent)+"expr.replace(rhs.content)"+"\n"
 		elsif @replace_type == "operation"
