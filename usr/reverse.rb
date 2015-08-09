@@ -52,6 +52,7 @@ $reverse_symbol.def_tree = rev_tree_rootnode
 # definitional tree for main
 main_tree_patt = make_main
 main_tree_expr = make_reverse(make_append(make_cons(make_true,make_nil),make_cons(make_false,make_nil)))
+# test : make_reverse(make_append(make_append(make_cons(make_true,make_nil),make_cons(make_false,make_nil)),make_cons(make_false,make_nil)))
 $main_tree = Leaf.new(main_tree_patt,main_tree_expr)
 $main_symbol.def_tree = $main_tree
 
