@@ -6,8 +6,9 @@ require_relative '../usr/append.rb'
 
 $nil_list_symbol.token_value = 4
 $cons_symbol.token_value = 5
-$true_symbol.token_value = 6
-$false_symbol.token_value = 7
+$red_symbol.token_value = 6
+$green_symbol.token_value = 7
+$blue_symbol.token_value = 8
 
 
 
@@ -56,8 +57,8 @@ end
 
 
 def $main_symbol.H(expr)
-  # append(cons(nil_list,true),cons(nil_list,false))
-  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($nil_list_symbol,[])),Box.new(Application.new($true_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($nil_list_symbol,[])),Box.new(Application.new($false_symbol,[]))]))]))
+  # append(cons(red,nil_list),cons(green,nil_list))
+  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($red_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($green_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))
   expr.replace(rhs.H().content)
   expr
 end

@@ -1,31 +1,25 @@
 require_relative '../src/expressions.rb'
 
-class Color_symbol < Constructor
-	attr_accessor :color_name
+$red_symbol = Constructor.new("red",0)
+$green_symbol = Constructor.new("green",0)
+$blue_symbol = Constructor.new("blue",0)
 
-	def initialize(color_name)
-		super("color",0)
-		@color_name = color_name
-	end
-
-	def show
-		@color_name
-	end
-
+if $constructors_hash["color"].nil?
+	$constructors_hash["color"] = [$red_symbol,$green_symbol,$blue_symbol]
+else
+	$constructors_hash["color"] += [$red_symbol,$green_symbol,$blue_symbol]
 end
 
-class Color_expression < Application
+# color helpers
 
-	def initialize(color_name)
-		super(Color_symbol.new(color_name),[])
-	end
-
-	def show
-		@symbol.show
-	end
-
+def make_red
+	return Box.new(Application.new($red_symbol,[]))
 end
 
-def make_color(c)
-	return Box.new(Color_expression.new(c))
+def make_green
+	return Box.new(Application.new($green_symbol,[]))
+end
+
+def make_blue
+	return Box.new(Application.new($blue_symbol,[]))
 end

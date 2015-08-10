@@ -57,14 +57,15 @@ def object_code_main
 	return output
 end
 
-=begin
 ####### EXAMPLE : list append #######
 require_relative '../usr/append.rb'
 prog1 = CurryModule.new($program_operations,$program_data_types,"append")
 compiler(prog1)
-=end
 
+
+=begin
 ####### EXAMPLE : reverse #######
 require_relative '../usr/reverse.rb'
 prog2 = CurryModule.new($program_operations,$program_data_types,"reverse")
 compiler(prog2)
+=end
