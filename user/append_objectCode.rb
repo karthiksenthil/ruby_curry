@@ -1,8 +1,8 @@
-require_relative '../run_time/function_N.rb'
-require_relative '../run_time/function_A.rb'
-require_relative '../src/expressions.rb'
-require_relative '../src/symbols.rb'
-require_relative '../usr/reverse.rb'
+require_relative '../src/runtime/function_N.rb'
+require_relative '../src/runtime/function_A.rb'
+require_relative '../src/compiler/expressions.rb'
+require_relative '../src/compiler/symbols.rb'
+require_relative '../user/append.rb'
 
 $nil_list_symbol.token_value = 4
 $cons_symbol.token_value = 5
@@ -55,36 +55,9 @@ end
 
 
 
-def $reverse_symbol.H(expr)
-  inductive_arg3 = expr.content.arguments[0]
-  case inductive_arg3.content.symbol.token
-  when VARIABLE
-    raise 'Handling Variables not implemented yet'
-  when CHOICE
-    raise 'Handling Choices not implemented yet'
-  when FAIL
-    expr.replace($fail_expression.content)
-  when OPERATION
-    inductive_arg3.H()
-    expr.H()
-  when 4  #nil_list
-    # nil_list
-    rhs = Box.new(Application.new($nil_list_symbol,[]))
-    expr.replace(rhs.content)
-  when 5  #cons
-    # append(reverse(xs),cons(x,nil_list))
-    rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($reverse_symbol,[expr.content.arguments[0].content.arguments[1]])),Box.new(Application.new($cons_symbol,[expr.content.arguments[0].content.arguments[0],Box.new(Application.new($nil_list_symbol,[]))]))]))
-    expr.replace(rhs.H().content)
-  end
-  expr
-end
-
-
-
-
 def $main_symbol.H(expr)
-  # reverse(append(cons(true,nil_list),cons(false,nil_list)))
-  rhs = Box.new(Application.new($reverse_symbol,[Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))]))
+  # append(cons(true,nil_list),cons(false,nil_list))
+  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))
   expr.replace(rhs.H().content)
   expr
 end

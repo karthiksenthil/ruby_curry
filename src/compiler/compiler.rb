@@ -1,4 +1,4 @@
-require_relative './generate_h.rb'
+require_relative '../compiler/generate_h.rb'
 
 # function to compile a curry module
 # prog => a curry module object 
@@ -20,7 +20,7 @@ def compiler(prog)
 
 	object_code += object_code_main()
 
-	object_code_dir = "/home/karthik/Documents/GSoC2015/PSU_stuff/definitional_trees/code/DefinitionalTree/usr"
+	object_code_dir = "/home/karthik/Documents/GSoC2015/PSU_stuff/definitional_trees/code/DefinitionalTree/user"
 	object_code_file = File.new(object_code_dir+"/"+prog.module_name+"_objectCode.rb","w")
 	object_code_file.write(object_code)
 	# puts object_code
@@ -28,11 +28,11 @@ def compiler(prog)
 end
 
 def object_code_initialise(prog)
-	output = "require_relative '../run_time/function_N.rb'\n"
-	output += "require_relative '../run_time/function_A.rb'\n"
-	output += "require_relative '../src/expressions.rb'\n"
-	output += "require_relative '../src/symbols.rb'\n"
-	output += "require_relative '../usr/"+prog.module_name+".rb'\n"
+	output = "require_relative '../src/runtime/function_N.rb'\n"
+	output += "require_relative '../src/runtime/function_A.rb'\n"
+	output += "require_relative '../src/compiler/expressions.rb'\n"
+	output += "require_relative '../src/compiler/symbols.rb'\n"
+	output += "require_relative '../user/"+prog.module_name+".rb'\n"
 	
 	output += "\n"
 	# assigning token values in object code
@@ -57,11 +57,24 @@ def object_code_main
 	return output
 end
 
+def main
+  program_name = ARGV.first
+  Module.new.module_eval(File.read(program_name))
+  # require_relative '../../user/append.rb'
+  compiler($currymodule)
+end
+
+main
+
+
+
+
+=begin
 ####### EXAMPLE : list append #######
 require_relative '../usr/append.rb'
 prog1 = CurryModule.new($program_operations,$program_data_types,"append")
 compiler(prog1)
-
+=end
 
 =begin
 ####### EXAMPLE : reverse #######

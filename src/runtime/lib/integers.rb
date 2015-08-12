@@ -1,11 +1,10 @@
-require_relative '../src/expressions.rb'
-require_relative '../src/exec_expressions.rb'
+require_relative '../../compiler/expressions.rb'
 
-class Int_symbol < XSymbol
+class Int_symbol < Constructor
   attr_accessor :name, :value, :arity, :token
   def initialize(value)
     raise format("Illegal integer \"%s\"", value) unless value.instance_of? Fixnum
-    super("int",0,CONSTRUCTOR)
+    super("int",0)
     @value = value
   end
   def show
@@ -27,7 +26,7 @@ def make_int(x)
 end
 
 def binary(operator)
-  Class.new(XSymbol) do
+  Class.new(Operation) do
     define_method(:H) do |expr|
       first_arg = expr.content.arguments[0]
 
@@ -66,12 +65,13 @@ end
 # ------------------------------------------------------------------
 # These are repetitive and could be macro-ed
 
+=begin
 Add_symbol = binary(:+)
-$add_symbol = Add_symbol.new("+",2,OPERATION)
+$add_symbol = Add_symbol.new("+",2)
 def make_add(x,y); return Box.new(Application.new($add_symbol,[x,y])); end
 
 Sub_symbol = binary(:-)
-$sub_symbol = Sub_symbol.new("-",2,OPERATION)
+$sub_symbol = Sub_symbol.new("-",2)
 def make_sub(x,y); return Box.new(Application.new($sub_symbol,[x,y])); end
 
 
@@ -87,3 +87,4 @@ puts t3.show
 t3.N
 puts t3.show
 #=end
+=end

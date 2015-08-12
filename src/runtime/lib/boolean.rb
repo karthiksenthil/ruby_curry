@@ -1,4 +1,4 @@
-require_relative '../src/expressions.rb'
+require_relative '../../compiler/expressions.rb'
 
 XTRUE = CONSTRUCTOR
 XFALSE = XTRUE + 1

@@ -1,7 +1,7 @@
 # class hierarchy to represent abstraction of H function
 # produced by generate_h procedure
 
-require_relative '../src/expressions.rb'
+require_relative '../expressions.rb'
 
 class Abstract_H
 

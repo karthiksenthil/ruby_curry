@@ -1,5 +1,5 @@
-require_relative '../src/definitional_tree.rb'
-require_relative '../src/utilities.rb'
+require_relative '../compiler/definitional_tree.rb'
+require_relative '../compiler/utilities.rb'
 
 class Box
 

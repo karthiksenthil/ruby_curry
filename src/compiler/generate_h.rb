@@ -1,7 +1,7 @@
-require_relative '../src/definitional_tree.rb'
-require_relative '../src/utilities.rb'
-require_relative '../acr/abstraction.rb'
-require_relative '../acr/entries.rb'
+require_relative './definitional_tree.rb'
+require_relative './utilities.rb'
+require_relative './acr/abstraction.rb'
+require_relative './acr/entries.rb'
 
 class Branch < DefTreeNode
 
