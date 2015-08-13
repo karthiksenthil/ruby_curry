@@ -20,7 +20,7 @@ def compiler(prog)
 
 	object_code += object_code_main()
 
-	object_code_dir = "/home/karthik/Documents/GSoC2015/PSU_stuff/definitional_trees/code/DefinitionalTree/user"
+	object_code_dir = `pwd`.strip
 	object_code_file = File.new(object_code_dir+"/"+prog.module_name+"_objectCode.rb","w")
 	object_code_file.write(object_code)
 	# puts object_code
@@ -32,7 +32,7 @@ def object_code_initialise(prog)
 	output += "require_relative '../src/runtime/function_A.rb'\n"
 	output += "require_relative '../src/compiler/expressions.rb'\n"
 	output += "require_relative '../src/compiler/symbols.rb'\n"
-	output += "require_relative '../examples/"+prog.module_name+".rb'\n"
+	output += "require_relative './"+prog.module_name+".rb'\n"
 	
 	output += "\n"
 	# assigning token values in object code

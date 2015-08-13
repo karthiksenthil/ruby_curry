@@ -3,9 +3,10 @@ require 'test/unit'
 class TestAppend < Test::Unit::TestCase
 
 	def test_append
-		Dir.chdir("examples")
+		# below line is needed if tests are run from BASE directory
+		# Dir.chdir("test")
 		`../bin/cmd.sh append`
-		require_relative '../user/append_objectCode.rb'
+		require_relative './append_objectCode.rb'
 		# input is append(true,false)
 		output = main.show()
 
