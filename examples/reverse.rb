@@ -1,6 +1,6 @@
-require_relative '../src/definitional_tree.rb'
-require_relative '../src/curry_module.rb'
-require_relative '../flpcode/boolean.rb'
+require_relative '../src/compiler/definitional_tree.rb'
+require_relative '../src/compiler/curry_module.rb'
+require_relative '../src/runtime/lib/boolean.rb'
 
 # Example to construct definitonal trees for a curry program
 # to reverse a list
@@ -61,3 +61,5 @@ $program_operations = [$append_symbol,$reverse_symbol,$main_symbol]
 $list_type = CurryType.new("list",[$nil_list_symbol,$cons_symbol])
 $boolean_type = CurryType.new("boolean",[$true_symbol,$false_symbol])
 $program_data_types = [$list_type,$boolean_type]
+
+$currymodule = CurryModule.new($program_operations,$program_data_types,"reverse")

@@ -32,7 +32,7 @@ def object_code_initialise(prog)
 	output += "require_relative '../src/runtime/function_A.rb'\n"
 	output += "require_relative '../src/compiler/expressions.rb'\n"
 	output += "require_relative '../src/compiler/symbols.rb'\n"
-	output += "require_relative '../user/"+prog.module_name+".rb'\n"
+	output += "require_relative '../examples/"+prog.module_name+".rb'\n"
 	
 	output += "\n"
 	# assigning token values in object code
@@ -59,8 +59,8 @@ end
 
 def main
   program_name = ARGV.first
-  Module.new.module_eval(File.read(program_name))
-  # require_relative '../../user/append.rb'
+  # Module.new.module_eval(File.read(program_name))
+  require program_name
   compiler($currymodule)
 end
 
