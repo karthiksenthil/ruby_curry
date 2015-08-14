@@ -6,8 +6,8 @@ require_relative './append.rb'
 
 $nil_list_symbol.token_value = 4
 $cons_symbol.token_value = 5
-$true_symbol.token_value = 6
-$false_symbol.token_value = 7
+$true_symbol.token_value = 4
+$false_symbol.token_value = 5
 
 
 

@@ -8,8 +8,8 @@ then
   exit
 fi
 
-FILE=$(dirname $1)/$(basename $1 ".rb")
+FILE=`pwd`/$(basename $1 ".rb")
 
-ruby $BASE/src/compiler/compiler.rb $FILE.rb
+ruby $BASE/src/compiler/compiler.rb $FILE
 
 

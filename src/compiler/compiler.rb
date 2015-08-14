@@ -2,10 +2,13 @@ require_relative '../compiler/generate_h.rb'
 
 # function to compile a curry module
 # prog => a curry module object 
-def compiler(prog)
+def compiler(program_name)
 
-	constructor_token = CONSTRUCTOR
+	require program_name+".rb"
+	prog = $currymodule
+
 	prog.curry_data_types.each do |dt|
+		constructor_token = CONSTRUCTOR
 		dt.constructors.each do |constructor|
 			constructor.token_value = constructor_token
 			constructor_token += 1
@@ -21,7 +24,7 @@ def compiler(prog)
 	object_code += object_code_main()
 
 	object_code_dir = `pwd`.strip
-	object_code_file = File.new(object_code_dir+"/"+prog.module_name+"_objectCode.rb","w")
+	object_code_file = File.new(program_name+"_objectCode.rb","w")
 	object_code_file.write(object_code)
 	# puts object_code
 
@@ -36,8 +39,8 @@ def object_code_initialise(prog)
 	
 	output += "\n"
 	# assigning token values in object code
-	constructor_token = CONSTRUCTOR
 	prog.curry_data_types.each do |dt|
+		constructor_token = CONSTRUCTOR
 		dt.constructors.each do |constructor|
 			output += "$"+constructor.show()+"_symbol.token_value = "+constructor_token.to_s+"\n"
 			constructor_token += 1
@@ -57,14 +60,7 @@ def object_code_main
 	return output
 end
 
-def main
-  program_name = ARGV.first
-  # Module.new.module_eval(File.read(program_name))
-  require program_name
-  compiler($currymodule)
-end
-
-main
+compiler(ARGV.first)
 
 
 
