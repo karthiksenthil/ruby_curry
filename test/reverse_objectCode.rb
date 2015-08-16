@@ -6,8 +6,9 @@ require_relative './reverse.rb'
 
 $nil_list_symbol.token_value = 4
 $cons_symbol.token_value = 5
-$true_symbol.token_value = 4
-$false_symbol.token_value = 5
+$red_symbol.token_value = 4
+$green_symbol.token_value = 5
+$blue_symbol.token_value = 6
 
 
 
@@ -83,8 +84,8 @@ end
 
 
 def $main_symbol.H(expr)
-  # reverse(append(cons(true,nil_list),cons(false,nil_list)))
-  rhs = Box.new(Application.new($reverse_symbol,[Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))]))
+  # reverse(append(append(cons(red,nil_list),cons(green,nil_list)),cons(blue,nil_list)))
+  rhs = Box.new(Application.new($reverse_symbol,[Box.new(Application.new($append_symbol,[Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($red_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($green_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($blue_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))]))
   expr.replace(rhs.H().content)
   expr
 end
