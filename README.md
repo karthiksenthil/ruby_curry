@@ -38,7 +38,7 @@ ruby test_reverse.rb
 
 ## Working of the compiler
 
-![Compiler Working](compiler_working/images.png)
+![Compiler Working](images/compiler_working.png)
 
 
 
