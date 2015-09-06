@@ -1,44 +1,30 @@
 # ruby_curry
 
-ruby_curry is a tool to compile and execute an input [Curry](https://en.wikipedia.org/wiki/Curry_(programming_language)) program. The tool converts the program into a Definitional Tree, a hierarchical structure, which is then accordingly processed into an intermediate object code. This object code is then executed to obtain the required output of the Curry program. The compiler is completely developed in Ruby.
+ruby_curry is a framework to study the compilation and execution of [Curry](http://www-ps.informatik.uni-kiel.de/currywiki/) programs. The name stems from the fact that compiler and object code are both ruby programs.  The main tool of this framework converts definitional trees into object code.  This object code is then executed by ruby to produce the value of a Curry expression.  The framework is incomplete, but structured to be incrementally extended to a full compiler/interpreter.  Since the object code is ruby code, the efficiency of execution is not a primary goal of this project.
 
-This tool is the result of a [project](https://www.google-melange.com/gsoc/project/details/google/gsoc2015/karthiksenthil/5700735861784576) under Google Summer of Code 2015 program and mentorship of [Portland State University](http://summer.cs.pdx.edu/).
+This tool is the result of a [project](https://www.google-melange.com/gsoc/project/details/google/gsoc2015/karthiksenthil/5700735861784576) developed by Karthik Senthil under Google Summer of Code 2015 program and mentorship of Prof. S. Antoy at [Portland State University](http://summer.cs.pdx.edu/).
 
 ## Usage
 
-The current implementation of the compiler assumes that the input program's definitional tree is available as in the case of this [example](https://github.com/karthiksenthil/DefinitionalTree/blob/master/examples/append.rb).
+The current implementation of the compiler assumes that the input encodes the definitional trees of some Curry functions and the declarations of some Curry types.  This [example](https://github.com/karthiksenthil/DefinitionalTree/blob/master/examples/append.rb) shows the format of the input.
 
-In order to compile a sample Curry program, we first define its definitional tree (`sample_program.rb`) in `user` directory.
+To compile a sample Curry program, we first encode the definitional tree of each function and each data type in a ruby program using a simple domain specific language. A sample program is `append.rb` in `user` directory.
 
-From the tool's root directory, the commands to compile the sample program:
+From the program directory, invoke the compiler on the sample program:
 ```bash
-cd user
-../bin/cmd.sh sample_program
+../bin/cmd.sh append
 ```
-This creates the object code `sample_program_objectCode.rb` in the same `user` directory. This object code can then be excuted by the command -
+
+This creates the object code `append_objectCode.rb` in the same `user` directory. This object code can then be excuted by the command:
 ```bash
 ruby sample_program_objectCode.rb
 ```
 
-As an example for the `append.rb` example in `user` dierctory:
-```bash
-cd user
-../bin/cmd.sh append
-ruby append_objectCode.rb
-```
-
 ## Running the tests
 
-There are 2 unit tests in the `test` directory to evaluate the working of the compiler. Tests can be run by -
+There are 2 unit tests in the `test` directory to evaluate the working of the compiler. Tests can be run by:
 ```bash
 cd test
 ruby test_append.rb
 ruby test_reverse.rb
 ```
-
-## Working of the compiler
-
-![Compiler Working](images/compiler_working.png)
-
-
-
