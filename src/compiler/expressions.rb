@@ -2,7 +2,7 @@ require_relative './symbols.rb'
 
 # Basic building block classes for the nodes of tree
 
-$replacement_records = []  # a structure to trace each and every replacement
+$replacement_stack = []  # a structure to trace each and every replacement
 
 # a wrapper class around Expressions
 class Box
@@ -14,7 +14,7 @@ class Box
 
 	def replace(new_content) # new content should be the content of another Box object only
 		replace_record = {:old=>@content,:new=>new_content}
-		$replacement_records << replace_record
+		$replacement_stack.push(replace_record)
 
 		@content = new_content
 	end
@@ -25,7 +25,8 @@ class Box
 	end
 
 	def H
-		if self.content.symbol.token != OPERATION
+		# H is defined only for OPERATION and CHOICE symbols
+		if self.content.symbol.token != OPERATION && self.content.symbol.token != CHOICE
 			raise "H is not defined on a non-operation rooted expression"
 		else
 			self.content.symbol.H(self)
