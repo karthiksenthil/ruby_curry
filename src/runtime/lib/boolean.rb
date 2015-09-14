@@ -20,6 +20,8 @@ def make_false
 	return Box.new(Application.new($false_symbol,[]))
 end
 
+
+=begin
 def make_not(x)
 	return Box.new(Application.new($not_symbol,[x]))
 end
@@ -155,3 +157,4 @@ end
 # puts make_or(make_false,make_or(make_false,make_not(make_false))).H().show()
 # and(or(false,true),not(and(true,true))) = false
 # puts make_and(make_or(make_false,make_true),make_not(make_and(make_true,make_true))).N()
+=end

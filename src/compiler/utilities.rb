@@ -1,6 +1,22 @@
 # some utility functions
 require_relative './expressions.rb'
 
+# utiltiy for logging
+module Log
+	def Log.write(s)
+		print s
+	end
+end
+
+# utility to print replacement stack
+def print_stack
+	while !$replacement_stack.empty?
+		r = $replacement_stack.pop
+		puts r[:old].show() + " -> " + r[:new].show()
+	end
+end
+
+# utility to print spaces - used for indentation in object code
 def print_spaces(n)
 	return " "*2*n
 end

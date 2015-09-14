@@ -8,6 +8,9 @@ FAIL = 3
 # the constructor symbols take a token value starting from 4
 CONSTRUCTOR = 4 
 
+# global variable to trace program
+$trace = true
+
 # the base abstract class
 class XSymbol
   attr_accessor :name, :arity
@@ -81,8 +84,8 @@ class Choice < XSymbol
 
   def initialize
     # symbol for Choice -> ?
-    # arity of Choice -> 0
-    super("?",0)
+    # arity of Choice -> 2
+    super("choice",2)
   end
 
   def token
@@ -90,6 +93,31 @@ class Choice < XSymbol
   end
 
 end
+
+#choice symbol
+$choice_symbol = Choice.new
+
+# constructor for making Choice object
+def make_choice(x,y)
+  return Box.new(Application.new($choice_symbol,[x,y]))
+end
+
+# standard H function for Choice symbol
+def $choice_symbol.H(expr)
+  left_argument = expr.content.arguments[0]
+
+  case left_argument.content.symbol.token
+  when CHOICE, OPERATION
+    # first argument is another CHOICE or OPERATION ; simplify it
+    left_argument.H()
+    expr.replace(left_argument.content)
+  else
+    # first argument is a CONSTRUCTOR or FAIL
+    expr.replace(left_argument.content)
+  end
+  expr
+end
+
 
 class Fail < XSymbol
 
@@ -104,5 +132,3 @@ class Fail < XSymbol
 end
 
 $fail_symbol = Fail.new
-
-

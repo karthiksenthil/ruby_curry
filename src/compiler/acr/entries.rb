@@ -38,7 +38,8 @@ class Choice_entry < Entry
 
 	def print_in_ruby(indent=0)
 		output = print_spaces(indent)+"when CHOICE"+"\n"
-		output += print_spaces(indent+1)+"raise 'Handling Choices not implemented yet'"+"\n"
+		output += print_spaces(indent+1)+"inductive_arg"+$inductive_arg_counter.to_s+".H()"+"\n"
+		output += print_spaces(indent+1)+"expr.H()"+"\n"
 		return output
 	end
 

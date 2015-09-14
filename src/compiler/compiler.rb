@@ -35,6 +35,7 @@ def object_code_initialise(prog)
 	output += "require_relative '../src/runtime/function_A.rb'\n"
 	output += "require_relative '../src/compiler/expressions.rb'\n"
 	output += "require_relative '../src/compiler/symbols.rb'\n"
+	output += "require_relative '../src/compiler/utilities.rb'\n"
 	output += "require_relative './"+prog.module_name+".rb'\n"
 	
 	output += "\n"
