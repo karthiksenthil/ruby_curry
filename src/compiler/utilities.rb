@@ -59,6 +59,35 @@ class Application < Expression
 		return path
 	end
 
+
+	# utility method to find position of sub-expression in main expression
+	# Doubt : unique occurence of sub_expr ?
+	def sub_expression_path(sub_expr)
+		path = []
+
+		if self == sub_expr
+			path << "found"
+			return path
+		end
+
+		self.arguments.each do |arg|
+			path << self.arguments.index(arg) + 1
+			inner_path = arg.content.sub_expression_path(sub_expr)
+
+			if inner_path.empty?
+				path.pop
+			elsif inner_path[0] == "found"
+				return path
+			else
+				path += inner_path
+			end					
+		end
+
+		return path
+
+	end
+
+
 end
 
 class Variable < Expression

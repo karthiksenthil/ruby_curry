@@ -33,6 +33,14 @@ class Box
 		end
 	end
 
+	def ==(another_box)
+		if another_box.class == Box
+			return self.content == another_box.content
+		else
+			return false
+		end
+	end
+
 end
 
 
@@ -131,15 +139,15 @@ class Application < Expression
   def ==(another_application)
   	if another_application.class == Application
   		# temporary code to make current unit test pass
-  		args_equality = []
-  		(0..self.arguments.length-1).each do |i|
-  			args_equality << self.arguments[i].content == another_application.arguments[i].content
-  		end 
-  		return self.symbol == another_application.symbol && args_equality
+  		# args_equality = []
+  		# (0..self.arguments.length-1).each do |i|
+  		# 	args_equality << self.arguments[i].content == another_application.arguments[i].content
+  		# end 
+  		# return self.symbol == another_application.symbol && args_equality
 
   		######### IMPORTANT #########
   		# old code, revert to this after coding compile.rb  
-  		# return self.symbol == another_application.symbol && self.arguments == another_application.arguments
+  		return self.symbol == another_application.symbol && self.arguments == another_application.arguments
   	else
   		false
   	end
