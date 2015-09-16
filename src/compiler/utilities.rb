@@ -119,6 +119,16 @@ def build_using_path(expression,variable)
 	return output
 end
 
+# write doc
+def build_contractum_replace(path)
+	code = "expr"
+  path.each do |i|
+    code += ".content.arguments[" + (i-1).to_s + "]"
+  end
+  code += ".replace("
+
+end
+
 
 =begin
 

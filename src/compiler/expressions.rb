@@ -13,7 +13,7 @@ class Box
 	end
 
 	def replace(new_content) # new content should be the content of another Box object only
-		replace_record = {:old=>@content,:new=>new_content}
+		replace_record = {:old=>@content.clone,:new=>new_content.clone}
 		$replacement_stack.push(replace_record)
 		Log.write(sprintf("R %s -> %s\n",@content.show,new_content.show)) if $trace
 		@content = new_content
