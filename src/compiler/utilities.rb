@@ -10,9 +10,9 @@ end
 
 # utility to print replacement stack
 def print_stack
-	while !$replacement_stack.empty?
-		r = $replacement_stack.pop
-		puts r[:old].show() + " -> " + r[:new].show()
+	puts "Stack status (read as {redex_box,redex_content,contractum_content}) :"
+	$replacement_stack.each do |r|
+		print sprintf("{%s,%s,%s}\n",r[:redex_box].show,r[:redex_content].show,r[:contractum_content].show)
 	end
 end
 

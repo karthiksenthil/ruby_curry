@@ -2,7 +2,10 @@ require_relative './symbols.rb'
 
 # Basic building block classes for the nodes of tree
 
-$replacement_stack = []  # a structure to trace each and every replacement
+# a structure to trace each and every replacement
+# structure of stack element :
+# {box_of_redex, content_of_redex, content_of_contractum}
+$replacement_stack = []  
 
 # a wrapper class around Expressions
 class Box
@@ -12,11 +15,17 @@ class Box
 		@content = content
 	end
 
-	def replace(new_content) # new content should be the content of another Box object only
-		replace_record = {:old=>@content.clone,:new=>new_content.clone}
-		$replacement_stack.push(replace_record)
+	def replace(new_content) # new content should be content of new Box object(contractum) only
+		replace_record = {redex_box: self, redex_content: self.content, contractum_content: new_content}
+		$replacement_stack.push(replace_record) if !$backtrack
 		Log.write(sprintf("R %s -> %s\n",@content.show,new_content.show)) if $trace
 		@content = new_content
+	end
+
+	# the method to replace/undo steps during backtrack stage(no push to stack)
+	def undo(new_content)
+		Log.write(sprintf("U %s -> %s\n",self.show,new_content.show)) if $trace
+		self.content = new_content
 	end
 
 	# showing a Box

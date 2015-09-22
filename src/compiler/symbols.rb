@@ -8,8 +8,10 @@ FAIL = 3
 # the constructor symbols take a token value starting from 4
 CONSTRUCTOR = 4 
 
-# global variable to trace program
+# global boolean to trace program
 $trace = true
+# global boolean for backtrack
+$backtrack = false
 
 # the base abstract class
 class XSymbol

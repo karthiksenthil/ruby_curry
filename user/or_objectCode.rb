@@ -3,6 +3,7 @@ require_relative '../src/runtime/function_A.rb'
 require_relative '../src/compiler/expressions.rb'
 require_relative '../src/compiler/symbols.rb'
 require_relative '../src/compiler/utilities.rb'
+require_relative '../src/compiler/repl.rb'
 require_relative './or.rb'
 
 $true_symbol.token_value = 4
@@ -54,17 +55,24 @@ def $or_symbol.H(expr)
 end
 
 
-
-
 def $main_symbol.H(expr)
   # or(false,choice(true,false))
-  rhs = Box.new(Application.new($or_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($choice_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($false_symbol,[]))]))]))
-  expr.replace(rhs.H().content)
+  $rhs = Box.new(Application.new($or_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($choice_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($false_symbol,[]))]))]))
+  expr.replace($rhs.H().content)
   expr
 end
 
 
 def main
   main_expr = Box.new(Application.new($main_symbol,[]))
+  Log.write(sprintf("A %s\n",main_expr.show()))
   main_expr.N()
+  Log.write(sprintf("V %s\n",main_expr.show()))
+  puts "\nForward run over, checking stack status"
+  print_stack
+  puts "\nInitialise backtrack phase"
+  backtrack(main_expr)
+  # main_expr.N()   # ideally this line should produce false as output  
 end
+
+main
