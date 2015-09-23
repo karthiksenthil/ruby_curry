@@ -19,8 +19,10 @@ def backtrack(expr)
 
     # if a Choice is found on stack, evaluate with right argument
     if redex_content.symbol.token == CHOICE
-      redex_box.undo(redex_content.arguments[1].content)
-      return true
+      if contractum_content == redex_content.arguments[0].content
+        redex_box.replace(redex_content.arguments[1].content)
+        return true
+      end
     end
     
   end
