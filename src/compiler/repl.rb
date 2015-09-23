@@ -27,3 +27,32 @@ def backtrack(expr)
     
   end
 end
+
+
+# function to implement the overall REPL operation for object-code
+# Param : top_level -> top level expression to evaluate in object code
+def repl(top_level)
+
+  # starting computation
+  Log.write(sprintf("A %s\n",top_level.show)) if $trace
+
+  loop do 
+    # report looping
+    Log.write(sprintf("L %s\n",top_level.show)) if $trace
+    top_level.N()
+
+    if top_level.content == $fail_expression
+      # report failure
+      Log.write(sprintf("F \n")) if $trace
+    else
+      # report value
+      Log.write(sprintf("V %s\n",top_level.show)) if $trace
+    end
+
+    break if !backtrack(top_level)
+
+  end
+
+  # done with all computations
+  Log.write(sprintf("Z \n")) if $trace
+end

@@ -36,6 +36,7 @@ def object_code_initialise(prog)
 	output += "require_relative '../src/compiler/expressions.rb'\n"
 	output += "require_relative '../src/compiler/symbols.rb'\n"
 	output += "require_relative '../src/compiler/utilities.rb'\n"
+	output += "require_relative '../src/compiler/repl.rb'\n"
 	output += "require_relative './"+prog.module_name+".rb'\n"
 	
 	output += "\n"
@@ -56,8 +57,9 @@ end
 def object_code_main
 	output = "def main\n"
 	output += print_spaces(1) + "main_expr = Box.new(Application.new($main_symbol,[]))\n"
-	output += print_spaces(1) + "main_expr.N()\n"
+	output += print_spaces(1) + "repl(main_expr)\n"
 	output += "end\n"
+	output += "\nmain\n"
 	return output
 end
 

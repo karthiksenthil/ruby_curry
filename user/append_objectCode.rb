@@ -3,6 +3,7 @@ require_relative '../src/runtime/function_A.rb'
 require_relative '../src/compiler/expressions.rb'
 require_relative '../src/compiler/symbols.rb'
 require_relative '../src/compiler/utilities.rb'
+require_relative '../src/compiler/repl.rb'
 require_relative './append.rb'
 
 $nil_list_symbol.token_value = 4
@@ -68,5 +69,7 @@ end
 
 def main
   main_expr = Box.new(Application.new($main_symbol,[]))
-  main_expr.N()
+  repl(main_expr)
 end
+
+main
