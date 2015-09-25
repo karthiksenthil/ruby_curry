@@ -44,9 +44,13 @@ def repl(top_level)
     if top_level.content == $fail_expression
       # report failure
       Log.write(sprintf("F \n")) if $trace
+      # add fail expression as output
+      $output_expressions << $fail_expression.show()
     else
       # report value
       Log.write(sprintf("V %s\n",top_level.show)) if $trace
+      # add the value as output 
+      $output_expressions << top_level.show()
     end
 
     break if !backtrack(top_level)

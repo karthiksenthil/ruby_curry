@@ -7,9 +7,12 @@ class TestReverse < Test::Unit::TestCase
 		# Dir.chdir("test")
 		`../bin/cmd.sh reverse`
 		require_relative './reverse_objectCode.rb'
+		$trace = false
 		# input is reverse(red,green,blue)
-		output = main.show()
+		main
 
+		assert_equal($output_expressions.size,1,"List reverse test failed")
+		output = $output_expressions[0]
 		assert_equal("cons(blue,cons(green,cons(red,nil_list)))",output,"List reverse test failed")
 
 	end

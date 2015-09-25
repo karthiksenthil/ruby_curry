@@ -12,6 +12,8 @@ CONSTRUCTOR = 4
 $trace = true
 # global boolean for backtrack
 $backtrack = false
+# array to store poosible output expressions
+$output_expressions = []
 
 # the base abstract class
 class XSymbol

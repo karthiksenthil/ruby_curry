@@ -7,9 +7,12 @@ class TestAppend < Test::Unit::TestCase
 		# Dir.chdir("test")
 		`../bin/cmd.sh append`
 		require_relative './append_objectCode.rb'
+		$trace = false
 		# input is append(true,false)
-		output = main.show()
+		main
 
+		assert_equal($output_expressions.size,1,"List append test failed")
+		output = $output_expressions[0]
 		assert_equal("cons(true,cons(false,nil_list))",output,"List append test failed")
 
 	end
