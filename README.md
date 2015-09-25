@@ -17,7 +17,7 @@ From the program directory, invoke the compiler on the sample program:
 
 This creates the object code `append_objectCode.rb` in the same `user` directory. This object code can then be excuted by the command:
 ```bash
-ruby sample_program_objectCode.rb
+ruby append_objectCode.rb
 ```
 
 ## Running the tests
