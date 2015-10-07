@@ -59,7 +59,7 @@ def object_code_main
 	output += print_spaces(1) + "main_expr = Box.new(Application.new($main_symbol,[]))\n"
 	output += print_spaces(1) + "repl(main_expr)\n"
 	output += "end\n"
-	# output += "\nmain\n"
+	output += "\nmain\n"
 	return output
 end
 

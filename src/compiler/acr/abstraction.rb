@@ -55,7 +55,10 @@ class RHS_Replace_H < Abstract_H
 		if @replace_type == "constructor"
 			output += print_spaces(indent)+"expr.replace(rhs.content)"+"\n"
 		elsif @replace_type == "operation"
-			output += print_spaces(indent)+"expr.replace(rhs.H().content)"+"\n"
+			# output += print_spaces(indent)+"expr.replace(rhs.H().content)"+"\n"
+			# changed to allow backtrack
+			output += print_spaces(indent)+"expr.replace(rhs.content)"+"\n"
+			output += print_spaces(indent)+"expr.H()"+"\n"
 		end
 		return output
 	end

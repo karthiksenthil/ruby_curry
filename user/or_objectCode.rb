@@ -60,7 +60,8 @@ end
 def $main_symbol.H(expr)
   # or(false,choice(true,false))
   rhs = Box.new(Application.new($or_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($choice_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($false_symbol,[]))]))]))
-  expr.replace(rhs.H().content)
+  expr.replace(rhs.content)
+  expr.H()
   expr
 end
 

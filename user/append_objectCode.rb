@@ -60,9 +60,10 @@ end
 
 
 def $main_symbol.H(expr)
-  # append(cons(true,nil_list),cons(false,nil_list))
-  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($false_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))
-  expr.replace(rhs.H().content)
+  # append(cons(true,nil_list),cons(choice(true,false),nil_list))
+  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($choice_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($false_symbol,[]))])),Box.new(Application.new($nil_list_symbol,[]))]))]))
+  expr.replace(rhs.content)
+  expr.H()
   expr
 end
 
