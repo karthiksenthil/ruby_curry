@@ -15,7 +15,8 @@ class Box
 		when VARIABLE
 			raise 'Variable not implemented'
 		when CHOICE
-			raise 'Choice not implemented'
+			self.H()
+			self.N()
 		when FAIL
 			self.replace($fail_expression.content)
 		else
