@@ -1,17 +1,18 @@
 require_relative '../src/compiler/definitional_tree.rb'
 require_relative '../src/compiler/curry_module.rb'
-require_relative '../src/runtime/lib/boolean.rb'
+# require_relative '../src/runtime/lib/boolean.rb'
+require_relative '../src/runtime/lib/colors.rb'
 
 # Example to construct definitonal trees for a curry program
 # to permute a list
 
 # Rules for ndinsert -
-# General rule -> ndinsert x y
+# General rule -> ndinsert x y0
 # 1. ndinsert x [] = [x]
 # 2. ndinsert x (y:ys) = choice(x:y:ys, y:ndinsert x ys)
 
 # Rules for permute -
-# General rule -> permute x
+# General rule -> permute x0
 # 1. permute [] = []
 # 2. permute (x:xs) = ndinsert x (permute xs)
 
@@ -51,8 +52,10 @@ end
 
 
 # variables
-$x = make_variable("x","list")
-$y = make_variable("y","list")
+$x = make_variable("x","*")
+$y = make_variable("y","*")
+$x0 = make_variable("x0","list")
+$y0 = make_variable("y0","list")
 $xs = make_variable("xs","list")
 $ys = make_variable("ys","list")
 
@@ -68,8 +71,8 @@ ndinsert_child2_lhs = make_ndinsert($x,make_cons($y,$ys))
 ndinsert_child2_rhs = make_choice(make_cons($x,make_cons($y,$ys)),make_cons($y,make_ndinsert($x,$ys)))
 ndinsert_child2 = Leaf.new(ndinsert_child2_lhs,ndinsert_child2_rhs)
 
-ndinsert_rootpatt = make_ndinsert($x,$y)
-ndinsert_tree = Branch.new(ndinsert_rootpatt,$y,[ndinsert_child1,ndinsert_child2])
+ndinsert_rootpatt = make_ndinsert($x,$y0)
+ndinsert_tree = Branch.new(ndinsert_rootpatt,$y0,[ndinsert_child1,ndinsert_child2])
 $ndinsert_symbol.def_tree = ndinsert_tree
 
 # definitional tree for permute
@@ -81,14 +84,14 @@ permute_child2_lhs = make_permute(make_cons($x,$xs))
 permute_child2_rhs = make_ndinsert($x,make_permute($xs))
 permute_child2 = Leaf.new(permute_child2_lhs,permute_child2_rhs)
 
-permute_rootpatt = make_permute($x)
-permute_tree = Branch.new(permute_rootpatt,$x,[permute_child1,permute_child2])
+permute_rootpatt = make_permute($x0)
+permute_tree = Branch.new(permute_rootpatt,$x0,[permute_child1,permute_child2])
 $permute_symbol.def_tree = permute_tree
 
 # definitional tree for main
 main_tree_patt = make_main
-# permute(cons(false,cons(true,nil_list)))
-main_tree_expr = make_permute(make_cons(make_false,make_cons(make_true,make_nil)))
+# permute(cons(red,cons(blue,cons(green,nil_list))))
+main_tree_expr = make_permute(make_cons(make_red,make_cons(make_blue,make_cons(make_green,make_nil))))
 $main_tree = Leaf.new(main_tree_patt,main_tree_expr)
 $main_symbol.def_tree = $main_tree
 
@@ -96,9 +99,9 @@ $main_symbol.def_tree = $main_tree
 $program_operations = [$ndinsert_symbol,$permute_symbol,$main_symbol]
 # curry data types
 $list_type = CurryType.new("list",[$nil_list_symbol,$cons_symbol])
-$boolean_type = CurryType.new("boolean",[$true_symbol,$false_symbol])
-# $color_type = CurryType.new("color",[$red_symbol,$green_symbol,$blue_symbol])
-$program_data_types = [$list_type,$boolean_type]
+# $boolean_type = CurryType.new("boolean",[$true_symbol,$false_symbol])
+$color_type = CurryType.new("color",[$red_symbol,$green_symbol,$blue_symbol])
+$program_data_types = [$list_type,$color_type]
 
 $currymodule = CurryModule.new($program_operations,$program_data_types,"permute")
 
