@@ -1,0 +1,34 @@
+{ "module" : 
+  { "name" : "list_append",
+    "code" : 
+    [ { "data" : "list",
+	"arguments" : "a",
+	"constructor list" :
+	[ { "constructor" :
+            { "name" : "nil_list",
+              "arguments": ""
+            }
+      },
+    { "constructor" : 
+            { "name" : "cons",
+              "arguments" : "a, List a"
+            }         
+	  }
+	]
+      },
+      { "operation" : "append",
+  "arity" : 2,
+	"rule list" :
+	[ { "variables" : "y:list",
+	    "lhs" : "append(nil,y)",
+	    "rhs" : "y"
+	  },
+	  { "variables" : "x:list,xs:list,y:list",
+	    "lhs" : "append(cons(x,xs),y)",
+	    "rhs" : "cons(x,append(xs,y))"
+	  }
+	]
+      }
+    ]
+  }
+}
