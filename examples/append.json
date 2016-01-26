@@ -20,7 +20,7 @@
   "arity" : 2,
 	"rule list" :
 	[ { "variables" : "y:list",
-	    "lhs" : "append(nil,y)",
+	    "lhs" : "append(nil_list,y)",
 	    "rhs" : "y"
 	  },
 	  { "variables" : "x:list,xs:list,y:list",

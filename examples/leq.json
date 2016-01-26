@@ -1,0 +1,55 @@
+{ "module" : 
+  { "name" : "less_than_equal",
+    "code" : 
+    [ { "data" : "integer",
+	"arguments" : "a",
+	"constructor list" :
+	[ { "constructor" :
+            { "name" : "zero",
+              "arguments": ""
+            }
+      },
+    { "constructor" : 
+            { "name" : "succ",
+              "arguments" : "a"
+            }         
+	  }
+	]
+      },
+      { "data" : "boolean",
+      "arguments" : "x",
+      "constructor list":
+      [ { "constructor" :
+            {
+              "name" : "True",
+              "arguments" : ""
+            }
+        },
+        { "constructor" :
+            {
+              "name" : "False",
+              "arguments" : ""
+            }
+        }
+    ]
+      },
+      { "operation" : "leq",
+  "arity" : 2,
+	"rule list" :
+	[ { "variables" : "y:integer",
+	    "lhs" : "leq(zero,y)",
+	    "rhs" : "True"
+	  },
+    { "variables" : "x:integer",
+      "lhs" : "leq(succ(x),zero)",
+      "rhs" : "False"
+    },
+    { "variables" : "x:integer,y:integer",
+      "lhs" : "leq(succ(y),succ(x))",
+      "rhs" : "leq(y,x)"
+    }
+	]
+      }
+    ]
+  }
+}

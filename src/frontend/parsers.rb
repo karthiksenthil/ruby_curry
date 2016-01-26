@@ -14,15 +14,39 @@ require_relative '../compiler/utilities.rb'
 
 # JSON -> object code approach
 
+# symbol table data structure
+# Key : name of symbol
+# Value : attributes like symbol type, arity
+$symbol_table = {}
+# operation table data structure
+# Key : name of operation
+# Value : array of Rule objects
+$operation_rules = {}
+
+class Rule
+	attr_accessor :lhs, :rhs
+
+	def initialize(lhs,rhs)
+		@lhs = lhs
+		@rhs = rhs
+	end
+
+	def show
+		return lhs.show + "->" + rhs.show + "\n"
+	end
+
+end
+
+
 # module to convert a string into an Expression
-module Parser
+module ExprParser
 
   # TODO: Extend to parse expression with a "where" clause.
 
   # Take a string s.
   # Return an expression of which s is a representation.
 
-  def Parser.compile(s)
+  def ExprParser.compile(s)
     s.strip!
     v, l = root(s)
     printf("Warning, unparsed \"%s\" \n", l) if l != ""
@@ -31,28 +55,41 @@ module Parser
 
   # Return the internal representation of an expression
   # and the string that remains to be parsed
-  def Parser.root(s)
+  def ExprParser.root(s)
     case s
     when /^(\d+)(.*)/
       # A number is a 0-ary function application (for replacement)
       return Box.new(Application.new($1.to_i, [])), $2
     when /(^[A-Za-z]\w*|\?|\+|\*|\-|\/)(.*)/
       arg, rest = parseArg($2)
-      return Box.new(Application.new($1, arg)), rest
+      symbol_attributes = $symbol_table[$1]
+
+      case symbol_attributes[:sym_type]
+      when "Constructor"
+      	c = Constructor.new($1,symbol_attributes[:arity])
+      	return Box.new(Application.new(c, arg)), rest
+      when "Operation"
+      	o = Operation.new($1,symbol_attributes[:arity],nil)
+      	return Box.new(Application.new(o, arg)), rest
+      when "Variable"
+      	return make_variable($1,symbol_attributes[:data_type]), rest
+      else
+      	throw Exception.exception("Invalid symbol") 	
+      end
+     
     else
       throw Exception.exception("Parse error " + s.to_s) 
     end
   end
 
-  def Parser.parseArg(s)
-    # printf("parsing %s \n", s)
+  def ExprParser.parseArg(s)
     arg, rest = [], s
     if s[0] == ?( then
       loop do
-        # printf("looping %s \n", rest)
+       
         # The 1st char of rest is ',' or '('
         k, rest = root(rest[1..-1])
-        # printf("Arg %s rest %s \n", k, rest)
+  
         # optimistically store arg 
         arg << k
         case rest[0]
@@ -66,15 +103,12 @@ module Parser
         end
       end
     end
-    # printf("parseArg return %s %s \n", arg, rest)
     return arg, rest
   end
 
 end
 
 # module to read JSON input file and define the symbol table
-$symbol_table = {}
-
 module JSONParser
 
 	# load JSON to memory for processing
@@ -92,14 +126,61 @@ module JSONParser
 
 	# function to parse the declarations and define the symbols in the program
 	def JSONParser.symbolTable(code)
+		
+		code.each do |declaration|
+			case declaration.keys[0]
+			when "data"
+				data_type = declaration["data"]
+				type_vars = declaration["arguments"].split(",")
+
+				declaration["constructor list"].each do |constructor|
+					constructor = constructor["constructor"]
+					cons_arity = constructor["arguments"].split(',').length()
+					# $symbol_table << {name: constructor["name"],type: "Constructor",arity: cons_arity}
+					$symbol_table[constructor["name"]] = {sym_type: "Constructor",arity: cons_arity}
+				end
+
+			when "operation"
+				op_name = declaration["operation"]
+				$symbol_table[op_name] = {sym_type: "Operation",arity: declaration["arity"]}
+				op_rules = declaration["rule list"]
+
+				$operation_rules[op_name] = []
+				op_rules.each do |r|
+					# store rule variables in symbol table
+					rule_vars = r["variables"].split(",")
+					rule_vars.each do |v|
+						name = v.split(":")[0]
+						dtype = v.split(":")[1]
+						$symbol_table[name] = {sym_type: "Variable", data_type: dtype}
+					end
+
+					# convert the rule r to Rule object
+					rule_lhs = ExprParser.compile(r["lhs"])
+					rule_rhs = ExprParser.compile(r["rhs"])
+					$operation_rules[op_name] << Rule.new(rule_lhs,rule_rhs)
+
+				end
+
+			else
+				throw Exception.exception("Invalid declaration")
+			end
+		end
+
 	end
 
 end
 
 
-expr = Parser.compile("append(nil,y)")
-puts expr.inspect
-
+# JSONParser.loadJSON("../../examples/frontend-sample.json")
+# # puts $symbol_table.inspect
+# # puts $operation_rules.inspect
+# $operation_rules.each do |op_name,op_rules|
+# 	puts "Rules for #{op_name}"
+# 	op_rules.each do |r|
+# 		print r.show
+# 	end
+# end
 
 
 =begin
