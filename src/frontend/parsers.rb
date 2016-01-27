@@ -67,6 +67,7 @@ module ExprParser
       case symbol_attributes[:sym_type]
       when "Constructor"
       	c = Constructor.new($1,symbol_attributes[:arity])
+      	c.token_value = symbol_attributes[:token] 
       	return Box.new(Application.new(c, arg)), rest
       when "Operation"
       	o = Operation.new($1,symbol_attributes[:arity],nil)
@@ -132,12 +133,13 @@ module JSONParser
 			when "data"
 				data_type = declaration["data"]
 				type_vars = declaration["arguments"].split(",")
-
+				constructor_token = CONSTRUCTOR
 				declaration["constructor list"].each do |constructor|
 					constructor = constructor["constructor"]
 					cons_arity = constructor["arguments"].split(',').length()
 					# $symbol_table << {name: constructor["name"],type: "Constructor",arity: cons_arity}
-					$symbol_table[constructor["name"]] = {sym_type: "Constructor",arity: cons_arity}
+					$symbol_table[constructor["name"]] = {sym_type: "Constructor",arity: cons_arity, token: constructor_token}
+					constructor_token += 1
 				end
 
 			when "operation"
