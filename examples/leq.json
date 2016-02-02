@@ -41,7 +41,7 @@
 	    "rhs" : "True"
 	  },
     { "variables" : "x:integer",
-      "lhs" : "leq(succ(succ(x)),zero)",
+      "lhs" : "leq(succ(x),zero)",
       "rhs" : "False"
     },
     { "variables" : "x:integer,y:integer",

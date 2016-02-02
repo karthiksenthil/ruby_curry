@@ -1,0 +1,62 @@
+================================= append =============================
+Rules for append
+append(nil_list,y)->y
+append(cons(x,xs),y)->cons(x,append(xs,y))
+
+Defintional Tree Construction for append
+
+Chains:
+append(Genvar_1,y) [1] append(nil_list,y) 
+append(Genvar_2,y) [1] append(cons(x,xs),y) 
+
+Definitional tree:
+
+append(Genvar_1,y) : Genvar_1
+  append(nil_list,y) -> y
+  append(cons(x,xs),y) -> cons(x,append(xs,y))
+
+
+
+================================= less than equal to =============================
+Rules for leq
+leq(zero,y)->True
+leq(succ(x),zero)->False
+leq(succ(y),succ(x))->leq(y,x)
+
+Defintional Tree Construction for leq
+
+Chains:
+leq(Genvar_1,y) [1] leq(zero,y) 
+leq(Genvar_3,Genvar_2) [1] leq(succ(x),Genvar_2) [2] leq(succ(x),zero) 
+leq(Genvar_5,Genvar_4) [1] leq(succ(y),Genvar_4) [2] leq(succ(y),succ(x)) 
+
+Definitional tree:
+
+leq(Genvar_1,y) : Genvar_1
+  leq(zero,y) -> True
+  leq(succ(x),Genvar_2) : Genvar_2
+    leq(succ(x),zero) -> False
+    leq(succ(y),succ(x)) -> leq(y,x)
+
+
+
+================================= half =============================
+Rules for half
+half(zero)->zero
+half(succ(zero))->zero
+half(succ(succ(x)))->succ(half(x))
+
+Defintional Tree Construction for half
+
+Chains:
+half(Genvar_1) [1] half(zero) 
+half(Genvar_3) [1] half(succ(Genvar_2)) [1, 1] half(succ(zero)) 
+half(Genvar_5) [1] half(succ(Genvar_4)) [1, 1] half(succ(succ(x))) 
+
+Definitional tree:
+
+half(Genvar_1) : Genvar_1
+  half(zero) -> zero
+  half(succ(Genvar_2)) : Genvar_2
+    half(succ(zero)) -> zero
+    half(succ(succ(x))) -> succ(half(x))

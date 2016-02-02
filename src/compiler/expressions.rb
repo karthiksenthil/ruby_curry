@@ -50,6 +50,15 @@ class Box
 		end
 	end
 
+	# function to check variant
+	def is_variant?(another_box)
+		if another_box.class == Box
+			return self.content.is_variant?(another_box.content)
+		else
+			return false
+		end
+	end
+
 end
 
 
@@ -92,6 +101,15 @@ class Variable < Expression
 	def ==(another_variable)
 		if another_variable.class == Variable
 			self.symbol == another_variable.symbol
+		else
+			false
+		end
+	end
+
+	# two variables are always similar (independence of type?)
+	def is_variant?(another_variable)
+		if another_variable.class == Variable
+			true
 		else
 			false
 		end
@@ -166,6 +184,22 @@ class Application < Expression
   # def H
   # 	self.symbol.H(self)
   # end
+
+  # check if one Application(Expression) is similar to another
+  def is_variant?(another_application)
+  	if another_application.class == Application
+  		return false if self.arguments.count != another_application.arguments.count
+
+  		args_similarity = []
+  		self.arguments.zip(another_application.arguments).each do |a,b|
+  			args_similarity << a.is_variant?(b)
+  		end
+  		# same symbol name
+  		return self.symbol == another_application.symbol && args_similarity.all?
+  	else
+  		return false
+  	end
+  end
 
 end
 
