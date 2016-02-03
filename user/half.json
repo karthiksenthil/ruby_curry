@@ -1,0 +1,47 @@
+{ "module" : 
+  { "name" : "half",
+    "code" : 
+    [ { "data" : "integer",
+	"arguments" : "a",
+	"constructor list" :
+	[ { "constructor" :
+            { "name" : "zero",
+              "arguments": ""
+            }
+      },
+    { "constructor" : 
+            { "name" : "succ",
+              "arguments" : "a"
+            }         
+	  }
+	]
+      },
+      { "operation" : "half",
+  "arity" : 1,
+	"rule list" :
+	[ { "variables" : "",
+	    "lhs" : "half(zero)",
+	    "rhs" : "zero"
+	  },
+    { "variables" : "",
+      "lhs" : "half(succ(zero))",
+      "rhs" : "zero"
+    },
+    { "variables" : "x:integer",
+      "lhs" : "half(succ(succ(x)))",
+      "rhs" : "succ(half(x))"
+    }
+	]
+      },
+      { "operation" : "main",
+  "arity" : 0,
+  "rule list" :
+  [ { "variables" : "",
+      "lhs" : "main",
+      "rhs" : "half(succ(succ(succ(zero))))"
+    }
+  ]
+      }
+    ]
+  }
+}

@@ -138,7 +138,7 @@ module JSONParser
 					constructor = constructor["constructor"]
 					cons_arity = constructor["arguments"].split(',').length()
 					# $symbol_table << {name: constructor["name"],type: "Constructor",arity: cons_arity}
-					$symbol_table[constructor["name"]] = {sym_type: "Constructor",arity: cons_arity, token: constructor_token}
+					$symbol_table[constructor["name"]] = {sym_type: "Constructor",arity: cons_arity, token: constructor_token, data_type: data_type}
 					constructor_token += 1
 				end
 

@@ -21,13 +21,13 @@
       "constructor list":
       [ { "constructor" :
             {
-              "name" : "True",
+              "name" : "true",
               "arguments" : ""
             }
         },
         { "constructor" :
             {
-              "name" : "False",
+              "name" : "false",
               "arguments" : ""
             }
         }
@@ -38,11 +38,11 @@
 	"rule list" :
 	[ { "variables" : "y:integer",
 	    "lhs" : "leq(zero,y)",
-	    "rhs" : "True"
+	    "rhs" : "true"
 	  },
     { "variables" : "x:integer",
       "lhs" : "leq(succ(x),zero)",
-      "rhs" : "False"
+      "rhs" : "false"
     },
     { "variables" : "x:integer,y:integer",
       "lhs" : "leq(succ(y),succ(x))",
@@ -55,7 +55,7 @@
   "rule list" :
   [ { "variables" : "",
       "lhs" : "main",
-      "rhs" : "leq(zero,succ(succ(zero)))"
+      "rhs" : "leq(succ(succ(zero)),succ(succ(zero)))"
     }
   ]
       }

@@ -1,5 +1,4 @@
 require_relative "./parsers.rb"
-require_relative "../../user/append.rb"
 
 def deep_clone(obj)
 	return Marshal.load(Marshal.dump(obj))
@@ -40,7 +39,16 @@ module Chaining
 			term,pos = select_term(term)
 		end
 
-		term.replace(make_variable("Genvar_#{@genvar_counter}","chain_var").content)
+
+		if term.content.symbol.token < CONSTRUCTOR
+			puts term.show
+			throw Exception.exception("LHS of a rule contains a call to another Operation")
+		end
+
+		# find out type of the generated variable in chaining
+		term_type = $symbol_table[term.content.symbol.show][:data_type]
+
+		term.replace(make_variable("Genvar_#{@genvar_counter}",term_type).content)
 		@genvar_counter += 1
 		chain += candidate_to_chain(lhs)
 	end
@@ -71,8 +79,13 @@ module Merging
 				if r.lhs.is_variant?(rule_chain)
 					# make a leaf, add to parent
 					l = Leaf.new(rule_chain,r.rhs)
-					parent.children << l
-					return
+					if parent.nil?
+						# case when DefTree is only one leaf
+						@def_tree = l
+					else
+						parent.children << l
+					end
+					return @def_tree
 				end
 			end
 
@@ -154,12 +167,13 @@ module DefTreeBuilder
 	def DefTreeBuilder.build_tree(rules)
 		# send a clone of rules to Chaining since they replace the terms
 		chains = Chaining.create_chains(deep_clone(rules))
-		puts "\nChains:"
-		print_chains(chains)
+		# puts "\nChains:"
+		# print_chains(chains)
 		merged = Merging.verify_position(chains,rules,nil)
-		puts "\nDefinitional tree:"
-		merged.pretty_print
-		puts
+		# puts "\nDefinitional tree:"
+		# merged.pretty_print
+		# puts
+		return merged
 	end
 
 	def DefTreeBuilder.print_chains(chains)
@@ -178,22 +192,6 @@ module DefTreeBuilder
 end # end of DefTreeBuilder module
 
 
-
-
-def test_run
-	JSONParser.loadJSON("../../examples/half.json")
-	$operation_rules.each do |op_name,op_rules|
-		puts "Rules for #{op_name}"
-		op_rules.each do |r|
-			print r.show
-		end
-		puts "\nDefintional Tree Construction for #{op_name}"
-		DefTreeBuilder.build_tree(op_rules)
-	end
-end
-
-
-test_run
 
 # test for is_variant?
 # a = make_append(make_cons(make_variable("x","list"),make_nil),make_nil)

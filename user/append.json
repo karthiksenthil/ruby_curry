@@ -16,6 +16,21 @@
 	  }
 	]
       },
+      { "data" : "boolean",
+  "arguments" : "a",
+  "constructor list" :
+  [ { "constructor" :
+            { "name" : "true",
+              "arguments": ""
+            }
+      },
+    { "constructor" : 
+            { "name" : "false",
+              "arguments" : ""
+            }         
+    }
+  ]
+      },
       { "operation" : "append",
   "arity" : 2,
 	"rule list" :
@@ -34,7 +49,7 @@
   "rule list" :
   [ { "variables" : "",
       "lhs" : "main",
-      "rhs" : "append(nil_list,nil_list)"
+      "rhs" : "append(cons(true,nil_list),nil_list)"
     }
   ]
       }

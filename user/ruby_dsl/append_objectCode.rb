@@ -4,17 +4,12 @@ require_relative '../src/compiler/expressions.rb'
 require_relative '../src/compiler/symbols.rb'
 require_relative '../src/compiler/utilities.rb'
 require_relative '../src/compiler/repl.rb'
+require_relative './append.rb'
 
-$nil_list_symbol = Constructor.new('nil_list',0)
 $nil_list_symbol.token_value = 4
-$cons_symbol = Constructor.new('cons',2)
 $cons_symbol.token_value = 5
-$true_symbol = Constructor.new('true',0)
 $true_symbol.token_value = 4
-$false_symbol = Constructor.new('false',0)
 $false_symbol.token_value = 5
-$append_symbol = Operation.new('append',2,nil)
-$main_symbol = Operation.new('main',0,nil)
 
 
 
@@ -54,7 +49,7 @@ def $append_symbol.H(expr)
       expr.replace(rhs.content)
     end
   when 5  #cons
-    # cons(x,append(xs,y))
+    # cons(z,append(zs,ys))
     rhs = Box.new(Application.new($cons_symbol,[expr.content.arguments[0].content.arguments[0],Box.new(Application.new($append_symbol,[expr.content.arguments[0].content.arguments[1],expr.content.arguments[1]]))]))
     expr.replace(rhs.content)
   end
@@ -65,8 +60,8 @@ end
 
 
 def $main_symbol.H(expr)
-  # append(cons(true,nil_list),nil_list)
-  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($nil_list_symbol,[]))]))
+  # append(cons(true,nil_list),cons(choice(true,false),nil_list))
+  rhs = Box.new(Application.new($append_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($choice_symbol,[Box.new(Application.new($true_symbol,[])),Box.new(Application.new($false_symbol,[]))])),Box.new(Application.new($nil_list_symbol,[]))]))]))
   expr.replace(rhs.content)
   expr.H()
   expr

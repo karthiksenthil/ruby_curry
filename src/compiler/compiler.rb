@@ -1,19 +1,56 @@
 require_relative '../compiler/generate_h.rb'
+require_relative '../frontend/def_tree_construct.rb'
 
 # function to compile a curry module
 # prog => a curry module object 
 def compiler(program_name)
 
-	require program_name+".rb"
-	prog = $currymodule
+	JSONParser.loadJSON(program_name+".json")
+	
+	#key : data type
+	#value : array of constructors
+	program_constructors = {}
+	program_operations = []
+	# define the symbols in the program
+	$symbol_table.each do |key,val|
+		sym_name = key
+		sym_attributes = val
 
-	prog.curry_data_types.each do |dt|
-		constructor_token = CONSTRUCTOR
-		dt.constructors.each do |constructor|
-			constructor.token_value = constructor_token
-			constructor_token += 1
+		case sym_attributes[:sym_type]
+		when "Constructor"
+			c = Constructor.new(sym_name,sym_attributes[:arity])
+			c.token_value = sym_attributes[:token]
+			cons_dtype = sym_attributes[:data_type]
+			if program_constructors[cons_dtype].nil?
+				program_constructors[cons_dtype] = [c]
+			else
+				program_constructors[cons_dtype] << c
+			end
+		when "Operation"
+			o = Operation.new(sym_name,sym_attributes[:arity],nil)
+			program_operations << o
 		end
+
 	end
+
+	# copy program constructors to global constructors_hash
+	$constructors_hash = program_constructors
+
+	# define CurryTypes
+	program_data_types = []
+	program_constructors.each do |type,cons|
+		program_data_types << CurryType.new(type,cons)
+	end
+
+	# build definitional trees for operations
+	build_definitional_trees($operation_rules,program_operations)
+
+	curry_module = CurryModule.new(program_operations,program_data_types,program_name)
+	prog = curry_module
+
+	# prog.operations.each do |oper|
+	# 	oper.def_tree.pretty_print()
+	# end
 	
 	object_code = object_code_initialise(prog) 
 
@@ -30,6 +67,17 @@ def compiler(program_name)
 
 end
 
+def build_definitional_trees(rules,prog_ops)
+	rules.each do |op_name,op_rules|
+		prog_ops.each do |op|
+			if op.name == op_name
+				op.def_tree = DefTreeBuilder.build_tree(op_rules)
+			end
+		end
+	end
+end
+
+
 def object_code_initialise(prog)
 	output = "require_relative '../src/runtime/function_N.rb'\n"
 	output += "require_relative '../src/runtime/function_A.rb'\n"
@@ -37,16 +85,22 @@ def object_code_initialise(prog)
 	output += "require_relative '../src/compiler/symbols.rb'\n"
 	output += "require_relative '../src/compiler/utilities.rb'\n"
 	output += "require_relative '../src/compiler/repl.rb'\n"
-	output += "require_relative './"+prog.module_name+".rb'\n"
+	# output += "require_relative './"+prog.module_name+".rb'\n"
 	
 	output += "\n"
-	# assigning token values in object code
+	# define constructor symbols in object code
 	prog.curry_data_types.each do |dt|
-		constructor_token = CONSTRUCTOR
 		dt.constructors.each do |constructor|
-			output += "$"+constructor.show()+"_symbol.token_value = "+constructor_token.to_s+"\n"
-			constructor_token += 1
+			output += "$"+constructor.show()+"_symbol = Constructor.new('#{constructor.show}',#{constructor.arity})\n"
+			output += "$"+constructor.show()+"_symbol.token_value = "+constructor.token.to_s+"\n"
 		end
+	end
+
+	# define operation symbols in object code
+	# Important : Definitional tree need not be defined in object code ?
+	# It is used only to construct the H function, not used during object code execution
+	prog.operations.each do |o|
+		output += "$"+o.show()+"_symbol = Operation.new('#{o.show()}',#{o.arity},nil)\n"
 	end
 
 	output += "\n"
