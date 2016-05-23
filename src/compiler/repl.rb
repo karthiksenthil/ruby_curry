@@ -49,7 +49,7 @@ def repl(top_level)
     else
       # report value
       Log.write(sprintf("V %s\n",top_level.show)) if $trace
-      # add the value as output 
+      # add the value as output
       $output_expressions << top_level.show()
       # print_stack
     end
