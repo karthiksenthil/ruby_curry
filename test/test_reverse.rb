@@ -1,9 +1,6 @@
-require 'test/unit'
-require 'minitest/reporters'
-reporter_options = { color: true }
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
+require 'minitest/autorun'
 
-class TestReverse < Test::Unit::TestCase
+class TestReverse < Minitest::Test
 
 	def test_reverse
 		# below line is needed if tests are run from BASE directory

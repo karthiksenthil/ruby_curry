@@ -1,9 +1,6 @@
-require 'test/unit'
-require 'minitest/reporters'
-reporter_options = { color: true }
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
+require 'minitest'
 
-class TestAppend < Test::Unit::TestCase
+class TestAppend < Minitest::Test
 
 	def test_append
 		# below line is needed if tests are run from BASE directory
