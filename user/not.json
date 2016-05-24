@@ -1,0 +1,44 @@
+{ "module" : 
+  { "name" : "not",
+    "code" : 
+    [ { "data" : "boolean",
+  "arguments" : "a",
+  "constructor list" :
+  [ { "constructor" :
+            { "name" : "true",
+              "arguments": ""
+            }
+      },
+    { "constructor" : 
+            { "name" : "false",
+              "arguments" : ""
+            }         
+    }
+  ]
+      },
+      { "operation" : "not",
+  "arity" : 1,
+	"rule list" :
+	[ { "variables" : "",
+	    "lhs" : "not(true)",
+	    "rhs" : "false"
+	  },
+    { "variables" : "",
+      "lhs" : "not(false)",
+      "rhs" : "true"
+    }
+	]
+      },
+      { "operation" : "main",
+  "arity" : 0,
+  "rule list" :
+  [ { "variables" : "",
+      "lhs" : "main",
+      "rhs" : "not(not(true))"
+    }
+  ]
+      }
+
+    ]
+  }
+}

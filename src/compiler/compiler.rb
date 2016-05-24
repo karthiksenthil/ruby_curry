@@ -88,6 +88,8 @@ def object_code_initialise(prog)
 	# output += "require_relative './"+prog.module_name+".rb'\n"
 	
 	output += "\n"
+	# define choice symbol in object code
+	output += "#Choice symbol and H function defined are globally defined in symbols.rb\n"
 	# define constructor symbols in object code
 	prog.curry_data_types.each do |dt|
 		dt.constructors.each do |constructor|

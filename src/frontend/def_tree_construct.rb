@@ -1,6 +1,12 @@
 require_relative "./parsers.rb"
 
 def deep_clone(obj)
+	# obj.each do |r|
+	# 	if r.rhs.content.symbol.name == "choice"
+	# 		puts r.rhs.content.inspect
+	# 		Marshal.dump(r.rhs.content.symbol)
+	# 	end
+	# end
 	return Marshal.load(Marshal.dump(obj))
 end
 

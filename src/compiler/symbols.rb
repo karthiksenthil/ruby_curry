@@ -98,13 +98,12 @@ class Choice < XSymbol
 
 end
 
-#choice symbol
-$choice_symbol = Choice.new
-
 # constructor for making Choice object
 def make_choice(x,y)
-  return Box.new(Application.new($choice_symbol,[x,y]))
+  return Box.new(Application.new(Choice.new,[x,y]))
 end
+
+$choice_symbol = Choice.new
 
 # standard H function for Choice symbol
 def $choice_symbol.H(expr)

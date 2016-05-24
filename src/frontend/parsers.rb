@@ -18,6 +18,7 @@ require_relative '../compiler/utilities.rb'
 # Key : name of symbol
 # Value : attributes like symbol type, arity
 $symbol_table = {}
+$symbol_table["choice"] = {sym_type: "Choice"}
 # operation table data structure
 # Key : name of operation
 # Value : array of Rule objects
@@ -62,6 +63,9 @@ module ExprParser
       return Box.new(Application.new($1.to_i, [])), $2
     when /(^[A-Za-z]\w*|\?|\+|\*|\-|\/)(.*)/
       arg, rest = parseArg($2)
+      # if $1 == "choice"
+      # 	puts arg[0].show, arg[1].show, rest
+      # end
       symbol_attributes = $symbol_table[$1]
 
       case symbol_attributes[:sym_type]
@@ -74,6 +78,9 @@ module ExprParser
       	return Box.new(Application.new(o, arg)), rest
       when "Variable"
       	return make_variable($1,symbol_attributes[:data_type]), rest
+      when "Choice"
+      	ch = Choice.new
+      	return Box.new(Application.new(ch, arg)), rest
       else
       	throw Exception.exception("Invalid symbol") 	
       end
