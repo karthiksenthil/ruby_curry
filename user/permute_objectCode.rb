@@ -80,8 +80,8 @@ end
 
 
 def $main_symbol.H(expr)
-  # permute(cons(red,cons(green,nil_list)))
-  rhs = Box.new(Application.new($permute_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($red_symbol,[])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($green_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))]))
+  # permute(cons(blue,cons(red,cons(green,nil_list))))
+  rhs = Box.new(Application.new($permute_symbol,[Box.new(Application.new($cons_symbol,[Box.new(Application.new($blue_symbol,[])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($red_symbol,[])),Box.new(Application.new($cons_symbol,[Box.new(Application.new($green_symbol,[])),Box.new(Application.new($nil_list_symbol,[]))]))]))]))]))
   expr.replace(rhs.content)
   expr.H()
   expr
