@@ -1,5 +1,5 @@
 { "module" : 
-  { "name" : "permute",
+  { "name" : "simple_choice",
     "code" : 
     [ { "data" : "list",
 	"arguments" : "a",
@@ -36,29 +36,21 @@
     }
   ]
       },
-      { "operation" : "ndinsert",
-  "arity" : 2,
+      { "operation" : "choose_rb",
+  "arity" : 0,
 	"rule list" :
-	[ { "variables" : "x:list",
-	    "lhs" : "ndinsert(x,nil_list)",
-	    "rhs" : "cons(x,nil_list)"
-	  },
-	  { "variables" : "x:list,y:list,ys:list",
-	    "lhs" : "ndinsert(x,cons(y,ys))",
-	    "rhs" : "choice(cons(x,cons(y,ys)),cons(y,ndinsert(x,ys)))"
+	[ { "variables" : "",
+	    "lhs" : "choose_rb",
+	    "rhs" : "choice(red,blue)"
 	  }
 	]
       },
-      { "operation" : "permute",
-  "arity" : 1,
+      { "operation" : "choose_bg",
+  "arity" : 0,
   "rule list" :
   [ { "variables" : "",
-      "lhs" : "permute(nil_list)",
-      "rhs" : "nil_list"
-    },
-    { "variables" : "x:list,xs:list",
-      "lhs" : "permute(cons(x,xs))",
-      "rhs" : "ndinsert(x,permute(xs))"
+      "lhs" : "choose_bg",
+      "rhs" : "choice(blue,green)"
     }
   ]
       },
@@ -67,7 +59,7 @@
   "rule list" :
   [ { "variables" : "",
       "lhs" : "main",
-      "rhs" : "permute(cons(blue,cons(red,cons(green,nil_list))))"
+      "rhs" : "cons(choose_rb,cons(choose_bg,nil_list))"
     }
   ]
       }

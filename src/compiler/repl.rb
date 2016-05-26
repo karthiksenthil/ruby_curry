@@ -3,7 +3,7 @@ require_relative './expressions.rb'
 # function for backtracking the replacement stack
 def backtrack(expr)
 
-  $backtrack = true
+  # $backtrack = true # culprit of the issue
   # $replacement_stack.pop() # pop the top-most element(main)
   main_element = $replacement_stack.last
   while(true)
