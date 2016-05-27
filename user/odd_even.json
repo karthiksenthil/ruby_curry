@@ -1,0 +1,57 @@
+{ "module" : 
+  { "name" : "odd_even",
+    "code" : 
+    [ { "data" : "Nat",
+  "arguments" : "a",
+  "constructor list" :
+  [ { "constructor" :
+            { "name" : "Zero",
+              "arguments": ""
+            }
+      },
+    { "constructor" : 
+            { "name" : "Succ",
+              "arguments" : "Nat a"
+            }         
+    }
+  ]
+      },
+      { "operation" : "even",
+  "arity" : 1,
+	"rule list" :
+	[ { "variables" : "",
+	    "lhs" : "even(Zero)",
+	    "rhs" : "Zero"
+	  },
+    { "variables" : "x:Nat",
+      "lhs" : "even(Succ(x))",
+      "rhs" : "odd(x)"
+    }
+	]
+      },
+      { "operation" : "odd",
+  "arity" : 1,
+  "rule list" :
+  [ { "variables" : "",
+      "lhs" : "odd(Zero)",
+      "rhs" : "Succ(Zero)"
+    },
+    { "variables" : "x:Nat",
+      "lhs" : "odd(Succ(x))",
+      "rhs" : "even(x)"
+    }
+  ]
+      },
+      { "operation" : "main",
+  "arity" : 0,
+  "rule list" :
+  [ { "variables" : "",
+      "lhs" : "main",
+      "rhs" : "choice((odd (Succ (Succ (Succ (Succ (Succ Zero)))))), (even (Succ (Succ (Succ (Succ (Succ Zero)))))))"
+    }
+  ]
+      }
+
+    ]
+  }
+}
