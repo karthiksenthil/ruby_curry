@@ -16,6 +16,9 @@ Following is the list of TODO tasks/features for ruby_curry :
 
 5. Problem of global variables in test suite
 		- try a custom script to run all test cases instead of Rake
+	 Solved : Added a custom rake task itest(independent test). Run with command "rake itest".
+	 Added on : 28 May 2016
+	 Solved on : 1 June 2016
 
 6. Necessary for multiple passes for fully populating symbol table
 		- example of odd_even.curry
