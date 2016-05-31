@@ -1,4 +1,5 @@
 require 'minitest'
+require 'minitest/autorun'
 
 class TestAppend < Minitest::Test
 

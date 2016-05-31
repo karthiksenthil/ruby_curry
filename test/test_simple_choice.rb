@@ -1,6 +1,7 @@
 # A unit test to check handling of Choice operation
 # The test also verifies the working of the "backtrack" feature
-
+require 'set'
+require 'minitest'
 require 'minitest/autorun'
 
 def same_elements?(arr1, arr2)
