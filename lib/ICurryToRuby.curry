@@ -52,7 +52,13 @@ ppStmt (Declare (Variable identifier (ILhs (n, i))))
 
 -- leave ICase unhandled for now --
 ppStmt (Declare (Variable identifier ICase))
-  = ""
+  = "\n#ICase statement is not implemented yet"
+
+ppStmt (Declare (Variable identifier IBind))
+  = "\n#IBind statement is not implemented yet"
+
+ppStmt (Declare (Variable identifier IFree))
+  = "\n#IFree statement is not implemented yet"    
 
 ppStmt (Declare (Variable identifier (IVar j (n,i))))
   = format "\nvar%d = var%d.content.arguments[%d]" 
@@ -71,6 +77,18 @@ ppStmt (ATable identifier flex expr branch_list)
 ppStmt (Return expr)
   = "\n\trhs = " ++ ppExpr expr
       ++ "\n\texpr.replace(rhs.content)"
+
+ppStmt (Fill i path j)
+  = "\n#Fill statement is not implemented yet"
+
+ppStmt (BTable identifier flex expr branch_list)
+  = "\n#BTable statement is not implemented yet"  
+
+ppStmt (IExternal string)
+  = "\n#IExternal statement is not implemented yet"
+
+ppStmt (Comment string)
+  = "\n#Comment statement is not implemented yet"  
 
 ---------------------------------------------------------------------
 
@@ -104,9 +122,18 @@ ppExpr (Applic bool (mod,symbol) arg_list)
     ++ foldr ((++) . ppArgList) "" [arg_list]
     ++ "))"
 
+ppExpr Exempt
+  = "\n#Exempt expression is not implemented yet"
+
+ppExpr (BuiltinVariant _)
+  = "\n#BuiltinVariant expression is not implemented yet"
+
+ppExpr (PartApplic missing expr)
+  = "\n#PartApplic expression is not implemented yet"
+
 ---------------------------------------------------------------------
 
-ppArgList [] = ""
+ppArgList [] = "[]"
 
 ppArgList [x]
   = "[" ++ ppExpr x ++ "]"
