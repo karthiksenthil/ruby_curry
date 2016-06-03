@@ -4,19 +4,32 @@ Following is the list of TODO tasks/features for ruby_curry :
 		- convert .icur to ruby object code directly
 		- this removes the intermediate JSON dependency
 
+	 Added on : 28 May 2016
+
 2. Adding support for inbuilt Curry modules like "Prelude"
-		- this will provide support for clauses like "case", "loop", "map" and other logical operators
-		- find the Curry code for "Prelude", convert to .icur which is then compiled to prelude_objectCode in Ruby. This file can be then included in all other object code files
+		- this will provide support for clauses like "case", "loop", "map" and other
+			logical operators
+		- find the Curry code for "Prelude", convert to .icur which is then compiled 
+			to prelude_objectCode in Ruby. This file can be then included in all other 
+			object code files
+
+	 Added on : 28 May 2016
 
 3. Adding support for Exempt
 		- use the $fail_symbol for constructing corresponding expressions
 
+	 Added on : 28 May 2016
+
 4. Handling different datatypes (probably a type system)
 		- provide support to most common types like "int", "char", "String"
 
+		Added on : 28 May 2016
+
 5. Problem of global variables in test suite
 		- try a custom script to run all test cases instead of Rake
-	 Solved : Added a custom rake task itest(independent test). Run with command "rake itest".
+	 Solved : Added a custom rake task itest(independent test). Run with command 
+	 "rake itest".
+
 	 Added on : 28 May 2016
 	 Solved on : 1 June 2016
 
@@ -28,7 +41,17 @@ Following is the list of TODO tasks/features for ruby_curry :
 			odd Zero = Succ Zero
 			odd Succ x = even(x)
 
-			Here when ruby_curry is parsing the second rule, it panics as it is unaware of "odd" symbol which is defined later in code.
+			Here when ruby_curry is parsing the second rule, it panics as it is unaware 
+			of "odd" symbol which is defined later in code.
 			
 		- could try multiple passes or a forward declaration concept
+
+	 Added on : 28 May 2016
+
+7. Create a single executable for using ICurry in the Github repo
+		- since the ICurry code by itself is big and difficult to setup on any 
+			machine, it would be better to create an executable version which can be 
+			invoked the translator system that will merged with ruby_curry
+
+	 Added on : 4 June 2016
 
