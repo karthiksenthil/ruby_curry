@@ -1,57 +1,80 @@
 Following is the list of TODO tasks/features for ruby_curry :
 
-1. Integration of translator system 
-		- convert .icur to ruby object code directly
-		- this removes the intermediate JSON dependency
+------------------------------------------------------------------
+28 May 2016 - Karthik Senthil
 
-	 Added on : 28 May 2016
+Integration of translator system 
+	- convert .icur to ruby object code directly
+	- this removes the intermediate JSON dependency
 
-2. Adding support for inbuilt Curry modules like "Prelude"
-		- this will provide support for clauses like "case", "loop", "map" and other
-			logical operators
-		- find the Curry code for "Prelude", convert to .icur which is then compiled 
-			to prelude_objectCode in Ruby. This file can be then included in all other 
-			object code files
+------------------------------------------------------------------
+28 May 2016 - Karthik Senthil
 
-	 Added on : 28 May 2016
+Adding support for inbuilt Curry modules like "Prelude"
+	- this will provide support for clauses like "case", "loop", "map" and other
+		logical operators
+	- find the Curry code for "Prelude", convert to .icur which is then compiled 
+		to prelude_objectCode in Ruby. This file can be then included in all other 
+		object code files
 
-3. Adding support for Exempt
-		- use the $fail_symbol for constructing corresponding expressions
+------------------------------------------------------------------
+28 May 2016 - Karthik Senthil
 
-	 Added on : 28 May 2016
+Adding support for Exempt
+	- use the $fail_symbol for constructing corresponding expressions
 
-4. Handling different datatypes (probably a type system)
-		- provide support to most common types like "int", "char", "String"
+------------------------------------------------------------------
+28 May 2016 - Karthik Senthil
 
-		Added on : 28 May 2016
+Handling different datatypes (probably a type system)
+	- provide support to most common types like "int", "char", "String"
 
-5. Problem of global variables in test suite
-		- try a custom script to run all test cases instead of Rake
-	 Solved : Added a custom rake task itest(independent test). Run with command 
-	 "rake itest".
+------------------------------------------------------------------
+28 May 2016 - Karthik Senthil
 
-	 Added on : 28 May 2016
-	 Solved on : 1 June 2016
+Necessary for multiple passes for fully populating symbol table
+	- example of odd_even.curry
 
-6. Necessary for multiple passes for fully populating symbol table
-		- example of odd_even.curry
+		even Zero = Zero
+		even Succ x = odd x
+		odd Zero = Succ Zero
+		odd Succ x = even(x)
 
-			even Zero = Zero
-			even Succ x = odd x
-			odd Zero = Succ Zero
-			odd Succ x = even(x)
-
-			Here when ruby_curry is parsing the second rule, it panics as it is unaware 
-			of "odd" symbol which is defined later in code.
+		Here when ruby_curry is parsing the second rule, it panics as it is unaware 
+		of "odd" symbol which is defined later in code.
 			
-		- could try multiple passes or a forward declaration concept
+	- could try multiple passes or a forward declaration concept
 
-	 Added on : 28 May 2016
+------------------------------------------------------------------
+4 June 2016 - Karthik Senthil
 
-7. Create a single executable for using ICurry in the Github repo
-		- since the ICurry code by itself is big and difficult to setup on any 
-			machine, it would be better to create an executable version which can be 
-			invoked the translator system that will merged with ruby_curry
+Create a single executable for using ICurry in the Github repo
+	- since the ICurry code by itself is big and difficult to setup on any 
+		machine, it would be better to create an executable version which can be 
+		invoked the translator system that will merged with ruby_curry
 
-	 Added on : 4 June 2016
+------------------------------------------------------------------
+Thu Jun  2 13:39:44 PDT 2016 - Sergio
+
+Need a uniform policy for the directory of output files.
+Without a uniform policy, scripts are not composable.
+
+Many scripts in the bin directory read and write files.
+Proposal: a script that takes input from directory X
+writes output to directory either X or X/.curry .
+Directory X/.curry should be used only for temporary files.
+
+------------------------------------------------------------------
+Thu Jun  2 13:46:50 PDT 2016 - Sergio
+
+Need ruby name spaces for symbols in Curry module.
+Without name spaces different symbols with the same name are confused.
+
+Two curry modules can define the same symbol.
+The current translation does not distinguish the two.
+Proposal: the translation of a Curry module should be
+a ruby module with the same name.  Non local symbols in ruby
+will use the module resolution operator :: .
+
+------------------------------------------------------------------
 
