@@ -64,6 +64,13 @@ Proposal: a script that takes input from directory X
 writes output to directory either X or X/.curry .
 Directory X/.curry should be used only for temporary files.
 
+FIXED in same-dir branch.
+All generated files go into .curry .
+Other processors copy from there.
+
+A copy of the generated ruby is still placed in "user",
+but this should go away when a library load path is defined.
+
 ------------------------------------------------------------------
 Thu Jun  2 13:46:50 PDT 2016 - Sergio
 
@@ -77,4 +84,46 @@ a ruby module with the same name.  Non local symbols in ruby
 will use the module resolution operator :: .
 
 ------------------------------------------------------------------
+Sun Jun  5 14:48:59 PDT 2016 - Sergio
+
+Need a library load path to load runtime and libraries regardless of
+the location of the user dictory.
+
+------------------------------------------------------------------
+Sun Jun  5 14:45:52 PDT 2016 - Sergio
+
+Main function should be generated only when a "main" symbol is
+defined.  Library modules should not have a main entry.
+
+------------------------------------------------------------------
+Sun Jun  5 14:39:13 PDT 2016 - Sergio
+
+Revise class Operation.
+What is the purpose of the 3rd argument of the constructor?
+
+If it is always "nil" it should be removed.
+If not it should be defined in the abstract RCurry.
+
+------------------------------------------------------------------
+Sat Jun  4 13:11:27 PDT 2016 - Sergio
+
+Need to define purpose project directories.
+The content of these directory should be under version control.
+
+Some directory seem obsolete, e.g., "compiler".
+The purpose of some directories is not clear, e.g., "user".
+Should object code be checked in?
+
+------------------------------------------------------------------
+Sat Jun  4 12:28:02 PDT 2016 - Sergio
+
+Need testing suite.
+Code checked into the repository should pass the suite.
+
+Current tests refers to an obsolete system.
+At the very least, we should test that the translator from
+ICurry to ruby produces no error on all the sample files.
+
+------------------------------------------------------------------
+
 
