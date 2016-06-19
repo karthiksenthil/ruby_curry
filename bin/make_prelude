@@ -1,0 +1,7 @@
+#!/bin/sh
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+
+bin/curry2icur lib/Prelude
+bin/icur2ruby lib/Prelude
+mv -f lib/.curry/Prelude.rb lib

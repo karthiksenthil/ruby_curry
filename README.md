@@ -1,30 +1,38 @@
 # ruby_curry
 
-ruby_curry is a framework to study the compilation and execution of [Curry](http://www-ps.informatik.uni-kiel.de/currywiki/) programs. The name stems from the fact that compiler and object code are both ruby programs.  The main tool of this framework converts definitional trees into object code.  This object code is then executed by ruby to produce the value of a Curry expression.  The framework is incomplete, but structured to be incrementally extended to a full compiler/interpreter.  Since the object code is ruby code, the efficiency of execution is not a primary goal of this project.
+ruby_curry is a framework to study the compilation and execution of [Curry](http://www-ps.informatik.uni-kiel.de/currywiki/) programs. The name stems from the fact that the runtime environment and the object code are ruby programs.  A front-end, coded in Curry, produces an abstract representation of Curry programs suitable for compilation in an imperative/object-oriented language. This representation is converted into an abstract Ruby program and then into concreted Ruby code which is executed by the Ruby interpreter.  Since the object code is in Ruby, the efficiency of execution is not a primary goal of this project.
 
-This tool is the result of a [project](https://www.google-melange.com/gsoc/project/details/google/gsoc2015/karthiksenthil/5700735861784576) developed by Karthik Senthil under Google Summer of Code 2015 program and mentorship of Prof. S. Antoy at [Portland State University](http://summer.cs.pdx.edu/).
+This tool is the result of a on-going [project](https://summerofcode.withgoogle.com/projects/#4517222395412480) developed by Karthik Senthil under Google Summer of Code 2016 program and mentorship of Prof. S. Antoy at [Portland State University](http://psu-gsoc-2016.blogspot.in/).
 
 ## Usage
 
-The current implementation of the compiler assumes that the input encodes the definitional trees of some Curry functions and the declarations of some Curry types.  This [example](https://github.com/karthiksenthil/DefinitionalTree/blob/master/examples/append.rb) shows the format of the input.
+To compile a sample Curry program, we first translate it into an "imperative" representation called ICurry
 
-To compile a sample Curry program, we first encode the definitional tree of each function and each data type in a ruby program using a simple domain specific language. A sample program is `append.rb` in `user` directory.
+`curry2icur file`
 
-From the program directory, invoke the compiler on the sample program:
-```bash
-../bin/cmd.sh append
-```
+Then we translate this representation into ruby
 
-This creates the object code `append_objectCode.rb` in the same `user` directory. This object code can then be excuted by the command:
-```bash
-ruby append_objectCode.rb
-```
+`icur2ruby file`
+
+And finally we execute it
+
+`exec file`
+
+There are scripts to automate the entire compilation pipeline.
+
+## Current state
+
+Curry is a large, general-purpose language.  Not all Curry constructs
+are currently supported and many external library functions are not
+yet coded.  However, simple programs compile and run as expected.
+
+Completing support for all Curry constructs is within reach.
 
 ## Running the tests
 
-There are 2 unit tests in the `test` directory to evaluate the working of the compiler. Tests can be run by:
-```bash
-cd test
-ruby test_append.rb
-ruby test_reverse.rb
-```
+The tests can be run with the following Rake command
+
+`rake test`
+
+The tests require the following Ruby gems  - [minitest](https://github.com/seattlerb/minitest), [colorize](https://rubygems.org/gems/colorize/versions/0.7.7)
+

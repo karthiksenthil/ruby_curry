@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pdflatex ICurry
+makeindex -c ICurry
+pdflatex ICurry

@@ -1,0 +1,31 @@
+(IModule "myappend" 
+["Prelude"] 
+[(("myappend","MyList"),[(IConstructor ("myappend","Nil") 0),(IConstructor ("myappend","Cons") 2)])] 
+[
+(IFunction ("myappend","append") 2 
+[(Declare (Variable 1 (ILhs (("myappend","append"),1)))),
+(Declare (Variable 2 (ILhs (("myappend","append"),2)))),
+(Declare (Variable 5 ICase)),
+(Assign 5 (Reference 1)),
+(ATable 5 True (Reference 5) [((IConstructor ("myappend","Nil") 0),[(Return (Reference 2))]),((IConstructor ("myappend","Cons") 2),[(Declare (Variable 3 (IVar 5 (("myappend","Cons"),1)))),(Declare (Variable 4 (IVar 5 (("myappend","Cons"),2)))),(Return (Applic True ("myappend","Cons") [(Reference 3),(Applic False ("myappend","append") [(Reference 4),(Reference 2)])]))])])
+]),
+
+(IFunction ("myappend","l1") 0 
+[(Return (Applic True ("myappend","Cons") [(BuiltinVariant (Bint 1)),(Applic True ("myappend","Cons") [(BuiltinVariant (Bint 2)),(Applic True ("myappend","Nil") [])])]))
+]),
+
+(IFunction ("myappend","l2") 0 
+[(Return (Applic True ("myappend","Cons") [(BuiltinVariant (Bint 3)),(Applic True ("myappend","Cons") [(BuiltinVariant (Bint 4)),(Applic True ("myappend","Nil") [])])]))
+]),
+
+(IFunction ("myappend","main") 0 
+[(Return (Applic False ("myappend","append") [(Applic False ("myappend","l1") []),(Applic False ("myappend","l2") [])]))
+])
+
+]
+)
+
+
+mynot.rcur
+ABSTRACT = (RModule "mynot" [] [(RConstructor ("mynot","myFalse") 0 4),(RConstructor ("mynot","myTrue") 0 5)] [(RFunctionDeclaration ("mynot","myNot") 1),(RFunctionDeclaration ("mynot","main") 0)] [(RFunctionDefinition ("mynot","myNot") 1 [(RVariable (RILhs 1 1)),(RVariable (Unimpl 2 "Unimplemented")),(RAssign 2 (Ref 1)),(RCase (Ref 2) [(("mynot","myFalse"),[(RReturn (Application ("mynot","myTrue") []))]),(("mynot","myTrue"),[(RReturn (Application ("mynot","myFalse") []))])])]),(RFunctionDefinition ("mynot","main") 0 [(RReturn (Application ("mynot","myNot") [(Application ("mynot","myNot") [(Application ("mynot","myTrue") [])])]))])])
+

@@ -1,0 +1,299 @@
+\documentclass{article}
+
+\usepackage{makeidx}
+\makeindex
+
+\renewcommand{\tt}{\ttfamily}
+\newcommand{\codefont}{\small\tt}
+\newcommand{\code}[1]{\mbox{\codefont{#1}}}
+\newcommand{\ccode}[1]{``\code{#1}''}
+
+\newcommand{\todo}[1]{{\textcolor{red}{[#1]}}}
+\newcommand{\COMMENT}[1]{}
+
+\usepackage{graphicx}
+\newcommand{\equprogram}[1]{%
+\def\separator{1.667ex}%
+\frenchspacing%
+\refstepcounter{equation}%
+\par\vspace\separator\hspace{1em}%
+%$\vcenter{\codefont\noindent\kern-.5em{#1}}$%
+\scalebox{1.0}{$\vcenter{\codefont\noindent{#1}}$}%
+\raisebox{0.3ex}{\kern-2.5em\llap{\rm (\theequation)}}
+\par\vspace\separator\noindent\kern-.0em%
+}
+
+\newcommand{\w}{\noindent{\rm \phantom{XI}}} % tab
+
+\parindent=0pt
+\parskip=1ex
+
+\begin{document}
+
+\title{The ICurry Format}
+\author{Sergio Antoy}
+\date{May 25, 2016}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+This document describes the ICurry format, a representation of Curry
+programs developed for a Curry compiler that takes a Curry source
+program and generates the corresponding imperative and/or
+object-oriented executable code.  ICurry is an intermediate abstract
+representation of Curry program between the source and the executable
+formats.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\index{Introduction}%
+
+
+
+The ICurry Format defines various concepts that can be found in Curry
+programs, e.g., module, functions, expressions, etc.  Below we define
+these concepts.  There is no type information in ICurry because only
+well typed Curry modules are translated and type information is not
+used during the execution of a program.
+
+In the examples that follow ICurry code is represented in an informal
+format called ``.read'' that eases understanting the structure of the
+code.  The Curry definition of the ICurry format is in a file called
+ICurry.curry.  The following Curry module is our running example.
+
+Ex:
+\equprogram{%
+    module bintree where \\
+    data Bintree x = Leaf | Branch x (Bintree x) (Bintree x) \\
+    isin \_ Leaf = False \\
+    isin x (Branch y l r) = x==y || isin x l || isin x r
+}
+
+\section{Elements}
+\index{Elements}%
+
+In this section we define the elements of the ICurry format.
+
+
+
+\subsection{module}
+\index{module}%
+
+A complete ICurry unit is a module.  An ICurry module is a representation
+of a Curry module.  An ICurry module defines:
+%
+\begin{enumerate}
+  \itemsep=-4pt
+\item the module name, a string
+\item the imported modules, a list of strings
+\item the data types declared by the Curry module, a list of \emph{data} types
+\item the functions defined by the Curry module, a list of \emph{function}
+\end{enumerate}
+%
+Ex:
+%
+\equprogram{%
+      module "bintree" \\
+\w      import \\
+\w\w        "Prelude" \\
+\w      data ... \\
+\w      function ...
+}
+
+\subsection{name}
+\index{name}%
+
+In ICurry a name represents a qualified identifier in Curry.  It is
+a pair of string with a dot in between.
+
+Ex:
+\equprogram{%
+  "bintree.Bintree"
+}
+%
+\subsection{data}
+\index{data}%
+
+A data declaration declares a data type and its data constructor.
+The data type is a name.
+A data constructor is a name plus its arity and an index.
+Data constructors of a data type are indexed sequentially starting from 0.
+As we said earlier, no types and no type variables are present in ICurry.
+
+Ex:
+\equprogram{%
+    data "bintree.Bintree" \\
+\w      constructor "bintree.Leaf" 0 0 \\
+\w      constructor "bintree.Branch" 3 1
+}
+%
+\subsection{path}
+\index{path}%
+
+Curry manipulates graphs, which later we call expressions.  A \emph{path}
+allows us to identify a subexpression in an expression. For example,
+consider the following fragment of code:
+%
+\equprogram{%
+    let x = Branch 11 (Branch 12 Leaf y) Leaf \\
+\w~     y = Branch 13 (Branch 14 x Leaf) Leaf \\
+    in x
+}
+%
+In the binding of $x$, $y$ is the 3rd argument of the second
+argument and the nodes of the parents are both labeled by
+the \emph{Branch} symbol.  Assuming that $x$ is understood,
+this path is represented by:
+%
+\equprogram{%
+    "bintree.Branch":2 "bintree.Branch":3
+}
+%
+\subsection{variable}
+\index{variable}%
+
+In ICurry a variable identifies a graph node, i.e., an expression.
+Variables are declared in the code of functions.
+They are idenfied by an index in $0,1,2,\ldots$ unique within a function.
+There are several kinds of variables:
+%
+\begin{enumerate}
+\itemsep=-4pt
+\item \emph{ILhs} $(n,i)$: identifies the $i^{th}$ argument of an expression
+  rooted by a node labeled by $n$ and matched by the left-hand side of
+  some rule.
+\item \emph{ICase}: identifies an expression used as the selector of an
+  \emph{ATable} or \emph{BTable}.
+\item \emph{IVar} $j$ $(n,i)$: identifies the $i^{th}$ argument of an expression rooted by a node labeled by $n$ and bound to variable $j$.
+\item \emph{IBind}: identifies a variable bound by a let block.
+\item \emph{IFree}: identifies a free variable.
+\end{enumerate}
+%
+Examples of variables are in the body of functions.
+%
+\subsection{expression}
+\index{expression}%
+
+The objects of a Curry computation are graphs, also called expressions.
+Informally, an expression is a variable or the application of a
+symbol to a sequence of arguments.  There a handful of particular expressions
+such as integers and characters.
+There are several kinds of expressions:
+%
+\begin{enumerate}
+\itemsep=-4pt  
+\item \emph{exempt}: an expression representing "no expression".
+\item \emph{reference\_var} $i$: the variable identified by integer $i$.
+\item \emph{int} $i$: the builtin integer $i$.
+\item \emph{char} $c$: the builtin character $c$.
+\item \emph{Node} $n$ $(l_1, \ldots l_k)$:
+  application of the symbol whose name is $n$ to
+  the sequence of expressions $l_1, \ldots l_k$
+\item \emph{partial} $i$ \emph{exp}: \emph{exp} is a partial application missing $i$ arguments.
+\end{enumerate}
+%
+For example, given the program:
+%
+\equprogram{%
+  main xs = map (2 +) xs
+}
+%
+the expression representing the left-hand side of \emph{main} is:
+%
+\equprogram{%
+        Node "Prelude.map" ( \\
+\w          partial 1 ( \\
+\w\w            Node "Prelude.+" ( \\
+\w\w\w              int 2 ) ) , \\
+\w          reference\_var 1 )
+}
+%
+where variable 1 is bound to \emph{xs}.
+%
+\subsection{statement}
+\index{statement}%
+
+The body of a function is a sequence of statements.
+There are several kinds of statements:
+\begin{enumerate}
+\itemsep=-4pt  
+\item \emph{Comment} $s$: where $s$ is a string providing
+  information generated by the translator,
+  not a comment in the source Curry program.
+  The execution should ignore comments.
+\item \emph{Declare} $i$ $v$: $i$ is an integer uniquely identifying
+  variable $v$ within a function. The execution declares the variable.
+\item \emph{Assign} $i$ \emph{exp}: $i$ is the identifier of a variable
+  and \emph{exp} an expression.  The execution binds \emph{exp} to
+  the variable.
+\item \emph{Fill} $i$ \emph{path} $j$: integers $i$ and $j$ are
+  variable identifiers, \emph{path} is a list of $(n,k)$ pairs, where
+  $n$ is a name, the label of a node, and and $k$ is an integer, the
+  index of an argument in the node. \emph{path} identifies a node in
+  the binding of $i$.  The execution sets the node to the binding of $j$.
+\item \emph{Return} \emph{exp}: The execution returns expression \emph{exp}.
+\item \emph{ATable} $k$ $c$ $b$ $i$ \emph{branches}:
+  $k$ is an integer uniquely identifying the table within a function,
+  $c$ is the number of branches in the table,
+  $b$ is either \emph{flex} or \emph{rigid} telling whether or not
+  to narrow the inductive variable,
+  $i$ is the inductive variable,
+  \emph{branches} is a list of $(sym,stmt)$ pairs where $sym$ is
+  a constructor symbol and $stmt$ a list of statements.
+  If the root of the binding of $i$ is a constructor $c$,
+  then there exists a branch $(c,s)$ and the execution continues
+  with statements $s$.
+\end{enumerate}
+%
+\subsection{function}
+\index{function}%
+
+In ICurry a function holds executable code.  Each function of a source
+Curry program is translated into an ICurry a function.  Some ICurry
+functions originate from other constructs such as case and let
+blocks.
+
+An ICurry function holds 3 pieces of information: $n$ the function name,
+$i$ the function arity, $stmt$ a sequence of one or more executable statements
+the last of which returns a value.
+
+Ex:
+\equprogram{%
+{}function "bintree.isin" 2 \\
+\w{}code \\
+\w\w{}declare\_var 1 (ILhs (("bintree","isin"),1)) \\
+\w\w{}declare\_var 2 (ILhs (("bintree","isin"),2)) \\
+\w\w{}declare\_var 6 ICase \\
+\w\w{}assign 6 \\
+\w\w\w{}reference\_var 2 \\
+\w\w{}ATable 6 2 flex \\
+\w\w\w{}reference\_var 6 \\
+\w\w\w"{}bintree.Leaf" => \\
+\w\w\w\w{}return \\
+\w\w\w\w\w{}Node "Prelude.False" \\
+\w\w\w"{}bintree.Branch" => \\
+\w\w\w\w{}declare\_var 3 (IVar 6 (("bintree","Branch"),1)) \\
+\w\w\w\w{}declare\_var 4 (IVar 6 (("bintree","Branch"),2)) \\
+\w\w\w\w{}declare\_var 5 (IVar 6 (("bintree","Branch"),3)) \\
+\w\w\w\w{}return \\
+\w\w\w\w\w{}Node "Prelude.||" ( \\
+\w\w\w\w\w\w{}Node "Prelude.==" ( \\
+\w\w\w\w\w\w\w{}reference\_var 1 , \\
+\w\w\w\w\w\w\w{}reference\_var 3 ) , \\
+\w\w\w\w\w\w{}Node "Prelude.||" ( \\
+\w\w\w\w\w\w\w{}Node "bintree.isin" ( \\
+\w\w\w\w\w\w\w\w{}reference\_var 1 , \\
+\w\w\w\w\w\w\w\w{}reference\_var 4 ) , \\
+\w\w\w\w\w\w\w{}Node "bintree.isin" ( \\
+\w\w\w\w\w\w\w\w{}reference\_var 1 , \\
+\w\w\w\w\w\w\w\w{}reference\_var 5 ) ) )
+}
+
+\newpage
+\printindex
+
+\end{document}

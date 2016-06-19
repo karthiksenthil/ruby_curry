@@ -1,0 +1,3 @@
+
+main = failed ? 23
+

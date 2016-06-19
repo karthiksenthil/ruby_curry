@@ -1,0 +1,64 @@
+#!/bin/sh
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))/src/translator
+# echo BASEDIR $BASEDIR
+
+FORCE=0
+QUIET=0
+while [ $1 ]
+do
+    case $1 in
+	-f) FORCE=1; shift;;
+	-q) QUIET=1; shift;;
+	-*) echo `basename $0`: ignored flag \"$1\"; shift;;
+	*) break;;
+    esac
+done
+
+if [ "$1" = "" ]
+then
+    echo Warning: no file given
+    exit
+fi
+
+FILE=$(dirname $1)/$(basename $1 ".curry")
+TARGET=$(dirname $1)/.curry/$(basename $1 ".curry")
+
+# ------------------------------------------------------------------
+# create ICurry if forced or it is obsolete
+
+CURRYPATH=$(dirname $1):$BASEDIR/icurry:$BASEDIR/format
+export CURRYPATH
+
+if [ $FORCE = 1 ]
+then
+    rm -f $TARGET.*
+fi
+
+if [ ! -f $TARGET.icur -o $FILE.curry -nt $TARGET.icur ]
+then
+    rm -f $TARGET.icur 
+    # echo CURRYPATH $CURRYPATH
+    # command="pakcs -Dkeepfiles=yes :set v3 :set args $FILE :load $BASEDIR/icurry/Main.curry :eval main :quit"
+    # command="pakcs -q :set v0 :set +suspend :set args $FILE :load $BASEDIR/icurry/Main.curry :eval Main.main :quit"
+    # command="pakcs -q :set v0 :set +printfail :set args $FILE :load $BASEDIR/icurry/Main.curry :eval Main.main :quit"
+    # command="pakcs -q :set v0 :set +consfail :set args $FILE :load $BASEDIR/icurry/Main.curry :eval Main.main :quit"
+    # command="kics2 :set +trace :set args $FILE :load $BASEDIR/icurry/Main.curry :eval Main.main :quit"  
+    command="pakcs -q :set v0 :set args $FILE :load $BASEDIR/icurry/Main.curry :eval Main.main :quit"
+    # echo Running $command
+    $command
+    if [ 0 -eq $? ]
+    then
+	mv -f $FILE.icur $TARGET.icur
+	mv -f $FILE.read $TARGET.read
+	if [ $QUIET = 0 ]
+	then
+	    echo \"$TARGET.icur\" file created
+	    cat $TARGET.read
+	fi
+    else
+	echo "Failed to create icur file"
+    fi
+else
+    [ $QUIET = 1 ] || echo "icur file of $FILE is up to date"
+fi

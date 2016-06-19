@@ -1,4 +1,16 @@
+require 'optparse'
 require_relative './expressions.rb'
+
+# function for setting flags for runtime trace
+def set_execution_trace
+  option = false
+  OptionParser.new do |opts|
+    opts.on("-t", "--trace") do |v|
+      option = true
+    end
+  end.parse!
+  return option
+end
 
 # function for backtracking the replacement stack
 def backtrack(expr)
@@ -33,6 +45,9 @@ end
 # Param : top_level -> top level expression to evaluate in object code
 def repl(top_level)
 
+  # set global flags
+  $trace = set_execution_trace()
+
   # starting computation
   Log.write(sprintf("A %s\n",top_level.show)) if $trace
 
@@ -41,11 +56,11 @@ def repl(top_level)
     Log.write(sprintf("L %s\n",top_level.show)) if $trace
     top_level.N()
 
-    if top_level.content == $fail_expression
+    if top_level.content.symbol.token == FAIL
       # report failure
       Log.write(sprintf("F \n")) if $trace
-      # add fail expression as output
-      $output_expressions << $fail_expression.show()
+      # Do not add fail expression as output
+      # $output_expressions << top_level.show()
     else
       # report value
       Log.write(sprintf("V %s\n",top_level.show)) if $trace
@@ -60,4 +75,10 @@ def repl(top_level)
 
   # done with all computations
   Log.write(sprintf("Z \n")) if $trace
+
+  # if executed without trace, print all output expressions
+  if !$trace
+    puts $output_expressions
+  end
+
 end

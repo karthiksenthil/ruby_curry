@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# This is functioning stub.
+# Needed to check timestamps of icur and rb and recompile what is needed.
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+# echo BASEDIR $BASEDIR
+
+if [ "$1" = "" ]
+then
+    echo Warning: no file given
+    exit
+fi
+
+# Assume the ruby object code is in the subditectory ".curry"
+# of the directory of the Curry source code
+TARGET=$(dirname $1)/.curry/$(basename $1 ".curry")
+SAMEDIR=$(dirname $TARGET)
+
+if [ -f $TARGET.rb ]
+then
+    RUBYLIB=$BASEDIR:$BASEDIR/lib:$SAMEDIR
+    export RUBYLIB
+    # ulimit -s 500000 ; ruby $TARGET.rb
+    ruby $TARGET.rb $2
+else
+    echo Something is missing
+fi
+
+    

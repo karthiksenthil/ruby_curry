@@ -1,0 +1,29 @@
+#!/bin/sh
+
+echo THIS PROGRAM GENERATES BROKEN STANDALONE - DO NOT USE !!!
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+# echo BASEDIR $BASEDIR
+
+if [ "$1" = "" ]
+then
+    echo Warning: no file given
+    exit
+fi
+
+# Assume the ruby object code is in the subditectory ".curry"
+# of the directory of the Curry source code
+TARGET=$(dirname $1)/$(basename $1 ".curry")
+SAMEDIR=$(dirname $TARGET)
+
+if [ -f $TARGET.rb ]
+then
+	echo EXEC $TARGET.rb
+    RUBYLIB=$BASEDIR:$BASEDIR/lib:$SAMEDIR
+    export RUBYLIB
+    ruby $TARGET.rb
+else
+    echo Something is missing $TARGET.rb
+fi
+
+    

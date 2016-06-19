@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+# echo BASEDIR $BASEDIR
+
+rm -rf `find . -name ".curry"`

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo THIS PROGRAM GENERATES BROKEN STANDALONE - DO NOT USE !!!
+
+echo 'Standalone programs write to source directory (not ".curry").'
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+SOURCEDIR=$BASEDIR/src/translator
+
+CURRYPATH=$(dirname $1):$SOURCEDIR/icurry:$SOURCEDIR/ruby:$SOURCEDIR/format
+export CURRYPATH
+
+kics2 :set ghc -static -optl-static -optl-pthread :load $SOURCEDIR/icurry/Main.curry :save :quit
+mv $SOURCEDIR/icurry/Main $BASEDIR/bin/trans2icur
+
+kics2 :set ghc -static -optl-static -optl-pthread :load $SOURCEDIR/ruby/Main.curry :save :quit
+mv $SOURCEDIR/ruby/Main $BASEDIR/bin/trans2ruby
+
+# execute as follows, dir is optional, no ".curry" extension
+# trans2xxx dir/file

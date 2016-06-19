@@ -1,4 +1,4 @@
-require './src/compiler/expressions.rb'
+require_relative '../src/compiler/expressions.rb'
 
 class Int_symbol < Constructor
   attr_accessor :name, :value, :arity, :token
@@ -18,6 +18,11 @@ class Int_expression < Application
   end
   def show
     return @symbol.show
+  end
+  def ==(another_int)
+    if another_int.class == Int_expression
+      return self.symbol == another_int.symbol && self.symbol.value == another_int.symbol.value 
+    end
   end
 end
 

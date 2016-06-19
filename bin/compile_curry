@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# a script to call all compiler execution scripts
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+
+# Curry to ICurry
+$BASEDIR/bin/curry2icur $1 $2
+# ICurry to ruby object code
+$BASEDIR/bin/icur2ruby $1 $2
+# Execute object code
+$BASEDIR/bin/exec $2 $3

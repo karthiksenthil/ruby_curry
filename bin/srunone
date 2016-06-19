@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# compile and run a program
+
+BASEDIR=$(dirname $(dirname $(readlink -f $0)))
+
+$BASEDIR/bin/curry2icur -q $1
+$BASEDIR/bin/icur2ruby -q $1
+$BASEDIR/bin/exec $1
+

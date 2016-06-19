@@ -1,0 +1,50 @@
+
+module "myappend"
+  import
+    "Prelude"
+  data "myappend.MyList"
+    constructor "myappend.Nil" 0 0
+    constructor "myappend.Cons" 2 1
+  function "myappend.append" 2
+    code
+      declare_var 1 (ILhs (("myappend","append"),1))
+      declare_var 2 (ILhs (("myappend","append"),2))
+      declare_var 5 ICase
+      assign 5
+        reference_var 1
+      ATable 5 2 flex
+        reference_var 5
+        "myappend.Nil" =>
+          return
+            reference_var 2
+        "myappend.Cons" =>
+          declare_var 3 (IVar 5 (("myappend","Cons"),1))
+          declare_var 4 (IVar 5 (("myappend","Cons"),2))
+          return
+            Node "myappend.Cons" (
+              reference_var 3 ,
+              Node "myappend.append" (
+                reference_var 4 ,
+                reference_var 2 ) )
+  function "myappend.l1" 0
+    code
+      return
+        Node "myappend.Cons" (
+          int 1 ,
+          Node "myappend.Cons" (
+            int 2 ,
+            Node "myappend.Nil" ) )
+  function "myappend.l2" 0
+    code
+      return
+        Node "myappend.Cons" (
+          int 3 ,
+          Node "myappend.Cons" (
+            int 4 ,
+            Node "myappend.Nil" ) )
+  function "myappend.main" 0
+    code
+      return
+        Node "myappend.append" (
+          Node "myappend.l1" ,
+          Node "myappend.l2" )
