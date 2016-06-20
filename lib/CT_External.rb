@@ -76,7 +76,7 @@ module CT_External
     when 1 # CHOICE
       arg.H()
     when 2 # FAIL
-      Box.new(Application.new(CT_System::CT_fail,[]))
+      Box.new(Application.new(Prelude::CT_failed,[]))
     when 3 # OPERATION
       arg.H()
     else
