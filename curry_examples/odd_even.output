@@ -1,0 +1,2 @@
+Odd_even::Zero
+Odd_even::Succ(Odd_even::Zero)

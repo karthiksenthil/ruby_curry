@@ -1,0 +1,6 @@
+Permute::Cons(Permute::Blue,Permute::Cons(Permute::Red,Permute::Cons(Permute::Green,Permute::Nil)))
+Permute::Cons(Permute::Red,Permute::Cons(Permute::Blue,Permute::Cons(Permute::Green,Permute::Nil)))
+Permute::Cons(Permute::Red,Permute::Cons(Permute::Green,Permute::Cons(Permute::Blue,Permute::Nil)))
+Permute::Cons(Permute::Blue,Permute::Cons(Permute::Green,Permute::Cons(Permute::Red,Permute::Nil)))
+Permute::Cons(Permute::Green,Permute::Cons(Permute::Blue,Permute::Cons(Permute::Red,Permute::Nil)))
+Permute::Cons(Permute::Green,Permute::Cons(Permute::Red,Permute::Cons(Permute::Blue,Permute::Nil)))
