@@ -128,6 +128,52 @@ module CT_External
     return make_int(arg2-arg1)
   end
 
+  def CT_External::CT_prim_5FInt_5Ftimes(expr) # "prim_Int_times"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    arg2 = expr.content.arguments[1].content.symbol.value
+    return make_int(arg2*arg1)
+  end
+
+  def CT_External::CT_prim_5FInt_5Fdiv(expr) # "prim_Int_div"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    arg2 = expr.content.arguments[1].content.symbol.value
+    if arg1 == 0
+      return Box.new(Application.new(Prelude::CT_failed,[]))
+    else
+      return make_int(arg2/arg1)
+    end
+  end
+
+  def CT_External::CT_prim_5FInt_5Fmod(expr) # "prim_Int_mod"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    arg2 = expr.content.arguments[1].content.symbol.value
+    if arg1 == 0
+      return Box.new(Application.new(Prelude::CT_failed,[]))
+    else
+      return make_int(arg2%arg1)
+    end
+  end
+
+  def CT_External::CT_prim_5FInt_5Fquot(expr) # "prim_Int_quot"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    arg2 = expr.content.arguments[1].content.symbol.value
+    if arg1 == 0
+      return Box.new(Application.new(Prelude::CT_failed,[]))
+    else
+      abort "ABORT: \"quot\" not yet defined"
+    end
+  end
+
+  def CT_External::CT_prim_5FInt_5Frem(expr) # "prim_Int_rem"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    arg2 = expr.content.arguments[1].content.symbol.value
+    if arg1 == 0
+      return Box.new(Application.new(Prelude::CT_failed,[]))
+    else
+      return make_int(arg2.remainder(arg1))
+    end
+  end
+
   # --- A non-reducible polymorphic function.
   # --- It is useful to express a failure in a search branch of the execution.
   # --- It could be defined by: `failed = head []`
