@@ -315,7 +315,7 @@ module Prelude
   def CT_uncurry.H(expr) # "uncurry"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -350,7 +350,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -399,7 +399,7 @@ module Prelude
 
   def CT_ensureSpine_2EensureList_2E20.H(expr) # "ensureSpine.ensureList.20"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -479,7 +479,7 @@ module Prelude
   def CT__26_26.H(expr) # "&&"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = var1
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -507,7 +507,7 @@ module Prelude
   def CT__7C_7C.H(expr) # "||"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = var1
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -534,7 +534,7 @@ module Prelude
 
   def CT_not.H(expr) # "not"
     var1 = expr.content.arguments[0]
-    #var2 is Unimplemented. Could be ICase, IBind, IFree
+    # var2 case selector
     var2 = var1
     case var2.content.symbol.token
     when 0 # VARIABLE
@@ -565,7 +565,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -595,7 +595,7 @@ module Prelude
 
   def CT_solve.H(expr) # "solve"
     var1 = expr.content.arguments[0]
-    #var2 is Unimplemented. Could be ICase, IBind, IFree
+    # var2 case selector
     var2 = var1
     case var2.content.symbol.token
     when 0 # VARIABLE
@@ -609,7 +609,7 @@ module Prelude
       var2.H()
       expr.H()
     when 4 # "False" => CT_False
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # "True" => CT_True
       rhs = Box.new(Application.new(Prelude::CT_True,[]))
@@ -620,7 +620,7 @@ module Prelude
   def CT__26_3E.H(expr) # "&>"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = var1
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -634,7 +634,7 @@ module Prelude
       var3.H()
       expr.H()
     when 4 # "False" => CT_False
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # "True" => CT_True
       rhs = var2
@@ -680,8 +680,8 @@ module Prelude
   def CT__3C.H(expr) # "<"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    nil #Unimplemented ICurry code
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # [(3,[])]
+    var3 = nil # to be bound soon
     var3 = Box.new(Application.new(Prelude::CT_False,[]))
     rhs = Box.new(Application.new(Prelude::CT__3C_5Fcase_5F_231,[var1, var2, var3]))
     expr.replace(rhs.content)
@@ -692,7 +692,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = Box.new(Application.new(Prelude::CT_compare,[var1, var2]))
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -726,8 +726,8 @@ module Prelude
   def CT__3E.H(expr) # ">"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    nil #Unimplemented ICurry code
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # [(3,[])]
+    var3 = nil # to be bound soon
     var3 = Box.new(Application.new(Prelude::CT_False,[]))
     rhs = Box.new(Application.new(Prelude::CT__3E_5Fcase_5F_231,[var1, var2, var3]))
     expr.replace(rhs.content)
@@ -738,7 +738,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = Box.new(Application.new(Prelude::CT_compare,[var1, var2]))
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -788,7 +788,7 @@ module Prelude
   def CT_max.H(expr) # "max"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = Box.new(Application.new(Prelude::CT__3E_3D,[var1, var2]))
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -819,7 +819,7 @@ module Prelude
   def CT_min.H(expr) # "min"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, var2]))
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -849,7 +849,7 @@ module Prelude
 
   def CT_fst.H(expr) # "fst"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -875,7 +875,7 @@ module Prelude
 
   def CT_snd.H(expr) # "snd"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -901,7 +901,7 @@ module Prelude
 
   def CT_head.H(expr) # "head"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -915,7 +915,7 @@ module Prelude
       var4.H()
       expr.H()
     when 4 # "[]" => CT__5B_5D
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # ":" => CT__3A
       var2 = var4.content.arguments[0]
@@ -930,7 +930,7 @@ module Prelude
 
   def CT_tail.H(expr) # "tail"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -944,7 +944,7 @@ module Prelude
       var4.H()
       expr.H()
     when 4 # "[]" => CT__5B_5D
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # ":" => CT__3A
       var2 = var4.content.arguments[0]
@@ -959,7 +959,7 @@ module Prelude
 
   def CT_null.H(expr) # "null"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -986,7 +986,7 @@ module Prelude
   def CT__2B_2B.H(expr) # "++"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var1
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1015,7 +1015,7 @@ module Prelude
 
   def CT_length.H(expr) # "length"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -1043,7 +1043,7 @@ module Prelude
   def CT__21_21.H(expr) # "!!"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var1
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1057,12 +1057,12 @@ module Prelude
       var5.H()
       expr.H()
     when 4 # "[]" => CT__5B_5D
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # ":" => CT__3A
       var3 = var5.content.arguments[0]
       var4 = var5.content.arguments[1]
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, make_int(0)]))
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -1076,7 +1076,7 @@ module Prelude
         var6.H()
         expr.H()
       when 4 # "False" => CT_False
-        #var7 is Unimplemented. Could be ICase, IBind, IFree
+        # var7 case selector
         var7 = Box.new(Application.new(Prelude::CT__3E,[var2, make_int(0)]))
         case var7.content.symbol.token
         when 0 # VARIABLE
@@ -1111,7 +1111,7 @@ module Prelude
   def CT_map.H(expr) # "map"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1139,7 +1139,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = var3
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -1170,7 +1170,7 @@ module Prelude
   def CT_foldl1.H(expr) # "foldl1"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1184,7 +1184,7 @@ module Prelude
       var5.H()
       expr.H()
     when 4 # "[]" => CT__5B_5D
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # ":" => CT__3A
       var3 = var5.content.arguments[0]
@@ -1199,7 +1199,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = var3
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -1230,7 +1230,7 @@ module Prelude
   def CT_foldr1.H(expr) # "foldr1"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    # var7 case selector
     var7 = var2
     case var7.content.symbol.token
     when 0 # VARIABLE
@@ -1244,12 +1244,12 @@ module Prelude
       var7.H()
       expr.H()
     when 4 # "[]" => CT__5B_5D
-      rhs = nil
+      rhs = CT_External::FAILED
       expr.replace(rhs.content)
     when 5 # ":" => CT__3A
       var3 = var7.content.arguments[0]
       var4 = var7.content.arguments[1]
-      #var8 is Unimplemented. Could be ICase, IBind, IFree
+      # var8 case selector
       var8 = var4
       case var8.content.symbol.token
       when 0 # VARIABLE
@@ -1281,7 +1281,7 @@ module Prelude
   def CT_filter.H(expr) # "filter"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1300,7 +1300,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var3 = var5.content.arguments[0]
       var4 = var5.content.arguments[1]
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -1327,7 +1327,7 @@ module Prelude
   def CT_zip.H(expr) # "zip"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    # var7 case selector
     var7 = var1
     case var7.content.symbol.token
     when 0 # VARIABLE
@@ -1346,7 +1346,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var3 = var7.content.arguments[0]
       var4 = var7.content.arguments[1]
-      #var8 is Unimplemented. Could be ICase, IBind, IFree
+      # var8 case selector
       var8 = var2
       case var8.content.symbol.token
       when 0 # VARIABLE
@@ -1375,7 +1375,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var10 is Unimplemented. Could be ICase, IBind, IFree
+    # var10 case selector
     var10 = var1
     case var10.content.symbol.token
     when 0 # VARIABLE
@@ -1394,7 +1394,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var4 = var10.content.arguments[0]
       var5 = var10.content.arguments[1]
-      #var11 is Unimplemented. Could be ICase, IBind, IFree
+      # var11 case selector
       var11 = var2
       case var11.content.symbol.token
       when 0 # VARIABLE
@@ -1413,7 +1413,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var6 = var11.content.arguments[0]
         var7 = var11.content.arguments[1]
-        #var12 is Unimplemented. Could be ICase, IBind, IFree
+        # var12 case selector
         var12 = var3
         case var12.content.symbol.token
         when 0 # VARIABLE
@@ -1443,7 +1443,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var8 is Unimplemented. Could be ICase, IBind, IFree
+    # var8 case selector
     var8 = var2
     case var8.content.symbol.token
     when 0 # VARIABLE
@@ -1462,7 +1462,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var4 = var8.content.arguments[0]
       var5 = var8.content.arguments[1]
-      #var9 is Unimplemented. Could be ICase, IBind, IFree
+      # var9 case selector
       var9 = var3
       case var9.content.symbol.token
       when 0 # VARIABLE
@@ -1492,7 +1492,7 @@ module Prelude
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
     var4 = expr.content.arguments[3]
-    #var11 is Unimplemented. Could be ICase, IBind, IFree
+    # var11 case selector
     var11 = var2
     case var11.content.symbol.token
     when 0 # VARIABLE
@@ -1511,7 +1511,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var5 = var11.content.arguments[0]
       var6 = var11.content.arguments[1]
-      #var12 is Unimplemented. Could be ICase, IBind, IFree
+      # var12 case selector
       var12 = var3
       case var12.content.symbol.token
       when 0 # VARIABLE
@@ -1530,7 +1530,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var7 = var12.content.arguments[0]
         var8 = var12.content.arguments[1]
-        #var13 is Unimplemented. Could be ICase, IBind, IFree
+        # var13 case selector
         var13 = var4
         case var13.content.symbol.token
         when 0 # VARIABLE
@@ -1558,7 +1558,7 @@ module Prelude
 
   def CT_unzip.H(expr) # "unzip"
     var1 = expr.content.arguments[0]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = var1
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -1577,7 +1577,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var2 = var6.content.arguments[0]
       var3 = var6.content.arguments[1]
-      #var7 is Unimplemented. Could be ICase, IBind, IFree
+      # var7 case selector
       var7 = var2
       case var7.content.symbol.token
       when 0 # VARIABLE
@@ -1604,12 +1604,12 @@ module Prelude
     var4 = expr.content.arguments[0]
     var5 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    nil #Unimplemented ICurry code
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # [(6,[]),(7,[]),(8,[])]
+    var6 = nil # to be bound soon
     var6 = Box.new(Application.new(Prelude::CT_unzip,[var3]))
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    var7 = nil # to be bound soon
     var7 = Box.new(Application.new(Prelude::CT_unzip_2E_5F_23selFP2_23xs,[var6]))
-    #var8 is Unimplemented. Could be ICase, IBind, IFree
+    var8 = nil # to be bound soon
     var8 = Box.new(Application.new(Prelude::CT_unzip_2E_5F_23selFP3_23ys,[var6]))
     rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var4, var7])), Box.new(Application.new(Prelude::CT__3A,[var5, var8]))]))
     expr.replace(rhs.content)
@@ -1617,7 +1617,7 @@ module Prelude
 
   def CT_unzip_2E_5F_23selFP2_23xs.H(expr) # "unzip._#selFP2#xs"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -1643,7 +1643,7 @@ module Prelude
 
   def CT_unzip_2E_5F_23selFP3_23ys.H(expr) # "unzip._#selFP3#ys"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -1669,7 +1669,7 @@ module Prelude
 
   def CT_unzip3.H(expr) # "unzip3"
     var1 = expr.content.arguments[0]
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    # var7 case selector
     var7 = var1
     case var7.content.symbol.token
     when 0 # VARIABLE
@@ -1688,7 +1688,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var2 = var7.content.arguments[0]
       var3 = var7.content.arguments[1]
-      #var8 is Unimplemented. Could be ICase, IBind, IFree
+      # var8 case selector
       var8 = var2
       case var8.content.symbol.token
       when 0 # VARIABLE
@@ -1717,14 +1717,14 @@ module Prelude
     var5 = expr.content.arguments[1]
     var6 = expr.content.arguments[2]
     var3 = expr.content.arguments[3]
-    nil #Unimplemented ICurry code
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    # [(7,[]),(8,[]),(9,[]),(10,[])]
+    var7 = nil # to be bound soon
     var7 = Box.new(Application.new(Prelude::CT_unzip3,[var3]))
-    #var8 is Unimplemented. Could be ICase, IBind, IFree
+    var8 = nil # to be bound soon
     var8 = Box.new(Application.new(Prelude::CT_unzip3_2E_5F_23selFP5_23xs,[var7]))
-    #var9 is Unimplemented. Could be ICase, IBind, IFree
+    var9 = nil # to be bound soon
     var9 = Box.new(Application.new(Prelude::CT_unzip3_2E_5F_23selFP6_23ys,[var7]))
-    #var10 is Unimplemented. Could be ICase, IBind, IFree
+    var10 = nil # to be bound soon
     var10 = Box.new(Application.new(Prelude::CT_unzip3_2E_5F_23selFP7_23zs,[var7]))
     rhs = Box.new(Application.new(Prelude::CT__28_2C_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var4, var8])), Box.new(Application.new(Prelude::CT__3A,[var5, var9])), Box.new(Application.new(Prelude::CT__3A,[var6, var10]))]))
     expr.replace(rhs.content)
@@ -1732,7 +1732,7 @@ module Prelude
 
   def CT_unzip3_2E_5F_23selFP5_23xs.H(expr) # "unzip3._#selFP5#xs"
     var1 = expr.content.arguments[0]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var1
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1759,7 +1759,7 @@ module Prelude
 
   def CT_unzip3_2E_5F_23selFP6_23ys.H(expr) # "unzip3._#selFP6#ys"
     var1 = expr.content.arguments[0]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var1
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1786,7 +1786,7 @@ module Prelude
 
   def CT_unzip3_2E_5F_23selFP7_23zs.H(expr) # "unzip3._#selFP7#zs"
     var1 = expr.content.arguments[0]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var1
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1849,7 +1849,7 @@ module Prelude
   def CT_take.H(expr) # "take"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -1875,7 +1875,7 @@ module Prelude
   def CT_take_2Etakep_2E220.H(expr) # "take.takep.220"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1902,7 +1902,7 @@ module Prelude
   def CT_drop.H(expr) # "drop"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -1931,7 +1931,7 @@ module Prelude
   def CT_drop_2Edropp_2E229.H(expr) # "drop.dropp.229"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -1959,7 +1959,7 @@ module Prelude
   def CT_splitAt.H(expr) # "splitAt"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -1985,7 +1985,7 @@ module Prelude
   def CT_splitAt_2EsplitAtp_2E239.H(expr) # "splitAt.splitAtp.239"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -2014,12 +2014,12 @@ module Prelude
     var3 = expr.content.arguments[0]
     var1 = expr.content.arguments[1]
     var4 = expr.content.arguments[2]
-    nil #Unimplemented ICurry code
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # [(5,[]),(6,[]),(7,[])]
+    var5 = nil # to be bound soon
     var5 = Box.new(Application.new(Prelude::CT_splitAt,[Box.new(Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    var6 = nil # to be bound soon
     var6 = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP9_23ys,[var5]))
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    var7 = nil # to be bound soon
     var7 = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP10_23zs,[var5]))
     rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var3, var6])), var7]))
     expr.replace(rhs.content)
@@ -2027,7 +2027,7 @@ module Prelude
 
   def CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP9_23ys.H(expr) # "splitAt.splitAtp.239._#selFP9#ys"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2053,7 +2053,7 @@ module Prelude
 
   def CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP10_23zs.H(expr) # "splitAt.splitAtp.239._#selFP10#zs"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2080,7 +2080,7 @@ module Prelude
   def CT_takeWhile.H(expr) # "takeWhile"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -2099,7 +2099,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var3 = var5.content.arguments[0]
       var4 = var5.content.arguments[1]
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -2125,7 +2125,7 @@ module Prelude
   def CT_dropWhile.H(expr) # "dropWhile"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -2144,7 +2144,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var3 = var5.content.arguments[0]
       var4 = var5.content.arguments[1]
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -2171,7 +2171,7 @@ module Prelude
   def CT_span.H(expr) # "span"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var2
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -2190,7 +2190,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var3 = var5.content.arguments[0]
       var4 = var5.content.arguments[1]
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -2204,7 +2204,7 @@ module Prelude
         var6.H()
         expr.H()
       when 4 # "False" => CT_False
-        #var7 is Unimplemented. Could be ICase, IBind, IFree
+        # var7 case selector
         var7 = Box.new(Application.new(Prelude::CT_otherwise,[]))
         case var7.content.symbol.token
         when 0 # VARIABLE
@@ -2237,12 +2237,12 @@ module Prelude
     var3 = expr.content.arguments[0]
     var1 = expr.content.arguments[1]
     var4 = expr.content.arguments[2]
-    nil #Unimplemented ICurry code
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # [(5,[]),(6,[]),(7,[])]
+    var5 = nil # to be bound soon
     var5 = Box.new(Application.new(Prelude::CT_span,[var1, var4]))
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    var6 = nil # to be bound soon
     var6 = Box.new(Application.new(Prelude::CT_span_2E_5F_23selFP12_23ys,[var5]))
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    var7 = nil # to be bound soon
     var7 = Box.new(Application.new(Prelude::CT_span_2E_5F_23selFP13_23zs,[var5]))
     rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var3, var6])), var7]))
     expr.replace(rhs.content)
@@ -2250,7 +2250,7 @@ module Prelude
 
   def CT_span_2E_5F_23selFP12_23ys.H(expr) # "span._#selFP12#ys"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2276,7 +2276,7 @@ module Prelude
 
   def CT_span_2E_5F_23selFP13_23zs.H(expr) # "span._#selFP13#zs"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2308,7 +2308,7 @@ module Prelude
 
   def CT_lines.H(expr) # "lines"
     var1 = expr.content.arguments[0]
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    # var7 case selector
     var7 = var1
     case var7.content.symbol.token
     when 0 # VARIABLE
@@ -2327,12 +2327,12 @@ module Prelude
     when 5 # ":" => CT__3A
       var2 = var7.content.arguments[0]
       var3 = var7.content.arguments[1]
-      nil #Unimplemented ICurry code
-      #var4 is Unimplemented. Could be ICase, IBind, IFree
+      # [(4,[]),(5,[]),(6,[])]
+      var4 = nil # to be bound soon
       var4 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271,[Box.new(Application.new(Prelude::CT__3A,[var2, var3]))]))
-      #var5 is Unimplemented. Could be ICase, IBind, IFree
+      var5 = nil # to be bound soon
       var5 = Box.new(Application.new(Prelude::CT_lines_2E_5F_23selFP18_23l,[var4]))
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      var6 = nil # to be bound soon
       var6 = Box.new(Application.new(Prelude::CT_lines_2E_5F_23selFP19_23xs_5Fl,[var4]))
       rhs = Box.new(Application.new(Prelude::CT__3A,[var5, Box.new(Application.new(Prelude::CT_lines,[var6]))]))
       expr.replace(rhs.content)
@@ -2341,7 +2341,7 @@ module Prelude
 
   def CT_lines_2Esplitline_2E271.H(expr) # "lines.splitline.271"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2360,7 +2360,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
-      #var5 is Unimplemented. Could be ICase, IBind, IFree
+      # var5 case selector
       var5 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, make_int(999999)]))
       case var5.content.symbol.token
       when 0 # VARIABLE
@@ -2387,12 +2387,12 @@ module Prelude
   def CT_lines_2Esplitline_2E271_5Flet_5F_231.H(expr) # "lines.splitline.271_let_#1"
     var2 = expr.content.arguments[0]
     var3 = expr.content.arguments[1]
-    nil #Unimplemented ICurry code
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # [(4,[]),(5,[]),(6,[])]
+    var4 = nil # to be bound soon
     var4 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271,[var3]))
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    var5 = nil # to be bound soon
     var5 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271_2E_5F_23selFP15_23ds,[var4]))
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    var6 = nil # to be bound soon
     var6 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271_2E_5F_23selFP16_23es,[var4]))
     rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var2, var5])), var6]))
     expr.replace(rhs.content)
@@ -2400,7 +2400,7 @@ module Prelude
 
   def CT_lines_2Esplitline_2E271_2E_5F_23selFP15_23ds.H(expr) # "lines.splitline.271._#selFP15#ds"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2426,7 +2426,7 @@ module Prelude
 
   def CT_lines_2Esplitline_2E271_2E_5F_23selFP16_23es.H(expr) # "lines.splitline.271._#selFP16#es"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2452,7 +2452,7 @@ module Prelude
 
   def CT_lines_2E_5F_23selFP18_23l.H(expr) # "lines._#selFP18#l"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2478,7 +2478,7 @@ module Prelude
 
   def CT_lines_2E_5F_23selFP19_23xs_5Fl.H(expr) # "lines._#selFP19#xs_l"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2511,8 +2511,8 @@ module Prelude
 
   def CT_words.H(expr) # "words"
     var1 = expr.content.arguments[0]
-    nil #Unimplemented ICurry code
-    #var2 is Unimplemented. Could be ICase, IBind, IFree
+    # [(2,[])]
+    var2 = nil # to be bound soon
     var2 = Box.new(Application.new(Prelude::CT_dropWhile,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_words_2EisSpace_2E283,[]))])), var1]))
     rhs = Box.new(Application.new(Prelude::CT_words_5Fcase_5F_231,[var2]))
     expr.replace(rhs.content)
@@ -2521,7 +2521,7 @@ module Prelude
 
   def CT_words_5Fcase_5F_231.H(expr) # "words_case_#1"
     var2 = expr.content.arguments[0]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -2535,12 +2535,12 @@ module Prelude
       var6.H()
       expr.H()
     when 4 # "False" => CT_False
-      nil #Unimplemented ICurry code
-      #var3 is Unimplemented. Could be ICase, IBind, IFree
+      # [(3,[]),(4,[]),(5,[])]
+      var3 = nil # to be bound soon
       var3 = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_break,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_words_2EisSpace_2E283,[]))]))])), var2]))
-      #var4 is Unimplemented. Could be ICase, IBind, IFree
+      var4 = nil # to be bound soon
       var4 = Box.new(Application.new(Prelude::CT_words_2E_5F_23selFP21_23w,[var3]))
-      #var5 is Unimplemented. Could be ICase, IBind, IFree
+      var5 = nil # to be bound soon
       var5 = Box.new(Application.new(Prelude::CT_words_2E_5F_23selFP22_23s2,[var3]))
       rhs = Box.new(Application.new(Prelude::CT__3A,[var4, Box.new(Application.new(Prelude::CT_words,[var5]))]))
       expr.replace(rhs.content)
@@ -2559,7 +2559,7 @@ module Prelude
 
   def CT_words_2E_5F_23selFP21_23w.H(expr) # "words._#selFP21#w"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2585,7 +2585,7 @@ module Prelude
 
   def CT_words_2E_5F_23selFP22_23s2.H(expr) # "words._#selFP22#s2"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -2611,7 +2611,7 @@ module Prelude
 
   def CT_unwords.H(expr) # "unwords"
     var1 = expr.content.arguments[0]
-    #var2 is Unimplemented. Could be ICase, IBind, IFree
+    # var2 case selector
     var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
     case var2.content.symbol.token
     when 0 # VARIABLE
@@ -2688,7 +2688,7 @@ module Prelude
   def CT_lookup.H(expr) # "lookup"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var7 is Unimplemented. Could be ICase, IBind, IFree
+    # var7 case selector
     var7 = var2
     case var7.content.symbol.token
     when 0 # VARIABLE
@@ -2707,7 +2707,7 @@ module Prelude
     when 5 # ":" => CT__3A
       var3 = var7.content.arguments[0]
       var4 = var7.content.arguments[1]
-      #var8 is Unimplemented. Could be ICase, IBind, IFree
+      # var8 case selector
       var8 = var3
       case var8.content.symbol.token
       when 0 # VARIABLE
@@ -2723,7 +2723,7 @@ module Prelude
       when 4 # "(,)" => CT__28_2C_29
         var5 = var8.content.arguments[0]
         var6 = var8.content.arguments[1]
-        #var9 is Unimplemented. Could be ICase, IBind, IFree
+        # var9 case selector
         var9 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, var5]))
         case var9.content.symbol.token
         when 0 # VARIABLE
@@ -2737,7 +2737,7 @@ module Prelude
           var9.H()
           expr.H()
         when 4 # "False" => CT_False
-          #var10 is Unimplemented. Could be ICase, IBind, IFree
+          # var10 case selector
           var10 = Box.new(Application.new(Prelude::CT_otherwise,[]))
           case var10.content.symbol.token
           when 0 # VARIABLE
@@ -2784,7 +2784,7 @@ module Prelude
   def CT_enumFromTo.H(expr) # "enumFromTo"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = Box.new(Application.new(Prelude::CT__3E,[var1, var2]))
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -2820,7 +2820,7 @@ module Prelude
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
     var4 = expr.content.arguments[3]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = Box.new(Application.new(Prelude::CT__3E_3D,[var3, var2]))
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -2834,7 +2834,7 @@ module Prelude
       var5.H()
       expr.H()
     when 4 # "False" => CT_False
-      #var6 is Unimplemented. Could be ICase, IBind, IFree
+      # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT_otherwise,[]))
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -3030,7 +3030,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var5 is Unimplemented. Could be ICase, IBind, IFree
+    # var5 case selector
     var5 = var3
     case var5.content.symbol.token
     when 0 # VARIABLE
@@ -3061,7 +3061,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = var3
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -3191,7 +3191,7 @@ module Prelude
 
   def CT_putStr.H(expr) # "putStr"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -3232,7 +3232,7 @@ module Prelude
 
   def CT_getLine_2E_5F_23lambda7.H(expr) # "getLine._#lambda7"
     var1 = expr.content.arguments[0]
-    #var2 is Unimplemented. Could be ICase, IBind, IFree
+    # var2 case selector
     var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, make_int(999999)]))
     case var2.content.symbol.token
     when 0 # VARIABLE
@@ -3279,7 +3279,7 @@ module Prelude
 
   def CT_showError.H(expr) # "showError"
     var1 = expr.content.arguments[0]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = var1
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -3343,7 +3343,7 @@ module Prelude
 
   def CT_doSolve.H(expr) # "doSolve"
     var1 = expr.content.arguments[0]
-    #var2 is Unimplemented. Could be ICase, IBind, IFree
+    # var2 case selector
     var2 = var1
     case var2.content.symbol.token
     when 0 # VARIABLE
@@ -3369,7 +3369,7 @@ module Prelude
 
   def CT_sequenceIO.H(expr) # "sequenceIO"
     var1 = expr.content.arguments[0]
-    #var4 is Unimplemented. Could be ICase, IBind, IFree
+    # var4 case selector
     var4 = var1
     case var4.content.symbol.token
     when 0 # VARIABLE
@@ -3434,7 +3434,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    #var6 is Unimplemented. Could be ICase, IBind, IFree
+    # var6 case selector
     var6 = var3
     case var6.content.symbol.token
     when 0 # VARIABLE
@@ -3496,7 +3496,7 @@ module Prelude
   def CT_unless.H(expr) # "unless"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = var1
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -3525,7 +3525,7 @@ module Prelude
   def CT_when.H(expr) # "when"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    #var3 is Unimplemented. Could be ICase, IBind, IFree
+    # var3 case selector
     var3 = var1
     case var3.content.symbol.token
     when 0 # VARIABLE
@@ -3565,7 +3565,7 @@ module Prelude
   end
 
   def CT_unknown.H(expr) # "unknown"
-    #var1 is Unimplemented. Could be ICase, IBind, IFree
+    abort "Free variable var1 not implemented"
     rhs = var1
     expr.replace(rhs.content)
     if expr.content.symbol.token == OPERATION

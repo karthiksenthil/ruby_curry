@@ -97,9 +97,7 @@ single_expr (BuiltinVariant (Bchar ch))
 
 single_expr (PartApplic miss expr) = RPartial miss (single_expr expr)
 
--- TODO: extend
--- Unimplemented expressions from ICurry
-single_expr (Exempt) = RExpression
+single_expr Exempt = FailExpression
 
 --------------------------------------------------------------
 

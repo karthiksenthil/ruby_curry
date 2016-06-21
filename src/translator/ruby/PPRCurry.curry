@@ -86,7 +86,7 @@ ppStatement n (RVariable (RIFree identifier))
   = ppIndent n ++ format "abort \"Free variable var%d not implemented\"" [FI identifier]
 
 ppStatement n (RVariable (RIBind identifier))
-  = ppIndent n ++ format "var%d = nil # bound variable" [FI identifier]
+  = ppIndent n ++ format "var%d = nil # to be bound soon" [FI identifier]
 
 ppStatement n (RAssign ref expression)
   = ppIndent n ++ format "var%d = " [FI ref]
@@ -131,10 +131,12 @@ ppStatement n (RReplace redex contractum)
                ++ ".replace(" ++ ppExpression contractum ++ ".content)"
 
 ppStatement n (RFill i list j)
-  = ppIndent n ++ format "# rfill %d %s %d" [FI i, FS (show list), FI j]
+  = ppIndent n ++ format "var%d%s = var%d" [FI i, FS path, FI j]
+  where path = concatMap (\x -> format ".content.arguments[%d]" [FI (x-1)]) list 
+-- rfill %d %s %d" [FI i, FS (show list), FI j]
 
 ppStatement n (RBTable)
-  = ppIndent n ++ "# RBTable"
+  = ppIndent n ++ "abort \"ABORT: BTable not yet implemented\""
 
 ppStatement n (RComment string)
   = ppIndent n ++ format "# %s" [FS string]
@@ -169,6 +171,9 @@ ppExpression (Integer num)
 ppExpression (Character char)
   = format "CT_Character::make_char(\"%c\")" [FC char]  
 
+ppExpression FailExpression
+  = format "CT_External::FAILED" []
+
 ppExpression (ROr expr_1 expr_2)
   = format "Box.new(Application.new(CT_System::CT_choice,[%s,%s]))"
       [FS (ppExpression expr_1), FS (ppExpression expr_2)]
@@ -176,9 +181,6 @@ ppExpression (ROr expr_1 expr_2)
 -- TODO: look into this 
 ppExpression (Expr str)
   = format "expr" []
-
-ppExpression (RExpression)
-  = "nil"  -- enables compiling without syntax errors
 
 -------------------------------------------------------------------------------
 

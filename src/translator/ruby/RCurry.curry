@@ -61,7 +61,8 @@ data RExpression
   | RPartial Int RExpression
   | Integer Int
   | Character Char
+  | FailExpression
   -- TODO: What is the meaning of this ???
   | Expr String
   | ROr RExpression RExpression   -- produced by overlapping rules
-  | RExpression -- added for unimplemented stuff, remove later
+  -- | RExpression -- added for unimplemented stuff, remove later

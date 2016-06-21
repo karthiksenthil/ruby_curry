@@ -10,13 +10,13 @@ TESTS=`ls $TESTDIR/*.curry`
 for tmp in $TESTS;
 do
     file=$(basename $tmp ".curry")
-    # echo $file
-    if [ -e $TESTDIR/$file.output ]
+    echo 
+    $BASEDIR/bin/curry2icur -q $TESTDIR/$file
+    $BASEDIR/bin/icur2ruby -q $TESTDIR/$file
+    $BASEDIR/bin/exec $TESTDIR/$file > $TESTDIR/$file.comp
+    if [ "$?" = "0" ]
     then
-	$BASEDIR/bin/curry2icur -q $TESTDIR/$file
-	$BASEDIR/bin/icur2ruby -q $TESTDIR/$file
-	$BASEDIR/bin/exec $TESTDIR/$file > $TESTDIR/$file.comp
-	if [ "$?" = "0" ]
+	if [ -e $TESTDIR/$file.output ]
 	then
 	    OK=`diff -q $TESTDIR/$file.comp $TESTDIR/$file.output`
 	    if [ "$?" != "0" -o "$OK" != "" ]
@@ -28,10 +28,10 @@ do
 		rm -f $TESTDIR/$file.comp
 	    fi
 	else
-	    echo "***" $file execution fails
+	    echo "---" $file no reference output
 	fi
     else
-	echo "---" $file no reference output
+	echo "***" $file execution fails
     fi
 done
 

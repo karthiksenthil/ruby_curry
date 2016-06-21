@@ -179,8 +179,10 @@ module CT_External
   # --- It could be defined by: `failed = head []`
   # failed :: _failed external
 
+  CT_External::FAILED = Box.new(Application.new(CT_System::CT_fail,[]))
+
   def CT_External::CT_failed(expr) # "failed"
-    return Box.new(Application.new(CT_System::CT_fail,[]))
+    return CT_External::FAILED
   end
 
 end
