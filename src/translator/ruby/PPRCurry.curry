@@ -61,6 +61,7 @@ runtimeRubyFiles = [
   "src/compiler/repl.rb",
   "CT_System.rb",
   "integers.rb",
+  "CT_Character.rb",
   "CT_External.rb" ]
 
 ppImported [] = ""
@@ -164,6 +165,9 @@ ppExpression (RPartial miss expr)
 
 ppExpression (Integer num)
   = format "make_int(%d)" [FI num]
+
+ppExpression (Character char)
+  = format "CT_Character::make_char(\"%c\")" [FC char]  
 
 ppExpression (ROr expr_1 expr_2)
   = format "Box.new(Application.new(CT_System::CT_choice,[%s,%s]))"

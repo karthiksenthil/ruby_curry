@@ -31,6 +31,7 @@ class TestPositivePrograms < Minitest::Test
         if $?.exitstatus == 0
           #program executed successfully
           exp_output = File.open(expected_output_file).read()
+          # assert_equal(obt_output,exp_output,"#{prog} test failed.")
           if exp_output == obt_output
             obtained_matches[prog] = true
             print ".".green

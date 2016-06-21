@@ -92,9 +92,8 @@ single_expr (IOr expr_1 expr_2)
 single_expr (BuiltinVariant (Bint num))
   = Integer num  
 
--- TODO: to compile the Prelude
 single_expr (BuiltinVariant (Bchar ch))
-  = Integer 999999
+  = Character ch
 
 single_expr (PartApplic miss expr) = RPartial miss (single_expr expr)
 
