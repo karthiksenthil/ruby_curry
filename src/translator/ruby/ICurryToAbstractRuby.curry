@@ -29,15 +29,15 @@ single_stmt (Declare (Variable identifier (ILhs (n, i))))
 
 single_stmt (Declare (Variable identifier (IVar j (_,i))))
         = RVariable (RIVar identifier j i)
-
+  
 single_stmt (Declare (Variable identifier ICase))
-  = RVariable (Unimpl identifier "Unimplemented")
+  = RVariable (RICase identifier)
 
 single_stmt (Declare (Variable identifier IBind))
-  = RVariable (Unimpl identifier "Unimplemented")
+  = RVariable (RIBind identifier)
 
 single_stmt (Declare (Variable identifier IFree))
-  = RVariable (Unimpl identifier "Unimplemented")
+  = RVariable (RIFree identifier)
 
 single_stmt (Assign i expr)
   = RAssign i (single_expr expr)
@@ -52,7 +52,7 @@ single_stmt (ATable _ _ expr branch_list)
 	       (IConstructor (_,name) _, bl) <- branch_list]
         all_branch_list
 	  = zip [0..] (default_branches expr ++ constr_branch_list)
-    in RCase (single_expr expr) all_branch_list
+    in RATable (single_expr expr) all_branch_list
 
 
 -- if expr is constructor rooted, then return it;
@@ -70,10 +70,9 @@ single_stmt (Return expr)
 
 single_stmt (IExternal qname) = RExternal qname
 
--- Unimplemented statements from ICurry
-single_stmt (Comment _) = RStatement
-single_stmt (Fill _ _ _) = RStatement
-single_stmt (BTable _ _ _ _) = RStatement
+single_stmt (Comment string) = RComment string
+single_stmt (Fill i list j) = RFill i (map snd list) j
+single_stmt (BTable _ _ _ _) = RBTable
 
 --------------------------------------------------------------
 

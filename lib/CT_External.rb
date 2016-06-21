@@ -43,6 +43,8 @@ module CT_External
   def CT_External::CT_apply(expr)
     # partially applied boxed application
     partial = expr.content.arguments[0]
+    # TODO: since Partial is a constructor could use pattern matching
+    # TODO: replacing show with to_s would simplify "missing" expression
     if partial.content.symbol.class != Partial
       # Here is the case where the partial function
       # is the VALUE of the first argument

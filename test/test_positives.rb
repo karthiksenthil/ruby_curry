@@ -7,7 +7,7 @@ class TestPositivePrograms < Minitest::Test
   def test_positives
     basedir = `dirname $(readlink -f $0)`.chomp
 
-    failing_progs = ['addition.curry','bintree.curry','casecolor.curry',
+    failing_progs = ['bintree.curry','casecolor.curry',
                       'example_fill.curry','fibo.curry','letrec.curry']
     all_progs = `ls #{basedir}/curry_examples/ | egrep '\.curry'`.split
 
@@ -25,7 +25,7 @@ class TestPositivePrograms < Minitest::Test
       #convert icur to ruby object code
       `#{basedir}/bin/icur2ruby -f #{basedir}/curry_examples/#{prog}`
       #execute object code and save output
-      obt_output = `#{basedir}/bin/exec #{basedir}/curry_examples/#{prog}`.chomp
+      obt_output = `#{basedir}/bin/exec #{basedir}/curry_examples/#{prog}`
 
       #load expected output
       expected_output_file = "#{basedir}/curry_examples/" + 

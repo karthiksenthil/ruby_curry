@@ -10,8 +10,6 @@ CONSTRUCTOR = 4
 
 # global boolean for backtrack
 $backtrack = false
-# array to store poosible output expressions
-$output_expressions = []
 
 # function to convert ruby variable name to curry name
 def conv_ruby_var(var_name)

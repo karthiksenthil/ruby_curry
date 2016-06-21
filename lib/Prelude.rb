@@ -3554,7 +3554,7 @@ module Prelude
   def CT__3F.H(expr) # "?"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = nil
+    rhs = Box.new(Application.new(CT_System::CT_choice,[var1,var2]))
     expr.replace(rhs.content)
     expr.H()
   end

@@ -78,9 +78,14 @@ ppStatement n (RVariable (RIVar identifier ref index))
   = ppIndent n ++ format "var%d = var%d.content.arguments[%d]"
                           [FI identifier, FI ref, FI (index-1)]
 
-ppStatement n (RVariable (Unimpl identifier status))
-  = ppIndent n ++ format "#var%d is %s. Could be ICase, IBind, IFree"
-                          [FI identifier, FS status]
+ppStatement n (RVariable (RICase identifier))
+  = ppIndent n ++ format "# var%d case selector" [FI identifier]
+
+ppStatement n (RVariable (RIFree identifier))
+  = ppIndent n ++ format "abort \"Free variable var%d not implemented\"" [FI identifier]
+
+ppStatement n (RVariable (RIBind identifier))
+  = ppIndent n ++ format "var%d = nil # bound variable" [FI identifier]
 
 ppStatement n (RAssign ref expression)
   = ppIndent n ++ format "var%d = " [FI ref]
@@ -109,7 +114,7 @@ ppStatement n (RExternal (_++"."++name))
       ++ ppIndent n ++ "expr.replace(rhs.content)"
       ++ ppIndent n ++ "expr.H() if expr.content.symbol.token == OPERATION"
 
-ppStatement n (RCase expression branch_list)
+ppStatement n (RATable expression branch_list)
   = ppIndent n ++ "case " ++ ppExpression expression ++ ".content.symbol.token"
       ++ foldr ((++) . ppBranch n) "" branch_list
       ++ ppIndent n ++ "end"
@@ -124,9 +129,14 @@ ppStatement n (RReplace redex contractum)
   = ppIndent n ++ ppExpression redex 
                ++ ".replace(" ++ ppExpression contractum ++ ".content)"
 
+ppStatement n (RFill i list j)
+  = ppIndent n ++ format "# rfill %d %s %d" [FI i, FS (show list), FI j]
 
-ppStatement n (RStatement)
-  = ppIndent n ++ "nil #Unimplemented ICurry code"
+ppStatement n (RBTable)
+  = ppIndent n ++ "# RBTable"
+
+ppStatement n (RComment string)
+  = ppIndent n ++ format "# %s" [FS string]
 
 -------------------------------------------------------------------------------
 

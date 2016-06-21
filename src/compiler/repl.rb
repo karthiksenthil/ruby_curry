@@ -59,13 +59,15 @@ def repl(top_level)
     if top_level.content.symbol.token == FAIL
       # report failure
       Log.write(sprintf("F \n")) if $trace
-      # Do not add fail expression as output
-      # $output_expressions << top_level.show()
+      # Do not print failures
     else
-      # report value
-      Log.write(sprintf("V %s\n",top_level.show)) if $trace
-      # add the value as output
-      $output_expressions << top_level.show()
+      # either trace or print value  
+      if $trace
+        Log.write(sprintf("V %s\n",top_level.show))
+      else
+        # print value unless tracing
+        printf("%s\n", top_level.show)
+      end
       # print_stack
     end
 
@@ -75,10 +77,5 @@ def repl(top_level)
 
   # done with all computations
   Log.write(sprintf("Z \n")) if $trace
-
-  # if executed without trace, print all output expressions
-  if !$trace
-    puts $output_expressions
-  end
 
 end

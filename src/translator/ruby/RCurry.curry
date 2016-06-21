@@ -37,18 +37,22 @@ data Mode = Done | Recur | Check
 data RStatement
   = RVariable RVarType
   | RAssign Int RExpression
-  | RCase RExpression [(Int, (String, [RStatement]))]
+  | RATable RExpression [(Int, (String, [RStatement]))]
   | RReturn Mode RExpression
   | RExternal String    -- call an external (coded in ruby) function
   | RException String   -- TODO: What is this for
   | RHFunction RExpression
   | RReplace RExpression RExpression   -- 1st one is expression to be replaced, 2nd is the replacement expr
-  | RStatement -- added for unimplemented stuff, remove later
+  | RComment String
+  | RFill Int [Int] Int
+  | RBTable 
 
 data RVarType
   = RILhs Int Int        -- for ILhs
   | RIVar Int Int Int    -- for IVar
-  | Unimpl Int String    -- for unimplemented ICase, IBind, IFree
+  | RICase Int
+  | RIFree Int
+  | RIBind Int
 
 data RExpression
   = Ref Int
@@ -56,6 +60,7 @@ data RExpression
   | Application Bool RName [RExpression]
   | RPartial Int RExpression
   | Integer Int
+  | Character Char
   -- TODO: What is the meaning of this ???
   | Expr String
   | ROr RExpression RExpression   -- produced by overlapping rules
