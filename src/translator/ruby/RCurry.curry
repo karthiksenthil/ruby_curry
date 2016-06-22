@@ -41,11 +41,10 @@ data RStatement
   | RReturn Mode RExpression
   | RExternal String    -- call an external (coded in ruby) function
   | RException String   -- TODO: What is this for
-  | RHFunction RExpression
-  | RReplace RExpression   -- expr is the replacement
   | RComment String
   | RFill Int [Int] Int
-  | RBTable 
+  | RBTable
+  | Recur_On_Arg RExpression
 
 data RVarType
   = RILhs Int Int
@@ -62,7 +61,4 @@ data RExpression
   | Integer Int
   | Character Char
   | FailExpression
-  -- TODO: What is the meaning of this ???
-  | Expr String
   | ROr RExpression RExpression   -- produced by overlapping rules
-  -- | RExpression -- added for unimplemented stuff, remove later

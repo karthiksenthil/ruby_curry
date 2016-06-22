@@ -1,6 +1,13 @@
 Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
+Wed Jun 22 11:26:59 PDT 2016 - Sergio
+
+The Prelude contains many non-printable characters.
+This creates problems in generating Prelude.rb.
+
+------------------------------------------------------------------
+
 Tue Jun 21 16:31:12 PDT 2016 - Sergio
 
 file expressions.rb should refactored

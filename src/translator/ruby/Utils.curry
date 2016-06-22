@@ -39,6 +39,7 @@ charToHex c
 
 capitalize :: String -> String
 capitalize (x:xs) = toUpper x : xs
+capitalize [] = error "Capitalize empty string"
 
 ruby_qual (mod,name) = capitalize mod ++ "::" ++ translate name
 

@@ -8,6 +8,7 @@ module Prelude
   require 'src/compiler/repl.rb'
   require 'CT_System.rb'
   require 'integers.rb'
+  require 'CT_Character.rb'
   require 'CT_External.rb'
 
   Prelude::CT__28_29 = Constructor.new('Prelude::CT__28_29',0)
@@ -321,13 +322,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var3 = var5.content.arguments[0]
       var4 = var5.content.arguments[1]
@@ -356,13 +358,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_until,[var1, var2, Box.new(Application.new(Prelude::CT_apply,[var2, var3]))]))
       expr.replace(rhs.content)
@@ -405,13 +408,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -485,13 +489,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_False,[]))
       expr.replace(rhs.content)
@@ -513,13 +518,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = var2
       expr.replace(rhs.content)
@@ -540,13 +546,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_True,[]))
       expr.replace(rhs.content)
@@ -571,13 +578,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = var3
       expr.replace(rhs.content)
@@ -601,13 +609,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -626,13 +635,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -698,13 +708,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "LT" => CT_LT
       rhs = Box.new(Application.new(Prelude::CT_True,[]))
       expr.replace(rhs.content)
@@ -744,13 +755,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "LT" => CT_LT
       rhs = var3
       expr.replace(rhs.content)
@@ -794,13 +806,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = var2
       expr.replace(rhs.content)
@@ -825,13 +838,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = var2
       expr.replace(rhs.content)
@@ -855,13 +869,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -881,13 +896,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -907,13 +923,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -936,13 +953,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -965,13 +983,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT_True,[]))
       expr.replace(rhs.content)
@@ -992,13 +1011,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = var2
       expr.replace(rhs.content)
@@ -1021,13 +1041,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = make_int(0)
       expr.replace(rhs.content)
@@ -1049,13 +1070,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -1068,13 +1090,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 4 # "False" => CT_False
         # var7 case selector
         var7 = Box.new(Application.new(Prelude::CT__3E,[var2, make_int(0)]))
@@ -1082,13 +1105,14 @@ module Prelude
         when 0 # VARIABLE
           raise 'Handling Variables not implemented yet'
         when 1 # CHOICE
-          var7.H()
-          expr.H()
+          var7.H
+          expr.H
         when 2 # FAIL
-          expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+          rhs = CT_External::FAILED
+          expr.replace(rhs.content)
         when 3 # OPERATION
-          var7.H()
-          expr.H()
+          var7.H
+          expr.H
         when 4 # "False" => CT_False
           rhs = Box.new(Application.new(Prelude::CT_failed,[]))
           expr.replace(rhs.content)
@@ -1117,13 +1141,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1145,13 +1170,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = var2
       expr.replace(rhs.content)
@@ -1176,13 +1202,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -1205,13 +1232,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = var2
       expr.replace(rhs.content)
@@ -1236,13 +1264,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = CT_External::FAILED
       expr.replace(rhs.content)
@@ -1255,13 +1284,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 4 # "[]" => CT__5B_5D
         rhs = var3
         expr.replace(rhs.content)
@@ -1287,13 +1317,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1306,13 +1337,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 4 # "False" => CT_False
         rhs = Box.new(Application.new(Prelude::CT_filter,[var1, var4]))
         expr.replace(rhs.content)
@@ -1333,13 +1365,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1352,13 +1385,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 4 # "[]" => CT__5B_5D
         rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
@@ -1381,13 +1415,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var10.H()
-      expr.H()
+      var10.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var10.H()
-      expr.H()
+      var10.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1400,13 +1435,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var11.H()
-        expr.H()
+        var11.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var11.H()
-        expr.H()
+        var11.H
+        expr.H
       when 4 # "[]" => CT__5B_5D
         rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
@@ -1419,13 +1455,14 @@ module Prelude
         when 0 # VARIABLE
           raise 'Handling Variables not implemented yet'
         when 1 # CHOICE
-          var12.H()
-          expr.H()
+          var12.H
+          expr.H
         when 2 # FAIL
-          expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+          rhs = CT_External::FAILED
+          expr.replace(rhs.content)
         when 3 # OPERATION
-          var12.H()
-          expr.H()
+          var12.H
+          expr.H
         when 4 # "[]" => CT__5B_5D
           rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
           expr.replace(rhs.content)
@@ -1449,13 +1486,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var8.H()
-      expr.H()
+      var8.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var8.H()
-      expr.H()
+      var8.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1468,13 +1506,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var9.H()
-        expr.H()
+        var9.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var9.H()
-        expr.H()
+        var9.H
+        expr.H
       when 4 # "[]" => CT__5B_5D
         rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
@@ -1498,13 +1537,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var11.H()
-      expr.H()
+      var11.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var11.H()
-      expr.H()
+      var11.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1517,13 +1557,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var12.H()
-        expr.H()
+        var12.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var12.H()
-        expr.H()
+        var12.H
+        expr.H
       when 4 # "[]" => CT__5B_5D
         rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
@@ -1536,13 +1577,14 @@ module Prelude
         when 0 # VARIABLE
           raise 'Handling Variables not implemented yet'
         when 1 # CHOICE
-          var13.H()
-          expr.H()
+          var13.H
+          expr.H
         when 2 # FAIL
-          expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+          rhs = CT_External::FAILED
+          expr.replace(rhs.content)
         when 3 # OPERATION
-          var13.H()
-          expr.H()
+          var13.H
+          expr.H
         when 4 # "[]" => CT__5B_5D
           rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
           expr.replace(rhs.content)
@@ -1564,13 +1606,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
       expr.replace(rhs.content)
@@ -1583,13 +1626,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var7.H()
-        expr.H()
+        var7.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var7.H()
-        expr.H()
+        var7.H
+        expr.H
       when 4 # "(,)" => CT__28_2C_29
         var4 = var7.content.arguments[0]
         var5 = var7.content.arguments[1]
@@ -1623,13 +1667,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -1649,13 +1694,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -1675,13 +1721,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__28_2C_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
       expr.replace(rhs.content)
@@ -1694,13 +1741,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 4 # "(,,)" => CT__28_2C_2C_29
         var4 = var8.content.arguments[0]
         var5 = var8.content.arguments[1]
@@ -1738,13 +1786,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "(,,)" => CT__28_2C_2C_29
       var2 = var5.content.arguments[0]
       var3 = var5.content.arguments[1]
@@ -1765,13 +1814,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "(,,)" => CT__28_2C_2C_29
       var2 = var5.content.arguments[0]
       var3 = var5.content.arguments[1]
@@ -1792,13 +1842,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "(,,)" => CT__28_2C_2C_29
       var2 = var5.content.arguments[0]
       var3 = var5.content.arguments[1]
@@ -1855,13 +1906,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_take_2Etakep_2E220,[var1, var2]))
       expr.replace(rhs.content)
@@ -1881,13 +1933,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1908,13 +1961,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_drop_2Edropp_2E229,[var1, var2]))
       expr.replace(rhs.content)
@@ -1937,13 +1991,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -1965,13 +2020,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239,[var1, var2]))
       expr.replace(rhs.content)
@@ -1991,13 +2047,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
       expr.replace(rhs.content)
@@ -2033,13 +2090,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2059,13 +2117,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2086,13 +2145,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -2105,13 +2165,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 4 # "False" => CT_False
         rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
@@ -2131,13 +2192,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -2150,13 +2212,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 4 # "False" => CT_False
         rhs = Box.new(Application.new(Prelude::CT__3A,[var3, var4]))
         expr.replace(rhs.content)
@@ -2177,13 +2240,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
       expr.replace(rhs.content)
@@ -2196,13 +2260,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 4 # "False" => CT_False
         # var7 case selector
         var7 = Box.new(Application.new(Prelude::CT_otherwise,[]))
@@ -2210,13 +2275,14 @@ module Prelude
         when 0 # VARIABLE
           raise 'Handling Variables not implemented yet'
         when 1 # CHOICE
-          var7.H()
-          expr.H()
+          var7.H
+          expr.H
         when 2 # FAIL
-          expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+          rhs = CT_External::FAILED
+          expr.replace(rhs.content)
         when 3 # OPERATION
-          var7.H()
-          expr.H()
+          var7.H
+          expr.H
         when 4 # "False" => CT_False
           rhs = Box.new(Application.new(Prelude::CT_failed,[]))
           expr.replace(rhs.content)
@@ -2256,13 +2322,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2282,13 +2349,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2314,13 +2382,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
       expr.replace(rhs.content)
@@ -2347,13 +2416,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
       expr.replace(rhs.content)
@@ -2361,18 +2431,20 @@ module Prelude
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
       # var5 case selector
-      var5 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, make_int(999999)]))
+      var5 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, CT_Character::make_char("
+")]))
       case var5.content.symbol.token
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var5.H()
-        expr.H()
+        var5.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var5.H()
-        expr.H()
+        var5.H
+        expr.H
       when 4 # "False" => CT_False
         rhs = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271_5Flet_5F_231,[var2, var3]))
         expr.replace(rhs.content)
@@ -2406,13 +2478,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2432,13 +2505,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2458,13 +2532,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2484,13 +2559,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2504,7 +2580,8 @@ module Prelude
 
   def CT_unlines.H(expr) # "unlines"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_concatMap,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_flip,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__2B_2B,[]))])), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))])), var1]))
+    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_concatMap,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_flip,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__2B_2B,[]))])), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("
+"), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -2527,13 +2604,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "False" => CT_False
       # [(3,[]),(4,[]),(5,[])]
       var3 = nil # to be bound soon
@@ -2552,7 +2630,8 @@ module Prelude
 
   def CT_words_2EisSpace_2E283.H(expr) # "words.isSpace.283"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, make_int(999999)])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, make_int(999999)])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, make_int(999999)])), Box.new(Application.new(Prelude::CT__3D_3D,[var1, make_int(999999)]))]))]))]))
+    rhs = Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char(" ")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("	")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("
+")])), Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("")]))]))]))]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -2565,13 +2644,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2591,13 +2671,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "(,)" => CT__28_2C_29
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
@@ -2617,13 +2698,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_foldr1,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_unwords_2E_5F_23lambda5,[]))])), var1]))
       expr.replace(rhs.content)
@@ -2637,7 +2719,7 @@ module Prelude
   def CT_unwords_2E_5F_23lambda5.H(expr) # "unwords._#lambda5"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__2B_2B,[var1, Box.new(Application.new(Prelude::CT__3A,[make_int(999999), var2]))]))
+    rhs = Box.new(Application.new(Prelude::CT__2B_2B,[var1, Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), var2]))]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -2694,13 +2776,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var7.H()
-      expr.H()
+      var7.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT_Nothing,[]))
       expr.replace(rhs.content)
@@ -2713,13 +2796,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var8.H()
-        expr.H()
+        var8.H
+        expr.H
       when 4 # "(,)" => CT__28_2C_29
         var5 = var8.content.arguments[0]
         var6 = var8.content.arguments[1]
@@ -2729,13 +2813,14 @@ module Prelude
         when 0 # VARIABLE
           raise 'Handling Variables not implemented yet'
         when 1 # CHOICE
-          var9.H()
-          expr.H()
+          var9.H
+          expr.H
         when 2 # FAIL
-          expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+          rhs = CT_External::FAILED
+          expr.replace(rhs.content)
         when 3 # OPERATION
-          var9.H()
-          expr.H()
+          var9.H
+          expr.H
         when 4 # "False" => CT_False
           # var10 case selector
           var10 = Box.new(Application.new(Prelude::CT_otherwise,[]))
@@ -2743,13 +2828,14 @@ module Prelude
           when 0 # VARIABLE
             raise 'Handling Variables not implemented yet'
           when 1 # CHOICE
-            var10.H()
-            expr.H()
+            var10.H
+            expr.H
           when 2 # FAIL
-            expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+            rhs = CT_External::FAILED
+            expr.replace(rhs.content)
           when 3 # OPERATION
-            var10.H()
-            expr.H()
+            var10.H
+            expr.H
           when 4 # "False" => CT_False
             rhs = Box.new(Application.new(Prelude::CT_failed,[]))
             expr.replace(rhs.content)
@@ -2790,13 +2876,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT__3A,[var1, Box.new(Application.new(Prelude::CT_enumFromTo,[Box.new(Application.new(Prelude::CT__2B,[var1, make_int(1)])), var2]))]))
       expr.replace(rhs.content)
@@ -2826,13 +2913,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "False" => CT_False
       # var6 case selector
       var6 = Box.new(Application.new(Prelude::CT_otherwise,[]))
@@ -2840,13 +2928,14 @@ module Prelude
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
       when 1 # CHOICE
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 2 # FAIL
-        expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+        rhs = CT_External::FAILED
+        expr.replace(rhs.content)
       when 3 # OPERATION
-        var6.H()
-        expr.H()
+        var6.H
+        expr.H
       when 4 # "False" => CT_False
         rhs = Box.new(Application.new(Prelude::CT_failed,[]))
         expr.replace(rhs.content)
@@ -3036,13 +3125,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var5.H()
-      expr.H()
+      var5.H
+      expr.H
     when 4 # "Nothing" => CT_Nothing
       rhs = var1
       expr.replace(rhs.content)
@@ -3067,13 +3157,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "Left" => CT_Left
       var4 = var6.content.arguments[0]
       rhs = Box.new(Application.new(Prelude::CT_apply,[var1, var4]))
@@ -3197,13 +3288,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT_done,[]))
       expr.replace(rhs.content)
@@ -3219,7 +3311,8 @@ module Prelude
 
   def CT_putStrLn.H(expr) # "putStrLn"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E,[Box.new(Application.new(Prelude::CT_putStr,[var1])), Box.new(Application.new(Prelude::CT_putChar,[make_int(999999)]))]))
+    rhs = Box.new(Application.new(Prelude::CT__3E_3E,[Box.new(Application.new(Prelude::CT_putStr,[var1])), Box.new(Application.new(Prelude::CT_putChar,[CT_Character::make_char("
+")]))]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -3233,18 +3326,20 @@ module Prelude
   def CT_getLine_2E_5F_23lambda7.H(expr) # "getLine._#lambda7"
     var1 = expr.content.arguments[0]
     # var2 case selector
-    var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, make_int(999999)]))
+    var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("
+")]))
     case var2.content.symbol.token
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[Box.new(Application.new(Prelude::CT_getLine,[])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_getLine_2E_5F_23lambda7_2E_5F_23lambda8,[var1]))]))]))
       expr.replace(rhs.content)
@@ -3285,31 +3380,32 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "IOError" => CT_IOError
       var2 = var6.content.arguments[0]
-      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))])), var2]))
+      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("i"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("/"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))])), var2]))
       expr.replace(rhs.content)
       expr.H()
     when 5 # "UserError" => CT_UserError
       var3 = var6.content.arguments[0]
-      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var3]))
+      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("u"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("s"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var3]))
       expr.replace(rhs.content)
       expr.H()
     when 6 # "FailError" => CT_FailError
       var4 = var6.content.arguments[0]
-      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var4]))
+      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("f"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("a"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("i"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("l"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var4]))
       expr.replace(rhs.content)
       expr.H()
     when 7 # "NondetError" => CT_NondetError
       var5 = var6.content.arguments[0]
-      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__3A,[make_int(999999), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))]))]))])), var5]))
+      rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("n"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("n"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("d"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("t"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))]))]))])), var5]))
       expr.replace(rhs.content)
       expr.H()
     end
@@ -3349,13 +3445,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var2.H()
-      expr.H()
+      var2.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_failed,[]))
       expr.replace(rhs.content)
@@ -3375,13 +3472,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var4.H()
-      expr.H()
+      var4.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT_return,[Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
       expr.replace(rhs.content)
@@ -3440,13 +3538,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var6.H()
-      expr.H()
+      var6.H
+      expr.H
     when 4 # "[]" => CT__5B_5D
       rhs = Box.new(Application.new(Prelude::CT_return,[var2]))
       expr.replace(rhs.content)
@@ -3502,13 +3601,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = var2
       expr.replace(rhs.content)
@@ -3531,13 +3631,14 @@ module Prelude
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'
     when 1 # CHOICE
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      rhs = CT_External::FAILED
+      expr.replace(rhs.content)
     when 3 # OPERATION
-      var3.H()
-      expr.H()
+      var3.H
+      expr.H
     when 4 # "False" => CT_False
       rhs = Box.new(Application.new(Prelude::CT_done,[]))
       expr.replace(rhs.content)

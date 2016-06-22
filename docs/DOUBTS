@@ -14,6 +14,21 @@ If this is correct, I can add an if condition and handle this function
 in CT_External.rb. My doubt is if my claim above is true. What about
 case when n<0 and d<0 ?
 
++++
+Yes, you can add any condition or statement in the code.
+Below are the formulas where the division must give a real.
+I think truncate is in ruby
+
+truncate x = if x >= 0 then floor x else ceiling x
+truncate 2.3 => 2
+truncate -2.3 => -2
+
+
+function quotRem (x, y) {
+  tmp = truncate(x / y)
+  return (tmp, x - y * tmp)
+}
+
 ------------------------------------------------------------------
 
 Tue Jun 21 15:47:32 PDT 2016 - Sergio

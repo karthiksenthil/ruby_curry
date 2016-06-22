@@ -1,0 +1,59 @@
+The runtime defines a function f.H for each operation symbol f.
+Function f.H takes an argument identified by expr.
+For example, where CT_head is the head-of-a-list function
+
+  def CT_head.H(expr)
+    ...
+  end
+
+This is the contract for f.H
+When f.H(expr) begins execution, expr is a full application of f
+to some arguments, i.e., expr=f(t1,...tn), where n is the arity of f
+When f.H(expr) ends execution expr=c(t1,...tk), where c is a constructor
+symbol of arity k, or c is the fail symbol.  
+f.H(expr) also return the updated expr.
+The updated expr has been derived from the initial expr by rewrite steps.
+
+The body of f.H is composed by a few patterns.
+There is a possibly empty set of nested cases.
+The selector of a case is an argument (subargument in a nested case)
+of expr.
+
+  def CT_head.H(expr) # "head"
+    selector = expr.content.arguments[0]
+    case selector.content.symbol.token
+    when ...
+    end
+  end
+
+Each branch of the case either is a nested case or follows one of 5
+patterns depending on the token of the selector.
+
+token=0: the selector is variable.  The variable is instantiated by a
+generator.  Not yet implemented.
+
+token=1 and token=3: the selector is rooted by g, where g is either
+an operation or the choice symbol. The selector is head normalized
+and the H function for expr is called again.  The code is
+
+      selector.H()
+      expr.H()
+
+token=2: expr is replaced by a failure.
+
+      expr.replace(CT_External::FAILED)
+
+token=x, where x >= 4: An expression, rhs, corresponding to a rule
+right-hand side is constructed and expr is replaced by rhs.
+If after the replacement expr is not rooted by a constructor,
+H is inviked for expr again.
+
+
+      rhs = expr.content.arguments[0].content.arguments[0]
+      expr.replace(rhs.content)
+      if expr.content.symbol.token == OPERATION
+        expr.H()
+      end
+
+The final test is avoided when the root of rhs is known at compile
+time.

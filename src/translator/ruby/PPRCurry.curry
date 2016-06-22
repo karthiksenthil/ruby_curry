@@ -92,8 +92,8 @@ ppStatement n (RAssign ref expression)
   = ppIndent n ++ format "var%d = " [FI ref]
       ++ ppExpression expression
 
--- A return instruction replaces the argument of the function
--- in which this statement appears with argument "expression"
+------------------------------------------------------------------
+
 ppStatement n (RReturn mode expression)
   | mode == Done
   = ppIndent n ++ "rhs = " ++ ppExpression expression
@@ -123,11 +123,9 @@ ppStatement n (RATable expression branch_list)
 ppStatement n (RException msg)
   = ppIndent n ++ format "raise '%s'" [FS msg]
 
-ppStatement n (RHFunction expression)
-  = ppIndent n ++ ppExpression expression ++ ".H()"
-
-ppStatement n (RReplace contractum)
-  = ppIndent n ++ "expr.replace(" ++ ppExpression contractum ++ ".content)"
+ppStatement n (Recur_On_Arg arg)
+  = ppIndent n ++ format "%s.H" [FS (ppExpression arg)] ++
+    ppIndent n ++ format "expr.H" []
 
 ppStatement n (RFill i list j)
   = ppIndent n ++ format "var%d%s = var%d" [FI i, FS path, FI j]
@@ -176,10 +174,6 @@ ppExpression FailExpression
 ppExpression (ROr expr_1 expr_2)
   = format "Box.new(Application.new(CT_System::CT_choice,[%s,%s]))"
       [FS (ppExpression expr_1), FS (ppExpression expr_2)]
-
--- TODO: look into this 
-ppExpression (Expr str)
-  = format "expr" []
 
 -------------------------------------------------------------------------------
 

@@ -80,7 +80,9 @@ single_expr (Reference i) = Ref i
 
 single_expr (Applic bool qname arg_list)
   | qname == ("Prelude","?")
-  = single_expr (IOr (head arg_list) (head (tail arg_list)))
+  -- TODO: the next two statement should be equal, but are not.
+  -- = single_expr (IOr (head arg_list) (head (tail arg_list)))
+  = single_expr (Applic bool ("CT_System","choice") arg_list)
   | otherwise
   = Application bool qname (map single_expr arg_list)
 
@@ -103,7 +105,7 @@ single_branch ((IConstructor (mod,name) _), stmt_list)
   = let case_stmts = map single_stmt stmt_list
     in (mod++"."++name, case_stmts) 
 
--- TODO: replace Prelude.failed with something more abstract
+-- TODO: This is too low-level.  Move it to PPRCurry
 
 -- These are the 4 initial entries in a pattern matching case
 -- They correspond to the following matches of the inductive variable
@@ -116,7 +118,7 @@ single_branch ((IConstructor (mod,name) _), stmt_list)
 default_branches expr
   = [ ("VARIABLE",
        [RException "Handling Variables not implemented yet"])
-    , ("CHOICE", [RHFunction (single_expr expr), RHFunction (Expr "expr")])
+    , ("CHOICE", [Recur_On_Arg (single_expr expr)])
     , ("FAIL", [RReturn Done FailExpression])
-    , ("OPERATION", [RHFunction (single_expr expr), RHFunction (Expr "expr")])
+    , ("OPERATION", [Recur_On_Arg (single_expr expr)])
     ]
