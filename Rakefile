@@ -12,7 +12,7 @@ Rake::TestTask.new do |t|
   t.name = "ftest"
   t.libs << "test"
   t.test_files = FileList['test/temp.rb']
-  t.ruby_opts = "-f"
+  # ENV["force-compile"] = true
   t.verbose = true
 end
 

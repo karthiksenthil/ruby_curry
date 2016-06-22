@@ -160,7 +160,11 @@ module CT_External
     if arg1 == 0
       return Box.new(Application.new(Prelude::CT_failed,[]))
     else
-      abort "ABORT: \"quot\" not yet defined"
+      if arg2 < 0 and arg1 > 0
+        return make_int(1+(arg2/arg1))
+      else
+        return make_int(arg2/arg1)
+      end
     end
   end
 
@@ -171,6 +175,23 @@ module CT_External
       return Box.new(Application.new(Prelude::CT_failed,[]))
     else
       return make_int(arg2.remainder(arg1))
+    end
+  end
+
+  # ------------------------------------------------------------------
+  # Character operations
+
+  def CT_External::CT_prim_5Ford(expr) # "prim_ord"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    return make_int(arg1.ord)
+  end
+
+  def CT_External::CT_prim_5Fchr(expr) # "prim_chr"
+    arg1 = expr.content.arguments[0].content.symbol.value
+    if arg1 < 0 or arg1 > 255
+      return Box.new(Application.new(Prelude::CT_failed,[]))
+    else
+      return CT_Character::make_char(arg1.chr)
     end
   end
 

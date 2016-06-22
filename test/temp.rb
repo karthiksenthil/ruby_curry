@@ -3,8 +3,9 @@ require 'minitest/autorun'
 require 'colorize'
 
 if ARGV[1] == "-f"
-  basedir = `dirname $(readlink -f $0)`.chomp
-  `rm -rf #{basedir}/curry_examples/.curry/*`
+  puts "working"
+  # basedir = `dirname $(readlink -f $0)`.chomp
+  # `rm -rf #{basedir}/curry_examples/.curry/*`
 end
 
 class TestPositivePrograms < Minitest::Test
