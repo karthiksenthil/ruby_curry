@@ -10,7 +10,7 @@ module CT_Character
     end
 
     def show
-      return @value.to_s
+      return "'"+@value+"'"
     end
   end
 

@@ -1,1 +1,1 @@
-Prelude:::(a,Prelude:::(b,Prelude:::(c,Prelude:::(d,Prelude::[]))))
+Prelude:::('a',Prelude:::('b',Prelude:::('c',Prelude:::('d',Prelude::[]))))

@@ -1,4 +1,20 @@
 ------------------------------------------------------------------
+Wed Jun 22 - Karthik
+
+I looked up how to implement the "quot" external function. It is 
+integer quotient always rounded to zero.
+
+Claim : Ruby's "/" operator gives the same result as Prelude::quot for all
+cases except when n<0 and d>0
+
+Ruby : -15/4 => -4
+Curry : quot (-15) 4 => -3
+
+If this is correct, I can add an if condition and handle this function
+in CT_External.rb. My doubt is if my claim above is true. What about
+case when n<0 and d<0 ?
+
+------------------------------------------------------------------
 
 Tue Jun 21 15:47:32 PDT 2016 - Sergio
 
@@ -9,6 +25,8 @@ Why is this necessary ?
 
 Tue Jun 21 15:47:32 PDT 2016 - Sergio
 
+== This problem is fixed. Non printable characters problem still persists.
+
 A character 'x' is printed as x.
 Should it be printed like 'x' ?
 
@@ -18,3 +36,8 @@ We are far from that, printing character is part of it.
 A complication is printing non visible characters such as '\n'.
 
 ------------------------------------------------------------------
+
+
+
+
+

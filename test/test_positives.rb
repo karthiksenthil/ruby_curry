@@ -4,57 +4,34 @@ require 'colorize'
 
 class TestPositivePrograms < Minitest::Test
 
-  def test_positives
-    basedir = `dirname $(readlink -f $0)`.chomp
+  basedir = `dirname $(readlink -f $0)`.chomp
+  all_tests = `ls #{basedir}/curry_examples/ | egrep '\.curry'`.split
 
-    all_progs = `ls #{basedir}/curry_examples/ | egrep '\.curry'`.split
+  all_tests.each do |test|
+    #compile curry to icur
+    `#{basedir}/bin/curry2icur -q #{basedir}/curry_examples/#{test}`
+    #convert icur to ruby object code
+    `#{basedir}/bin/icur2ruby -q #{basedir}/curry_examples/#{test}`
+    #execute object code and save output
+    obtained_output = `#{basedir}/bin/exec #{basedir}/curry_examples/#{test}`
 
-    # TODO : support for logging compiler output
-
-    obtained_matches = {}
-    expected_matches = {}
-    all_progs.each do |prog|
-      # puts "Started test on #{prog}"
-      #load expected output
+    if $?.exitstatus == 0
+      #test compiled successfully
       expected_output_file = "#{basedir}/curry_examples/" + 
-                              File.basename(prog,".curry") + ".output"
-
+                                File.basename(test,".curry") + ".output"
+      #check if output file exists
       if File.exist?(expected_output_file)
-        expected_matches[prog] = true
-        #compile curry to icur
-        `#{basedir}/bin/curry2icur -q #{basedir}/curry_examples/#{prog}`
-        #convert icur to ruby object code
-        `#{basedir}/bin/icur2ruby -q #{basedir}/curry_examples/#{prog}`
-        #execute object code and save output
-        obt_output = `#{basedir}/bin/exec #{basedir}/curry_examples/#{prog}`
-
-        if $?.exitstatus == 0
-          #program executed successfully
-          exp_output = File.open(expected_output_file).read()
-          # assert_equal(obt_output,exp_output,"#{prog} test failed.")
-          if exp_output == obt_output
-            obtained_matches[prog] = true
-            print ".".green
-          else
-            obtained_matches[prog] = false
-            print ".".red
-            `echo "#{obt_output}" > /tmp/#{prog}.tmp`
-            puts "\n#{prog} test failed."
-            puts `diff /tmp/#{prog}.tmp #{expected_output_file}`
-          end
-        else
-          obtained_matches[prog] = false
-          puts "\n#{prog} execution fails"
+        define_method("test_#{test}") do
+          expected_output = File.open(expected_output_file).read()
+          assert_equal(expected_output, obtained_output, "#{test} failed.")
         end
-
       else
-        puts "\nExpected output file for #{prog} not found"
-      end                        
-      
+        puts "No reference output found for #{test}.\n"
+      end
+    else
+      puts "#{test} execution failed.\n\n"
     end
 
-    assert_equal(expected_matches,obtained_matches,"Positive programs test failed.")
   end
 
 end
-
