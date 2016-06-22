@@ -126,9 +126,8 @@ ppStatement n (RException msg)
 ppStatement n (RHFunction expression)
   = ppIndent n ++ ppExpression expression ++ ".H()"
 
-ppStatement n (RReplace redex contractum)
-  = ppIndent n ++ ppExpression redex 
-               ++ ".replace(" ++ ppExpression contractum ++ ".content)"
+ppStatement n (RReplace contractum)
+  = ppIndent n ++ "expr.replace(" ++ ppExpression contractum ++ ".content)"
 
 ppStatement n (RFill i list j)
   = ppIndent n ++ format "var%d%s = var%d" [FI i, FS path, FI j]

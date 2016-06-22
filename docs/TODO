@@ -1,16 +1,28 @@
 Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
+Tue Jun 21 16:31:12 PDT 2016 - Sergio
+
+file expressions.rb should refactored
+
+1.  Put everying in a module CT_Expressions to limit the visibility
+    of "common" identifiers such as "Box" or "Application"
+
+2.  Split the file into several files.
+    (a) The definition and initialization of the classes,
+        almost all the functionality should be moved out.
+    (b) A file for printing.  Currently the method is "show",
+        but it should be renamed "to_s".  This will enable
+	expressions with variables that are not expressions.
+	This will simplify some application, such as "Partial".
+    (c) A file for equality.  Wait for this until the external
+        function (==) of the Prelude is coded to see what is needed.
+    (d) A similar file for "compare".
+
+------------------------------------------------------------------
 Sat Jun 18 14:33:07 PDT 2016 - Sergio
 
 Check whether src/runtime/lib is being used.  If not remove.
-
-------------------------------------------------------------------
-Fri Jun 17 2016 - Karthik
-
-Support for Fail expressions. Currently repl uses a global fail
-expression. Change this and verify with a couple of test curry
-programs
 
 ------------------------------------------------------------------
 Wed Jun 15 2016 - Karthik
@@ -30,15 +42,6 @@ The purpose of some directories is not clear, e.g., "user".
 Should object code be checked in?
 
 ------------------------------------------------------------------
-Sat Jun  4 12:28:02 PDT 2016 - Sergio
-
-Need testing suite.
-Code checked into the repository should pass the suite.
-
-Current tests refers to an obsolete system.
-At the very least, we should test that the translator from
-ICurry to ruby produces no error on all the sample files.
-
 ITESM BELOW THIS LINE ARE SOLVED.
 ==================================================================
 
@@ -206,3 +209,27 @@ What is the purpose of the 3rd argument of the constructor?
 
 If it is always "nil" it should be removed.
 If not it should be defined in the abstract RCurry.
+
+------------------------------------------------------------------
+Fri Jun 17 2016 - Karthik
+
+Support for Fail expressions. Currently repl uses a global fail
+expression. Change this and verify with a couple of test curry
+programs
+
++++
+I think this has been solved.
+
+------------------------------------------------------------------
+Sat Jun  4 12:28:02 PDT 2016 - Sergio
+
+Need testing suite.
+Code checked into the repository should pass the suite.
+
+Current tests refers to an obsolete system.
+At the very least, we should test that the translator from
+ICurry to ruby produces no error on all the sample files.
+
++++
+There are now two testing harnesses.
+------------------------------------------------------------------

@@ -78,11 +78,9 @@ single_stmt (BTable _ _ _ _) = RBTable
 
 single_expr (Reference i) = Ref i
 
--- TODO: should replace "prelude failed" too
--- TODO: should not depend on CT_System !!! bad abstraction
 single_expr (Applic bool qname arg_list)
   | qname == ("Prelude","?")
-  = single_expr (Applic bool ("CT_System","choice") arg_list)
+  = single_expr (IOr (head arg_list) (head (tail arg_list)))
   | otherwise
   = Application bool qname (map single_expr arg_list)
 
@@ -114,11 +112,11 @@ single_branch ((IConstructor (mod,name) _), stmt_list)
 --   2 => the fail expression
 --   3 => an operation-rooted expression
 -- Each entry is a list of RCurry statements
+
 default_branches expr
   = [ ("VARIABLE",
        [RException "Handling Variables not implemented yet"])
     , ("CHOICE", [RHFunction (single_expr expr), RHFunction (Expr "expr")])
-    -- next should be a global fail, not local
-    , ("FAIL", [RReplace (Expr "expr") (Application True ("Prelude","failed") [])])
+    , ("FAIL", [RReturn Done FailExpression])
     , ("OPERATION", [RHFunction (single_expr expr), RHFunction (Expr "expr")])
     ]

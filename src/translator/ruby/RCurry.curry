@@ -42,14 +42,14 @@ data RStatement
   | RExternal String    -- call an external (coded in ruby) function
   | RException String   -- TODO: What is this for
   | RHFunction RExpression
-  | RReplace RExpression RExpression   -- 1st one is expression to be replaced, 2nd is the replacement expr
+  | RReplace RExpression   -- expr is the replacement
   | RComment String
   | RFill Int [Int] Int
   | RBTable 
 
 data RVarType
-  = RILhs Int Int        -- for ILhs
-  | RIVar Int Int Int    -- for IVar
+  = RILhs Int Int
+  | RIVar Int Int Int
   | RICase Int
   | RIFree Int
   | RIBind Int

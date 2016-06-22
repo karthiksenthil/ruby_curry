@@ -5,6 +5,15 @@ BASEDIR=$(dirname $(dirname $(readlink -f $0)))
 
 TESTDIR=$BASEDIR/curry_examples
 
+while [ $1 ]
+do
+    case $1 in
+	-f) rm -rf $TESTDIR/.curry/*; shift;;
+	-*) echo `basename $0`: ignored flag \"$1\"; shift;;
+	*) break;;
+    esac
+done
+
 TESTS=`ls $TESTDIR/*.curry`
 
 for tmp in $TESTS;
