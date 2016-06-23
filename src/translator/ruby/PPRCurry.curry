@@ -3,6 +3,7 @@ module PPRCurry where
 import RCurry
 import XFormat
 import Utils
+import Char
 
 rcurryToRuby (RModule name import_list const_list func_decls func_defs)
   = format "module %s" [FS (capitalize name)]
@@ -198,7 +199,11 @@ ppExpression (Integer num)
   = format "make_int(%d)" [FI num]
 
 ppExpression (Character char)
-  = format "CT_Character::make_char(\"%c\")" [FC char]  
+  = format "CT_Character::make_char(\"%s\")" [FS (printable char)]
+  where printable char = if isControl char then toHex char else [char]
+        toHex char = ['\\', 'x', hexDigits !! div (ord char) 16
+	                       , hexDigits !! mod (ord char) 16]
+	hexDigits = "0123456789abcdef"
 
 ppExpression FailExpression
   = format "CT_External::FAILED" []

@@ -2431,8 +2431,7 @@ module Prelude
       var2 = var4.content.arguments[0]
       var3 = var4.content.arguments[1]
       # var5 case selector
-      var5 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, CT_Character::make_char("
-")]))
+      var5 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, CT_Character::make_char("\x0a")]))
       case var5.content.symbol.token
       when 0 # VARIABLE
         raise 'Handling Variables not implemented yet'
@@ -2580,8 +2579,7 @@ module Prelude
 
   def CT_unlines.H(expr) # "unlines"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_concatMap,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_flip,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__2B_2B,[]))])), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("
-"), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))])), var1]))
+    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_concatMap,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_flip,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__2B_2B,[]))])), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("\x0a"), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -2630,8 +2628,7 @@ module Prelude
 
   def CT_words_2EisSpace_2E283.H(expr) # "words.isSpace.283"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char(" ")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("	")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("
-")])), Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("")]))]))]))]))
+    rhs = Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char(" ")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x09")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0a")])), Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0d")]))]))]))]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -3311,8 +3308,7 @@ module Prelude
 
   def CT_putStrLn.H(expr) # "putStrLn"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E,[Box.new(Application.new(Prelude::CT_putStr,[var1])), Box.new(Application.new(Prelude::CT_putChar,[CT_Character::make_char("
-")]))]))
+    rhs = Box.new(Application.new(Prelude::CT__3E_3E,[Box.new(Application.new(Prelude::CT_putStr,[var1])), Box.new(Application.new(Prelude::CT_putChar,[CT_Character::make_char("\x0a")]))]))
     expr.replace(rhs.content)
     expr.H()
   end
@@ -3326,8 +3322,7 @@ module Prelude
   def CT_getLine_2E_5F_23lambda7.H(expr) # "getLine._#lambda7"
     var1 = expr.content.arguments[0]
     # var2 case selector
-    var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("
-")]))
+    var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0a")]))
     case var2.content.symbol.token
     when 0 # VARIABLE
       raise 'Handling Variables not implemented yet'

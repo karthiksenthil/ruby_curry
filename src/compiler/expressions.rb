@@ -16,6 +16,7 @@ class Box
     @content = content
   end
 
+  # TODO: replace should not be here.  Maybe in repl ???
   def replace(new_content) # new content should be content of new Box object(contractum) only
     replace_record = {redex_box: self, redex_content: self.content, contractum_content: new_content}
     $replacement_stack.push(replace_record)
