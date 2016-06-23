@@ -10,7 +10,11 @@ module CT_Character
     end
 
     def show
-      return "'"+@value+"'"
+      if (@value =~ /[^[:print:]]/).nil?
+        return "\""+@value+"\""
+      else
+        return "\"\\x"+@value.ord.to_s(16)+"\""
+      end
     end
   end
 

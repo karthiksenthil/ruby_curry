@@ -8,12 +8,9 @@ Rake::TestTask.new do |t|
 end
 
 # task for force recompile option
-Rake::TestTask.new do |t|
-  t.name = "ftest"
-  t.libs << "test"
-  t.test_files = FileList['test/temp.rb']
-  # ENV["force-compile"] = true
-  t.verbose = true
+task :ftest do
+  sh "rm -rf curry_examples/.curry/*"
+  Rake::Task["test"].invoke
 end
 
 # for custom rake test task

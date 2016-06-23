@@ -160,10 +160,12 @@ module CT_External
     if arg1 == 0
       return Box.new(Application.new(Prelude::CT_failed,[]))
     else
-      if arg2 < 0 and arg1 > 0
-        return make_int(1+(arg2/arg1))
+      x = arg2.fdiv(arg1)
+      # print "#{x} = #{arg2}/#{arg1}\n"
+      if x >= 0
+        return make_int(x.floor)
       else
-        return make_int(arg2/arg1)
+        return make_int(x.ceil)
       end
     end
   end
