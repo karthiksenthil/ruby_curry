@@ -4,7 +4,18 @@
 
 BASEDIR=$(dirname $(dirname $(readlink -f $0)))
 
-$BASEDIR/bin/curry2icur -q $1
-$BASEDIR/bin/icur2ruby -q $1
+FORCE=
+while [ $1 ]
+do
+    case $1 in
+	-f) FORCE=-f; shift;;
+	-*) echo `basename $0`: ignored flag \"$1\"; shift;;
+	*) break;;
+    esac
+done
+
+
+$BASEDIR/bin/curry2icur $FORCE -q $1
+$BASEDIR/bin/icur2ruby $FORCE -q $1
 $BASEDIR/bin/exec $1
 

@@ -37,13 +37,14 @@ data Mode = Done | Recur | Check
 data RStatement
   = RVariable RVarType
   | RAssign Int RExpression
+  | RFill Int [Int] Int
+  --
   | RATable RExpression [(Int, (String, [RStatement]))]
+  | RBTable RExpression [(RBuiltin, [RStatement])]
   | RReturn Mode RExpression
   | RExternal String    -- call an external (coded in ruby) function
   | RException String   -- TODO: What is this for
   | RComment String
-  | RFill Int [Int] Int
-  | RBTable
   | Recur_On_Arg RExpression
 
 data RVarType
@@ -52,6 +53,8 @@ data RVarType
   | RICase Int
   | RIFree Int
   | RIBind Int
+
+data RBuiltin = Rint Int | Rchar Char | Rfloat Float 
 
 data RExpression
   = Ref Int

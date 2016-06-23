@@ -8,9 +8,6 @@ OPERATION = 3
 # the constructor symbols take a token value starting from 4
 CONSTRUCTOR = 4 
 
-# global boolean for backtrack
-$backtrack = false
-
 # function to convert ruby variable name to curry name
 def conv_ruby_var(var_name)
   # TODO: Something breaks, maybe due to the naming scheme

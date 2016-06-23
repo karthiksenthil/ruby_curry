@@ -15,9 +15,6 @@ end
 # function for backtracking the replacement stack
 def backtrack(expr)
 
-  # $backtrack = true # culprit of the issue
-  # $replacement_stack.pop() # pop the top-most element(main)
-  main_element = $replacement_stack.last
   while(true)
     return false if $replacement_stack.empty?
     top = $replacement_stack.pop()

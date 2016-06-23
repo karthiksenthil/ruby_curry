@@ -132,8 +132,40 @@ ppStatement n (RFill i list j)
   where path = concatMap (\x -> format ".content.arguments[%d]" [FI (x-1)]) list 
 -- rfill %d %s %d" [FI i, FS (show list), FI j]
 
-ppStatement n (RBTable)
-  = ppIndent n ++ "abort \"ABORT: BTable not yet implemented\""
+ppStatement n (RBTable expr branch_list)
+  = make_case_fix_part_begin n expr
+    ++ ppIndent n ++ "else"
+    ++ make_if_then_else_case (n+1) expr (zip [0..] branch_list)
+    ++ make_case_fix_part_end n  
+
+make_case_fix_part_begin n expr
+  = ppIndent n ++ format "case %s.content.symbol.token" 
+                      [FS (ppExpression expr)]
+    ++ ppIndent n ++ "when 0 # VARIABLE"
+    ++ ppIndent (n+1) ++ "raise 'Handling Variables not implemented yet'"
+    ++ ppIndent n ++ "when 1, 3 # CHOICE, OPERATION"
+    ++ ppIndent (n+1) ++ format "%s.H" [FS (ppExpression expr)]
+        ++ ppIndent (n+1) ++ "expr.H"
+    ++ ppIndent n ++ "when 2 # FAIL"
+    ++ ppIndent (n+1) ++ "expr.replace(CT_External::FAILED.content)"
+
+make_case_fix_part_end n
+  = ppIndent n ++ "end"
+
+make_if_then_else_case n _ []
+  = ppIndent n ++ "else" ++
+    ppIndent (n+1) ++ "expr.replace(CT_External::FAILED.content)" ++
+    ppIndent n ++ "end"
+make_if_then_else_case n expr ((header, (val, stmt_list)) : branch_list)
+  = ppIndent n ++ format "%s %s.content.symbol.value == %s"
+        [FS (printable header), FS (ppExpression expr), builtin val]
+    ++ foldr ((++) . ppStatement (n+1)) "" stmt_list
+    ++ make_if_then_else_case n expr branch_list
+    where printable x | x==0 = "if"
+                      | True = "elsif"
+          builtin (Rint x) = FS (show x)
+          builtin (Rchar x) = FS (show x)
+          builtin (Rfloat x) = FS (show x)
 
 ppStatement n (RComment string)
   = ppIndent n ++ format "# %s" [FS string]

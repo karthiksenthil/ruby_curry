@@ -72,7 +72,12 @@ single_stmt (IExternal qname) = RExternal qname
 
 single_stmt (Comment string) = RComment string
 single_stmt (Fill i list j) = RFill i (map snd list) j
-single_stmt (BTable _ _ _ _) = RBTable
+single_stmt (BTable _ _ expr branch_list)
+  = RBTable (single_expr expr) [(builtin value, map single_stmt stmt_list)
+                     | (value, stmt_list) <- branch_list]
+  where builtin (Bint i)   = Rint i
+        builtin (Bchar c)  = Rchar c
+        builtin (Bfloat f) = Rfloat f
 
 --------------------------------------------------------------
 

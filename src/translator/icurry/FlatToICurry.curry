@@ -86,9 +86,11 @@ makeStmt stuff (Case flex expr branch_list@(Branch (Pattern cname _) _ : _))
           | otherwise = blookup dname z
 
 makeStmt stuff (Case flex expr branch_list@(Branch (LPattern _) _ : _))
-  = [BTable counter (flex==Flex) (makeExpr stuff expr)
-      [(translate pattern, makeStmt stuff branch_expr) 
-          | (Branch (LPattern pattern) branch_expr) <- branch_list]]
+  = [Declare (Variable counter ICase),
+     Assign counter (makeExpr stuff expr),
+     BTable counter (flex==Flex) (Reference counter)
+          [(translate pattern, makeStmt stuff branch_expr) 
+              | (Branch (LPattern pattern) branch_expr) <- branch_list]]
   where counter = unknown  -- later replace with an int
         translate (Intc x) = Bint x
         translate (Charc x) = Bchar x
