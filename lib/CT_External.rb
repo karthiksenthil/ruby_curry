@@ -197,6 +197,15 @@ module CT_External
     end
   end
 
+
+  # ------------------------------------------------------------------
+  # File IO operations
+  def CT_External::CT_prim_5FreadFileContents(expr)
+    arg1 = CT_External::expr_to_string(expr.content.arguments[0])
+  end
+
+
+
   # --- A non-reducible polymorphic function.
   # --- It is useful to express a failure in a search branch of the execution.
   # --- It could be defined by: `failed = head []`
@@ -206,6 +215,13 @@ module CT_External
 
   def CT_External::CT_failed(expr) # "failed"
     return CT_External::FAILED
+  end
+
+  # ------------------------------------------------------------------
+  # Utility functions
+  def CT_External::expr_to_string(expr)
+    puts expr.show
+    raise
   end
 
 end

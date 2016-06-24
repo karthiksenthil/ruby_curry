@@ -1,0 +1,1 @@
+main = readFile "/home/karthik/Documents/GSoC2016/code/redstar/ruby_curry/Rakefile"

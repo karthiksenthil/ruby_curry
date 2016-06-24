@@ -1,5 +1,30 @@
 ------------------------------------------------------------------
-Wed Jun 22 - Karthik
+Fri Jun 24 - Karthik
+
+The following is the list of external functions left to be implemented:
+
+$!!                        letrec
+$##                        =:<=
+prim_error                 =:<<=
+==                         ifVar
+=:=                        >>=
+&                          return
+compare                    prim_putChar
+prim_negateFloat           getChar      
+cond                       prim_readFile, prim_readFileContents
+catch                      prim_writeFile
+prim_show                  prim_appendFile
+
+
+Among these I feel the special character operations like $## and ==
+are important and need to implemented before other functions.
+
+The IO functions cannot be implemented at the moment.
+
+So can we have a priority list of functions to be implemented  ?
+
+------------------------------------------------------------------
+Wed Jun 22 - Karthik - Solved on Jun 23
 
 I looked up how to implement the "quot" external function. It is 
 integer quotient always rounded to zero.
