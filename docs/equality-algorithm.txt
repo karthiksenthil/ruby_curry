@@ -1,0 +1,33 @@
+Fri Jun 24 12:33:53 PDT 2016
+
+This node describes how to evaluate an expression of the form left=right, where left and right are expressions.  This algorithm is the basis of the Prelude builtin == operation.
+
+Operation == is called with the usual argument expr.
+Argument expr has 2 arguments that we call left and right.
+Both are inductive, thus there is the usuaL cases
+
+  case left
+  VARIABLE => not yet implemented
+  CHOICE and OPERATION => left.H; expr.H
+  FAIL => return left (which is a failure already)
+  CONSTRUCTOR =>
+    case right
+      VARIABLE => not yet implemented
+      CHOICE and OPERATION => right.H; expr.H
+      FAIL => return right (which is a failure already)
+      CONSTRUCTOR =>
+        if left.root is different than right.root
+	  return False
+	else
+	  suppose arity.left.root = k (also arity.right.root = k)
+	  # below == is not ruby but Prelude::==
+	  return left.arg1 == right.arg1 and ... and left.argk == right.argk
+	  # in particular, if k is zero return True
+	end
+    end # case right
+  end # case left
+
+We need == for symbols because integers and characters must check
+the value, where as algebraic constructors do not.
+
+We may code == for expressions, if this is convenient.
