@@ -1,5 +1,5 @@
 ------------------------------------------------------------------
-Fri Jun 24 - Karthik
+Fri Jun 24 - Karthik - Solved Jun 24
 
 The following is the list of external functions left to be implemented:
 
@@ -22,6 +22,14 @@ are important and need to implemented before other functions.
 The IO functions cannot be implemented at the moment.
 
 So can we have a priority list of functions to be implemented  ?
+
++++
+These functions will allow us to run the most programs:
+==, compare, =:=, =:<=
+
+All I/O functions are postponed.
+
+The remaining functions can wait.  I'll think whether and how they are needed.
 
 ------------------------------------------------------------------
 Wed Jun 22 - Karthik - Solved on Jun 23
@@ -63,7 +71,7 @@ Why is this necessary ?
 
 ------------------------------------------------------------------
 
-Tue Jun 21 15:47:32 PDT 2016 - Sergio
+Tue Jun 21 15:47:32 PDT 2016 - Sergio - I think this is solved
 
 == This problem is fixed. Non printable characters problem still persists.
 

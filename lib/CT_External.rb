@@ -26,7 +26,15 @@ module CT_External
   # Equality
 
   def CT_External::CT__3D_3D(expr)
-    abort "ABORT: (==) not yet defined"
+    arg1 = expr.content.arguments[0]
+    arg2 = expr.content.arguments[1]
+
+    if arg1 == arg2
+      return Box.new(Application.new(Prelude::CT_True,[]))
+    else
+      return Box.new(Application.new(Prelude::CT_False,[]))
+    end
+    
   end
 
   def CT_External::CT_compare(expr)
