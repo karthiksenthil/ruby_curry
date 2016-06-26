@@ -40,7 +40,7 @@ class XSymbol
     @arity = arity
   end
 
-  def show
+  def to_s
   	return conv_ruby_var(@name)
   end
 

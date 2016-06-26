@@ -47,6 +47,3 @@ module CT_Expressions
   end
 
 end
-
-t = CT_Expressions::make_variable("test","test")
-p t.inspect
