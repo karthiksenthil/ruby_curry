@@ -43,3 +43,4 @@ nil_sym.token_value = 4
 nil_app = CT_Expressions::Box.new(CT_Expressions::Application.new(nil_sym,[]))
 append_app = CT_Expressions::Box.new(CT_Expressions::Application.new(append_sym,[nil_app,nil_app]))
 puts append_app.to_s
+puts append_app.class

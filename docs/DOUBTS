@@ -1,4 +1,36 @@
 ------------------------------------------------------------------
+Mon Jun 27 - Karthik
+
+Apart from printing and equality, the following functions are 
+defined for expressions :-
+
+1. Box : replace, undo, H  (shall I define this in a separate file or 
+   move it to repl.rb?)
+
+Hard to tell what is the best place.  See the final comment.
+
+2. is_variant? method for all expressions - an unused functionality 
+   to check if 2 expressions are same or different. Used for definitional 
+   tree construction.
+
+Delete it.
+
+3. construct_expr? method for all expressions - again an unsed utility 
+   used to check if an expression is constructor rooted.
+
+Delete it.
+
+How should I go about defining these remaining functions for expressions ?
+
+This is difficult to say because there are conflicting goals.
+It is desirable to have small modules.
+It is desirable to avoid dependencies.
+A good approach is to put some functionality where there is
+the information the functionality depends on.
+If a class gets too big and complicated, split it.
+Writing good, elegant code is an art.
+
+------------------------------------------------------------------
 Fri Jun 24 - Karthik - Solved Jun 24
 
 The following is the list of external functions left to be implemented:

@@ -1,12 +1,6 @@
 Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
-Wed Jun 22 11:26:59 PDT 2016 - Sergio
-
-The Prelude contains many non-printable characters.
-This creates problems in generating Prelude.rb.
-
-------------------------------------------------------------------
 
 Tue Jun 21 16:31:12 PDT 2016 - Sergio
 
@@ -239,4 +233,10 @@ ICurry to ruby produces no error on all the sample files.
 
 +++
 There are now two testing harnesses.
+------------------------------------------------------------------
+
+Wed Jun 22 11:26:59 PDT 2016 - Sergio - Fixed
+
+The Prelude contains many non-printable characters.
+This creates problems in generating Prelude.rb.
 ------------------------------------------------------------------
