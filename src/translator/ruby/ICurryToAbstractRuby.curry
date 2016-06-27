@@ -50,9 +50,8 @@ single_stmt (ATable _ _ expr branch_list)
   = let constr_branch_list 
           = [(name, map single_stmt bl) | 
 	       (IConstructor (_,name) _, bl) <- branch_list]
-        all_branch_list
-	  = zip [0..] (default_branches expr ++ constr_branch_list)
-    in RATable (single_expr expr) all_branch_list
+        -- 4 is the starting index of constructors
+    in RATable (single_expr expr) (zip [4..] constr_branch_list)
 
 
 -- if expr is constructor rooted, then return it;

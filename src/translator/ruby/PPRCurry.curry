@@ -99,39 +99,31 @@ ppStatement n (RReturn mode expression)
   | mode == Done
   = ppIndent n ++ "rhs = " ++ ppExpression expression
       ++ ppIndent n ++ "expr.replace(rhs.content)"
+      ++ ppIndent n ++ "return expr"
   | mode == Recur
   = ppIndent n ++ "rhs = " ++ ppExpression expression
       ++ ppIndent n ++ "expr.replace(rhs.content)"
       ++ ppIndent n ++ "expr.H()"
+      ++ ppIndent n ++ "return expr"
   | otherwise
   = ppIndent n ++ "rhs = " ++ ppExpression expression
       ++ ppIndent n ++ "expr.replace(rhs.content)"
       ++ ppIndent n ++ "if expr.content.symbol.token == OPERATION"
       ++ ppIndent (n+1) ++ "expr.H()"
       ++ ppIndent n ++ "end"    
+      ++ ppIndent n ++ "return expr"
 
 ppStatement n (RExternal (_++"."++name))
   = ppIndent n
       ++ format "rhs = %s(expr)" [FS ("CT_External::"++ruby_unqual name)]
       ++ ppIndent n ++ "expr.replace(rhs.content)"
       ++ ppIndent n ++ "expr.H() if expr.content.symbol.token == OPERATION"
+      ++ ppIndent n ++ "return expr"
 
-ppStatement n (RATable expression branch_list)
-  = ppIndent n ++ "case " ++ ppExpression expression ++ ".content.symbol.token"
-      ++ foldr ((++) . ppBranch n) "" branch_list
-      ++ ppIndent n ++ "end"
-
-ppStatement n (RException msg)
-  = ppIndent n ++ format "raise '%s'" [FS msg]
-
-ppStatement n (Recur_On_Arg arg)
-  = ppIndent n ++ format "%s.H" [FS (ppExpression arg)] ++
-    ppIndent n ++ format "expr.H" []
-
-ppStatement n (RFill i list j)
-  = ppIndent n ++ format "var%d%s = var%d" [FI i, FS path, FI j]
-  where path = concatMap (\x -> format ".content.arguments[%d]" [FI (x-1)]) list 
--- rfill %d %s %d" [FI i, FS (show list), FI j]
+ppStatement n (RATable expr branch_list)
+  =  make_case_fix_part_begin n expr
+    ++ foldr ((++) . ppBranch (n+1)) "" branch_list
+    ++ make_case_fix_part_end n  
 
 ppStatement n (RBTable expr branch_list)
   = make_case_fix_part_begin n expr
@@ -139,24 +131,41 @@ ppStatement n (RBTable expr branch_list)
     ++ make_if_then_else_case (n+1) expr (zip [0..] branch_list)
     ++ make_case_fix_part_end n  
 
-make_case_fix_part_begin n expr
-  = ppIndent n ++ format "case %s.content.symbol.token" 
-                      [FS (ppExpression expr)]
-    ++ ppIndent n ++ "when 0 # VARIABLE"
-    ++ ppIndent (n+1) ++ "raise 'Handling Variables not implemented yet'"
-    ++ ppIndent n ++ "when 1, 3 # CHOICE, OPERATION"
-    ++ ppIndent (n+1) ++ format "%s.H" [FS (ppExpression expr)]
-        ++ ppIndent (n+1) ++ "expr.H"
-    ++ ppIndent n ++ "when 2 # FAIL"
-    ++ ppIndent (n+1) ++ "expr.replace(CT_External::FAILED.content)"
+ppStatement n (RException msg)
+  = ppIndent n ++ format "raise '%s'" [FS msg]
+
+ppStatement n (Recur_On_Arg arg)
+  = ppIndent n ++ format "%s.H" [FS (ppExpression arg)] ++
+    ppIndent n ++ "next"
+
+ppStatement n (RFill i list j)
+  = ppIndent n ++ format "var%d%s = var%d" [FI i, FS path, FI j]
+  where path = concatMap (\x -> format ".content.arguments[%d]" [FI (x-1)]) list 
+-- rfill %d %s %d" [FI i, FS (show list), FI j]
+
+make_case_fix_part_begin n arg
+  = ppIndent n ++ "loop {" 
+    ++ ppIndent (n+1) ++ format "case %s.content.symbol.token" 
+                      [FS (ppExpression arg)]
+    ++ ppIndent (n+1) ++ "when 0 # VARIABLE"
+    ++ ppIndent (n+2) ++ "raise 'Handling Variables not implemented yet'"
+    ++ ppIndent (n+1) ++ "when 1, 3 # CHOICE, OPERATION"
+    ++ ppIndent (n+2) ++ format "%s.H" [FS (ppExpression arg)]
+    ++ ppIndent (n+2) ++ "next"
+    ++ ppIndent (n+1) ++ "when 2 # FAIL"
+    ++ ppIndent (n+2) ++ "expr.replace(CT_External::FAILED.content)"
+    ++ ppIndent (n+2) ++ "return expr"
 
 make_case_fix_part_end n
-  = ppIndent n ++ "end"
+  = ppIndent (n+1) ++ "end"
+    ++ ppIndent n ++ "}" 
 
 make_if_then_else_case n _ []
   = ppIndent n ++ "else" ++
     ppIndent (n+1) ++ "expr.replace(CT_External::FAILED.content)" ++
+    ppIndent (n+1) ++ "return expr" ++
     ppIndent n ++ "end"
+
 make_if_then_else_case n expr ((header, (val, stmt_list)) : branch_list)
   = ppIndent n ++ format "%s %s.content.symbol.value == %s"
         [FS (printable header), FS (ppExpression expr), builtin val]
