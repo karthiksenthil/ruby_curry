@@ -91,7 +91,7 @@ class Variable < Expression
   end
 
   def show
-    return @symbol.show()
+    return @symbol.to_s()
   end
 
   # check if variable is a constructor-rooted expression
@@ -142,7 +142,7 @@ class Application < Expression
   # for example, xs ++ ys ==> ++(xs,ys)
   # Return : output(string)
   def show
-    output = symbol.show()+"("
+    output = symbol.to_s()+"("
     if !@arguments.nil?
       @arguments.each do |arg|
   	output += arg.show()+","
