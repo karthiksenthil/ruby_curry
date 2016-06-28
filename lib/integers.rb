@@ -1,4 +1,4 @@
-require_relative '../src/compiler/expressions.rb'
+require_relative '../src/compiler/expressions_include.rb'
 
 class Int_symbol < Constructor
   attr_accessor :name, :value, :arity, :token
@@ -7,17 +7,17 @@ class Int_symbol < Constructor
     super("int",0)
     @value = value
   end
-  def show
+  def to_s
     return @value.to_s
   end
 end
 
-class Int_expression < Application
+class Int_expression < CT_Expressions::Application
   def initialize(value)
     super(Int_symbol.new(value),[])
   end
-  def show
-    return @symbol.show
+  def to_s
+    return @symbol.to_s
   end
   def ==(another_int)
     if another_int.class == Int_expression
@@ -27,7 +27,7 @@ class Int_expression < Application
 end
 
 def make_int(x)
-  return Box.new(Int_expression.new(x))
+  return CT_Expressions::Box.new(Int_expression.new(x))
 end
 
 def binary(operator)

@@ -18,7 +18,7 @@ module CT_System
       var1.H()
       expr.replace(var1.content)
     when 2 # FAIL
-      expr.replace(Box.new(Application.new(Prelude::CT_failed,[])).content)
+      expr.replace(CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[])).content)
     else
      expr.replace(var1.content)
     end      

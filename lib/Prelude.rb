@@ -2,7 +2,7 @@ module Prelude
 
   require 'src/runtime/function_N.rb'
   require 'src/runtime/function_A.rb'
-  require 'src/compiler/expressions.rb'
+  require 'src/compiler/expressions_include.rb'
   require 'src/compiler/symbols.rb'
   require 'src/compiler/utilities.rb'
   require 'src/compiler/repl.rb'
@@ -272,7 +272,7 @@ module Prelude
   def CT__2E.H(expr) # "."
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT__2E_2E_5F_23lambda1,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E_2E_5F_23lambda1,[var1, var2]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -281,7 +281,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[var1, Box.new(Application.new(Prelude::CT_apply,[var2, var3]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var2, var3]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -312,7 +312,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[var1, Box.new(Application.new(Prelude::CT__28_2C_29,[var2, var3]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[var2, var3]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -336,7 +336,7 @@ module Prelude
       when 4 # "(,)" => CT__28_2C_29
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var3])), var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3])), var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -348,7 +348,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var3])), var2]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3])), var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -359,7 +359,7 @@ module Prelude
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
     # var4 case selector
-    var4 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
+    var4 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3]))
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
@@ -371,7 +371,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_until,[var1, var2, Box.new(Application.new(Prelude::CT_apply,[var2, var3]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_until,[var1, var2, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var2, var3]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -389,7 +389,7 @@ module Prelude
   def CT_seq.H(expr) # "seq"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_21,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_const,[var2]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_21,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_const,[var2]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -404,7 +404,7 @@ module Prelude
 
   def CT_ensureSpine.H(expr) # "ensureSpine"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_ensureSpine_2EensureList_2E20,[Box.new(Application.new(Prelude::CT_ensureNotFree,[var1]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_ensureSpine_2EensureList_2E20,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_ensureNotFree,[var1]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -425,13 +425,13 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var2 = var4.content.arguments[0]
         var3 = var4.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3A,[var2, Box.new(Application.new(Prelude::CT_ensureSpine,[var3]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var2, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_ensureSpine,[var3]))]))
         expr.replace(rhs.content)
         return expr
       end
@@ -441,7 +441,7 @@ module Prelude
   def CT__24.H(expr) # "$"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[var1, var2]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -464,7 +464,7 @@ module Prelude
   def CT__24_23.H(expr) # "$#"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_21,[var1, Box.new(Application.new(Prelude::CT_ensureNotFree,[var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_21,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_ensureNotFree,[var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -479,7 +479,7 @@ module Prelude
 
   def CT_error.H(expr) # "error"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5Ferror,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5Ferror,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -515,7 +515,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_False,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # "True" => CT_True
@@ -552,7 +552,7 @@ module Prelude
         end
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT_True,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -574,11 +574,11 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_True,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT_False,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -586,7 +586,7 @@ module Prelude
   end
 
   def CT_otherwise.H(expr) # "otherwise"
-    rhs = Box.new(Application.new(Prelude::CT_True,[]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
     expr.replace(rhs.content)
     return expr
   end
@@ -644,7 +644,7 @@ module Prelude
         expr.replace(rhs.content)
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT_True,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -691,7 +691,7 @@ module Prelude
   def CT__2F_3D.H(expr) # "/="
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_not,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_not,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -723,8 +723,8 @@ module Prelude
     var2 = expr.content.arguments[1]
     # [(3,[])]
     var3 = nil # to be bound soon
-    var3 = Box.new(Application.new(Prelude::CT_False,[]))
-    rhs = Box.new(Application.new(Prelude::CT__3C_5Fcase_5F_231,[var1, var2, var3]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C_5Fcase_5F_231,[var1, var2, var3]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -735,7 +735,7 @@ module Prelude
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
     # var4 case selector
-    var4 = Box.new(Application.new(Prelude::CT_compare,[var1, var2]))
+    var4 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_compare,[var1, var2]))
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
@@ -747,7 +747,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "LT" => CT_LT
-        rhs = Box.new(Application.new(Prelude::CT_True,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # "EQ" => CT_EQ
@@ -773,8 +773,8 @@ module Prelude
     var2 = expr.content.arguments[1]
     # [(3,[])]
     var3 = nil # to be bound soon
-    var3 = Box.new(Application.new(Prelude::CT_False,[]))
-    rhs = Box.new(Application.new(Prelude::CT__3E_5Fcase_5F_231,[var1, var2, var3]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_5Fcase_5F_231,[var1, var2, var3]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -785,7 +785,7 @@ module Prelude
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
     # var4 case selector
-    var4 = Box.new(Application.new(Prelude::CT_compare,[var1, var2]))
+    var4 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_compare,[var1, var2]))
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
@@ -811,7 +811,7 @@ module Prelude
         end
         return expr
       when 6 # "GT" => CT_GT
-        rhs = Box.new(Application.new(Prelude::CT_True,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -821,7 +821,7 @@ module Prelude
   def CT__3C_3D.H(expr) # "<="
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_not,[Box.new(Application.new(Prelude::CT__3E,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_not,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E,[var1, var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -830,7 +830,7 @@ module Prelude
   def CT__3E_3D.H(expr) # ">="
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_not,[Box.new(Application.new(Prelude::CT__3C,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_not,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C,[var1, var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -840,7 +840,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     # var3 case selector
-    var3 = Box.new(Application.new(Prelude::CT__3E_3D,[var1, var2]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3D,[var1, var2]))
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
@@ -873,7 +873,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     # var3 case selector
-    var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, var2]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C_3D,[var1, var2]))
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
@@ -1033,13 +1033,13 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT_True,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var2 = var4.content.arguments[0]
         var3 = var4.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_False,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -1071,7 +1071,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3A,[var3, Box.new(Application.new(Prelude::CT__2B_2B,[var4, var2]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[var4, var2]))]))
         expr.replace(rhs.content)
         return expr
       end
@@ -1099,7 +1099,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var2 = var4.content.arguments[0]
         var3 = var4.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__2B,[make_int(1), Box.new(Application.new(Prelude::CT_length,[var3]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B,[make_int(1), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_length,[var3]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -1130,7 +1130,7 @@ module Prelude
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
         # var6 case selector
-        var6 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, make_int(0)]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var2, make_int(0)]))
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
@@ -1143,7 +1143,7 @@ module Prelude
             return expr
           when 4 # "False" => CT_False
             # var7 case selector
-            var7 = Box.new(Application.new(Prelude::CT__3E,[var2, make_int(0)]))
+            var7 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E,[var2, make_int(0)]))
             loop {
               case var7.content.symbol.token
               when 0 # VARIABLE
@@ -1155,12 +1155,12 @@ module Prelude
                 expr.replace(CT_External::FAILED.content)
                 return expr
               when 4 # "False" => CT_False
-                rhs = Box.new(Application.new(Prelude::CT_failed,[]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
                 expr.replace(rhs.content)
                 expr.H()
                 return expr
               when 5 # "True" => CT_True
-                rhs = Box.new(Application.new(Prelude::CT__21_21,[var4, Box.new(Application.new(Prelude::CT__2D,[var2, make_int(1)]))]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__21_21,[var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2D,[var2, make_int(1)]))]))
                 expr.replace(rhs.content)
                 expr.H()
                 return expr
@@ -1195,13 +1195,13 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3A,[Box.new(Application.new(Prelude::CT_apply,[var1, var3])), Box.new(Application.new(Prelude::CT_map,[var1, var4]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_map,[var1, var4]))]))
         expr.replace(rhs.content)
         return expr
       end
@@ -1234,7 +1234,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var4 = var6.content.arguments[0]
         var5 = var6.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_foldl,[var1, Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var2])), var4])), var5]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldl,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var2])), var4])), var5]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -1264,7 +1264,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_foldl,[var1, var3, var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldl,[var1, var3, var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -1298,7 +1298,7 @@ module Prelude
       when 5 # ":" => CT__3A
         var4 = var6.content.arguments[0]
         var5 = var6.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var4])), Box.new(Application.new(Prelude::CT_foldr,[var1, var2, var5]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var4])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr,[var1, var2, var5]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -1350,7 +1350,7 @@ module Prelude
           when 5 # ":" => CT__3A
             var5 = var8.content.arguments[0]
             var6 = var8.content.arguments[1]
-            rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var3])), Box.new(Application.new(Prelude::CT_foldr1,[var1, Box.new(Application.new(Prelude::CT__3A,[var5, var6]))]))]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr1,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var5, var6]))]))]))
             expr.replace(rhs.content)
             expr.H()
             return expr
@@ -1376,14 +1376,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
         # var6 case selector
-        var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3]))
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
@@ -1395,12 +1395,12 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "False" => CT_False
-            rhs = Box.new(Application.new(Prelude::CT_filter,[var1, var4]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_filter,[var1, var4]))
             expr.replace(rhs.content)
             expr.H()
             return expr
           when 5 # "True" => CT_True
-            rhs = Box.new(Application.new(Prelude::CT__3A,[var3, Box.new(Application.new(Prelude::CT_filter,[var1, var4]))]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_filter,[var1, var4]))]))
             expr.replace(rhs.content)
             return expr
           end
@@ -1425,7 +1425,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -1444,13 +1444,13 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "[]" => CT__5B_5D
-            rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
             expr.replace(rhs.content)
             return expr
           when 5 # ":" => CT__3A
             var5 = var8.content.arguments[0]
             var6 = var8.content.arguments[1]
-            rhs = Box.new(Application.new(Prelude::CT__3A,[Box.new(Application.new(Prelude::CT__28_2C_29,[var3, var5])), Box.new(Application.new(Prelude::CT_zip,[var4, var6]))]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[var3, var5])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_zip,[var4, var6]))]))
             expr.replace(rhs.content)
             return expr
           end
@@ -1476,7 +1476,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -1495,7 +1495,7 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "[]" => CT__5B_5D
-            rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
             expr.replace(rhs.content)
             return expr
           when 5 # ":" => CT__3A
@@ -1514,13 +1514,13 @@ module Prelude
                 expr.replace(CT_External::FAILED.content)
                 return expr
               when 4 # "[]" => CT__5B_5D
-                rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
                 expr.replace(rhs.content)
                 return expr
               when 5 # ":" => CT__3A
                 var8 = var12.content.arguments[0]
                 var9 = var12.content.arguments[1]
-                rhs = Box.new(Application.new(Prelude::CT__3A,[Box.new(Application.new(Prelude::CT__28_2C_2C_29,[var4, var6, var8])), Box.new(Application.new(Prelude::CT_zip3,[var5, var7, var9]))]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[var4, var6, var8])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_zip3,[var5, var7, var9]))]))
                 expr.replace(rhs.content)
                 return expr
               end
@@ -1548,7 +1548,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -1567,13 +1567,13 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "[]" => CT__5B_5D
-            rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
             expr.replace(rhs.content)
             return expr
           when 5 # ":" => CT__3A
             var6 = var9.content.arguments[0]
             var7 = var9.content.arguments[1]
-            rhs = Box.new(Application.new(Prelude::CT__3A,[Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var4])), var6])), Box.new(Application.new(Prelude::CT_zipWith,[var1, var5, var7]))]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var4])), var6])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_zipWith,[var1, var5, var7]))]))
             expr.replace(rhs.content)
             return expr
           end
@@ -1600,7 +1600,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -1619,7 +1619,7 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "[]" => CT__5B_5D
-            rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
             expr.replace(rhs.content)
             return expr
           when 5 # ":" => CT__3A
@@ -1638,13 +1638,13 @@ module Prelude
                 expr.replace(CT_External::FAILED.content)
                 return expr
               when 4 # "[]" => CT__5B_5D
-                rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
                 expr.replace(rhs.content)
                 return expr
               when 5 # ":" => CT__3A
                 var9 = var13.content.arguments[0]
                 var10 = var13.content.arguments[1]
-                rhs = Box.new(Application.new(Prelude::CT__3A,[Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var5])), var7])), var9])), Box.new(Application.new(Prelude::CT_zipWith3,[var1, var6, var8, var10]))]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var5])), var7])), var9])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_zipWith3,[var1, var6, var8, var10]))]))
                 expr.replace(rhs.content)
                 return expr
               end
@@ -1670,7 +1670,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -1691,7 +1691,7 @@ module Prelude
           when 4 # "(,)" => CT__28_2C_29
             var4 = var7.content.arguments[0]
             var5 = var7.content.arguments[1]
-            rhs = Box.new(Application.new(Prelude::CT_unzip_5Flet_5F_231,[var4, var5, var3]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip_5Flet_5F_231,[var4, var5, var3]))
             expr.replace(rhs.content)
             expr.H()
             return expr
@@ -1707,12 +1707,12 @@ module Prelude
     var3 = expr.content.arguments[2]
     # [(6,[]),(7,[]),(8,[])]
     var6 = nil # to be bound soon
-    var6 = Box.new(Application.new(Prelude::CT_unzip,[var3]))
+    var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip,[var3]))
     var7 = nil # to be bound soon
-    var7 = Box.new(Application.new(Prelude::CT_unzip_2E_5F_23selFP2_23xs,[var6]))
+    var7 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip_2E_5F_23selFP2_23xs,[var6]))
     var8 = nil # to be bound soon
-    var8 = Box.new(Application.new(Prelude::CT_unzip_2E_5F_23selFP3_23ys,[var6]))
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var4, var7])), Box.new(Application.new(Prelude::CT__3A,[var5, var8]))]))
+    var8 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip_2E_5F_23selFP3_23ys,[var6]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var4, var7])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var5, var8]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -1786,7 +1786,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__28_2C_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -1808,7 +1808,7 @@ module Prelude
             var4 = var8.content.arguments[0]
             var5 = var8.content.arguments[1]
             var6 = var8.content.arguments[2]
-            rhs = Box.new(Application.new(Prelude::CT_unzip3_5Flet_5F_231,[var4, var5, var6, var3]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip3_5Flet_5F_231,[var4, var5, var6, var3]))
             expr.replace(rhs.content)
             expr.H()
             return expr
@@ -1825,14 +1825,14 @@ module Prelude
     var3 = expr.content.arguments[3]
     # [(7,[]),(8,[]),(9,[]),(10,[])]
     var7 = nil # to be bound soon
-    var7 = Box.new(Application.new(Prelude::CT_unzip3,[var3]))
+    var7 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip3,[var3]))
     var8 = nil # to be bound soon
-    var8 = Box.new(Application.new(Prelude::CT_unzip3_2E_5F_23selFP5_23xs,[var7]))
+    var8 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip3_2E_5F_23selFP5_23xs,[var7]))
     var9 = nil # to be bound soon
-    var9 = Box.new(Application.new(Prelude::CT_unzip3_2E_5F_23selFP6_23ys,[var7]))
+    var9 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip3_2E_5F_23selFP6_23ys,[var7]))
     var10 = nil # to be bound soon
-    var10 = Box.new(Application.new(Prelude::CT_unzip3_2E_5F_23selFP7_23zs,[var7]))
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var4, var8])), Box.new(Application.new(Prelude::CT__3A,[var5, var9])), Box.new(Application.new(Prelude::CT__3A,[var6, var10]))]))
+    var10 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unzip3_2E_5F_23selFP7_23zs,[var7]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var4, var8])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var5, var9])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var6, var10]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -1923,7 +1923,7 @@ module Prelude
 
   def CT_concat.H(expr) # "concat"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_foldr,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__2B_2B,[]))])), Box.new(Application.new(Prelude::CT__5B_5D,[])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -1931,7 +1931,7 @@ module Prelude
 
   def CT_concatMap.H(expr) # "concatMap"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_concat,[]))])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_map,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_concat,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_map,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -1940,14 +1940,14 @@ module Prelude
   def CT_iterate.H(expr) # "iterate"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__3A,[var2, Box.new(Application.new(Prelude::CT_iterate,[var1, Box.new(Application.new(Prelude::CT_apply,[var1, var2]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var2, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_iterate,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var2]))]))]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_repeat.H(expr) # "repeat"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__3A,[var1, Box.new(Application.new(Prelude::CT_repeat,[var1]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_repeat,[var1]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -1955,7 +1955,7 @@ module Prelude
   def CT_replicate.H(expr) # "replicate"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_take,[var1, Box.new(Application.new(Prelude::CT_repeat,[var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_take,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_repeat,[var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -1965,7 +1965,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     # var3 case selector
-    var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
@@ -1977,12 +1977,12 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_take_2Etakep_2E220,[var1, var2]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_take_2Etakep_2E220,[var1, var2]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2005,13 +2005,13 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3A,[var3, Box.new(Application.new(Prelude::CT_take,[Box.new(Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_take,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2022,7 +2022,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     # var3 case selector
-    var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
@@ -2034,7 +2034,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_drop_2Edropp_2E229,[var1, var2]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_drop_2Edropp_2E229,[var1, var2]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -2065,13 +2065,13 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_drop,[Box.new(Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_drop,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -2083,7 +2083,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     # var3 case selector
-    var3 = Box.new(Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C_3D,[var1, make_int(0)]))
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
@@ -2095,12 +2095,12 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239,[var1, var2]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239,[var1, var2]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), var2]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), var2]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2123,13 +2123,13 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_5Flet_5F_231,[var3, var1, var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_5Flet_5F_231,[var3, var1, var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -2143,12 +2143,12 @@ module Prelude
     var4 = expr.content.arguments[2]
     # [(5,[]),(6,[]),(7,[])]
     var5 = nil # to be bound soon
-    var5 = Box.new(Application.new(Prelude::CT_splitAt,[Box.new(Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))
+    var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_splitAt,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2D,[var1, make_int(1)])), var4]))
     var6 = nil # to be bound soon
-    var6 = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP9_23ys,[var5]))
+    var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP9_23ys,[var5]))
     var7 = nil # to be bound soon
-    var7 = Box.new(Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP10_23zs,[var5]))
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var3, var6])), var7]))
+    var7 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_splitAt_2EsplitAtp_2E239_2E_5F_23selFP10_23zs,[var5]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, var6])), var7]))
     expr.replace(rhs.content)
     return expr
   end
@@ -2223,14 +2223,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
         # var6 case selector
-        var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3]))
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
@@ -2242,11 +2242,11 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "False" => CT_False
-            rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
             expr.replace(rhs.content)
             return expr
           when 5 # "True" => CT_True
-            rhs = Box.new(Application.new(Prelude::CT__3A,[var3, Box.new(Application.new(Prelude::CT_takeWhile,[var1, var4]))]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_takeWhile,[var1, var4]))]))
             expr.replace(rhs.content)
             return expr
           end
@@ -2271,14 +2271,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
         # var6 case selector
-        var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3]))
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
@@ -2290,11 +2290,11 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "False" => CT_False
-            rhs = Box.new(Application.new(Prelude::CT__3A,[var3, var4]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, var4]))
             expr.replace(rhs.content)
             return expr
           when 5 # "True" => CT_True
-            rhs = Box.new(Application.new(Prelude::CT_dropWhile,[var1, var4]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_dropWhile,[var1, var4]))
             expr.replace(rhs.content)
             expr.H()
             return expr
@@ -2320,14 +2320,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var3 = var5.content.arguments[0]
         var4 = var5.content.arguments[1]
         # var6 case selector
-        var6 = Box.new(Application.new(Prelude::CT_apply,[var1, var3]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var3]))
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
@@ -2340,7 +2340,7 @@ module Prelude
             return expr
           when 4 # "False" => CT_False
             # var7 case selector
-            var7 = Box.new(Application.new(Prelude::CT_otherwise,[]))
+            var7 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_otherwise,[]))
             loop {
               case var7.content.symbol.token
               when 0 # VARIABLE
@@ -2352,18 +2352,18 @@ module Prelude
                 expr.replace(CT_External::FAILED.content)
                 return expr
               when 4 # "False" => CT_False
-                rhs = Box.new(Application.new(Prelude::CT_failed,[]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
                 expr.replace(rhs.content)
                 expr.H()
                 return expr
               when 5 # "True" => CT_True
-                rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__3A,[var3, var4]))]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, var4]))]))
                 expr.replace(rhs.content)
                 return expr
               end
             }
           when 5 # "True" => CT_True
-            rhs = Box.new(Application.new(Prelude::CT_span_5Flet_5F_231,[var3, var1, var4]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_span_5Flet_5F_231,[var3, var1, var4]))
             expr.replace(rhs.content)
             expr.H()
             return expr
@@ -2379,12 +2379,12 @@ module Prelude
     var4 = expr.content.arguments[2]
     # [(5,[]),(6,[]),(7,[])]
     var5 = nil # to be bound soon
-    var5 = Box.new(Application.new(Prelude::CT_span,[var1, var4]))
+    var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_span,[var1, var4]))
     var6 = nil # to be bound soon
-    var6 = Box.new(Application.new(Prelude::CT_span_2E_5F_23selFP12_23ys,[var5]))
+    var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_span_2E_5F_23selFP12_23ys,[var5]))
     var7 = nil # to be bound soon
-    var7 = Box.new(Application.new(Prelude::CT_span_2E_5F_23selFP13_23zs,[var5]))
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var3, var6])), var7]))
+    var7 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_span_2E_5F_23selFP13_23zs,[var5]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var3, var6])), var7]))
     expr.replace(rhs.content)
     return expr
   end
@@ -2445,7 +2445,7 @@ module Prelude
 
   def CT_break.H(expr) # "break"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_span,[Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_not,[]))])), var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_span,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_not,[]))])), var1]))]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -2465,7 +2465,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -2473,12 +2473,12 @@ module Prelude
         var3 = var7.content.arguments[1]
         # [(4,[]),(5,[]),(6,[])]
         var4 = nil # to be bound soon
-        var4 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271,[Box.new(Application.new(Prelude::CT__3A,[var2, var3]))]))
+        var4 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2Esplitline_2E271,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var2, var3]))]))
         var5 = nil # to be bound soon
-        var5 = Box.new(Application.new(Prelude::CT_lines_2E_5F_23selFP18_23l,[var4]))
+        var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2E_5F_23selFP18_23l,[var4]))
         var6 = nil # to be bound soon
-        var6 = Box.new(Application.new(Prelude::CT_lines_2E_5F_23selFP19_23xs_5Fl,[var4]))
-        rhs = Box.new(Application.new(Prelude::CT__3A,[var5, Box.new(Application.new(Prelude::CT_lines,[var6]))]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2E_5F_23selFP19_23xs_5Fl,[var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var5, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines,[var6]))]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2500,14 +2500,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
         var2 = var4.content.arguments[0]
         var3 = var4.content.arguments[1]
         # var5 case selector
-        var5 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, CT_Character::make_char("\x0a")]))
+        var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var2, CT_Character::make_char("\x0a")]))
         loop {
           case var5.content.symbol.token
           when 0 # VARIABLE
@@ -2519,12 +2519,12 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "False" => CT_False
-            rhs = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271_5Flet_5F_231,[var2, var3]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2Esplitline_2E271_5Flet_5F_231,[var2, var3]))
             expr.replace(rhs.content)
             expr.H()
             return expr
           when 5 # "True" => CT_True
-            rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__5B_5D,[])), var3]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])), var3]))
             expr.replace(rhs.content)
             return expr
           end
@@ -2538,12 +2538,12 @@ module Prelude
     var3 = expr.content.arguments[1]
     # [(4,[]),(5,[]),(6,[])]
     var4 = nil # to be bound soon
-    var4 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271,[var3]))
+    var4 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2Esplitline_2E271,[var3]))
     var5 = nil # to be bound soon
-    var5 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271_2E_5F_23selFP15_23ds,[var4]))
+    var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2Esplitline_2E271_2E_5F_23selFP15_23ds,[var4]))
     var6 = nil # to be bound soon
-    var6 = Box.new(Application.new(Prelude::CT_lines_2Esplitline_2E271_2E_5F_23selFP16_23es,[var4]))
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT__3A,[var2, var5])), var6]))
+    var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lines_2Esplitline_2E271_2E_5F_23selFP16_23es,[var4]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var2, var5])), var6]))
     expr.replace(rhs.content)
     return expr
   end
@@ -2658,7 +2658,7 @@ module Prelude
 
   def CT_unlines.H(expr) # "unlines"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_concatMap,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_flip,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__2B_2B,[]))])), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("\x0a"), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_concatMap,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_flip,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("\x0a"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2668,8 +2668,8 @@ module Prelude
     var1 = expr.content.arguments[0]
     # [(2,[])]
     var2 = nil # to be bound soon
-    var2 = Box.new(Application.new(Prelude::CT_dropWhile,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_words_2EisSpace_2E283,[]))])), var1]))
-    rhs = Box.new(Application.new(Prelude::CT_words_5Fcase_5F_231,[var2]))
+    var2 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_dropWhile,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_words_2EisSpace_2E283,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_words_5Fcase_5F_231,[var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2678,7 +2678,7 @@ module Prelude
   def CT_words_5Fcase_5F_231.H(expr) # "words_case_#1"
     var2 = expr.content.arguments[0]
     # var6 case selector
-    var6 = Box.new(Application.new(Prelude::CT__3D_3D,[var2, Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+    var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var2, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
@@ -2692,16 +2692,16 @@ module Prelude
       when 4 # "False" => CT_False
         # [(3,[]),(4,[]),(5,[])]
         var3 = nil # to be bound soon
-        var3 = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_break,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_words_2EisSpace_2E283,[]))]))])), var2]))
+        var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_break,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_words_2EisSpace_2E283,[]))]))])), var2]))
         var4 = nil # to be bound soon
-        var4 = Box.new(Application.new(Prelude::CT_words_2E_5F_23selFP21_23w,[var3]))
+        var4 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_words_2E_5F_23selFP21_23w,[var3]))
         var5 = nil # to be bound soon
-        var5 = Box.new(Application.new(Prelude::CT_words_2E_5F_23selFP22_23s2,[var3]))
-        rhs = Box.new(Application.new(Prelude::CT__3A,[var4, Box.new(Application.new(Prelude::CT_words,[var5]))]))
+        var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_words_2E_5F_23selFP22_23s2,[var3]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_words,[var5]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2710,7 +2710,7 @@ module Prelude
 
   def CT_words_2EisSpace_2E283.H(expr) # "words.isSpace.283"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char(" ")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x09")])), Box.new(Application.new(Prelude::CT__7C_7C,[Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0a")])), Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0d")]))]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__7C_7C,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char(" ")])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__7C_7C,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x09")])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__7C_7C,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0a")])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0d")]))]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2773,7 +2773,7 @@ module Prelude
   def CT_unwords.H(expr) # "unwords"
     var1 = expr.content.arguments[0]
     # var2 case selector
-    var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+    var2 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
@@ -2785,12 +2785,12 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_foldr1,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_unwords_2E_5F_23lambda5,[]))])), var1]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr1,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_unwords_2E_5F_23lambda5,[]))])), var1]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2800,33 +2800,33 @@ module Prelude
   def CT_unwords_2E_5F_23lambda5.H(expr) # "unwords._#lambda5"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__2B_2B,[var1, Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
   end
 
   def CT_reverse.H(expr) # "reverse"
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_foldl,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_flip,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__3A,[]))]))]))])), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldl,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_flip,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[]))]))]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_and.H(expr) # "and"
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_foldr,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__26_26,[]))])), Box.new(Application.new(Prelude::CT_True,[]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__26_26,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))]))]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_or.H(expr) # "or"
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_foldr,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__7C_7C,[]))])), Box.new(Application.new(Prelude::CT_False,[]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__7C_7C,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))]))]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_any.H(expr) # "any"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(Prelude::CT_or,[])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_map,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_or,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_map,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2834,7 +2834,7 @@ module Prelude
 
   def CT_all.H(expr) # "all"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(Prelude::CT_and,[])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_map,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_and,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_map,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2842,7 +2842,7 @@ module Prelude
 
   def CT_elem.H(expr) # "elem"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_any,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT__3D_3D,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_any,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2850,7 +2850,7 @@ module Prelude
 
   def CT_notElem.H(expr) # "notElem"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_all,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT__2F_3D,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_all,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2F_3D,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2872,7 +2872,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT_Nothing,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Nothing,[]))
         expr.replace(rhs.content)
         return expr
       when 5 # ":" => CT__3A
@@ -2894,7 +2894,7 @@ module Prelude
             var5 = var8.content.arguments[0]
             var6 = var8.content.arguments[1]
             # var9 case selector
-            var9 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, var5]))
+            var9 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, var5]))
             loop {
               case var9.content.symbol.token
               when 0 # VARIABLE
@@ -2907,7 +2907,7 @@ module Prelude
                 return expr
               when 4 # "False" => CT_False
                 # var10 case selector
-                var10 = Box.new(Application.new(Prelude::CT_otherwise,[]))
+                var10 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_otherwise,[]))
                 loop {
                   case var10.content.symbol.token
                   when 0 # VARIABLE
@@ -2919,19 +2919,19 @@ module Prelude
                     expr.replace(CT_External::FAILED.content)
                     return expr
                   when 4 # "False" => CT_False
-                    rhs = Box.new(Application.new(Prelude::CT_failed,[]))
+                    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
                     expr.replace(rhs.content)
                     expr.H()
                     return expr
                   when 5 # "True" => CT_True
-                    rhs = Box.new(Application.new(Prelude::CT_lookup,[var1, var4]))
+                    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_lookup,[var1, var4]))
                     expr.replace(rhs.content)
                     expr.H()
                     return expr
                   end
                 }
               when 5 # "True" => CT_True
-                rhs = Box.new(Application.new(Prelude::CT_Just,[var6]))
+                rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Just,[var6]))
                 expr.replace(rhs.content)
                 return expr
               end
@@ -2944,7 +2944,7 @@ module Prelude
 
   def CT_enumFrom.H(expr) # "enumFrom"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__3A,[var1, Box.new(Application.new(Prelude::CT_enumFrom,[Box.new(Application.new(Prelude::CT__2B,[var1, make_int(1)]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_enumFrom,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B,[var1, make_int(1)]))]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -2952,7 +2952,7 @@ module Prelude
   def CT_enumFromThen.H(expr) # "enumFromThen"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_iterate,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT__2B,[Box.new(Application.new(Prelude::CT__2D,[var2, var1]))]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_iterate,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2D,[var2, var1]))]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -2962,7 +2962,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     # var3 case selector
-    var3 = Box.new(Application.new(Prelude::CT__3E,[var1, var2]))
+    var3 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E,[var1, var2]))
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
@@ -2974,11 +2974,11 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT__3A,[var1, Box.new(Application.new(Prelude::CT_enumFromTo,[Box.new(Application.new(Prelude::CT__2B,[var1, make_int(1)])), var2]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_enumFromTo,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B,[var1, make_int(1)])), var2]))]))
         expr.replace(rhs.content)
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT__5B_5D,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))
         expr.replace(rhs.content)
         return expr
       end
@@ -2989,7 +2989,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    rhs = Box.new(Application.new(Prelude::CT_takeWhile,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_enumFromThenTo_2Ep_2E321,[var3, var1, var2]))])), Box.new(Application.new(Prelude::CT_enumFromThen,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_takeWhile,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_enumFromThenTo_2Ep_2E321,[var3, var1, var2]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_enumFromThen,[var1, var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3001,7 +3001,7 @@ module Prelude
     var3 = expr.content.arguments[2]
     var4 = expr.content.arguments[3]
     # var5 case selector
-    var5 = Box.new(Application.new(Prelude::CT__3E_3D,[var3, var2]))
+    var5 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3D,[var3, var2]))
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
@@ -3014,7 +3014,7 @@ module Prelude
         return expr
       when 4 # "False" => CT_False
         # var6 case selector
-        var6 = Box.new(Application.new(Prelude::CT_otherwise,[]))
+        var6 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_otherwise,[]))
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
@@ -3026,19 +3026,19 @@ module Prelude
             expr.replace(CT_External::FAILED.content)
             return expr
           when 4 # "False" => CT_False
-            rhs = Box.new(Application.new(Prelude::CT_failed,[]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
             expr.replace(rhs.content)
             expr.H()
             return expr
           when 5 # "True" => CT_True
-            rhs = Box.new(Application.new(Prelude::CT__3E_3D,[var4, var1]))
+            rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3D,[var4, var1]))
             expr.replace(rhs.content)
             expr.H()
             return expr
           end
         }
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT__3C_3D,[var4, var1]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3C_3D,[var4, var1]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3048,7 +3048,7 @@ module Prelude
 
   def CT_ord.H(expr) # "ord"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5Ford,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5Ford,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3063,7 +3063,7 @@ module Prelude
 
   def CT_chr.H(expr) # "chr"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5Fchr,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5Fchr,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3079,7 +3079,7 @@ module Prelude
   def CT__2B.H(expr) # "+"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Fplus,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Fplus,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3095,7 +3095,7 @@ module Prelude
   def CT__2D.H(expr) # "-"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Fminus,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Fminus,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3111,7 +3111,7 @@ module Prelude
   def CT__2A.H(expr) # "*"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Ftimes,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Ftimes,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3127,7 +3127,7 @@ module Prelude
   def CT_div.H(expr) # "div"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Fdiv,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Fdiv,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3143,7 +3143,7 @@ module Prelude
   def CT_mod.H(expr) # "mod"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Fmod,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Fmod,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3159,7 +3159,7 @@ module Prelude
   def CT_divMod.H(expr) # "divMod"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT_div,[var1, var2])), Box.new(Application.new(Prelude::CT_mod,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_div,[var1, var2])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_mod,[var1, var2]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -3167,7 +3167,7 @@ module Prelude
   def CT_quot.H(expr) # "quot"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Fquot,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Fquot,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3183,7 +3183,7 @@ module Prelude
   def CT_rem.H(expr) # "rem"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FInt_5Frem,[]))])), var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FInt_5Frem,[]))])), var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3199,14 +3199,14 @@ module Prelude
   def CT_quotRem.H(expr) # "quotRem"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__28_2C_29,[Box.new(Application.new(Prelude::CT_quot,[var1, var2])), Box.new(Application.new(Prelude::CT_rem,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_quot,[var1, var2])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_rem,[var1, var2]))]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_negate.H(expr) # "negate"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__2D,[make_int(0), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2D,[make_int(0), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3214,7 +3214,7 @@ module Prelude
 
   def CT_negateFloat.H(expr) # "negateFloat"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5FnegateFloat,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FnegateFloat,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3228,7 +3228,7 @@ module Prelude
   end
 
   def CT_success.H(expr) # "success"
-    rhs = Box.new(Application.new(Prelude::CT_True,[]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
     expr.replace(rhs.content)
     return expr
   end
@@ -3258,7 +3258,7 @@ module Prelude
         return expr
       when 5 # "Just" => CT_Just
         var4 = var5.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT_apply,[var2, var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var2, var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3284,13 +3284,13 @@ module Prelude
         return expr
       when 4 # "Left" => CT_Left
         var4 = var6.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT_apply,[var1, var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "Right" => CT_Right
         var5 = var6.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT_apply,[var2, var5]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var2, var5]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3315,7 +3315,7 @@ module Prelude
   def CT__3E_3E.H(expr) # ">>"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[var1, Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT__3E_3E_2E_5F_23lambda6,[var2]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[var1, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_2E_5F_23lambda6,[var2]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3333,7 +3333,7 @@ module Prelude
   end
 
   def CT_done.H(expr) # "done"
-    rhs = Box.new(Application.new(Prelude::CT_return,[Box.new(Application.new(Prelude::CT__28_29,[]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_29,[]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3341,7 +3341,7 @@ module Prelude
 
   def CT_putChar.H(expr) # "putChar"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5FputChar,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FputChar,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3363,7 +3363,7 @@ module Prelude
 
   def CT_readFile.H(expr) # "readFile"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5FreadFile,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FreadFile,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3386,7 +3386,7 @@ module Prelude
   def CT_writeFile.H(expr) # "writeFile"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT__24_23_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FwriteFile,[]))])), var1])), var2]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FwriteFile,[]))])), var1])), var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3402,7 +3402,7 @@ module Prelude
   def CT_appendFile.H(expr) # "appendFile"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT__24_23_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT_prim_5FappendFile,[]))])), var1])), var2]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5FappendFile,[]))])), var1])), var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3430,14 +3430,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT_done,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_done,[]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # ":" => CT__3A
         var2 = var4.content.arguments[0]
         var3 = var4.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3E_3E,[Box.new(Application.new(Prelude::CT_putChar,[var2])), Box.new(Application.new(Prelude::CT_putStr,[var3]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_putChar,[var2])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_putStr,[var3]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3447,14 +3447,14 @@ module Prelude
 
   def CT_putStrLn.H(expr) # "putStrLn"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E,[Box.new(Application.new(Prelude::CT_putStr,[var1])), Box.new(Application.new(Prelude::CT_putChar,[CT_Character::make_char("\x0a")]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_putStr,[var1])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_putChar,[CT_Character::make_char("\x0a")]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
   end
 
   def CT_getLine.H(expr) # "getLine"
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[Box.new(Application.new(Prelude::CT_getChar,[])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_getLine_2E_5F_23lambda7,[]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_getChar,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_getLine_2E_5F_23lambda7,[]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3463,7 +3463,7 @@ module Prelude
   def CT_getLine_2E_5F_23lambda7.H(expr) # "getLine._#lambda7"
     var1 = expr.content.arguments[0]
     # var2 case selector
-    var2 = Box.new(Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0a")]))
+    var2 = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3D_3D,[var1, CT_Character::make_char("\x0a")]))
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
@@ -3475,12 +3475,12 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[Box.new(Application.new(Prelude::CT_getLine,[])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_getLine_2E_5F_23lambda7_2E_5F_23lambda8,[var1]))]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_getLine,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_getLine_2E_5F_23lambda7_2E_5F_23lambda8,[var1]))]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT_return,[Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3491,7 +3491,7 @@ module Prelude
   def CT_getLine_2E_5F_23lambda7_2E_5F_23lambda8.H(expr) # "getLine._#lambda7._#lambda8"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_return,[Box.new(Application.new(Prelude::CT__3A,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var1, var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3499,14 +3499,14 @@ module Prelude
 
   def CT_userError.H(expr) # "userError"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_UserError,[var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_UserError,[var1]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_ioError.H(expr) # "ioError"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_error,[Box.new(Application.new(Prelude::CT_showError,[var1]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_error,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_showError,[var1]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3528,25 +3528,25 @@ module Prelude
         return expr
       when 4 # "IOError" => CT_IOError
         var2 = var6.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("i"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("/"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))])), var2]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("i"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("/"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))])), var2]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "UserError" => CT_UserError
         var3 = var6.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("u"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("s"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var3]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("u"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("s"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var3]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 6 # "FailError" => CT_FailError
         var4 = var6.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("f"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("a"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("i"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("l"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var4]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("f"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("a"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("i"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("l"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))])), var4]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 7 # "NondetError" => CT_NondetError
         var5 = var6.content.arguments[0]
-        rhs = Box.new(Application.new(Prelude::CT__2B_2B,[Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("n"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("n"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("d"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("t"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), Box.new(Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), Box.new(Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))]))]))])), var5]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2B_2B,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("n"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("n"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("d"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("t"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("e"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("o"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char("r"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(":"), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Character::make_char(" "), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))]))]))]))]))]))]))]))]))]))]))])), var5]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3563,7 +3563,7 @@ module Prelude
 
   def CT_show.H(expr) # "show"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_prim_5Fshow,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_prim_5Fshow,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3578,7 +3578,7 @@ module Prelude
 
   def CT_print.H(expr) # "print"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT_putStrLn,[Box.new(Application.new(Prelude::CT_show,[var1]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_putStrLn,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_show,[var1]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3599,12 +3599,12 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_failed,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT_done,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_done,[]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3627,14 +3627,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT_return,[Box.new(Application.new(Prelude::CT__5B_5D,[]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # ":" => CT__3A
         var2 = var4.content.arguments[0]
         var3 = var4.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[var2, Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_sequenceIO_2E_5F_23lambda9,[var3]))]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[var2, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_sequenceIO_2E_5F_23lambda9,[var3]))]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3645,7 +3645,7 @@ module Prelude
   def CT_sequenceIO_2E_5F_23lambda9.H(expr) # "sequenceIO._#lambda9"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[Box.new(Application.new(Prelude::CT_sequenceIO,[var1])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_sequenceIO_2E_5F_23lambda9_2E_5F_23lambda10,[var2]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_sequenceIO,[var1])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_sequenceIO_2E_5F_23lambda9_2E_5F_23lambda10,[var2]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3654,21 +3654,21 @@ module Prelude
   def CT_sequenceIO_2E_5F_23lambda9_2E_5F_23lambda10.H(expr) # "sequenceIO._#lambda9._#lambda10"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_return,[Box.new(Application.new(Prelude::CT__3A,[var1, var2]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[var1, var2]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
   end
 
   def CT_sequenceIO_5F.H(expr) # "sequenceIO_"
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_foldr,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(Prelude::CT__3E_3E,[]))])), Box.new(Application.new(Prelude::CT_done,[]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_done,[]))]))]))
     expr.replace(rhs.content)
     return expr
   end
 
   def CT_mapIO.H(expr) # "mapIO"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_sequenceIO,[]))])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_map,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_sequenceIO,[]))])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_map,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3676,7 +3676,7 @@ module Prelude
 
   def CT_mapIO_5F.H(expr) # "mapIO_"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(Prelude::CT_sequenceIO_5F,[])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_map,[var1]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_sequenceIO_5F,[])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_map,[var1]))]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3699,14 +3699,14 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "[]" => CT__5B_5D
-        rhs = Box.new(Application.new(Prelude::CT_return,[var2]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[var2]))
         expr.replace(rhs.content)
         expr.H()
         return expr
       when 5 # ":" => CT__3A
         var4 = var6.content.arguments[0]
         var5 = var6.content.arguments[1]
-        rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_apply,[var1, var2])), var4])), Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_foldIO_2E_5F_23lambda11,[var1, var5]))]))]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[var1, var2])), var4])), CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldIO_2E_5F_23lambda11,[var1, var5]))]))]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3718,7 +3718,7 @@ module Prelude
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
     var3 = expr.content.arguments[2]
-    rhs = Box.new(Application.new(Prelude::CT_foldIO,[var1, var3, var2]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldIO,[var1, var3, var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3727,7 +3727,7 @@ module Prelude
   def CT_liftIO.H(expr) # "liftIO"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT__3E_3E_3D,[var2, Box.new(Application.new(Prelude::CT__2E,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_return,[]))])), var1]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3E_3E_3D,[var2, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__2E,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_return,[]))])), var1]))]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3736,7 +3736,7 @@ module Prelude
   def CT_forIO.H(expr) # "forIO"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_mapIO,[var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_mapIO,[var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3745,7 +3745,7 @@ module Prelude
   def CT_forIO_5F.H(expr) # "forIO_"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(Prelude::CT_apply,[Box.new(Application.new(Prelude::CT_mapIO_5F,[var2])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_mapIO_5F,[var2])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3774,7 +3774,7 @@ module Prelude
         end
         return expr
       when 5 # "True" => CT_True
-        rhs = Box.new(Application.new(Prelude::CT_done,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_done,[]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3798,7 +3798,7 @@ module Prelude
         expr.replace(CT_External::FAILED.content)
         return expr
       when 4 # "False" => CT_False
-        rhs = Box.new(Application.new(Prelude::CT_done,[]))
+        rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_done,[]))
         expr.replace(rhs.content)
         expr.H()
         return expr
@@ -3816,14 +3816,14 @@ module Prelude
   def CT__3F.H(expr) # "?"
     var1 = expr.content.arguments[0]
     var2 = expr.content.arguments[1]
-    rhs = Box.new(Application.new(CT_System::CT_choice,[var1,var2]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[var1,var2]))
     expr.replace(rhs.content)
     expr.H()
     return expr
   end
 
   def CT_anyOf.H(expr) # "anyOf"
-    rhs = Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_foldr1,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(2)),Box.new(Application.new(CT_System::CT_choice,[]))]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_foldr1,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(2)),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[]))]))]))]))
     expr.replace(rhs.content)
     return expr
   end
@@ -3850,7 +3850,7 @@ module Prelude
 
   def CT_normalForm.H(expr) # "normalForm"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_21_21,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_id,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_21_21,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_id,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr
@@ -3858,7 +3858,7 @@ module Prelude
 
   def CT_groundNormalForm.H(expr) # "groundNormalForm"
     var1 = expr.content.arguments[0]
-    rhs = Box.new(Application.new(Prelude::CT__24_23_23,[Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(1)),Box.new(Application.new(Prelude::CT_id,[]))])), var1]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__24_23_23,[CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(1)),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_id,[]))])), var1]))
     expr.replace(rhs.content)
     expr.H()
     return expr

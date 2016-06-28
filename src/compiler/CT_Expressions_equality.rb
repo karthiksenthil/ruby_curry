@@ -1,5 +1,3 @@
-require_relative './CT_Expressions.rb'
-
 module CT_Expressions
 
   class Box
@@ -36,6 +34,7 @@ module CT_Expressions
 
 end
 
+=begin
 # test case
 append_sym = Operation.new("Test::CT_append",2)
 append_sym2 = Operation.new("Test::CT_append2",2)
@@ -45,3 +44,4 @@ nil_app = CT_Expressions::Box.new(CT_Expressions::Application.new(nil_sym,[]))
 append_app1 = CT_Expressions::Box.new(CT_Expressions::Application.new(append_sym,[nil_app,nil_app]))
 append_app2 = CT_Expressions::Box.new(CT_Expressions::Application.new(append_sym2,[nil_app,nil_app]))
 puts append_app1 == append_app2
+=end

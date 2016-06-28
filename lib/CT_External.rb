@@ -2,7 +2,7 @@ require 'pp'
 
 module CT_External
   
-  require 'src/compiler/expressions.rb'
+  require 'src/compiler/expressions_include.rb'
   require 'src/compiler/symbols.rb'
 
   # ------------------------------------------------------------------
@@ -19,7 +19,7 @@ module CT_External
     value = expr.content.arguments[0].content.symbol.value
     printf("   *** Ringing a bell for %d msec. ***\n", value)
     # return a value (the only one) of the declared type
-    return Box.new(Application.new(Prelude::CT__28_29,[]))
+    return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_29,[]))
   end
 
   # ------------------------------------------------------------------
@@ -30,11 +30,11 @@ module CT_External
     arg2 = expr.content.arguments[1]
 
     if arg1 == arg2
-      return Box.new(Application.new(Prelude::CT_True,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
     else
-      return Box.new(Application.new(Prelude::CT_False,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
     end
-    
+
   end
 
   def CT_External::CT_compare(expr)
@@ -65,12 +65,12 @@ module CT_External
     arg_list = partial.content.arguments[1].content.arguments
     new_arg_list = arg_list + [new_argument]
     xsymbol = partial.content.arguments[1].content.symbol
-    new_expr = Box.new(Application.new(xsymbol, new_arg_list))
+    new_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(xsymbol, new_arg_list))
     if missing==1
       return new_expr
     else
-      new_missing = Box.new(Int_expression.new(missing-1))
-      return Box.new(Application.new(CT_System::CT_partial,[new_missing,new_expr]))
+      new_missing = CT_Expressions::Box.new(Int_expression.new(missing-1))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[new_missing,new_expr]))
     end
   end
 
@@ -86,7 +86,7 @@ module CT_External
     when 1 # CHOICE
       arg.H()
     when 2 # FAIL
-      Box.new(Application.new(Prelude::CT_failed,[]))
+      CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     when 3 # OPERATION
       arg.H()
     else
@@ -116,7 +116,7 @@ module CT_External
     else
       # nothing to do, arg2 is already a HNF
     end
-    new_expr = Box.new(Application.new(Prelude::CT_apply,[arg1,arg2]))
+    new_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_apply,[arg1,arg2]))
     return new_expr
   end
 
@@ -146,7 +146,7 @@ module CT_External
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
     if arg1 == 0
-      return Box.new(Application.new(Prelude::CT_failed,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
       return make_int(arg2/arg1)
     end
@@ -156,7 +156,7 @@ module CT_External
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
     if arg1 == 0
-      return Box.new(Application.new(Prelude::CT_failed,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
       return make_int(arg2%arg1)
     end
@@ -166,7 +166,7 @@ module CT_External
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
     if arg1 == 0
-      return Box.new(Application.new(Prelude::CT_failed,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
       x = arg2.fdiv(arg1)
       # print "#{x} = #{arg2}/#{arg1}\n"
@@ -182,7 +182,7 @@ module CT_External
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
     if arg1 == 0
-      return Box.new(Application.new(Prelude::CT_failed,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
       return make_int(arg2.remainder(arg1))
     end
@@ -199,7 +199,7 @@ module CT_External
   def CT_External::CT_prim_5Fchr(expr) # "prim_chr"
     arg1 = expr.content.arguments[0].content.symbol.value
     if arg1 < 0 or arg1 > 255
-      return Box.new(Application.new(Prelude::CT_failed,[]))
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
       return CT_Character::make_char(arg1.chr)
     end
@@ -219,7 +219,7 @@ module CT_External
   # --- It could be defined by: `failed = head []`
   # failed :: _failed external
 
-  CT_External::FAILED = Box.new(Application.new(CT_System::CT_fail,[]))
+  CT_External::FAILED = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_fail,[]))
 
   def CT_External::CT_failed(expr) # "failed"
     return CT_External::FAILED
@@ -228,7 +228,7 @@ module CT_External
   # ------------------------------------------------------------------
   # Utility functions
   def CT_External::expr_to_string(expr)
-    puts expr.show
+    puts expr.to_s
     raise
   end
 

@@ -50,13 +50,13 @@ ppMainFunction [] = ""
 ppMainFunction (RFunctionDeclaration qname@(mod,name) arity : rest)
   | name == "main" && arity == 0
   = "\n" ++ ppIndent 1
-      ++ format "repl(Box.new(Application.new(%s,[])))" [FS (ruby_qual qname)]
+      ++ format "repl(CT_Expressions::Box.new(CT_Expressions::Application.new(%s,[])))" [FS (ruby_qual qname)]
   | otherwise = ppMainFunction rest
 
 runtimeRubyFiles = [
   "src/runtime/function_N.rb",
   "src/runtime/function_A.rb",
-  "src/compiler/expressions.rb",
+  "src/compiler/expressions_include.rb",
   "src/compiler/symbols.rb",
   "src/compiler/utilities.rb",
   "src/compiler/repl.rb",
@@ -196,12 +196,12 @@ ppExpression (Ref i)
   = format "var%d" [FI i]
 
 ppExpression (Application bool qname arg_list)
-  = format "Box.new(Application.new(%s," [FS (ruby_qual qname)]
+  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(%s," [FS (ruby_qual qname)]
       ++ foldr ((++) . ppArgList) "" [arg_list]
       ++"))"
 
 ppExpression (RPartial miss expr)
-  = format "Box.new(Application.new(CT_System::CT_partial,[Box.new(Int_expression.new(%d)),%s]))"
+  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(%d)),%s]))"
            [FI miss, FS (ppExpression expr)]
 
 ppExpression (Integer num)
@@ -218,7 +218,7 @@ ppExpression FailExpression
   = format "CT_External::FAILED" []
 
 ppExpression (ROr expr_1 expr_2)
-  = format "Box.new(Application.new(CT_System::CT_choice,[%s,%s]))"
+  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[%s,%s]))"
       [FS (ppExpression expr_1), FS (ppExpression expr_2)]
 
 -------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 module CT_Character
-  require_relative '../src/compiler/expressions.rb'
+  require_relative '../src/compiler/expressions_include.rb'
 
   class Char_symbol < Constructor
     attr_accessor :name, :value, :arity, :token
@@ -9,7 +9,7 @@ module CT_Character
       @value = value
     end
 
-    def show
+    def to_s
       if (@value =~ /[^[:print:]]/).nil?
         return "\""+@value+"\""
       else
@@ -18,12 +18,12 @@ module CT_Character
     end
   end
 
-  class Char_expression < Application
+  class Char_expression < CT_Expressions::Application
     def initialize(value)
       super(Char_symbol.new(value),[])
     end
-    def show
-      return @symbol.show
+    def to_s
+      return @symbol.to_s
     end
     def ==(another_char)
       if another_char.class == Char_expression
@@ -33,7 +33,7 @@ module CT_Character
   end
 
   def CT_Character::make_char(x)
-    return Box.new(CT_Character::Char_expression.new(x))
+    return CT_Expressions::Box.new(CT_Character::Char_expression.new(x))
   end
 
 end

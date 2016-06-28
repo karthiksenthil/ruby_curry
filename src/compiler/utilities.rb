@@ -1,5 +1,5 @@
 # some utility functions
-require_relative './expressions.rb'
+require_relative './expressions_include.rb'
 
 # utiltiy for logging
 module Log
@@ -27,8 +27,9 @@ def puti(symb, the_binding)
   return var_name
 end
 
+module CT_Expressions
 # extend classes Application and Variable to print code and find path
-class Application < Expression
+class Application < CT_Expressions::Expression
 
 	# parameter expression => lhs_pattern of a leaf (see Notes print_code 1.1)
 	def print_code(expression)
@@ -90,7 +91,7 @@ class Application < Expression
 
 end
 
-class Variable < Expression
+class Variable < CT_Expressions::Expression
 
 	# to print code for a Variable, we find the path of the variable w.r.t an expression 
 	def print_code(expression)
@@ -129,6 +130,7 @@ def build_contractum_replace(path)
 
 end
 
+end
 
 =begin
 

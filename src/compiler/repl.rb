@@ -1,5 +1,10 @@
 require 'optparse'
-require_relative './expressions.rb'
+require_relative './expressions_include.rb'
+
+# a structure to trace each and every replacement
+# structure of stack element :
+# {box_of_redex, content_of_redex, content_of_contractum}
+$replacement_stack = [] 
 
 # function for setting flags for runtime trace
 def set_execution_trace
@@ -46,11 +51,11 @@ def repl(top_level)
   $trace = set_execution_trace()
 
   # starting computation
-  Log.write(sprintf("A %s\n",top_level.show)) if $trace
+  Log.write(sprintf("A %s\n",top_level.to_s)) if $trace
 
   loop do 
     # report looping
-    Log.write(sprintf("L %s\n",top_level.show)) if $trace
+    Log.write(sprintf("L %s\n",top_level.to_s)) if $trace
     top_level.N()
 
     if top_level.content.symbol.token == FAIL
@@ -60,10 +65,10 @@ def repl(top_level)
     else
       # either trace or print value  
       if $trace
-        Log.write(sprintf("V %s\n",top_level.show))
+        Log.write(sprintf("V %s\n",top_level.to_s))
       else
         # print value unless tracing
-        printf("%s\n", top_level.show)
+        printf("%s\n", top_level.to_s)
       end
       # print_stack
     end
