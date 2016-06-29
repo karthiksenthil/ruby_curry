@@ -10,6 +10,11 @@ class Int_symbol < Constructor
   def to_s
     return @value.to_s
   end
+  def ==(another_int)
+    if another_int.class == Int_symbol
+      return @value == another_int.value
+    end
+  end
 end
 
 class Int_expression < CT_Expressions::Application

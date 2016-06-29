@@ -26,13 +26,59 @@ module CT_External
   # Equality
 
   def CT_External::CT__3D_3D(expr)
-    arg1 = expr.content.arguments[0]
-    arg2 = expr.content.arguments[1]
+    left = expr.content.arguments[0]
+    right = expr.content.arguments[1]
 
-    if arg1 == arg2
-      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+    case left.content.symbol.token
+    when 0 #VARIABLE
+      raise 'Handling Variables is not implemented yet'
+    when 1, 3 # CHOICE, OPERATION
+      left.H
+      expr.H
+    when 2 #FAIL
+      return left
     else
-      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+      case right.content.symbol.token
+      when 0 #VARIABLE
+        raise 'Handling Variables is not implemented yet'
+      when 1, 3 # CHOICE, OPERATION
+        right.H
+        expr.H
+      when 2 #FAIL
+        return right
+      else
+
+        if left.content.symbol == right.content.symbol
+          k = left.content.symbol.arity
+          if k == 0
+            return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+          end
+
+          # array to hold equality expressions between args
+          args_equality = []
+          (0..k-1).each do |i|
+            # left.argi == right.argi
+            args_equality << CT_Expressions::Box.new(CT_Expressions::Application.new(
+                              Prelude::CT__3D_3D,[left.content.arguments[i],right.content.arguments[i]]))
+          end
+
+          while args_equality.length > 1
+            curr_arg = args_equality[0]
+            next_arg = args_equality[1]
+            # curr_arg && next_arg
+            and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                        Prelude::CT__26_26,[curr_arg,next_arg]))
+            args_equality[0] = and_expr
+            args_equality.delete_at(1)
+          end
+
+          return args_equality[0]
+
+        else
+          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+        end
+
+      end
     end
 
   end

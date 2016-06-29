@@ -16,6 +16,12 @@ module CT_Character
         return "\"\\x"+@value.ord.to_s(16)+"\""
       end
     end
+
+    def ==(another_char)
+    if another_char.class == Char_symbol
+      return @value == another_char.value
+    end
+  end
   end
 
   class Char_expression < CT_Expressions::Application
