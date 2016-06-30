@@ -10,10 +10,10 @@ module CT_Character
     end
 
     def to_s
-      if (@value =~ /[^[:print:]]/).nil?
-        return "\""+@value+"\""
+      if @value < " " || "~" < @value
+        return sprintf("\"\\x%02x\"", @value.ord)
       else
-        return "\"\\x"+@value.ord.to_s(16)+"\""
+        return sprintf("\"%s\"", @value)
       end
     end
 

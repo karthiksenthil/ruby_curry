@@ -1,0 +1,37 @@
+Wed Jun 29 20:54:34 PDT 2016
+
+This note describes how to evaluate an expression of the form (compare left right), where left and right are expressions.  This algorithm is the basis of the Prelude builtin compare operation.
+
+Operation compare is called with the usual argument expr.
+Argument expr has 2 arguments that we call left and right.
+Both are inductive, thus there is the usuaL cases
+
+  case left
+  VARIABLE => not yet implemented
+  CHOICE and OPERATION => left.H; expr.H
+  FAIL => return left (which is a failure already)
+  CONSTRUCTOR =>
+    case right
+      VARIABLE => not yet implemented
+      CHOICE and OPERATION => right.H; expr.H
+      FAIL => return right (which is a failure already)
+      CONSTRUCTOR =>
+        if left.root.name alphabetically precedes right.root.name
+	  return Prelude::LT
+	elsif left.root.name alphabetically follows right.root.name
+	  return Prelude::GT
+	else /* the roots have the same name, hence the same arity */
+	  suppose arity.left.root = k
+	  for i in 1..k
+             tmp = compare left.arg[i] right.arg[i]
+	     if tmp is different from Prelude::EQ
+	       return tmp
+	     end_if
+	  end_for
+	  return Prelude::EQ
+	end
+    end # case right
+  end # case left
+
+We need compare for symbols because integers and characters must check
+the value, where as algebraic constructors do not.
