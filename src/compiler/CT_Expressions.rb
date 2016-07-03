@@ -1,12 +1,16 @@
 module CT_Expressions
 
-  require_relative './symbols.rb'
+  require_relative './CT_Symbols'
 
   class Box
     attr_accessor :content #content of a Box is an Expression object
 
     def initialize(content)
       @content = content
+    end
+
+    def H
+      @content.symbol.H(self)
     end
   end
 

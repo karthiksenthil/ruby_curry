@@ -1,11 +1,11 @@
 module CT_Character
   require_relative '../src/compiler/expressions_include.rb'
 
-  class Char_symbol < Constructor
-    attr_accessor :name, :value, :arity, :token
+  class Char_symbol < CT_Symbols::Constructor
+    attr_accessor :value
     def initialize(value)
       raise format("Illegal character \"%s\"", value) unless value.instance_of? String
-      super("char",0)
+      super("char",0,CT_Symbols::CONSTRUCTOR)
       @value = value
     end
 
@@ -18,10 +18,8 @@ module CT_Character
     end
 
     def ==(another_char)
-    if another_char.class == Char_symbol
-      return @value == another_char.value
+      return another_char.class == self.class && another_char.value == @value
     end
-  end
   end
 
   class Char_expression < CT_Expressions::Application

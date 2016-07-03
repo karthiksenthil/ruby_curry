@@ -4,6 +4,7 @@ import RCurry
 import XFormat
 import Utils
 import Char
+import List(intersperse)
 
 rcurryToRuby (RModule name import_list const_list func_decls func_defs)
   = format "module %s" [FS (capitalize name)]
@@ -28,14 +29,13 @@ ppDefinition_list func_defs@(_:_)
   = foldr ((++) . ppFuncDefinition) "" func_defs
 
 ppConstructor (RConstructor qname arity token)
-  = ppIndent 1 ++ format "%s = Constructor.new('%s',%d)" 
-                         [FS (ruby_qual qname), FS (ruby_qual qname), FI arity]
-      ++ ppIndent 1 ++ format "%s.token_value = %d"
-                              [FS (ruby_qual qname), FI token]
+  = ppIndent 1
+      ++ format "%s = CT_Symbols::Constructor.new('%s',%d,%d)" 
+           [FS (ruby_qual qname), FS (ruby_qual qname), FI arity, FI token]
 
 ppFuncDeclaration (RFunctionDeclaration qname arity)
   = ppIndent 1 ++
-       format "%s = Operation.new('%s',%d) # \"%s\""
+       format "%s = CT_Symbols::Operation.new('%s',%d) # \"%s\""
        [FS (ruby_qual qname), FS (ruby_qual qname), FI arity, FS(snd qname)]
 
 ppFuncDefinition (RFunctionDefinition (_,name) arity stmt_list)
@@ -57,7 +57,6 @@ runtimeRubyFiles = [
   "src/runtime/function_N.rb",
   "src/runtime/function_A.rb",
   "src/compiler/expressions_include.rb",
-  "src/compiler/symbols.rb",
   "src/compiler/utilities.rb",
   "src/compiler/repl.rb",
   "CT_System.rb",
@@ -98,17 +97,17 @@ ppStatement n (RAssign ref expression)
 ppStatement n (RReturn mode expression)
   | mode == Done
   = ppIndent n ++ "rhs = " ++ ppExpression expression
-      ++ ppIndent n ++ "expr.replace(rhs.content)"
+      ++ ppIndent n ++ "replacex(expr,rhs)"
       ++ ppIndent n ++ "return expr"
   | mode == Recur
   = ppIndent n ++ "rhs = " ++ ppExpression expression
-      ++ ppIndent n ++ "expr.replace(rhs.content)"
+      ++ ppIndent n ++ "replacex(expr,rhs)"
       ++ ppIndent n ++ "expr.H()"
       ++ ppIndent n ++ "return expr"
   | otherwise
   = ppIndent n ++ "rhs = " ++ ppExpression expression
-      ++ ppIndent n ++ "expr.replace(rhs.content)"
-      ++ ppIndent n ++ "if expr.content.symbol.token == OPERATION"
+      ++ ppIndent n ++ "replacex(expr,rhs)"
+      ++ ppIndent n ++ "if expr.content.symbol.token == CT_Symbols::OPERATION"
       ++ ppIndent (n+1) ++ "expr.H()"
       ++ ppIndent n ++ "end"    
       ++ ppIndent n ++ "return expr"
@@ -116,8 +115,8 @@ ppStatement n (RReturn mode expression)
 ppStatement n (RExternal (_++"."++name))
   = ppIndent n
       ++ format "rhs = %s(expr)" [FS ("CT_External::"++ruby_unqual name)]
-      ++ ppIndent n ++ "expr.replace(rhs.content)"
-      ++ ppIndent n ++ "expr.H() if expr.content.symbol.token == OPERATION"
+      ++ ppIndent n ++ "replacex(expr,rhs)"
+      ++ ppIndent n ++ "expr.H() if expr.content.symbol.token == CT_Symbols::OPERATION"
       ++ ppIndent n ++ "return expr"
 
 ppStatement n (RATable expr branch_list)
@@ -153,7 +152,7 @@ make_case_fix_part_begin n arg
     ++ ppIndent (n+2) ++ format "%s.H" [FS (ppExpression arg)]
     ++ ppIndent (n+2) ++ "next"
     ++ ppIndent (n+1) ++ "when 2 # FAIL"
-    ++ ppIndent (n+2) ++ "expr.replace(CT_External::FAILED.content)"
+    ++ ppIndent (n+2) ++ "replacex(expr,CT_External::FAILED)"
     ++ ppIndent (n+2) ++ "return expr"
 
 make_case_fix_part_end n
@@ -162,7 +161,7 @@ make_case_fix_part_end n
 
 make_if_then_else_case n _ []
   = ppIndent n ++ "else" ++
-    ppIndent (n+1) ++ "expr.replace(CT_External::FAILED.content)" ++
+    ppIndent (n+1) ++ "replacex(expr,CT_External::FAILED)" ++
     ppIndent (n+1) ++ "return expr" ++
     ppIndent n ++ "end"
 
@@ -201,7 +200,7 @@ ppExpression (Application bool qname arg_list)
       ++"))"
 
 ppExpression (RPartial miss expr)
-  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Expressions::Box.new(Int_expression.new(%d)),%s]))"
+  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[make_int(%d),%s]))"
            [FI miss, FS (ppExpression expr)]
 
 ppExpression (Integer num)
@@ -223,17 +222,7 @@ ppExpression (ROr expr_1 expr_2)
 
 -------------------------------------------------------------------------------
 
-ppArgList [] = "[]"
-
-ppArgList [x]
-  = "[" ++ ppExpression x ++ "]"
-
-ppArgList (x1:x2:xs)
-  = "[" ++
-       ppExpression x1 ++
-       foldr ((++) . aux) "" (x2:xs) ++
-       "]"
-    where aux x = ", " ++ ppExpression x
+ppArgList list = "[" ++ concat (intersperse "," (map ppExpression list)) ++ "]"
 
 ppIndent indent
   = "\n" ++ take (2 * indent) (repeat ' ')      

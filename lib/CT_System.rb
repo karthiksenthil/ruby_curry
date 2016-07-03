@@ -1,9 +1,11 @@
 module CT_System
 
+  require 'src/compiler/expressions_include'
+
   # Some special symbols
-  CT_System::CT_fail = Fail.new
-  CT_System::CT_choice = Choice.new
-  CT_System::CT_partial = Partial.new
+  CT_System::CT_fail = CT_Symbols::Fail.new
+  CT_System::CT_choice = CT_Symbols::Choice.new
+  CT_System::CT_partial = CT_Symbols::Partial.new
 
   # Choice is an operation, hence must have an H function.
   def CT_choice.H(expr)
@@ -16,12 +18,12 @@ module CT_System
       raise 'Handling Variables not implemented yet'
     when 1, 3 # CHOICE, OPERATION
       var1.H()
-      expr.replace(var1.content)
+      replacex(expr,var1)
     when 2 # FAIL
-      expr.replace(CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[])).content)
+      replacex(expr,CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[])))
     else
-     expr.replace(var1.content)
-    end      
+     replacex(expr,var1)
+    end
   end
 
 end

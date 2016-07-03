@@ -2,8 +2,7 @@ require 'pp'
 
 module CT_External
   
-  require 'src/compiler/expressions_include.rb'
-  require 'src/compiler/symbols.rb'
+  require 'src/compiler/expressions_include'
 
   # ------------------------------------------------------------------
   # Example
@@ -99,12 +98,12 @@ module CT_External
     partial = expr.content.arguments[0]
     # TODO: since Partial is a constructor could use pattern matching
     # TODO: replacing show with to_s would simplify "missing" expression
-    if partial.content.symbol.class != Partial
+    if partial.content.symbol.class != CT_Symbols::Partial
       # Here is the case where the partial function
       # is the VALUE of the first argument
       partial.H
     end
-    raise "External apply error" unless partial.content.symbol.class == Partial
+    raise "External apply error" unless partial.content.symbol.class == CT_Symbols::Partial
     missing = partial.content.arguments[0].content.symbol.value
     # build the application
     new_argument = expr.content.arguments[1]
@@ -115,7 +114,7 @@ module CT_External
     if missing==1
       return new_expr
     else
-      new_missing = CT_Expressions::Box.new(Int_expression.new(missing-1))
+      new_missing = make_int(missing-1)
       return CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[new_missing,new_expr]))
     end
   end

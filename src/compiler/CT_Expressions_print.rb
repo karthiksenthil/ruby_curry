@@ -2,13 +2,13 @@ module CT_Expressions
 
   class Box
     def to_s
-      @content.to_s()
+      @content.to_s
     end
   end
 
   class Variable < CT_Expressions::Expression
     def to_s
-      return @symbol.to_s()
+      return @symbol.to_s
     end
   end
 

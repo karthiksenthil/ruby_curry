@@ -1,4 +1,4 @@
-require_relative '../compiler/symbols'
+require_relative '../compiler/CT_Symbols'
 require_relative './function_A.rb'
 
 module CT_Expressions
@@ -6,12 +6,12 @@ module CT_Expressions
   class Box
     def N
       case content.symbol.token
-      when VARIABLE
+      when CT_Symbols::VARIABLE
         raise 'Variable not implemented'
-      when CHOICE, OPERATION
+      when CT_Symbols::CHOICE, CT_Symbols::OPERATION
         H()
         N()
-      when FAIL
+      when CT_Symbols::FAIL
         # nothing to do
       else
         content.arguments.each do |arg|

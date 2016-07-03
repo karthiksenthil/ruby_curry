@@ -17,6 +17,27 @@ def set_execution_trace
   return option
 end
 
+def help
+  printf("A: start computation\n")
+  printf("F: failure\n")
+  printf("L: looping\n")
+  printf("R: replace\n")
+  printf("U: undo replacement\n")
+  printf("V: value\n")
+  printf("Z: end computation\n")
+  printf("--------------------------------\n")
+end
+
+# both arguments are boxes, though the contractum needs not to be
+def replacex(redex, contractum) 
+  before = redex.content
+  after  = contractum.content
+  replace_record = {redex_box: redex, redex_content: before, contractum_content: after}
+  $replacement_stack.push(replace_record)
+  Log.write(sprintf("R %s -> %s\n",before.to_s,after.to_s)) if $trace
+  redex.content = after
+end
+
 # function for backtracking the replacement stack
 def backtrack(expr)
 
@@ -28,13 +49,14 @@ def backtrack(expr)
     contractum_content = top[:contractum_content]
 
     # undo the step
+    Log.write(sprintf("U %s -> %s\n",redex_box.to_s,redex_content.to_s)) if $trace
+    redex_box.content = redex_content
 
-    redex_box.undo(redex_content)
-
-    # if a Choice is found on stack, evaluate with right argument
-    if redex_content.symbol.token == CHOICE
-      if contractum_content == redex_content.arguments[0].content
-        redex_box.replace(redex_content.arguments[1].content)
+    # if a Choice is found on stack, and it was reduced to the left argument
+    # reduce it to the right argument
+    if redex_content.symbol.token == CT_Symbols::CHOICE
+      if contractum_content.equal?(redex_content.arguments[0].content)
+        replacex(redex_box,redex_content.arguments[1])
         return true
       end
     end
@@ -49,6 +71,7 @@ def repl(top_level)
 
   # set global flags
   $trace = set_execution_trace()
+  help if $trace
 
   # starting computation
   Log.write(sprintf("A %s\n",top_level.to_s)) if $trace
@@ -58,10 +81,10 @@ def repl(top_level)
     Log.write(sprintf("L %s\n",top_level.to_s)) if $trace
     top_level.N()
 
-    if top_level.content.symbol.token == FAIL
+    if top_level.content.symbol.token == CT_Symbols::FAIL
       # report failure
       Log.write(sprintf("F \n")) if $trace
-      # Do not print failures
+    # Do not print failures
     else
       # either trace or print value  
       if $trace
@@ -81,3 +104,4 @@ def repl(top_level)
   Log.write(sprintf("Z \n")) if $trace
 
 end
+
