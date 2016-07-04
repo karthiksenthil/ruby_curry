@@ -13,6 +13,11 @@ class Int_symbol < CT_Symbols::Constructor
   def ==(another_int)
     return another_int.class == self.class && another_int.value == @value
   end
+  def compare(another_int)
+    if another_int.class == self.class
+      return @value <=> another_int.value
+    end
+  end
 end
 
 def make_int(x)

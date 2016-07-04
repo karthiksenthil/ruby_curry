@@ -20,6 +20,12 @@ module CT_Character
     def ==(another_char)
       return another_char.class == self.class && another_char.value == @value
     end
+
+    def compare(another_char)
+      if another_char.class == self.class
+        return @value <=> another_char.value
+      end
+    end
   end
 
   class Char_expression < CT_Expressions::Application

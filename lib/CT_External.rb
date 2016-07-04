@@ -83,7 +83,56 @@ module CT_External
   end
 
   def CT_External::CT_compare(expr)
-    abort "ABORT: \"compare\" not yet defined"
+    left = expr.content.arguments[0]
+    right = expr.content.arguments[1]
+    
+    case left.content.symbol.token
+    when 0 #VARIABLE
+      raise 'Handling Variables is not implemented yet'
+    when 1, 3 #CHOICE, OPERATION
+      left.H
+      expr.H
+    when 2 #FAIL
+      return left
+    else
+      case right.content.symbol.token
+      when 0 #VARIABLE
+        raise 'Handling Variables is not implemented yet'
+      when 1, 3 #CHOICE, OPERATION
+        right.H
+        expr.H
+      when 2 #FAIL
+        return right
+      else
+
+        if left.content.symbol.compare(right.content.symbol) == -1
+          # left symbol alphabetically precedes right symbol
+          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_LT,[]))
+        elsif left.content.symbol.compare(right.content.symbol) == 1
+          # left symbol alphabetically follows right symbol
+          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))
+        else
+          # case of equal root symbols
+          k = left.content.symbol.arity
+
+          (0..k-1).each do |i|
+            tmp = CT_Expressions.Box.new(CT_Expressions::Application.new(
+                   Prelude::CT_compare,[left.content.arguments[i],right.content.arguments[i]]))
+            tmp.H #execute the comparison
+
+            if tmp == CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[]))
+              next
+            else
+              return tmp
+            end
+          end
+          #all arguments are equal
+          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[]))
+        end 
+
+      end
+    end
+
   end
 
   # ------------------------------------------------------------------

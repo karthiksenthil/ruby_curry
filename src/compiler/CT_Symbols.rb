@@ -40,7 +40,13 @@ module CT_Symbols
     end
 
     def ==(another_symbol)
-      return another_symbol.class == self.class && another_symbol.name == name
+      return another_symbol.class == self.class && another_symbol.name == @name
+    end
+
+    def compare(another_symbol)
+      if another_symbol.class == self.class
+        return @name <=> another_symbol.name
+      end
     end
     
   end
