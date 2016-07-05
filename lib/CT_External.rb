@@ -111,12 +111,12 @@ module CT_External
         elsif left.content.symbol.compare(right.content.symbol) == 1
           # left symbol alphabetically follows right symbol
           return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))
-        else
+        elsif left.content.symbol.compare(right.content.symbol) == 0
           # case of equal root symbols
           k = left.content.symbol.arity
 
           (0..k-1).each do |i|
-            tmp = CT_Expressions.Box.new(CT_Expressions::Application.new(
+            tmp = CT_Expressions::Box.new(CT_Expressions::Application.new(
                    Prelude::CT_compare,[left.content.arguments[i],right.content.arguments[i]]))
             tmp.H #execute the comparison
 
