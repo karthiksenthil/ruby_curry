@@ -45,7 +45,7 @@ module CT_Symbols
 
     def compare(another_symbol)
       if another_symbol.class == self.class
-        return @name <=> another_symbol.name
+        return self.token <=> another_symbol.token
       end
     end
     
