@@ -1,1 +1,3 @@
-main l = map (2 +) l
+list = [0..]
+
+main = take 7 (map (2 *) list)

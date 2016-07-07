@@ -136,6 +136,13 @@ module CT_External
   end
 
   # ------------------------------------------------------------------
+  # Equational constraint functions
+
+  def CT_External::CT__3D_3A_3C_3D(expr)
+  end
+
+
+  # ------------------------------------------------------------------
   # Evaluation functions
 
   # -- Only for internal use:
