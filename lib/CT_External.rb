@@ -139,6 +139,76 @@ module CT_External
   # Equational constraint functions
 
   def CT_External::CT__3D_3A_3C_3D(expr)
+    left = expr.content.arguments[0]
+    right = expr.content.arguments[1]
+
+    case left.content.symbol.token
+    when 1, 3 # CHOICE, OPERATION
+      left.H
+      expr.H
+    when 2 # FAIL
+      # return false if fail is encountered
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+    when 0 # VARIABLE
+      bind_variable(left, right)
+      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+    else # CONSTRUCTOR
+
+      case right.content.symbol.token
+      when 1, 3 # CHOICE, OPERATION
+        right.H
+        expr.H
+      when 2 # FAIL
+        # return false if fail is encountered
+        return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+      else # both VARIABLE and CONSTRUCTOR
+
+        k = left.content.symbol.arity
+        # declare fresh variables and instaniate right only when VARIABLE
+        if right.content.symbol.token == 0
+          right = CT_Expressions::Box.new(CT_Expressions::Application.new(left.content.symbol,[]))
+          (0..k-1).each do |i|
+            type = "FreshVar"
+            name = "_#{i}"
+            right.content.arguments << make_variable(name,type)
+          end
+        end
+        puts "here, k = #{k}" #using for debug
+
+        # check if left and right have same root symbol
+        if left.content.symbol == right.content.symbol
+
+          if k == 0 # return true if arity is 0
+            return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+          end
+
+          args_const_eql = []
+          (0..k-1).each do |i|
+            # left.argi =:<= right.argi
+            args_const_eql << CT_Expressions::Box.new(CT_Expressions::Application.new(
+                               Prelude::CT__3D_3A_3C_3D,[left.content.arguments[i],right.content.arguments[i]]))
+          end
+
+          while args_const_eql.length > 1
+            curr_arg = args_const_eql[0]
+            next_arg = args_const_eql[1]
+            # curr_arg && next_arg
+            and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                        Prelude::CT__26_26,[curr_arg,next_arg]))
+            args_const_eql[0] = and_expr
+            args_const_eql.delete_at(1)
+          end
+
+          puts args_const_eql[0].to_s
+          return args_const_eql[0]
+
+        else
+          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+        end
+
+      end # case right
+    end # case left
+
   end
 
 

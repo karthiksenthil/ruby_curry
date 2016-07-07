@@ -12,6 +12,19 @@ To evaluate e1 =:<= e2 :
   (c) If h2 = c s1 . . . sn : evaluate t1 =:<= s1 & . . . & tn =:<= sn
   (d) Otherwise: fail
 
+Corrected version of algorithm :-
+
+To evaluate e1 =:<= e2 :
+1. Evaluate e1 to a head normal form h1
+2. If h1 is a variable: bind it to e2 and return True
+3. If h1 = c t1 . . . tn (where c is a constructor):
+  (a) Evaluate e2 to a head normal form h2
+  (b) If h2 is a variable: instantiate h2 to c x1 . . . xn (x1 , . . . , xn
+      are fresh variables) and evaluate t1 =:<= x1 && . . . && tn =:<= xn
+  (c) If h2 = c s1 . . . sn : evaluate t1 =:<= s1 && . . . && tn =:<= sn
+  (d) Otherwise: return False
+
+
 
 Pseudo code implementation in CT_External :
 

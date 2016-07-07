@@ -20,6 +20,7 @@ end
 def help
   printf("A: start computation\n")
   printf("F: failure\n")
+  printf("I: variable binding\n")
   printf("L: looping\n")
   printf("R: replace\n")
   printf("U: undo replacement\n")
@@ -36,6 +37,15 @@ def replacex(redex, contractum)
   $replacement_stack.push(replace_record)
   Log.write(sprintf("R %s -> %s\n",before.to_s,after.to_s)) if $trace
   redex.content = after
+end
+
+def bind_variable(var, bind_expr)
+  before = var.content
+  after = bind_expr.content
+  bind_record = {redex_box: var, redex_content: before, contractum_content: after}
+  $replacement_stack.push(bind_record)
+  Log.write(sprintf("I %s -> %s\n",before.to_s,after.to_s)) if $trace
+  var.content = after
 end
 
 # function for backtracking the replacement stack
