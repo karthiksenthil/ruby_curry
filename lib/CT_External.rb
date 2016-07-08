@@ -147,8 +147,7 @@ module CT_External
       left.H
       expr.H
     when 2 # FAIL
-      # return false if fail is encountered
-      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+      return left
     when 0 # VARIABLE
       bind_variable(left, right)
       return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
@@ -159,8 +158,7 @@ module CT_External
         right.H
         expr.H
       when 2 # FAIL
-        # return false if fail is encountered
-        return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+        return right
       else # both VARIABLE and CONSTRUCTOR
 
         k = left.content.symbol.arity
@@ -199,7 +197,6 @@ module CT_External
             args_const_eql.delete_at(1)
           end
 
-          puts args_const_eql[0].to_s
           return args_const_eql[0]
 
         else
