@@ -1,0 +1,4 @@
+Prelude::(,)(Narrow_color::Green,Narrow_color::Green)
+Prelude::(,)(Narrow_color::Green,Narrow_color::Blue)
+Prelude::(,)(Narrow_color::Blue,Narrow_color::Green)
+Prelude::(,)(Narrow_color::Blue,Narrow_color::Blue)

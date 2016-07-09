@@ -5,10 +5,13 @@
 BASEDIR=$(dirname $(dirname $(readlink -f $0)))
 
 FORCE=
+TRACE=
+
 while [ $1 ]
 do
     case $1 in
 	-f) FORCE=-f; shift;;
+	-t) TRACE=-t; shift;;
 	-*) echo `basename $0`: ignored flag \"$1\"; shift;;
 	*) break;;
     esac
@@ -17,5 +20,6 @@ done
 
 $BASEDIR/bin/curry2icur $FORCE -q $1
 $BASEDIR/bin/icur2ruby $FORCE -q $1
-$BASEDIR/bin/exec $1
+# TODO: the position of the flag should come forward
+timeout 2s $BASEDIR/bin/exec $1 $TRACE
 

@@ -1,24 +1,21 @@
 module PPRCurry where
 
 import RCurry
+import PPData
 import XFormat
 import Utils
 import Char
 import List(intersperse)
 
-rcurryToRuby (RModule name import_list const_list func_decls func_defs)
+rcurryToRuby (RModule name import_list data_list func_decls func_defs)
   = format "module %s" [FS (capitalize name)]
       ++ ppImported runtimeRubyFiles
       ++ ppImported import_list
-      ++ ppConstructor_list const_list
+      ++ ppData_list data_list
       ++ ppDeclaration_list func_decls
       ++ ppDefinition_list func_defs
       ++ ppMainFunction func_decls
       ++ "\n\nend\n"
-
-ppConstructor_list [] = ""
-ppConstructor_list const_list@(_:_)
-  = "\n" ++ foldr ((++) . ppConstructor) "" const_list
 
 ppDeclaration_list [] = ""
 ppDeclaration_list func_decls@(_:_)
@@ -27,11 +24,6 @@ ppDeclaration_list func_decls@(_:_)
 ppDefinition_list [] = ""
 ppDefinition_list func_defs@(_:_)
   = foldr ((++) . ppFuncDefinition) "" func_defs
-
-ppConstructor (RConstructor qname arity token)
-  = ppIndent 1
-      ++ format "%s = CT_Symbols::Constructor.new('%s',%d,%d)" 
-           [FS (ruby_qual qname), FS (ruby_qual qname), FI arity, FI token]
 
 ppFuncDeclaration (RFunctionDeclaration qname arity)
   = ppIndent 1 ++
@@ -82,8 +74,11 @@ ppStatement n (RVariable (RIVar identifier ref index))
 ppStatement n (RVariable (RICase identifier))
   = ppIndent n ++ format "# var%d case selector" [FI identifier]
 
+-- TODO: abstract name supply for free variables
 ppStatement n (RVariable (RIFree identifier))
-  = ppIndent n ++ format "abort \"Free variable var%d not implemented\"" [FI identifier]
+  = ppIndent n ++
+       format "var%d = CT_Expressions::Box.new(CT_Expressions::Variable.new(CT_Symbols::Variable.new))"
+           [FI identifier]
 
 ppStatement n (RVariable (RIBind identifier))
   = ppIndent n ++ format "var%d = nil # to be bound soon" [FI identifier]
@@ -119,13 +114,13 @@ ppStatement n (RExternal (_++"."++name))
       ++ ppIndent n ++ "expr.H() if expr.content.symbol.token == CT_Symbols::OPERATION"
       ++ ppIndent n ++ "return expr"
 
-ppStatement n (RATable expr branch_list)
-  =  make_case_fix_part_begin n expr
+ppStatement n (RATable expr branch_list@((_, (key, _)):_))
+  =  make_case_fix_part_begin n expr (Just key)
     ++ foldr ((++) . ppBranch (n+1)) "" branch_list
-    ++ make_case_fix_part_end n  
+    ++ make_case_fix_part_end n
 
 ppStatement n (RBTable expr branch_list)
-  = make_case_fix_part_begin n expr
+  = make_case_fix_part_begin n expr Nothing
     ++ ppIndent n ++ "else"
     ++ make_if_then_else_case (n+1) expr (zip [0..] branch_list)
     ++ make_case_fix_part_end n  
@@ -142,18 +137,25 @@ ppStatement n (RFill i list j)
   where path = concatMap (\x -> format ".content.arguments[%d]" [FI (x-1)]) list 
 -- rfill %d %s %d" [FI i, FS (show list), FI j]
 
-make_case_fix_part_begin n arg
+-- TODO: fix key when BRTable
+make_case_fix_part_begin n arg key
   = ppIndent n ++ "loop {" 
     ++ ppIndent (n+1) ++ format "case %s.content.symbol.token" 
                       [FS (ppExpression arg)]
     ++ ppIndent (n+1) ++ "when 0 # VARIABLE"
-    ++ ppIndent (n+2) ++ "raise 'Handling Variables not implemented yet'"
+    ++ ppIndent (n+2) ++ key_case key
     ++ ppIndent (n+1) ++ "when 1, 3 # CHOICE, OPERATION"
     ++ ppIndent (n+2) ++ format "%s.H" [FS (ppExpression arg)]
     ++ ppIndent (n+2) ++ "next"
     ++ ppIndent (n+1) ++ "when 2 # FAIL"
     ++ ppIndent (n+2) ++ "replacex(expr,CT_External::FAILED)"
     ++ ppIndent (n+2) ++ "return expr"
+  where key_case (Just qname) 
+           -- TODO:  must bind to a fresh generator !!!
+           = format "bind_variable(%s, $gen_table[%s]) ### FIXME"
+                [FS (ppExpression arg), FS (ruby_qual qname)]
+        key_case Nothing
+           = "raise \"No narrowing of builtin types\""
 
 make_case_fix_part_end n
   = ppIndent (n+1) ++ "end"
@@ -181,7 +183,7 @@ ppStatement n (RComment string)
 
 -------------------------------------------------------------------------------
 
-ppBranch n (token, (name, stmt_list))
+ppBranch n (token, ((_,name), stmt_list))
   = ppIndent n
        ++ ( if token >= 4
             then format "when %d # \"%s\" => %s"
@@ -223,6 +225,3 @@ ppExpression (ROr expr_1 expr_2)
 -------------------------------------------------------------------------------
 
 ppArgList list = "[" ++ concat (intersperse "," (map ppExpression list)) ++ "]"
-
-ppIndent indent
-  = "\n" ++ take (2 * indent) (repeat ' ')      

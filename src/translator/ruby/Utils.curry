@@ -44,3 +44,8 @@ capitalize [] = error "Capitalize empty string"
 ruby_qual (mod,name) = capitalize mod ++ "::" ++ translate name
 
 ruby_unqual name = translate name
+
+------------------------------------------------------------------
+
+ppIndent indent
+  = "\n" ++ take (2 * indent) (repeat ' ')      

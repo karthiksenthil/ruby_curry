@@ -8,9 +8,11 @@ data RModule
   = RModule
     String                      -- name of this ruby module
     [String]                    -- name of required modules
-    [RConstructor]              -- data constructors
+    [RDatatype]                 -- algebraic type
     [RFunctionDeclaration]      -- list of function names & arity
     [RFunctionDefinition]       -- list of function definitions
+
+data RDatatype = RDatatype RName [RConstructor]
 
 data RConstructor
   = RConstructor 
@@ -39,7 +41,7 @@ data RStatement
   | RAssign Int RExpression
   | RFill Int [Int] Int
   --
-  | RATable RExpression [(Int, (String, [RStatement]))]
+  | RATable RExpression [(Int, (RName, [RStatement]))]
   | RBTable RExpression [(RBuiltin, [RStatement])]
   | RReturn Mode RExpression
   | RExternal String    -- call an external (coded in ruby) function

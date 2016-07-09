@@ -7,7 +7,7 @@ module CT_Expressions
     def N
       case content.symbol.token
       when CT_Symbols::VARIABLE
-        raise 'Variable not implemented'
+        # nothing to do
       when CT_Symbols::CHOICE, CT_Symbols::OPERATION
         H()
         N()

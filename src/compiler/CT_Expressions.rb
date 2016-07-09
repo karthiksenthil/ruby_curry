@@ -20,21 +20,18 @@ module CT_Expressions
 
   # Class to denote variables
   class Variable < CT_Expressions::Expression
-    attr_accessor :symbol,:type
+    attr_accessor :symbol
 
     # create a varible with its name
     # Params : symbol
-    # Return : Variable
-    def initialize(symbol,type)
+    def initialize(symbol)
       @symbol = symbol # the printable representation of variable
-      @type = type # tags the Variable with its type
     end
   end
 
   # short hand method to declare variables
-  def CT_Expressions::make_variable(name,type)
-    sym = Variable_symbol.new(name,0) # symbol defined in symbols.rb
-    return CT_Expressions::Box.new(CT_Expressions::Variable.new(sym,type))
+  def CT_Expressions::make_variable
+    return CT_Expressions::Variable.new(CT_Symbols::Variable.new)
   end
 
   # Class to denote applications

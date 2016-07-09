@@ -22,7 +22,7 @@ do
     echo 
     $BASEDIR/bin/curry2icur -q $TESTDIR/$file
     $BASEDIR/bin/icur2ruby -q $TESTDIR/$file
-    $BASEDIR/bin/exec $TESTDIR/$file > $TESTDIR/$file.comp
+    timeout 2s $BASEDIR/bin/exec $TESTDIR/$file > $TESTDIR/$file.comp
     if [ "$?" = "0" ]
     then
 	if [ -e $TESTDIR/$file.output ]

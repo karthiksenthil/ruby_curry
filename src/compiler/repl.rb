@@ -1,6 +1,9 @@
 require 'optparse'
 require_relative './expressions_include.rb'
 
+# global generator table
+$gen_table = {}
+
 # a structure to trace each and every replacement
 # structure of stack element :
 # {box_of_redex, content_of_redex, content_of_contractum}

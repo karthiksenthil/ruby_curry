@@ -138,7 +138,7 @@ module CT_External
   # ------------------------------------------------------------------
   # Equational constraint functions
 
-  def CT_External::CT__3D_3A_3C_3D(expr)
+  def CT_External::CT__3D_3A_3C_3D(expr)  # "=:<="
     left = expr.content.arguments[0]
     right = expr.content.arguments[1]
 

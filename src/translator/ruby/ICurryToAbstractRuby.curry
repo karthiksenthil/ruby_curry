@@ -5,13 +5,13 @@ import ICurry
 import RCurry
 
 execute (IModule name imported_list data_list funct_list)
-  = let constr_list = concatMap single_data data_list
+  = let rdata_list = map single_data data_list
         fun_declar_list = map single_funct_declare funct_list
         fun_defin_list = map single_funct_def funct_list
-    in RModule name imported_list constr_list fun_declar_list fun_defin_list
+    in RModule name imported_list rdata_list fun_declar_list fun_defin_list
 
-single_data (_, constr_list)
-  = map single_constr (zip constr_list [4..])
+single_data (qname, constr_list)
+  = RDatatype qname (map single_constr (zip constr_list [4..]))
 
 single_constr ((IConstructor qname arity), index)
   = RConstructor qname arity index
@@ -48,8 +48,8 @@ single_stmt (Assign i expr)
 
 single_stmt (ATable _ _ expr branch_list)
   = let constr_branch_list 
-          = [(name, map single_stmt bl) | 
-	       (IConstructor (_,name) _, bl) <- branch_list]
+          = [(qname, map single_stmt bl) | 
+	       (IConstructor qname _, bl) <- branch_list]
         -- 4 is the starting index of constructors
     in RATable (single_expr expr) (zip [4..] constr_branch_list)
 
