@@ -2,6 +2,18 @@ Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
 
+Mon Jul 11 22:29:40 PDT 2016 - Sergio
+
+Code external function "cond"
+
+------------------------------------------------------------------
+
+Mon Jul 11 22:29:40 PDT 2016 - Sergio
+
+Wrap lib/integers.rb in module
+
+------------------------------------------------------------------
+
 Tue Jun 21 16:31:12 PDT 2016 - Sergio
 
 file expressions.rb should refactored

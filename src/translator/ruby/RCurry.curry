@@ -41,7 +41,7 @@ data RStatement
   | RAssign Int RExpression
   | RFill Int [Int] Int
   --
-  | RATable RExpression [(Int, (RName, [RStatement]))]
+  | RATable RExpression [(RConstructor, [RStatement])]
   | RBTable RExpression [(RBuiltin, [RStatement])]
   | RReturn Mode RExpression
   | RExternal String    -- call an external (coded in ruby) function

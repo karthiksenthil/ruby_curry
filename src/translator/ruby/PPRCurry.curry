@@ -114,13 +114,14 @@ ppStatement n (RExternal (_++"."++name))
       ++ ppIndent n ++ "expr.H() if expr.content.symbol.token == CT_Symbols::OPERATION"
       ++ ppIndent n ++ "return expr"
 
-ppStatement n (RATable expr branch_list@((_, (key, _)):_))
-  =  make_case_fix_part_begin n expr (Just key)
+ppStatement n (RATable expr branch_list)
+  = make_case_fix_part_begin n expr gen_expr
     ++ foldr ((++) . ppBranch (n+1)) "" branch_list
     ++ make_case_fix_part_end n
+  where gen_expr = make_generator branch_list
 
 ppStatement n (RBTable expr branch_list)
-  = make_case_fix_part_begin n expr Nothing
+  = make_case_fix_part_begin n expr "dummy"
     ++ ppIndent n ++ "else"
     ++ make_if_then_else_case (n+1) expr (zip [0..] branch_list)
     ++ make_case_fix_part_end n  
@@ -138,24 +139,20 @@ ppStatement n (RFill i list j)
 -- rfill %d %s %d" [FI i, FS (show list), FI j]
 
 -- TODO: fix key when BRTable
-make_case_fix_part_begin n arg key
+make_case_fix_part_begin n arg generator
   = ppIndent n ++ "loop {" 
     ++ ppIndent (n+1) ++ format "case %s.content.symbol.token" 
                       [FS (ppExpression arg)]
     ++ ppIndent (n+1) ++ "when 0 # VARIABLE"
-    ++ ppIndent (n+2) ++ key_case key
+    ++ ppIndent (n+2) ++ format "bind_variable(%s, %s)"
+                            [FS (ppExpression arg), FS generator]
+    ++ ppIndent (n+2) ++ "next"
     ++ ppIndent (n+1) ++ "when 1, 3 # CHOICE, OPERATION"
     ++ ppIndent (n+2) ++ format "%s.H" [FS (ppExpression arg)]
     ++ ppIndent (n+2) ++ "next"
     ++ ppIndent (n+1) ++ "when 2 # FAIL"
     ++ ppIndent (n+2) ++ "replacex(expr,CT_External::FAILED)"
     ++ ppIndent (n+2) ++ "return expr"
-  where key_case (Just qname) 
-           -- TODO:  must bind to a fresh generator !!!
-           = format "bind_variable(%s, $gen_table[%s]) ### FIXME"
-                [FS (ppExpression arg), FS (ruby_qual qname)]
-        key_case Nothing
-           = "raise \"No narrowing of builtin types\""
 
 make_case_fix_part_end n
   = ppIndent (n+1) ++ "end"
@@ -183,12 +180,10 @@ ppStatement n (RComment string)
 
 -------------------------------------------------------------------------------
 
-ppBranch n (token, ((_,name), stmt_list))
+ppBranch n (RConstructor (_,name) arity token, stmt_list)
   = ppIndent n
-       ++ ( if token >= 4
-            then format "when %d # \"%s\" => %s"
+       ++ format "when %d # \"%s\" => %s"
 	                [FI token, FS name, FS (ruby_unqual name)]
-            else format "when %d # %s" [FI token, FS name] )
        ++ foldr ((++) . ppStatement (n+1)) "" stmt_list
 
 -------------------------------------------------------------------------------

@@ -47,11 +47,11 @@ single_stmt (Assign i expr)
 -- strip them away and convert the statements
 
 single_stmt (ATable _ _ expr branch_list)
-  = let constr_branch_list 
-          = [(qname, map single_stmt bl) | 
-	       (IConstructor qname _, bl) <- branch_list]
-        -- 4 is the starting index of constructors
-    in RATable (single_expr expr) (zip [4..] constr_branch_list)
+  = -- 4 is the starting index of constructors
+  RATable (single_expr expr)
+      [(RConstructor qname arity index, map single_stmt stmt_list)
+	   | (index, (IConstructor qname arity, stmt_list))
+	        <- (zip [4..] branch_list)]
 
 
 -- if expr is constructor rooted, then return it;

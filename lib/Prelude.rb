@@ -11,56 +11,35 @@ module Prelude
   require 'CT_External.rb'
   
   Prelude::CT__28_29 = CT_Symbols::Constructor.new('Prelude::CT__28_29',0,4)
-  $gen_table[Prelude::CT__28_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_29,[]))
   Prelude::CT__5B_5D = CT_Symbols::Constructor.new('Prelude::CT__5B_5D',0,4)
   Prelude::CT__3A = CT_Symbols::Constructor.new('Prelude::CT__3A',2,5)
-  $gen_table[Prelude::CT__5B_5D] = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))]))
   Prelude::CT__28_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_29',2,4)
-  $gen_table[Prelude::CT__28_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_29',3,4)
-  $gen_table[Prelude::CT__28_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_29',4,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_29',5,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_29',6,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_29',7,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_29',8,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_29',9,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_29',10,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29',11,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29',12,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29',13,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29',14,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29 = CT_Symbols::Constructor.new('Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29',15,4)
-  $gen_table[Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29] = CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))
   Prelude::CT_False = CT_Symbols::Constructor.new('Prelude::CT_False',0,4)
   Prelude::CT_True = CT_Symbols::Constructor.new('Prelude::CT_True',0,5)
-  $gen_table[Prelude::CT_False] = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))]))
   Prelude::CT_LT = CT_Symbols::Constructor.new('Prelude::CT_LT',0,4)
   Prelude::CT_EQ = CT_Symbols::Constructor.new('Prelude::CT_EQ',0,5)
   Prelude::CT_GT = CT_Symbols::Constructor.new('Prelude::CT_GT',0,6)
-  $gen_table[Prelude::CT_LT] = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_LT,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))]))]))
   Prelude::CT_Nothing = CT_Symbols::Constructor.new('Prelude::CT_Nothing',0,4)
   Prelude::CT_Just = CT_Symbols::Constructor.new('Prelude::CT_Just',1,5)
-  $gen_table[Prelude::CT_Nothing] = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Nothing,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Just,[CT_Expressions::Box.new(CT_Expressions::make_variable)]))]))
   Prelude::CT_Left = CT_Symbols::Constructor.new('Prelude::CT_Left',1,4)
   Prelude::CT_Right = CT_Symbols::Constructor.new('Prelude::CT_Right',1,5)
-  $gen_table[Prelude::CT_Left] = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Left,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Right,[CT_Expressions::Box.new(CT_Expressions::make_variable)]))]))
   Prelude::CT_IOError = CT_Symbols::Constructor.new('Prelude::CT_IOError',1,4)
   Prelude::CT_UserError = CT_Symbols::Constructor.new('Prelude::CT_UserError',1,5)
   Prelude::CT_FailError = CT_Symbols::Constructor.new('Prelude::CT_FailError',1,6)
   Prelude::CT_NondetError = CT_Symbols::Constructor.new('Prelude::CT_NondetError',1,7)
-  $gen_table[Prelude::CT_IOError] = CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_IOError,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_UserError,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_FailError,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_NondetError,[CT_Expressions::Box.new(CT_Expressions::make_variable)]))]))]))]))
 
   Prelude::CT__2E = CT_Symbols::Operation.new('Prelude::CT__2E',2) # "."
   Prelude::CT__2E_2E_5F_23lambda1 = CT_Symbols::Operation.new('Prelude::CT__2E_2E_5F_23lambda1',3) # ".._#lambda1"
@@ -316,7 +295,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -353,7 +333,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT_False])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -407,7 +388,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -497,7 +479,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -527,7 +510,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -556,7 +540,8 @@ module Prelude
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var2, $gen_table[Prelude::CT_False])
+        bind_variable(var2, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var2.H
         next
@@ -590,7 +575,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT_False])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -622,7 +608,8 @@ module Prelude
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var2, $gen_table[Prelude::CT_False])
+        bind_variable(var2, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var2.H
         next
@@ -649,7 +636,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -729,7 +717,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT_LT])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_LT,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -779,7 +768,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT_LT])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_LT,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -834,7 +824,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -867,7 +858,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -899,7 +891,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -926,7 +919,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -953,7 +947,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -984,7 +979,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -1015,7 +1011,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -1044,7 +1041,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1075,7 +1073,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -1105,7 +1104,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1124,7 +1124,8 @@ module Prelude
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var6, $gen_table[Prelude::CT_False])
+            bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var6.H
             next
@@ -1137,7 +1138,8 @@ module Prelude
             loop {
               case var7.content.symbol.token
               when 0 # VARIABLE
-                bind_variable(var7, $gen_table[Prelude::CT_False])
+                bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+                next
               when 1, 3 # CHOICE, OPERATION
                 var7.H
                 next
@@ -1177,7 +1179,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1207,7 +1210,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -1240,7 +1244,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1271,7 +1276,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -1304,7 +1310,8 @@ module Prelude
     loop {
       case var7.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var7, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var7.H
         next
@@ -1323,7 +1330,8 @@ module Prelude
         loop {
           case var8.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var8, $gen_table[Prelude::CT__5B_5D])
+            bind_variable(var8, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var8.H
             next
@@ -1358,7 +1366,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1377,7 +1386,8 @@ module Prelude
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var6, $gen_table[Prelude::CT_False])
+            bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var6.H
             next
@@ -1407,7 +1417,8 @@ module Prelude
     loop {
       case var7.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var7, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var7.H
         next
@@ -1426,7 +1437,8 @@ module Prelude
         loop {
           case var8.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var8, $gen_table[Prelude::CT__5B_5D])
+            bind_variable(var8, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var8.H
             next
@@ -1458,7 +1470,8 @@ module Prelude
     loop {
       case var10.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var10, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var10, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var10.H
         next
@@ -1477,7 +1490,8 @@ module Prelude
         loop {
           case var11.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var11, $gen_table[Prelude::CT__5B_5D])
+            bind_variable(var11, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var11.H
             next
@@ -1496,7 +1510,8 @@ module Prelude
             loop {
               case var12.content.symbol.token
               when 0 # VARIABLE
-                bind_variable(var12, $gen_table[Prelude::CT__5B_5D])
+                bind_variable(var12, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+                next
               when 1, 3 # CHOICE, OPERATION
                 var12.H
                 next
@@ -1530,7 +1545,8 @@ module Prelude
     loop {
       case var8.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var8, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var8, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var8.H
         next
@@ -1549,7 +1565,8 @@ module Prelude
         loop {
           case var9.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var9, $gen_table[Prelude::CT__5B_5D])
+            bind_variable(var9, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var9.H
             next
@@ -1582,7 +1599,8 @@ module Prelude
     loop {
       case var11.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var11, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var11, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var11.H
         next
@@ -1601,7 +1619,8 @@ module Prelude
         loop {
           case var12.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var12, $gen_table[Prelude::CT__5B_5D])
+            bind_variable(var12, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var12.H
             next
@@ -1620,7 +1639,8 @@ module Prelude
             loop {
               case var13.content.symbol.token
               when 0 # VARIABLE
-                bind_variable(var13, $gen_table[Prelude::CT__5B_5D])
+                bind_variable(var13, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+                next
               when 1, 3 # CHOICE, OPERATION
                 var13.H
                 next
@@ -1652,7 +1672,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -1671,7 +1692,8 @@ module Prelude
         loop {
           case var7.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var7, $gen_table[Prelude::CT__28_2C_29])
+            bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var7.H
             next
@@ -1714,7 +1736,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -1741,7 +1764,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -1768,7 +1792,8 @@ module Prelude
     loop {
       case var7.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var7, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var7.H
         next
@@ -1787,7 +1812,8 @@ module Prelude
         loop {
           case var8.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var8, $gen_table[Prelude::CT__28_2C_2C_29])
+            bind_variable(var8, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var8.H
             next
@@ -1834,7 +1860,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__28_2C_2C_29])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1862,7 +1889,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__28_2C_2C_29])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1890,7 +1918,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__28_2C_2C_29])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -1959,7 +1988,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -1987,7 +2017,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -2016,7 +2047,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -2047,7 +2079,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -2077,7 +2110,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -2105,7 +2139,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -2150,7 +2185,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2177,7 +2213,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2205,7 +2242,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -2224,7 +2262,8 @@ module Prelude
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var6, $gen_table[Prelude::CT_False])
+            bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var6.H
             next
@@ -2253,7 +2292,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -2272,7 +2312,8 @@ module Prelude
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var6, $gen_table[Prelude::CT_False])
+            bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var6.H
             next
@@ -2302,7 +2343,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -2321,7 +2363,8 @@ module Prelude
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var6, $gen_table[Prelude::CT_False])
+            bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var6.H
             next
@@ -2334,7 +2377,8 @@ module Prelude
             loop {
               case var7.content.symbol.token
               when 0 # VARIABLE
-                bind_variable(var7, $gen_table[Prelude::CT_False])
+                bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+                next
               when 1, 3 # CHOICE, OPERATION
                 var7.H
                 next
@@ -2386,7 +2430,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2413,7 +2458,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2447,7 +2493,8 @@ module Prelude
     loop {
       case var7.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var7, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var7.H
         next
@@ -2482,7 +2529,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2501,7 +2549,8 @@ module Prelude
         loop {
           case var5.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var5, $gen_table[Prelude::CT_False])
+            bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var5.H
             next
@@ -2545,7 +2594,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2572,7 +2622,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2599,7 +2650,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2626,7 +2678,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2672,7 +2725,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT_False])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -2713,7 +2767,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2740,7 +2795,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__28_2C_29])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -2767,7 +2823,8 @@ module Prelude
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var2, $gen_table[Prelude::CT_False])
+        bind_variable(var2, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var2.H
         next
@@ -2854,7 +2911,8 @@ module Prelude
     loop {
       case var7.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var7, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var7, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var7.H
         next
@@ -2873,7 +2931,8 @@ module Prelude
         loop {
           case var8.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var8, $gen_table[Prelude::CT__28_2C_29])
+            bind_variable(var8, CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__28_2C_29,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var8.H
             next
@@ -2888,7 +2947,8 @@ module Prelude
             loop {
               case var9.content.symbol.token
               when 0 # VARIABLE
-                bind_variable(var9, $gen_table[Prelude::CT_False])
+                bind_variable(var9, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+                next
               when 1, 3 # CHOICE, OPERATION
                 var9.H
                 next
@@ -2901,7 +2961,8 @@ module Prelude
                 loop {
                   case var10.content.symbol.token
                   when 0 # VARIABLE
-                    bind_variable(var10, $gen_table[Prelude::CT_False])
+                    bind_variable(var10, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+                    next
                   when 1, 3 # CHOICE, OPERATION
                     var10.H
                     next
@@ -2956,7 +3017,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -2995,7 +3057,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT_False])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -3008,7 +3071,8 @@ module Prelude
         loop {
           case var6.content.symbol.token
           when 0 # VARIABLE
-            bind_variable(var6, $gen_table[Prelude::CT_False])
+            bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+            next
           when 1, 3 # CHOICE, OPERATION
             var6.H
             next
@@ -3232,7 +3296,8 @@ module Prelude
     loop {
       case var5.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var5, $gen_table[Prelude::CT_Nothing])
+        bind_variable(var5, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Nothing,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Just,[CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var5.H
         next
@@ -3265,7 +3330,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT_Left])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Left,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_Right,[CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -3412,7 +3478,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -3457,7 +3524,8 @@ module Prelude
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var2, $gen_table[Prelude::CT_False])
+        bind_variable(var2, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var2.H
         next
@@ -3509,7 +3577,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT_IOError])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_IOError,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_UserError,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_FailError,[CT_Expressions::Box.new(CT_Expressions::make_variable)])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_NondetError,[CT_Expressions::Box.new(CT_Expressions::make_variable)]))]))]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -3581,7 +3650,8 @@ module Prelude
     loop {
       case var2.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var2, $gen_table[Prelude::CT_False])
+        bind_variable(var2, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var2.H
         next
@@ -3609,7 +3679,8 @@ module Prelude
     loop {
       case var4.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var4, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var4, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var4.H
         next
@@ -3681,7 +3752,8 @@ module Prelude
     loop {
       case var6.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var6, $gen_table[Prelude::CT__5B_5D])
+        bind_variable(var6, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Expressions::Box.new(CT_Expressions::make_variable),CT_Expressions::Box.new(CT_Expressions::make_variable)]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var6.H
         next
@@ -3749,7 +3821,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
@@ -3780,7 +3853,8 @@ module Prelude
     loop {
       case var3.content.symbol.token
       when 0 # VARIABLE
-        bind_variable(var3, $gen_table[Prelude::CT_False])
+        bind_variable(var3, CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_choice,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))])))
+        next
       when 1, 3 # CHOICE, OPERATION
         var3.H
         next
