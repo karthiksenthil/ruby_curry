@@ -2,6 +2,21 @@ Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
 
+Wed Jul 13 2016 - Karthik
+
+Handle the VARIABLE case in dispatch table for external functions
+like ==, compare.
+
+------------------------------------------------------------------
+
+Wed Jul 13 2016 - Karthik
+
+Enclose the dispatch table for CT_External::CT__24_21 ("$!") in
+loop construct. Check the loop construct implemented for 
+CT_External::CT_ensureNotFree.
+
+------------------------------------------------------------------
+
 Mon Jul 11 22:29:40 PDT 2016 - Sergio
 
 Code external function "cond"

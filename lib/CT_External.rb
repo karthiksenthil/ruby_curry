@@ -174,9 +174,7 @@ module CT_External
         if right.content.symbol.token == 0
           right = CT_Expressions::Box.new(CT_Expressions::Application.new(left.content.symbol,[]))
           (0..k-1).each do |i|
-            type = "FreshVar"
-            name = "_#{i}"
-            right.content.arguments << make_variable(name,type)
+            right.content.arguments << CT_Expressions::Box.new(CT_Expressions::make_variable)
           end
         end
         puts "here, k = #{k}" #using for debug
