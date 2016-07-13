@@ -13,7 +13,7 @@ class TestPositivePrograms < Minitest::Test
     #convert icur to ruby object code
     `#{basedir}/bin/icur2ruby -q #{basedir}/curry_examples/#{test}`
     #execute object code and save output
-    obtained_output = `#{basedir}/bin/exec #{basedir}/curry_examples/#{test}`
+    obtained_output = `timeout 2s #{basedir}/bin/exec #{basedir}/curry_examples/#{test}`
 
     if $?.exitstatus == 0
       #test compiled successfully

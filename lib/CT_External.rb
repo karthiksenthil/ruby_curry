@@ -28,57 +28,61 @@ module CT_External
     left = expr.content.arguments[0]
     right = expr.content.arguments[1]
 
-    case left.content.symbol.token
-    when 0 #VARIABLE
-      raise 'Handling Variables is not implemented yet'
-    when 1, 3 # CHOICE, OPERATION
-      left.H
-      expr.H
-    when 2 #FAIL
-      return left
-    else
-      case right.content.symbol.token
+    loop {
+      case left.content.symbol.token
       when 0 #VARIABLE
         raise 'Handling Variables is not implemented yet'
       when 1, 3 # CHOICE, OPERATION
-        right.H
-        expr.H
+        left.H
+        next
       when 2 #FAIL
-        return right
+        return left
       else
+        loop {
+          case right.content.symbol.token
+          when 0 #VARIABLE
+            raise 'Handling Variables is not implemented yet'
+          when 1, 3 # CHOICE, OPERATION
+            right.H
+            next
+          when 2 #FAIL
+            return right
+          else
 
-        if left.content.symbol == right.content.symbol
-          k = left.content.symbol.arity
-          if k == 0
-            return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+            if left.content.symbol == right.content.symbol
+              k = left.content.symbol.arity
+              if k == 0
+                return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+              end
+
+              # array to hold equality expressions between args
+              args_equality = []
+              (0..k-1).each do |i|
+                # left.argi == right.argi
+                args_equality << CT_Expressions::Box.new(CT_Expressions::Application.new(
+                                  Prelude::CT__3D_3D,[left.content.arguments[i],right.content.arguments[i]]))
+              end
+
+              while args_equality.length > 1
+                curr_arg = args_equality[0]
+                next_arg = args_equality[1]
+                # curr_arg && next_arg
+                and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                            Prelude::CT__26_26,[curr_arg,next_arg]))
+                args_equality[0] = and_expr
+                args_equality.delete_at(1)
+              end
+
+              return args_equality[0]
+
+            else
+              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+            end
+
           end
-
-          # array to hold equality expressions between args
-          args_equality = []
-          (0..k-1).each do |i|
-            # left.argi == right.argi
-            args_equality << CT_Expressions::Box.new(CT_Expressions::Application.new(
-                              Prelude::CT__3D_3D,[left.content.arguments[i],right.content.arguments[i]]))
-          end
-
-          while args_equality.length > 1
-            curr_arg = args_equality[0]
-            next_arg = args_equality[1]
-            # curr_arg && next_arg
-            and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
-                        Prelude::CT__26_26,[curr_arg,next_arg]))
-            args_equality[0] = and_expr
-            args_equality.delete_at(1)
-          end
-
-          return args_equality[0]
-
-        else
-          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
-        end
-
+        } # end of right case loop
       end
-    end
+    } # end of left case loop 
 
   end
 
@@ -86,52 +90,56 @@ module CT_External
     left = expr.content.arguments[0]
     right = expr.content.arguments[1]
     
-    case left.content.symbol.token
-    when 0 #VARIABLE
-      raise 'Handling Variables is not implemented yet'
-    when 1, 3 #CHOICE, OPERATION
-      left.H
-      expr.H
-    when 2 #FAIL
-      return left
-    else
-      case right.content.symbol.token
+    loop{
+      case left.content.symbol.token
       when 0 #VARIABLE
         raise 'Handling Variables is not implemented yet'
       when 1, 3 #CHOICE, OPERATION
-        right.H
-        expr.H
+        left.H
+        next
       when 2 #FAIL
-        return right
+        return left
       else
+        loop{
+          case right.content.symbol.token
+          when 0 #VARIABLE
+            raise 'Handling Variables is not implemented yet'
+          when 1, 3 #CHOICE, OPERATION
+            right.H
+            next
+          when 2 #FAIL
+            return right
+          else
 
-        if left.content.symbol.compare(right.content.symbol) == -1
-          # left symbol alphabetically precedes right symbol
-          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_LT,[]))
-        elsif left.content.symbol.compare(right.content.symbol) == 1
-          # left symbol alphabetically follows right symbol
-          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))
-        elsif left.content.symbol.compare(right.content.symbol) == 0
-          # case of equal root symbols
-          k = left.content.symbol.arity
+            if left.content.symbol.compare(right.content.symbol) == -1
+              # left symbol alphabetically precedes right symbol
+              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_LT,[]))
+            elsif left.content.symbol.compare(right.content.symbol) == 1
+              # left symbol alphabetically follows right symbol
+              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_GT,[]))
+            elsif left.content.symbol.compare(right.content.symbol) == 0
+              # case of equal root symbols
+              k = left.content.symbol.arity
 
-          (0..k-1).each do |i|
-            tmp = CT_Expressions::Box.new(CT_Expressions::Application.new(
-                   Prelude::CT_compare,[left.content.arguments[i],right.content.arguments[i]]))
-            tmp.H #execute the comparison
+              (0..k-1).each do |i|
+                tmp = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                       Prelude::CT_compare,[left.content.arguments[i],right.content.arguments[i]]))
+                tmp.H #execute the comparison
 
-            if tmp == CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[]))
-              next
-            else
-              return tmp
-            end
+                if tmp == CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[]))
+                  next
+                else
+                  return tmp
+                end
+              end
+              #all arguments are equal
+              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[]))
+            end 
+
           end
-          #all arguments are equal
-          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_EQ,[]))
-        end 
-
+        } # end of right case loop
       end
-    end
+    } # end of left case loop
 
   end
 
@@ -248,20 +256,24 @@ module CT_External
 
   def CT_External::CT_ensureNotFree(expr)
     arg = expr.content.arguments[0]
-    case arg.content.symbol.token
-    when 0 # VARIABLE
-      raise 'ensureNotFree: suspension is not implemented'
-    when 1 # CHOICE
-      arg.H()
-    when 2 # FAIL
-      CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
-    when 3 # OPERATION
-      arg.H()
-    else
-      arg
-    end
-    # this return is necessary
-    return arg
+    loop {
+      case arg.content.symbol.token
+      when 0 # VARIABLE
+        raise 'ensureNotFree: suspension is not implemented'
+      when 1 # CHOICE
+        arg.H()
+        next
+      when 2 # FAIL
+        return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
+      when 3 # OPERATION
+        arg.H()
+        next
+      else
+        return arg
+      end
+    }
+    # this return is necessary. Is it still necessary after loop ?
+    # return arg
   end
 
   # --- Right-associative application with strict evaluation of its argument
