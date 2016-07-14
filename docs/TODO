@@ -2,6 +2,13 @@ Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
 
+Thur Jul 14 2016 - Karthik
+
+Examples last_1, length_narrow are running into infinite loops
+during execution. Identify the reason and solve the issue.
+
+------------------------------------------------------------------
+
 Wed Jul 13 2016 - Karthik
 
 Handle the VARIABLE case in dispatch table for external functions

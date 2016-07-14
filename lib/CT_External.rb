@@ -150,67 +150,71 @@ module CT_External
     left = expr.content.arguments[0]
     right = expr.content.arguments[1]
 
-    case left.content.symbol.token
-    when 1, 3 # CHOICE, OPERATION
-      left.H
-      expr.H
-    when 2 # FAIL
-      return left
-    when 0 # VARIABLE
-      bind_variable(left, right)
-      return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
-    else # CONSTRUCTOR
-
-      case right.content.symbol.token
+    loop {
+      case left.content.symbol.token
       when 1, 3 # CHOICE, OPERATION
-        right.H
-        expr.H
+        left.H
+        next
       when 2 # FAIL
-        return right
-      else # both VARIABLE and CONSTRUCTOR
+        return left
+      when 0 # VARIABLE
+        bind_variable(left, right)
+        return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+      else # CONSTRUCTOR
 
-        k = left.content.symbol.arity
-        # declare fresh variables and instaniate right only when VARIABLE
-        if right.content.symbol.token == 0
-          right = CT_Expressions::Box.new(CT_Expressions::Application.new(left.content.symbol,[]))
-          (0..k-1).each do |i|
-            right.content.arguments << CT_Expressions::Box.new(CT_Expressions::make_variable)
-          end
-        end
-        puts "here, k = #{k}" #using for debug
+        loop {
+          case right.content.symbol.token
+          when 1, 3 # CHOICE, OPERATION
+            right.H
+            next
+          when 2 # FAIL
+            return right
+          else # both VARIABLE and CONSTRUCTOR
 
-        # check if left and right have same root symbol
-        if left.content.symbol == right.content.symbol
+            k = left.content.symbol.arity
+            # declare fresh variables and instaniate right only when VARIABLE
+            if right.content.symbol.token == 0
+              right = CT_Expressions::Box.new(CT_Expressions::Application.new(left.content.symbol,[]))
+              (0..k-1).each do |i|
+                right.content.arguments << CT_Expressions::Box.new(CT_Expressions::make_variable)
+              end
+            end
+            # puts "here, k = #{k}" #using for debug
 
-          if k == 0 # return true if arity is 0
-            return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
-          end
+            # check if left and right have same root symbol
+            if left.content.symbol == right.content.symbol
 
-          args_const_eql = []
-          (0..k-1).each do |i|
-            # left.argi =:<= right.argi
-            args_const_eql << CT_Expressions::Box.new(CT_Expressions::Application.new(
-                               Prelude::CT__3D_3A_3C_3D,[left.content.arguments[i],right.content.arguments[i]]))
-          end
+              if k == 0 # return true if arity is 0
+                return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
+              end
 
-          while args_const_eql.length > 1
-            curr_arg = args_const_eql[0]
-            next_arg = args_const_eql[1]
-            # curr_arg && next_arg
-            and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
-                        Prelude::CT__26_26,[curr_arg,next_arg]))
-            args_const_eql[0] = and_expr
-            args_const_eql.delete_at(1)
-          end
+              args_const_eql = []
+              (0..k-1).each do |i|
+                # left.argi =:<= right.argi
+                args_const_eql << CT_Expressions::Box.new(CT_Expressions::Application.new(
+                                   Prelude::CT__3D_3A_3C_3D,[left.content.arguments[i],right.content.arguments[i]]))
+              end
 
-          return args_const_eql[0]
+              while args_const_eql.length > 1
+                curr_arg = args_const_eql[0]
+                next_arg = args_const_eql[1]
+                # curr_arg && next_arg
+                and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                            Prelude::CT__26_26,[curr_arg,next_arg]))
+                args_const_eql[0] = and_expr
+                args_const_eql.delete_at(1)
+              end
 
-        else
-          return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
-        end
+              return args_const_eql[0]
 
-      end # case right
-    end # case left
+            else
+              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+            end
+
+          end # case right
+        }
+      end # case left
+    }
 
   end
 
