@@ -6,7 +6,7 @@ module Append
   require 'src/compiler/utilities.rb'
   require 'src/compiler/repl.rb'
   require 'CT_System.rb'
-  require 'integers.rb'
+  require 'CT_Integer.rb'
   require 'CT_Character.rb'
   require 'CT_External.rb'
 
@@ -49,7 +49,7 @@ module Append
   end
 
   def CT_main.H(expr) # "main"
-    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Append::CT_append,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[make_int(1),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[make_int(2),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[make_int(3),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[make_int(4),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))
+    rhs = CT_Expressions::Box.new(CT_Expressions::Application.new(Append::CT_append,[CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Integer::make_int(1),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Integer::make_int(2),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))])),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Integer::make_int(3),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__3A,[CT_Integer::make_int(4),CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT__5B_5D,[]))]))]))]))
     replacex(expr,rhs)
     expr.H()
     return expr
