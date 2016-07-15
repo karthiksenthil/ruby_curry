@@ -52,7 +52,7 @@ runtimeRubyFiles = [
   "src/compiler/utilities.rb",
   "src/compiler/repl.rb",
   "CT_System.rb",
-  "integers.rb",
+  "CT_Integer.rb",
   "CT_Character.rb",
   "CT_External.rb" ]
 
@@ -197,11 +197,11 @@ ppExpression (Application bool qname arg_list)
       ++"))"
 
 ppExpression (RPartial miss expr)
-  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[make_int(%d),%s]))"
+  = format "CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[CT_Integer::make_int(%d),%s]))"
            [FI miss, FS (ppExpression expr)]
 
 ppExpression (Integer num)
-  = format "make_int(%d)" [FI num]
+  = format "CT_Integer::make_int(%d)" [FI num]
 
 ppExpression (Character char)
   = format "CT_Character::make_char(\"%s\")" [FS (printable char)]

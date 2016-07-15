@@ -240,7 +240,7 @@ module CT_External
     if missing==1
       return new_expr
     else
-      new_missing = make_int(missing-1)
+      new_missing = CT_Integer::make_int(missing-1)
       return CT_Expressions::Box.new(CT_Expressions::Application.new(CT_System::CT_partial,[new_missing,new_expr]))
     end
   end
@@ -302,19 +302,19 @@ module CT_External
   def CT_External::CT_prim_5FInt_5Fplus(expr) # "prim_Int_plus"
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
-    return make_int(arg2+arg1)
+    return CT_Integer::make_int(arg2+arg1)
   end
 
   def CT_External::CT_prim_5FInt_5Fminus(expr) # "prim_Int_minus"
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
-    return make_int(arg2-arg1)
+    return CT_Integer::make_int(arg2-arg1)
   end
 
   def CT_External::CT_prim_5FInt_5Ftimes(expr) # "prim_Int_times"
     arg1 = expr.content.arguments[0].content.symbol.value
     arg2 = expr.content.arguments[1].content.symbol.value
-    return make_int(arg2*arg1)
+    return CT_Integer::make_int(arg2*arg1)
   end
 
   def CT_External::CT_prim_5FInt_5Fdiv(expr) # "prim_Int_div"
@@ -323,7 +323,7 @@ module CT_External
     if arg1 == 0
       return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
-      return make_int(arg2/arg1)
+      return CT_Integer::make_int(arg2/arg1)
     end
   end
 
@@ -333,7 +333,7 @@ module CT_External
     if arg1 == 0
       return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
-      return make_int(arg2%arg1)
+      return CT_Integer::make_int(arg2%arg1)
     end
   end
 
@@ -346,9 +346,9 @@ module CT_External
       x = arg2.fdiv(arg1)
       # print "#{x} = #{arg2}/#{arg1}\n"
       if x >= 0
-        return make_int(x.floor)
+        return CT_Integer::make_int(x.floor)
       else
-        return make_int(x.ceil)
+        return CT_Integer::make_int(x.ceil)
       end
     end
   end
@@ -359,7 +359,7 @@ module CT_External
     if arg1 == 0
       return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
     else
-      return make_int(arg2.remainder(arg1))
+      return CT_Integer::make_int(arg2.remainder(arg1))
     end
   end
 
@@ -368,7 +368,7 @@ module CT_External
 
   def CT_External::CT_prim_5Ford(expr) # "prim_ord"
     arg1 = expr.content.arguments[0].content.symbol.value
-    return make_int(arg1.ord)
+    return CT_Integer::make_int(arg1.ord)
   end
 
   def CT_External::CT_prim_5Fchr(expr) # "prim_chr"
