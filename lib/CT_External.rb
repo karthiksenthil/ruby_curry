@@ -24,13 +24,14 @@ module CT_External
   # ------------------------------------------------------------------
   # Equality
 
-  def CT_External::CT__3D_3D(expr)
+  def CT_External::CT__3D_3D(expr) # "=="
     left = expr.content.arguments[0]
     right = expr.content.arguments[1]
-
     loop {
       case left.content.symbol.token
       when 0 #VARIABLE
+        # TODO: instantiate to the generator, but we do not have it ???
+        # idea: create an equality for each type and dispatch on an object
         raise 'Handling Variables is not implemented yet'
       when 1, 3 # CHOICE, OPERATION
         left.H
@@ -48,37 +49,28 @@ module CT_External
           when 2 #FAIL
             return right
           else
-
-            if left.content.symbol == right.content.symbol
-              k = left.content.symbol.arity
-              if k == 0
+            if left.content.symbol != right.content.symbol
+              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+            else
+              arity = left.content.symbol.arity
+              if arity == 0
                 return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_True,[]))
               end
 
               # array to hold equality expressions between args
               args_equality = []
-              (0..k-1).each do |i|
+              (0...arity).each do |i|
                 # left.argi == right.argi
                 args_equality << CT_Expressions::Box.new(CT_Expressions::Application.new(
                                   Prelude::CT__3D_3D,[left.content.arguments[i],right.content.arguments[i]]))
               end
 
-              while args_equality.length > 1
-                curr_arg = args_equality[0]
-                next_arg = args_equality[1]
-                # curr_arg && next_arg
-                and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
-                            Prelude::CT__26_26,[curr_arg,next_arg]))
-                args_equality[0] = and_expr
-                args_equality.delete_at(1)
-              end
-
-              return args_equality[0]
-
-            else
-              return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
+              result = args_equality.drop(1).inject(args_equality.first) {
+                |accum, x| result = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                                                             Prelude::CT__26_26,[accum,x]))
+              }
+              return result
             end
-
           end
         } # end of right case loop
       end
@@ -169,6 +161,7 @@ module CT_External
             next
           when 2 # FAIL
             return right
+# TODO: troubles here.  Variable bind, constructor match.
           else # both VARIABLE and CONSTRUCTOR
 
             k = left.content.symbol.arity
@@ -266,7 +259,7 @@ module CT_External
         arg.H()
         next
       when 2 # FAIL
-        return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_failed,[]))
+        return arg
       when 3 # OPERATION
         arg.H()
         next

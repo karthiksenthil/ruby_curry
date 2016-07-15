@@ -125,7 +125,7 @@ module CT_Symbols
   class Fail < XSymbol
 
     def initialize
-      super("Prelude::CT_failed",0)
+      super("CT_System::CT_failed",0)
     end
 
     def token

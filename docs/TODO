@@ -2,10 +2,30 @@ Following is the list of TODO tasks/features for ruby_curry.
 
 ------------------------------------------------------------------
 
+Thu Jul 14 15:44:16 PDT 2016 - Sergio
+
+Directory "lib" should be only for Prelude and Curry libraries
+(similarly to Pakcs and Kics2).  External functions related to these
+libraries should be here too.  All other library modules should be in
+different directories.  Is there a natural way to partition them, or a
+single directory is adequate?
+
+------------------------------------------------------------------
+
+Thu Jul 14 15:44:16 PDT 2016 - Sergio
+
+Code external function =:= .
+This should be much easier than == .
+
+------------------------------------------------------------------
+
 Thur Jul 14 2016 - Karthik
 
 Examples last_1, length_narrow are running into infinite loops
 during execution. Identify the reason and solve the issue.
+
+This is likely due to an inadequate compilation scheme when the
+selector of a case is not a variable.
 
 ------------------------------------------------------------------
 
@@ -13,6 +33,8 @@ Wed Jul 13 2016 - Karthik
 
 Handle the VARIABLE case in dispatch table for external functions
 like ==, compare.
+
+This likely requires an extension of the compilation scheme.
 
 ------------------------------------------------------------------
 
