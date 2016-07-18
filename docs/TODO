@@ -51,37 +51,6 @@ Mon Jul 11 22:29:40 PDT 2016 - Sergio
 Code external function "cond"
 
 ------------------------------------------------------------------
-
-Mon Jul 11 22:29:40 PDT 2016 - Sergio
-
-Wrap lib/integers.rb in module
-
-------------------------------------------------------------------
-
-Tue Jun 21 16:31:12 PDT 2016 - Sergio
-
-file expressions.rb should refactored
-
-1.  Put everying in a module CT_Expressions to limit the visibility
-    of "common" identifiers such as "Box" or "Application"
-
-2.  Split the file into several files.
-    (a) The definition and initialization of the classes,
-        almost all the functionality should be moved out.
-    (b) A file for printing.  Currently the method is "show",
-        but it should be renamed "to_s".  This will enable
-	expressions with variables that are not expressions.
-	This will simplify some application, such as "Partial".
-    (c) A file for equality.  Wait for this until the external
-        function (==) of the Prelude is coded to see what is needed.
-    (d) A similar file for "compare".
-
-------------------------------------------------------------------
-Sat Jun 18 14:33:07 PDT 2016 - Sergio
-
-Check whether src/runtime/lib is being used.  If not remove.
-
-------------------------------------------------------------------
 Wed Jun 15 2016 - Karthik
 
 Convert the examples in "user" directory to Curry code and remove
@@ -296,3 +265,32 @@ Wed Jun 22 11:26:59 PDT 2016 - Sergio - Fixed
 The Prelude contains many non-printable characters.
 This creates problems in generating Prelude.rb.
 ------------------------------------------------------------------
+
+Mon Jul 11 22:29:40 PDT 2016 - Sergio - Fixed
+
+Wrap lib/integers.rb in module
+
+------------------------------------------------------------------
+
+Tue Jun 21 16:31:12 PDT 2016 - Sergio - Done
+
+file expressions.rb should refactored
+
+1.  Put everying in a module CT_Expressions to limit the visibility
+    of "common" identifiers such as "Box" or "Application"
+
+2.  Split the file into several files.
+    (a) The definition and initialization of the classes,
+        almost all the functionality should be moved out.
+    (b) A file for printing.  Currently the method is "show",
+        but it should be renamed "to_s".  This will enable
+	expressions with variables that are not expressions.
+	This will simplify some application, such as "Partial".
+    (c) A file for equality.  Wait for this until the external
+        function (==) of the Prelude is coded to see what is needed.
+    (d) A similar file for "compare".
+
+------------------------------------------------------------------
+Sat Jun 18 14:33:07 PDT 2016 - Sergio - Fixed
+
+Check whether src/runtime/lib is being used.  If not remove.
