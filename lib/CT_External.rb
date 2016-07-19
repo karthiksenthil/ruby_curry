@@ -211,6 +211,12 @@ module CT_External
 
   end
 
+  def CT_External::CT__3D_3A_3D(expr)
+  end
+
+  def CT_External::CT_cond(expr)
+  end
+
 
   # ------------------------------------------------------------------
   # Evaluation functions
