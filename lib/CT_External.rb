@@ -188,17 +188,11 @@ module CT_External
                                    Prelude::CT__3D_3A_3C_3D,[left.content.arguments[i],right.content.arguments[i]]))
               end
 
-              while args_const_eql.length > 1
-                curr_arg = args_const_eql[0]
-                next_arg = args_const_eql[1]
-                # curr_arg && next_arg
-                and_expr = CT_Expressions::Box.new(CT_Expressions::Application.new(
-                            Prelude::CT__26_26,[curr_arg,next_arg]))
-                args_const_eql[0] = and_expr
-                args_const_eql.delete_at(1)
-              end
-
-              return args_const_eql[0]
+              result = args_const_eql.drop(1).inject(args_const_eql.first) {
+                |accum, x| result = CT_Expressions::Box.new(CT_Expressions::Application.new(
+                                                             Prelude::CT__26_26,[accum,x]))
+              }
+              return result
 
             else
               return CT_Expressions::Box.new(CT_Expressions::Application.new(Prelude::CT_False,[]))
@@ -209,12 +203,6 @@ module CT_External
       end # case left
     }
 
-  end
-
-  def CT_External::CT__3D_3A_3D(expr)
-  end
-
-  def CT_External::CT_cond(expr)
   end
 
 
