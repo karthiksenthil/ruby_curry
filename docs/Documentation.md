@@ -15,3 +15,18 @@ More details about the progress made in each of these stages is given below.
 
 ### Translation of Curry programs ###
 
+In first stage of the compilation pipeline, we perform a set of translations
+to convert input Curry code into abstractions which can be then interpreted
+by the ruby_curry kernel for further stages. These abstractions are
+intermediate i.e. one cannot execute or interpret them directly to get the
+expected output of the Curry program.
+
+This unit comprises of 2 intermediate asbtractions before converting Curry
+to Ruby object code :
+* ICurry
+* RCurry
+
+A clearer insight into the path taken by the translator is given by the image
+below.
+
+![alt text](https://github.com/karthiksenthil/ruby_curry/blob/master/docs/images/translation_pipeline.png "Pipeline for translator unit")
