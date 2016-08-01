@@ -34,5 +34,37 @@ below.
 #### ** RCurry ** ####
 
 RCurry is an abstraction layer over the ICurry format. It is an in-memory
-abstraction, meaning, it is created and processed directly by program without
-any intermediate files.
+abstraction, meaning, it is created and processed directly during compile time
+without any intermediate files.
+
+RCurry represents a closer step to the expected Ruby object code for the Curry 
+program and hence it can be called "the abstract syntax of the ruby object code".
+The ruby_curry kernel picks up the ICurry format(.icur file) for the input Curry
+code and converts it to the RCurry format. The code implementing this module is
+present in `src/translator/ruby`
+
+Description of files in directory `src/translator/ruby` :
+* **RCurry.curry** : A Curry data file which defines the RCurry data structure. 
+Each data object represents an easily translatable component of the expected 
+object code.
+
+
+* **ICurryToAbstractRuby.curry** : This Curry program is responsible for converting
+ICurry to RCurry data structure. It reads from the .icur file.
+
+
+* **PPRCurry.curry** : An overall Curry program to "pretty print" the expected 
+Ruby object code from the RCurry format. By printing we refer to meta-programming 
+of the object code which is the ultimate aim of the ruby_curry kernel.
+
+
+* **PPData.curry** : A Curry program to handle "pretty printing" of data defined in
+input code. It is a sub-module used by PPRCurry.
+
+
+* **Utils.curry** : Some utilities used for this unit.
+
+
+* **Main.curry** : The main module for this component of the kernel, combining all 
+the above modules together.
+
