@@ -30,3 +30,9 @@ A clearer insight into the path taken by the translator is given by the image
 below.
 
 ![alt text](https://github.com/karthiksenthil/ruby_curry/blob/master/docs/images/translation_pipeline.png "Pipeline for translator unit")
+
+#### ** RCurry ** ####
+
+RCurry is an abstraction layer over the ICurry format. It is an in-memory
+abstraction, meaning, it is created and processed directly by program without
+any intermediate files.
