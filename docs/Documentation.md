@@ -31,7 +31,7 @@ below.
 
 ![alt text](https://github.com/karthiksenthil/ruby_curry/blob/master/docs/images/translation_pipeline.png "Pipeline for translator unit")
 
-#### ** RCurry ** ####
+#### RCurry ####
 
 RCurry is an abstraction layer over the ICurry format. It is an in-memory
 abstraction, meaning, it is created and processed directly during compile time
